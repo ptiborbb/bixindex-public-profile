@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.headerBlock {
+  background-image: $bix-bg-gradient;
+
+  .divider {
+    background: rgba(255, 255, 255, 0.4);
+    height: 1px;
+  }
+}
