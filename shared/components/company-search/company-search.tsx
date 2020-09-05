@@ -1,5 +1,5 @@
-import { FC } from "react";
-import classes from "./company-search.module.scss";
+import { FC } from 'react';
+import classes from './company-search.module.scss';
 
 interface CompanySearchProps {}
 
@@ -12,8 +12,7 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
         <button className={classes.searchButton}>Keresés</button>
       </div>
       <div className={classes.searchExamples}>
-        <b>Gyorskeresés:</b> Könyvelők, Marketingesek, HR szolgáltatók,
-        Építőipar
+        <b>Gyorskeresés:</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
       </div>
     </form>
   );

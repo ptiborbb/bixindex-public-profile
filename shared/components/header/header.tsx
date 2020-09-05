@@ -1,5 +1,5 @@
-import { FC } from "react";
-import classes from "./header.module.scss";
+import { FC } from 'react';
+import classes from './header.module.scss';
 
 interface HeaderProps {
   logoPath: string;
