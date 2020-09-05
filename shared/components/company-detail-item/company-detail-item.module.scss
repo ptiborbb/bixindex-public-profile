@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.companyDetailItem {
+  display: flex;
+  flex-shrink: 1;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .icon {
+    padding-right: 1rem;
+    color: $dark;
+  }
+
+  .companyDetailData {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      color: $dark;
+    }
+
+    .value {
+      font-size: 14px;
+      line-height: 17px;
+      color: $dark;
+    }
+  }
+}

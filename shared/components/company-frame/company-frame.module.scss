@@ -1,0 +1,54 @@
+@import '../../../styles/variables.scss';
+
+.companyFrame {
+  display: flex;
+  .companySidebar {
+    padding: 2rem;
+    width: 25%;
+    border-right: 1px solid #dddddd;
+    .ratingStar {
+      color: lightgray;
+    }
+    .ratingStarActive {
+      color: #bf9855;
+    }
+    .ratingCounter {
+      font-size: 35px;
+      line-height: 41px;
+      color: $dark;
+      &:after {
+        content: '/10';
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+
+    .detailsTitle {
+      background: $bix-bg-gradient;
+      color: $white;
+      padding: 1rem 2rem;
+      margin: 0 -2rem;
+    }
+
+    .companyName {
+      padding: 1rem 0;
+      font-size: 24px;
+      line-height: 29px;
+      color: $dark;
+    }
+  }
+
+  .companyContent {
+    width: 75%;
+    color: $dark;
+  }
+
+  .captionText {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: uppercase;
+    color: #b4b4b4;
+    padding: 0.5rem 0;
+  }
+}
