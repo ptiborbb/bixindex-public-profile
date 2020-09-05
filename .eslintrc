@@ -5,7 +5,7 @@
     "@typescript-eslint/interface-name-prefix": [
       "error",
       {
-        "prefixWithI": "always"
+        "prefixWithI": "never"
       }
     ],
     "react/react-in-jsx-scope": "off",
@@ -13,5 +13,10 @@
   },
   "globals": {
     "React": "writable"
+  },
+  "settings": {
+    "react": {
+      "version": "16.13"
+    }
   }
 }
