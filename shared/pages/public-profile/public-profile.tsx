@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { FC } from 'react';
 import logo from '../../../public/bix_logo.svg';
+import bizalmiKorLogo from '../../../public/bizalmi_kor.svg';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
@@ -11,6 +12,10 @@ export const PublicProfile: FC = () => {
     <div>
       <Head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        />
       </Head>
       <div className={classes.headerBlock}>
         <div className={classes.container}>
@@ -21,7 +26,7 @@ export const PublicProfile: FC = () => {
           <CompanySearch />
         </div>
         <div className={classes.container}>
-          <CompanyHeader />
+          <CompanyHeader title={'Bizalmi Kor Kft.'} logoPath={bizalmiKorLogo} />
         </div>
       </div>
     </div>

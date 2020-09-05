@@ -1,5 +1,80 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 
 .companyHeader {
   height: 9rem;
+
+  .companyHeaderLogo {
+    height: 112px;
+    width: 112px;
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 75%;
+    }
+  }
+
+  .companyHeaderTitle {
+    height: 72px;
+    padding-left: 160px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .companyHeaderText {
+      font-weight: 500;
+      font-size: 32px;
+      color: white;
+
+      .companyTypeIcon {
+        margin: 0 1rem;
+      }
+    }
+  }
+
+  .companyHeaderLinksLine {
+    height: 72px;
+    background: #56aaa6;
+    border-radius: 4px;
+    padding-left: 160px;
+    display: flex;
+    align-items: center;
+
+    .companyWriteReview {
+      background: #f15c5c;
+      border-radius: 3px;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      border: 0;
+
+      .reviewIcon {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .companyHeaderLinks {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-evenly;
+
+      .companyHeaderLink {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+
+        &.active {
+          color: white;
+        }
+      }
+    }
+  }
 }
