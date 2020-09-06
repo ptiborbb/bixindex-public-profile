@@ -1,28 +1,28 @@
+import { IProduct, IProfile, IService } from '@codingsans/bixindex-common';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import GradeIcon from '@material-ui/icons/Grade';
+import LanguageIcon from '@material-ui/icons/Language';
 import PlaceIcon from '@material-ui/icons/Place';
 import SettingsIcon from '@material-ui/icons/Settings';
-import LanguageIcon from '@material-ui/icons/Language';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { FC } from 'react';
-import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
-import classes from './company-frame.module.scss';
-import { SocialIcon } from '../social-icon/social-icon';
 import { Chip } from '../chip/chip';
+import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
-import avatar from '../../../public/avatar.png';
+import { SocialIcon } from '../social-icon/social-icon';
+import classes from './company-frame.module.scss';
 
 interface CompanyFrameProps {
-  rating: number;
-  ratingCount: number;
-  company: {
-    name: string;
+  rating: {
+    value: number;
+    count: number;
   };
+  profile: IProfile;
 }
 
-export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, ratingCount, company }) => {
+export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
@@ -35,29 +35,34 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, ratingCount, compa
             <GradeIcon className={`${classes.ratingStar} `} />
           </div>
           <div className={classes.captionText}>Bizalmi index</div>
-          <div className={classes.ratingCounter}>{rating}</div>
-          <div className={classes.captionText}>ÖSSZESEN {ratingCount} DB ÉRTÉKELÉS</div>
+          <div className={classes.ratingCounter}>{rating.value}</div>
+          <div className={classes.captionText}>ÖSSZESEN {rating.count} DB ÉRTÉKELÉS</div>
         </div>
 
         <div className={classes.detailsTitle}>Cégadatok</div>
         <div className={classes.detailsBlock}>
-          <div className={classes.companyName}>{company.name}</div>
-          <CompanyDetailItem icon={<SupervisorAccountIcon />} label={'Létszám'} value={'10 fő'} change={'up'} />
+          <div className={classes.companyName}>{profile.name}</div>
+          <CompanyDetailItem
+            icon={<SupervisorAccountIcon />}
+            label={'Létszám'}
+            value={`${profile.details.employees.value} fő`}
+            change={profile.details.employees.change}
+          />
           <CompanyDetailItem
             icon={<AutorenewIcon />}
-            label={'Eves forgalom'}
-            value={'10 000 000 000 HUF'}
-            change={'down'}
+            label={'Éves forgalom'}
+            value={`${profile.details.yearlyIncome.value} HUF`}
+            change={profile.details.yearlyIncome.change}
           />
-          <CompanyDetailItem icon={<AssignmentIcon />} label={'Adoszam'} value={'14780846-2-43'} />
-          <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={'1095. Soroksári út 48. 10. ép. 2. em. 20'} />
-          <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={'Rendezvényszervezés'} />
-          <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={'www.bizalmikor.hu'} />
+          <CompanyDetailItem icon={<AssignmentIcon />} label={'Adoszam'} value={profile.details.taxNumber} />
+          <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={profile.details.address} />
+          <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={profile.details.mainProfile} />
+          <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
           <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={'cégnév1, cégnév2'} />
           <div>
-            <SocialIcon type={'facebook'} />
-            <SocialIcon type={'google'} />
-            <SocialIcon type={'linkedin'} />
+            {profile.fb && <SocialIcon type={'facebook'} />}
+            {profile.insta && <SocialIcon type={'insta'} />}
+            {profile.linkedin && <SocialIcon type={'linkedin'} />}
           </div>
 
           <div className={classes.separator}></div>
@@ -65,35 +70,32 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, ratingCount, compa
           <div className={classes.blockLabel}>Termékek és szolgáltatások</div>
 
           <div className={classes.chipBlock}>
-            <Chip text={'mrd+ vezetői klub'} />
-            <Chip text={'bizalom gála'} />
-            <Chip text={'bix'} />
-            <Chip text={'TOP Vezetői klub'} />
+            {profile.products.map((product, i) => (
+              <Chip key={i} text={product.name} />
+            ))}
           </div>
 
           <div className={classes.blockLabel}>Szakterület</div>
 
           <div className={classes.chipBlock}>
-            <Chip text={'értékesítés'} />
-            <Chip text={'marketing'} />
+            {profile.services.map((service, i) => (
+              <Chip key={i} text={service.name} />
+            ))}
           </div>
 
           <div className={classes.separator}></div>
 
           <div className={classes.blockLabel}>Kapcsolattartó</div>
 
-          <ContactItem
-            image={avatar}
-            name={'Letenovics - Nagy Roland'}
-            email={'roland.letenovics@bizalmikor.hu'}
-            phone={'+36 30 2203 203'}
-          />
-          <ContactItem
-            image={avatar}
-            name={'Letenovics - Nagy Roland'}
-            email={'roland.letenovics@bizalmikor.hu'}
-            phone={'+36 30 2203 203'}
-          />
+          {profile.contacts.map((contact, i) => (
+            <ContactItem
+              key={i}
+              image={contact.image}
+              name={contact.name}
+              email={contact.email}
+              phone={contact.phone}
+            />
+          ))}
         </div>
       </div>
       <div className={classes.companyContent}>CONTENT</div>

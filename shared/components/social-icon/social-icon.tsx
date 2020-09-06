@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
 import classes from './social-icon.module.scss';
 import facebook from '../../../public/social/Facebook.svg';
-import google from '../../../public/social/Google.svg';
+import insta from '../../../public/social/Google.svg';
 import linkedin from '../../../public/social/Linkedin.svg';
 
 interface SocialIconProps {
-  type: 'facebook' | 'google' | 'linkedin';
+  type: 'facebook' | 'insta' | 'linkedin';
   href?: string;
   marginRight?: string;
 }
@@ -15,8 +15,8 @@ export const SocialIcon: FC<SocialIconProps> = ({ type, href, marginRight = '1re
     switch (type) {
       case 'facebook':
         return facebook;
-      case 'google':
-        return google;
+      case 'insta':
+        return insta;
       case 'linkedin':
         return linkedin;
     }

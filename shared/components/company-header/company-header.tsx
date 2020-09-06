@@ -5,13 +5,15 @@ import WorkIcon from '@material-ui/icons/Work';
 import EditIcon from '@material-ui/icons/Edit';
 import { FC } from 'react';
 import classes from './company-header.module.scss';
+import { ECompanyTypes } from '@codingsans/bixindex-common';
 
 interface CompanyHeaderProps {
   title: string;
   logoPath: string;
+  companyType: ECompanyTypes;
 }
 
-export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath }) => {
+export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, companyType }) => {
   return (
     <div className={classes.companyHeader}>
       <div className={classes.companyHeaderTitle}>
@@ -20,16 +22,21 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath }) => {
         </div>
         <div className={classes.companyHeaderText}>
           <span>{title}</span>
-          <Tooltip title="Cég" placement="top" arrow>
-            <WorkIcon className={classes.companyTypeIcon} />
-          </Tooltip>
-          <Tooltip title="Termék" placement="top" arrow>
-            <WidgetsIcon className={classes.companyTypeIcon} />
-          </Tooltip>
-
-          <Tooltip title="Brand" placement="top" arrow>
-            <LoyaltyIcon className={classes.companyTypeIcon} />
-          </Tooltip>
+          {companyType === ECompanyTypes.COMPANY && (
+            <Tooltip title="Cég" placement="top" arrow>
+              <WorkIcon className={classes.companyTypeIcon} />
+            </Tooltip>
+          )}
+          {companyType === ECompanyTypes.SHOP && (
+            <Tooltip title="Termék" placement="top" arrow>
+              <WidgetsIcon className={classes.companyTypeIcon} />
+            </Tooltip>
+          )}
+          {companyType === ECompanyTypes.BRAND && (
+            <Tooltip title="Brand" placement="top" arrow>
+              <LoyaltyIcon className={classes.companyTypeIcon} />
+            </Tooltip>
+          )}
         </div>
       </div>
       <div className={classes.companyHeaderLinksLine}>
