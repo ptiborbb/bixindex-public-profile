@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 
 .container {
   max-width: 1170px;
@@ -12,4 +12,8 @@
     background: rgba(255, 255, 255, 0.4);
     height: 1px;
   }
+}
+
+.frameFix {
+  overflow: hidden;
 }

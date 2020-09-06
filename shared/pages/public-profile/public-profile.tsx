@@ -30,7 +30,7 @@ export const PublicProfile: FC = () => {
           <CompanyHeader title={'Bizalmi Kor Kft.'} logoPath={bizalmiKorLogo} />
         </div>
       </div>
-      <div>
+      <div className={classes.frameFix}>
         <div className={classes.container}>
           <CompanyFrame rating={8.96} ratingCount={85} company={{ name: 'Bizalmi kor Kft' }} />
         </div>
