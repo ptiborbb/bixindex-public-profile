@@ -39,8 +39,13 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, ratingCount, compa
         <div className={classes.detailsTitle}>Cégadatok</div>
         <div className={classes.detailsBlock}>
           <div className={classes.companyName}>{company.name}</div>
-          <CompanyDetailItem icon={<SupervisorAccountIcon />} label={'Létszám'} value={'10 fő'} />
-          <CompanyDetailItem icon={<AutorenewIcon />} label={'Eves forgalom'} value={'10 000 000 000 HUF'} />
+          <CompanyDetailItem icon={<SupervisorAccountIcon />} label={'Létszám'} value={'10 fő'} change={'up'} />
+          <CompanyDetailItem
+            icon={<AutorenewIcon />}
+            label={'Eves forgalom'}
+            value={'10 000 000 000 HUF'}
+            change={'down'}
+          />
           <CompanyDetailItem icon={<AssignmentIcon />} label={'Adoszam'} value={'14780846-2-43'} />
           <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={'1095. Soroksári út 48. 10. ép. 2. em. 20'} />
           <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={'Rendezvényszervezés'} />

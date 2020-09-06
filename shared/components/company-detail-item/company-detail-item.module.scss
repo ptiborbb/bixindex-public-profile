@@ -27,6 +27,20 @@
       font-size: 14px;
       line-height: 17px;
       color: $dark;
+      display: flex;
+      align-items: center;
+
+      .trendUp {
+        margin-left: 0.5rem;
+        color: $green;
+        font-size: 24px;
+      }
+
+      .trendDown {
+        margin-left: 0.5rem;
+        color: $red;
+        font-size: 24px;
+      }
     }
   }
 }
