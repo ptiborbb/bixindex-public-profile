@@ -4,8 +4,8 @@
   display: flex;
   .companySidebar {
     padding: 2rem;
-    width: 25%;
-    border-right: 1px solid #dddddd;
+    width: 32%;
+    border-right: 1px solid $grey;
     .ratingStar {
       color: lightgray;
     }
@@ -36,11 +36,32 @@
       line-height: 29px;
       color: $dark;
     }
+
+    .separator {
+      height: 1px;
+      background: $grey;
+      margin: 1.5rem -2rem;
+    }
+
+    .blockLabel {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: $dark;
+    }
+
+    .chipBlock {
+      margin: 0.5rem 0;
+    }
   }
 
   .companyContent {
-    width: 75%;
+    width: 68%;
     color: $dark;
+  }
+
+  .dFlex {
+    display: flex;
   }
 
   .captionText {

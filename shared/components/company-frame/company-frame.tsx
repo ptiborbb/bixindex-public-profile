@@ -10,6 +10,9 @@ import { FC } from 'react';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import classes from './company-frame.module.scss';
 import { SocialIcon } from '../social-icon/social-icon';
+import { Chip } from '../chip/chip';
+import { ContactItem } from '../contact-item/contact-item';
+import avatar from '../../../public/avatar.png';
 
 interface CompanyFrameProps {
   rating: number;
@@ -56,6 +59,41 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, ratingCount, compa
             <SocialIcon type={'google'} />
             <SocialIcon type={'linkedin'} />
           </div>
+
+          <div className={classes.separator}></div>
+
+          <div className={classes.blockLabel}>Termékek és szolgáltatások</div>
+
+          <div className={classes.chipBlock}>
+            <Chip text={'mrd+ vezetői klub'} />
+            <Chip text={'bizalom gála'} />
+            <Chip text={'bix'} />
+            <Chip text={'TOP Vezetői klub'} />
+          </div>
+
+          <div className={classes.blockLabel}>Szakterület</div>
+
+          <div className={classes.chipBlock}>
+            <Chip text={'értékesítés'} />
+            <Chip text={'marketing'} />
+          </div>
+
+          <div className={classes.separator}></div>
+
+          <div className={classes.blockLabel}>Kapcsolattartó</div>
+
+          <ContactItem
+            image={avatar}
+            name={'Letenovics - Nagy Roland'}
+            email={'roland.letenovics@bizalmikor.hu'}
+            phone={'+36 30 2203 203'}
+          />
+          <ContactItem
+            image={avatar}
+            name={'Letenovics - Nagy Roland'}
+            email={'roland.letenovics@bizalmikor.hu'}
+            phone={'+36 30 2203 203'}
+          />
         </div>
       </div>
       <div className={classes.companyContent}>CONTENT</div>

@@ -1,0 +1,14 @@
+@import '../../../styles/variables.scss';
+
+.chip {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  background: #56aaa6;
+  border-radius: 2px;
+  padding: 0.5rem;
+  color: white;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
