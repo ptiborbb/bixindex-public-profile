@@ -1,0 +1,16 @@
+@import '../../../../../../styles/variables.scss';
+
+.reviewRatio {
+  background: $bix-bg-gradient-v;
+  border-radius: 8px;
+  width: 4rem;
+  height: 4rem;
+
+  font-weight: 600;
+  font-size: 29px;
+  line-height: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: white;
+}

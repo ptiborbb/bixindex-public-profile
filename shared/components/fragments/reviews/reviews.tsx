@@ -1,8 +1,15 @@
 import { FC } from 'react';
+import { ReviewsDetail } from './components/reviews-detail/reviews-detail';
+import { ReviewsHeader } from './components/reviews-header/reviews-header';
 import classes from './reviews.module.scss';
 
 interface ReviewsProps {}
 
 export const Reviews: FC<ReviewsProps> = () => {
-  return <div className={classes.reviews}>REVIEWS</div>;
+  return (
+    <div className={classes.reviews}>
+      <ReviewsHeader />
+      <ReviewsDetail />
+    </div>
+  );
 };

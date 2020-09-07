@@ -1,0 +1,27 @@
+@import '../../../../../../styles/variables.scss';
+
+.reviewsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+
+  .reviewsSummary {
+    display: flex;
+    align-items: center;
+  }
+
+  .companyWriteReview {
+    background: #f15c5c;
+    border-radius: 3px;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: 0;
+
+    .reviewIcon {
+      margin-left: 0.5rem;
+    }
+  }
+}

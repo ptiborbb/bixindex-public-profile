@@ -1,0 +1,16 @@
+@import '../../../../../../styles/variables.scss';
+
+.reviewsDetail {
+  height: 2rem;
+  line-height: 2rem;
+  background: #56aaa6;
+  border-radius: 0;
+
+  .reviewsDetailTitle {
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 0 2rem;
+  }
+}
