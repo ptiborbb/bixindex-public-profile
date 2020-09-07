@@ -1,4 +1,4 @@
-import { IProduct, IProfile, IService } from '@codingsans/bixindex-common';
+import { IProfile } from '@codingsans/bixindex-common';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
@@ -7,10 +7,15 @@ import LanguageIcon from '@material-ui/icons/Language';
 import PlaceIcon from '@material-ui/icons/Place';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useMemo } from 'react';
 import { Chip } from '../chip/chip';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
+import { Awards } from '../fragments/awards/awards';
+import { News } from '../fragments/news/news';
+import { Products } from '../fragments/products/products';
+import { Reviews } from '../fragments/reviews/reviews';
 import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
@@ -23,6 +28,23 @@ interface CompanyFrameProps {
 }
 
 export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
+  const router = useRouter();
+  const hash = useMemo(() => router.asPath.split('#')[1], [router.asPath]);
+  const contentSegment = useMemo(() => {
+    switch (hash) {
+      case 'reviews':
+        return <Reviews />;
+      case 'awards':
+        return <Awards />;
+      case 'news':
+        return <News />;
+      case 'products':
+        return <Products />;
+      default:
+        return <Reviews />;
+    }
+  }, [hash]);
+
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
@@ -98,7 +120,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
           ))}
         </div>
       </div>
-      <div className={classes.companyContent}>CONTENT</div>
+      <div className={classes.companyContent}>{contentSegment}</div>
     </div>
   );
 };

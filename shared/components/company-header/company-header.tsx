@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { FC } from 'react';
 import classes from './company-header.module.scss';
 import { ECompanyTypes } from '@codingsans/bixindex-common';
+import Link from 'next/link';
 
 interface CompanyHeaderProps {
   title: string;
@@ -44,10 +45,18 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, company
           Értékelés írása <EditIcon className={classes.reviewIcon} />
         </button>
         <div className={classes.companyHeaderLinks}>
-          <div className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</div>
-          <div className={classes.companyHeaderLink}>Díjak</div>
-          <div className={classes.companyHeaderLink}>Hírek</div>
-          <div className={classes.companyHeaderLink}>Termékek/szolgáltatások</div>
+          <Link href="#reviews" passHref>
+            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</a>
+          </Link>
+          <Link href="#awards">
+            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Díjak</a>
+          </Link>
+          <Link href="#news">
+            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Hírek</a>
+          </Link>
+          <Link href="#products">
+            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Termékek/szolgáltatások</a>
+          </Link>
         </div>
       </div>
     </div>
