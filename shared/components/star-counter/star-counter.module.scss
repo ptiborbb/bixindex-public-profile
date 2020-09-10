@@ -1,0 +1,19 @@
+@import '../../../styles/variables.scss';
+
+.starCounter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  .star {
+    color: #bf9855;
+  }
+
+  .counter {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: $dark;
+    margin-left: 1rem;
+  }
+}

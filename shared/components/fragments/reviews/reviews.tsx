@@ -9,7 +9,12 @@ export const Reviews: FC<ReviewsProps> = () => {
   return (
     <div className={classes.reviews}>
       <ReviewsHeader />
-      <ReviewsDetail />
+      <ReviewsDetail
+        filter={{ name: '', productId: undefined, productOrService: undefined, stars: undefined, date: undefined }}
+        filterChanged={console.log}
+        products={[]}
+        services={[]}
+      />
     </div>
   );
 };
