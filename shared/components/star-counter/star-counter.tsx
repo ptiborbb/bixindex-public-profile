@@ -4,7 +4,7 @@ import classes from './star-counter.module.scss';
 
 interface StarCounterProps {
   stars: number;
-  count: number;
+  count?: number;
 }
 
 export const StarCounter: FC<StarCounterProps> = ({ stars, count }) => {
@@ -19,7 +19,7 @@ export const StarCounter: FC<StarCounterProps> = ({ stars, count }) => {
           <GradeOutlined key={i} className={classes.star} />
         ),
       )}
-      <span className={classes.counter}>{count}</span>
+      {count && <span className={classes.counter}>{count}</span>}
     </div>
   );
 };
