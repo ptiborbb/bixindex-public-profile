@@ -10,7 +10,14 @@ export const Reviews: FC<ReviewsProps> = () => {
     <div className={classes.reviews}>
       <ReviewsHeader />
       <ReviewsDetail
-        filter={{ name: '', productId: undefined, productOrService: undefined, stars: undefined, date: undefined }}
+        filter={{
+          name: '',
+          productId: undefined,
+          productOrService: undefined,
+          stars: undefined,
+          date: undefined,
+          type: 'bix',
+        }}
         filterChanged={console.log}
         products={[]}
         services={[]}
