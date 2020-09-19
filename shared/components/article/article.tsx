@@ -1,3 +1,5 @@
+import { Link } from '@material-ui/icons';
+import { InfoRounded, Public } from '@material-ui/icons';
 import { FC } from 'react';
 import classes from './article.module.scss';
 
@@ -19,13 +21,19 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
           <span className={classes.votes}>{votes}</span>
         </div>
         <div className={classes.type}>
-          {type}
-          <span className={classes.date}>{date}</span>
+          <span className={classes.typeBlock}>
+            <InfoRounded fontSize="small" /> {type}
+          </span>
+          <span className={classes.date}>
+            <Public fontSize="small" /> {date}
+          </span>
         </div>
       </div>
       <div className={classes.content}>{content}</div>
       <div className={classes.link}>
-        <a href={link}>{link}</a>
+        <a href={link}>
+          <Link fontSize="small" /> {link}
+        </a>
       </div>
     </div>
   );
