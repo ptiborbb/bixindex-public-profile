@@ -15,6 +15,13 @@
         font-size: 16px;
         line-height: 20px;
         color: $dark;
+        display: flex;
+        align-items: center;
+      }
+
+      .voteIcon {
+        color: #00d014;
+        margin-right: 0.5rem;
       }
     }
 
@@ -24,6 +31,10 @@
       line-height: 17px;
       color: #ff3739;
       display: flex;
+
+      .icon {
+        margin-right: 0.5rem;
+      }
 
       .typeBlock {
         display: flex;
@@ -54,5 +65,14 @@
     line-height: 20px;
     text-decoration-line: underline;
     color: #5d92f4;
+
+    & > a {
+      display: flex;
+      align-items: center;
+
+      & > .icon {
+        margin-right: 0.5rem;
+      }
+    }
   }
 }

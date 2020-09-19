@@ -1,71 +1,19 @@
-import { ECompanyTypes, IProfile } from '@codingsans/bixindex-common';
 import Head from 'next/head';
-import { FC, useMemo } from 'react';
-import avatar from '../../../public/avatar.png';
+import { FC, useMemo, useState } from 'react';
 import logo from '../../../public/bix_logo.svg';
-import bizalmiKorLogo from '../../../public/bizalmi_kor.svg';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
 import classes from './public-profile.module.scss';
 
-export const PublicProfile: FC = (props) => {
-  const publicProfile = useMemo(
-    () =>
-      ({
-        profile: {
-          fb: 'google.com',
-          insta: 'google.com',
-          linkedin: 'google.com',
-          website: 'bixindex.hu',
-          name: 'Bizalmi Kör Kft.',
-          type: ECompanyTypes.COMPANY,
-          logo: bizalmiKorLogo,
+interface PublicProfileProps {
+  publicProfile: any;
+}
 
-          details: {
-            employees: {
-              value: 10,
-              change: 'up',
-            },
-            yearlyIncome: {
-              value: 100000000,
-              change: 'down',
-            },
-            taxNumber: '14780846-2-43',
-            address: '1095. Soroksári út 48. 10. ép. 2. em. 20',
-            mainProfile: 'Rendezvényszervezés',
-          },
-          products: [
-            { name: 'mrd+ vezetői klub' },
-            { name: 'bizalom gála' },
-            { name: 'bix' },
-            { name: 'TOP Vezetői klub' },
-          ],
-          services: [{ name: 'értékesítés' }, { name: 'marketing' }],
-          contacts: [
-            {
-              name: 'Letenovics - Nagy Roland',
-              email: 'roland.letenovics@bizalmikor.hu',
-              phone: '+36 30 2203 203',
-              image: avatar,
-            },
-          ],
-        },
-        rating: {
-          value: 8.96,
-          count: 85,
-        },
-      } as {
-        rating: {
-          value: number;
-          count: number;
-        };
-        profile: IProfile;
-      }),
-    [],
-  );
-
+export const PublicProfile: FC<PublicProfileProps> = (props) => {
+  const publicProfile = useMemo(() => props.publicProfile, [props]);
+  const [activeFragment, setFragment] = useState(() => 'reviews');
   return (
     <div>
       <Head>
@@ -88,13 +36,19 @@ export const PublicProfile: FC = (props) => {
             title={publicProfile.profile.name}
             logoPath={publicProfile.profile.logo}
             companyType={publicProfile.profile.type}
+            activate={(fragment) => setFragment(fragment)}
           />
         </div>
       </div>
       <div className={classes.frameFix}>
         <div className={classes.container}>
-          {JSON.stringify({ props })}
-          <CompanyFrame rating={publicProfile.rating} profile={publicProfile.profile} />
+          <CompanyFrame
+            activeFragment={activeFragment}
+            rating={publicProfile.rating}
+            profile={publicProfile.profile}
+            awards={publicProfile.awards}
+            articles={publicProfile.articles}
+          />
         </div>
       </div>
     </div>

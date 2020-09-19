@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { GetServerSidePropsContext } from 'next';
 import Page from '../index';
+import { mockData } from './mockData';
 
 export default Page;
 
@@ -18,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
     .get(`/public-profiles/${companyAlias}?by=ALIAS`)
     .then((res) => res.data)
     .catch((err) => {
-      console.log({ err });
+      // console.log({ err });
       return null;
     });
 
@@ -26,6 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ sl
 
   return {
     props: {
+      publicProfile: mockData(),
       profile,
     }, // will be passed to the page component as props
   };
