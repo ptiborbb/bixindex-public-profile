@@ -7,6 +7,7 @@ import { FC } from 'react';
 import classes from './company-header.module.scss';
 import { ECompanyTypes } from '@codingsans/bixindex-common';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface CompanyHeaderProps {
   title: string;
@@ -15,6 +16,9 @@ interface CompanyHeaderProps {
 }
 
 export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, companyType }) => {
+  const router = useRouter();
+  const [companyAlias] = (router?.query?.slug as string[]) || [];
+  console.log({ companyAlias });
   return (
     <div className={classes.companyHeader}>
       <div className={classes.companyHeaderTitle}>
@@ -45,16 +49,16 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, company
           Értékelés írása <EditIcon className={classes.reviewIcon} />
         </button>
         <div className={classes.companyHeaderLinks}>
-          <Link href="#reviews" passHref>
+          <Link href="[...slug]#reviews" as={`${companyAlias}#reviews`} passHref>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</a>
           </Link>
-          <Link href="#awards">
+          <Link href="[...slug]#awards" as={`${companyAlias}#awards`} passHref>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Díjak</a>
           </Link>
-          <Link href="#news">
+          <Link href="[...slug]#news" as={`${companyAlias}#news`} passHref>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Hírek</a>
           </Link>
-          <Link href="#products">
+          <Link href="[...slug]#products" as={`${companyAlias}#products`} passHref>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Termékek/szolgáltatások</a>
           </Link>
         </div>

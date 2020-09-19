@@ -10,7 +10,7 @@ import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
 import classes from './public-profile.module.scss';
 
-export const PublicProfile: FC = () => {
+export const PublicProfile: FC = (props) => {
   const publicProfile = useMemo(
     () =>
       ({
@@ -93,6 +93,7 @@ export const PublicProfile: FC = () => {
       </div>
       <div className={classes.frameFix}>
         <div className={classes.container}>
+          {JSON.stringify({ props })}
           <CompanyFrame rating={publicProfile.rating} profile={publicProfile.profile} />
         </div>
       </div>

@@ -35,7 +35,24 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
       case 'reviews':
         return <Reviews />;
       case 'awards':
-        return <Awards />;
+        return (
+          <Awards
+            awards={[
+              {
+                image: 'https://placekitten.com/300/200',
+                date: new Date(),
+                title: 'Title',
+                description: 'Description',
+              },
+              {
+                image: 'https://placekitten.com/300/200',
+                date: new Date(),
+                title: 'Title',
+                description: 'Description',
+              },
+            ]}
+          />
+        );
       case 'news':
         return <News />;
       case 'products':
