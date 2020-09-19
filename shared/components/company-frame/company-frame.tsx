@@ -54,7 +54,28 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
           />
         );
       case 'news':
-        return <News />;
+        return (
+          <News
+            articles={[
+              {
+                votes: 243,
+                date: new Date(),
+                title: 'Title',
+                type: 'Sajto',
+                content: 'Content',
+                link: 'https://google.com',
+              },
+              {
+                votes: 243,
+                date: new Date(),
+                title: 'Title',
+                type: 'Sajto',
+                content: 'Content',
+                link: 'https://google.com',
+              },
+            ]}
+          />
+        );
       case 'products':
         return <Products />;
       default:
