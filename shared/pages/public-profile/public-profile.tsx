@@ -1,9 +1,9 @@
-import { ECompanyTypes, IProduct, IProfile, IService } from '@codingsans/bixindex-common';
+import { ECompanyTypes, IProfile } from '@codingsans/bixindex-common';
 import Head from 'next/head';
 import { FC, useMemo } from 'react';
 import avatar from '../../../public/avatar.png';
-import bizalmiKorLogo from '../../../public/bizalmi_kor.svg';
 import logo from '../../../public/bix_logo.svg';
+import bizalmiKorLogo from '../../../public/bizalmi_kor.svg';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
