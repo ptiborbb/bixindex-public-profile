@@ -25,42 +25,26 @@ interface CompanyFrameProps {
     count: number;
   };
   profile: IProfile;
+  awards: any[];
+  articles: any[];
+  activeFragment: string;
 }
 
-export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
-  const router = useRouter();
-  const hash = useMemo(() => router.asPath.split('#')[1], [router.asPath]);
+export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile, awards, articles, activeFragment }) => {
   const contentSegment = useMemo(() => {
-    switch (hash) {
+    switch (activeFragment) {
       case 'reviews':
-        return <Reviews />;
+        return <Reviews rating={rating} />;
       case 'awards':
-        return (
-          <Awards
-            awards={[
-              {
-                image: 'https://placekitten.com/300/200',
-                date: new Date(),
-                title: 'Title',
-                description: 'Description',
-              },
-              {
-                image: 'https://placekitten.com/300/200',
-                date: new Date(),
-                title: 'Title',
-                description: 'Description',
-              },
-            ]}
-          />
-        );
+        return <Awards awards={awards} />;
       case 'news':
-        return <News />;
+        return <News articles={articles} />;
       case 'products':
         return <Products />;
       default:
-        return <Reviews />;
+        return <Reviews rating={rating} />;
     }
-  }, [hash]);
+  }, [activeFragment]);
 
   return (
     <div className={classes.companyFrame}>
@@ -137,6 +121,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
           ))}
         </div>
       </div>
+
       <div className={classes.companyContent}>{contentSegment}</div>
     </div>
   );

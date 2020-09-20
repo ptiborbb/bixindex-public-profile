@@ -1,23 +1,23 @@
+import { ECompanyTypes } from '@codingsans/bixindex-common';
 import { Tooltip } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import WorkIcon from '@material-ui/icons/Work';
-import EditIcon from '@material-ui/icons/Edit';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import classes from './company-header.module.scss';
-import { ECompanyTypes } from '@codingsans/bixindex-common';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 interface CompanyHeaderProps {
   title: string;
   logoPath: string;
   companyType: ECompanyTypes;
+  activate: (fragment: string) => void;
 }
 
-export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, companyType }) => {
+export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, companyType, activate }) => {
   const router = useRouter();
-  const [companyAlias] = (router?.query?.slug as string[]) || [];
+  const companyAlias = (router?.query?.companyAlias as string) || '';
   console.log({ companyAlias });
   return (
     <div className={classes.companyHeader}>
@@ -49,18 +49,18 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, company
           Értékelés írása <EditIcon className={classes.reviewIcon} />
         </button>
         <div className={classes.companyHeaderLinks}>
-          <Link href="[...slug]#reviews" as={`${companyAlias}#reviews`} passHref>
+          <div onClick={() => activate('reviews')}>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</a>
-          </Link>
-          <Link href="[...slug]#awards" as={`${companyAlias}#awards`} passHref>
+          </div>
+          <div onClick={() => activate('awards')}>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Díjak</a>
-          </Link>
-          <Link href="[...slug]#news" as={`${companyAlias}#news`} passHref>
+          </div>
+          <div onClick={() => activate('news')}>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Hírek</a>
-          </Link>
-          <Link href="[...slug]#products" as={`${companyAlias}#products`} passHref>
+          </div>
+          <div onClick={() => activate('products')}>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Termékek/szolgáltatások</a>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
