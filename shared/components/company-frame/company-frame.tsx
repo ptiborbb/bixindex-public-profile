@@ -27,10 +27,18 @@ interface CompanyFrameProps {
   profile: IProfile;
   awards: any[];
   articles: any[];
+  productsAndServices: any[];
   activeFragment: string;
 }
 
-export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile, awards, articles, activeFragment }) => {
+export const CompanyFrame: FC<CompanyFrameProps> = ({
+  rating,
+  profile,
+  awards,
+  articles,
+  productsAndServices,
+  activeFragment,
+}) => {
   const contentSegment = useMemo(() => {
     switch (activeFragment) {
       case 'reviews':
@@ -40,7 +48,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile, awards, a
       case 'news':
         return <News articles={articles} />;
       case 'products':
-        return <Products />;
+        return <Products productsAndServices={productsAndServices} />;
       default:
         return <Reviews rating={rating} />;
     }

@@ -50,6 +50,7 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
                 profile={publicProfile.profile}
                 awards={publicProfile.awards}
                 articles={publicProfile.articles}
+                productsAndServices={publicProfile.productsAndServices}
               />
             </div>
           </div>

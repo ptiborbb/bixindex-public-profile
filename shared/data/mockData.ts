@@ -1,4 +1,4 @@
-import { ECompanyTypes, IProfile } from '@codingsans/bixindex-common';
+import { ECompanyTypes, EProductTypes, IProduct, IProfile, IService } from '@codingsans/bixindex-common';
 
 export const mockData = (): any =>
   ({
@@ -77,6 +77,46 @@ export const mockData = (): any =>
         link: 'https://google.com',
       },
     ],
+    productsAndServices: [
+      {
+        id: '1',
+        description: 'product1',
+        name: 'product1',
+        mainCategory: 'main1',
+        subCategory: 'sub1',
+        pricing: '1000',
+        productType: EProductTypes.PRODUCT,
+        speciality: 'spec1',
+      },
+      {
+        id: '2',
+        description: 'product2',
+        name: 'product2',
+        mainCategory: 'main2',
+        subCategory: 'sub2',
+        pricing: '2000',
+        productType: EProductTypes.PRODUCT,
+        speciality: 'spec2',
+      },
+      {
+        id: '3',
+        description: 'service1',
+        name: 'service1',
+        mainCategory: 'main1',
+        subCategory: 'sub1',
+        pricing: '1000',
+        speciality: 'spec1',
+      },
+      {
+        id: '4',
+        description: 'service2',
+        name: 'service2',
+        mainCategory: 'main2',
+        subCategory: 'sub2',
+        pricing: '2000',
+        speciality: 'spec2',
+      },
+    ],
   } as {
     rating: {
       value: number;
@@ -85,4 +125,5 @@ export const mockData = (): any =>
     profile: IProfile;
     awards: any[];
     articles: any[];
+    productsAndServices: (IProduct | IService)[];
   });
