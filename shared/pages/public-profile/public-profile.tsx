@@ -12,7 +12,7 @@ interface PublicProfileProps {
 }
 
 export const PublicProfile: FC<PublicProfileProps> = (props) => {
-  const publicProfile = useMemo(() => props.publicProfile, [props]);
+  const publicProfile = useMemo(() => props?.publicProfile, [props]);
   const [activeFragment, setFragment] = useState(() => 'reviews');
   return (
     <div>
@@ -23,34 +23,38 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
           href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
         />
       </Head>
-      <div className={classes.headerBlock}>
-        <div className={classes.container}>
-          <Header logoPath={logo} />
-        </div>
-        <div className={classes.divider}></div>
-        <div className={classes.container}>
-          <CompanySearch />
-        </div>
-        <div className={classes.container}>
-          <CompanyHeader
-            title={publicProfile.profile.name}
-            logoPath={publicProfile.profile.logo}
-            companyType={publicProfile.profile.type}
-            activate={(fragment) => setFragment(fragment)}
-          />
-        </div>
-      </div>
-      <div className={classes.frameFix}>
-        <div className={classes.container}>
-          <CompanyFrame
-            activeFragment={activeFragment}
-            rating={publicProfile.rating}
-            profile={publicProfile.profile}
-            awards={publicProfile.awards}
-            articles={publicProfile.articles}
-          />
-        </div>
-      </div>
+      {publicProfile && (
+        <>
+          <div className={classes.headerBlock}>
+            <div className={classes.container}>
+              <Header logoPath={logo} />
+            </div>
+            <div className={classes.divider}></div>
+            <div className={classes.container}>
+              <CompanySearch />
+            </div>
+            <div className={classes.container}>
+              <CompanyHeader
+                title={publicProfile.profile.name}
+                logoPath={publicProfile.profile.logo}
+                companyType={publicProfile.profile.type}
+                activate={(fragment) => setFragment(fragment)}
+              />
+            </div>
+          </div>
+          <div className={classes.frameFix}>
+            <div className={classes.container}>
+              <CompanyFrame
+                activeFragment={activeFragment}
+                rating={publicProfile.rating}
+                profile={publicProfile.profile}
+                awards={publicProfile.awards}
+                articles={publicProfile.articles}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

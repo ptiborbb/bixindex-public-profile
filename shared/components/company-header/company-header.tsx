@@ -1,13 +1,12 @@
+import { ECompanyTypes } from '@codingsans/bixindex-common';
 import { Tooltip } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import WorkIcon from '@material-ui/icons/Work';
-import EditIcon from '@material-ui/icons/Edit';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import classes from './company-header.module.scss';
-import { ECompanyTypes } from '@codingsans/bixindex-common';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 interface CompanyHeaderProps {
   title: string;
@@ -18,7 +17,7 @@ interface CompanyHeaderProps {
 
 export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, companyType, activate }) => {
   const router = useRouter();
-  const [companyAlias] = (router?.query?.slug as string[]) || [];
+  const companyAlias = (router?.query?.companyAlias as string) || '';
   console.log({ companyAlias });
   return (
     <div className={classes.companyHeader}>
