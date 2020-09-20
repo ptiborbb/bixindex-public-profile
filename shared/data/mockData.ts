@@ -77,6 +77,7 @@ export const mockData = (): any =>
         link: 'https://google.com',
       },
     ],
+    productsAndServices: [],
   } as {
     rating: {
       value: number;
@@ -85,4 +86,5 @@ export const mockData = (): any =>
     profile: IProfile;
     awards: any[];
     articles: any[];
+    productsAndServices: any[];
   });
