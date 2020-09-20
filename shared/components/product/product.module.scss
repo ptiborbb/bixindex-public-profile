@@ -2,4 +2,55 @@
 
 .product {
   padding: 3rem;
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+
+    .mainDetails {
+      .name {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 29px;
+        color: $dark;
+      }
+      .categories {
+        padding-top: 0.5rem;
+        font-size: 14px;
+        line-height: 17px;
+        color: $light;
+      }
+    }
+
+    .subDetails {
+      .priceLabel {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: right;
+        color: $dark;
+      }
+      .price {
+        padding-top: 0.5rem;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: right;
+        color: $dark;
+      }
+    }
+  }
+
+  .descriptionLabel {
+    padding-top: 1.5rem;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: $dark;
+  }
+  .description {
+    padding-top: 0.5rem;
+    font-size: 16px;
+    line-height: 20px;
+    color: $dark;
+  }
 }

@@ -12,7 +12,7 @@ export const Products: FC<ProductsProps> = ({ productsAndServices }) => {
       {productsAndServices.map((product, i) => (
         <div key={i}>
           {i > 0 && <div className={classes.separator}></div>}
-          <Product />
+          <Product {...product} />
         </div>
       ))}
     </div>
