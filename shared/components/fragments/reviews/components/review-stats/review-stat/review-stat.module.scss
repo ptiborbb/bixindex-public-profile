@@ -1,0 +1,52 @@
+@import '../../../../../../../styles/variables.scss';
+
+.reviewStat {
+  display: flex;
+
+  & > div {
+    width: 50%;
+  }
+
+  .reviewLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & > .label {
+      margin-top: 1rem;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      text-transform: uppercase;
+      color: $dark;
+    }
+    & > .score {
+      margin-top: 1rem;
+      font-weight: 300;
+      font-size: 48px;
+      line-height: 59px;
+      color: $dark;
+    }
+
+    & > .ratingCount {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 18px;
+      text-align: center;
+      text-transform: uppercase;
+      color: $dark;
+    }
+  }
+
+  .reviewRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    & > .rate {
+    }
+  }
+}

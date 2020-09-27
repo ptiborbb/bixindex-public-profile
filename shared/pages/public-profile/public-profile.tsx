@@ -25,6 +25,7 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
       </Head>
       {publicProfile && (
         <>
+          {JSON.stringify({ publicProfile })}
           <div className={classes.headerBlock}>
             <div className={classes.container}>
               <Header logoPath={logo} />
@@ -50,6 +51,7 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
                 profile={publicProfile.profile}
                 awards={publicProfile.awards}
                 articles={publicProfile.articles}
+                stats={publicProfile.stats}
                 productsAndServices={publicProfile.productsAndServices}
               />
             </div>

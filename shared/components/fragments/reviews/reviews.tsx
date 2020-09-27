@@ -8,9 +8,10 @@ interface ReviewsProps {
     value: number;
     count: number;
   };
+  stats: any;
 }
 
-export const Reviews: FC<ReviewsProps> = ({ rating }) => {
+export const Reviews: FC<ReviewsProps> = ({ rating, stats }) => {
   return (
     <div className={classes.reviews}>
       <ReviewsHeader rating={rating} />
@@ -26,6 +27,7 @@ export const Reviews: FC<ReviewsProps> = ({ rating }) => {
         filterChanged={console.log}
         products={[]}
         services={[]}
+        stats={stats}
       />
     </div>
   );
