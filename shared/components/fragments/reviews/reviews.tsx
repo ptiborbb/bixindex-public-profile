@@ -8,9 +8,11 @@ interface ReviewsProps {
     value: number;
     count: number;
   };
+  stats: any;
+  npsRates: number[];
 }
 
-export const Reviews: FC<ReviewsProps> = ({ rating }) => {
+export const Reviews: FC<ReviewsProps> = ({ rating, stats, npsRates }) => {
   return (
     <div className={classes.reviews}>
       <ReviewsHeader rating={rating} />
@@ -26,6 +28,7 @@ export const Reviews: FC<ReviewsProps> = ({ rating }) => {
         filterChanged={console.log}
         products={[]}
         services={[]}
+        stats={{ ...stats, npsRates }}
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import { ECompanyTypes, EProductTypes, IProduct, IProfile, IService } from '@codingsans/bixindex-common';
+import { ReviewStatsProps } from '../components/fragments/reviews/components/review-stats/review-stats';
 
 export const mockData = (): any =>
   ({
@@ -117,6 +118,48 @@ export const mockData = (): any =>
         speciality: 'spec2',
       },
     ],
+    stats: {
+      index: {
+        ratingCount: 45,
+        score: 8.9,
+        ratings: {
+          excellent: 30,
+          good: 10,
+          mediocre: 3,
+          bad: 2,
+        },
+      },
+      indexDetails: [
+        {
+          label: 'megrendelők',
+          index: {
+            ratingCount: 45,
+            score: 8.9,
+            ratings: {
+              excellent: 30,
+              good: 10,
+              mediocre: 3,
+              bad: 2,
+            },
+          },
+        },
+        {
+          label: 'beszállítók',
+          index: {
+            ratingCount: 45,
+            score: 8.9,
+            ratings: {
+              excellent: 30,
+              good: 10,
+              mediocre: 3,
+              bad: 2,
+            },
+          },
+        },
+      ],
+      tags: ['Legendás szolgátatás', 'Profik', 'Pontos, tartják a határidőket'],
+    },
+    npsRates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   } as {
     rating: {
       value: number;
@@ -126,4 +169,6 @@ export const mockData = (): any =>
     awards: any[];
     articles: any[];
     productsAndServices: (IProduct | IService)[];
+    stats: ReviewStatsProps;
+    npsRates: [number, number, number, number, number, number, number, number, number, number];
   });

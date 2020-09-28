@@ -1,0 +1,29 @@
+@import '../../../../../../../styles/variables.scss';
+
+.reviewRate {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+
+  .ratio {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #054f6b;
+    margin-right: 0.5rem;
+  }
+
+  .line {
+    background: rgba(0, 165, 149, 0.2);
+    height: 8px;
+    width: 180px;
+
+    & > .innerLine {
+      background: #56aaa6;
+      height: 100%;
+    }
+  }
+}

@@ -21,22 +21,28 @@ import avatar from '../../../../../../public/avatar.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
 import { Chip } from '../../../../chip/chip';
+import { ReviewStats, ReviewStatsProps } from '../review-stats/review-stats';
 
 interface ReviewsDetailProps {
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
   products: IProduct[];
   services: IService[];
+  stats: ReviewStatsProps;
 }
 
-export const ReviewsDetail: FC<ReviewsDetailProps> = ({ filter, filterChanged, products, services }) => {
+export const ReviewsDetail: FC<ReviewsDetailProps> = ({ filter, filterChanged, products, services, stats }) => {
   const [opened, setOpened] = useState(false);
   return (
     <div className={classes.reviewsDetail}>
       <div className={classes.reviewsDetailTitle} onClick={() => setOpened(!opened)}>
         Részletes adatok {opened ? <ExpandLess /> : <ExpandMore />}
       </div>
-      {opened && <div className={classes.reviewsDetailContent}>OPENED</div>}
+      {opened && (
+        <div className={classes.reviewsDetailContent}>
+          <ReviewStats {...stats} />
+        </div>
+      )}
 
       <div className={classes.filterTitle}>
         <Tune /> Szűrők
