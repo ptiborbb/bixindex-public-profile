@@ -20,12 +20,28 @@
       text-transform: uppercase;
       color: $dark;
     }
-    & > .score {
+
+    & > .gauge {
       margin-top: 1rem;
-      font-weight: 300;
-      font-size: 48px;
-      line-height: 59px;
-      color: $dark;
+      position: relative;
+      & > .progressRing {
+        & > .progressRingCircle {
+          transition: 0.35s stroke-dashoffset;
+          transform: rotate(-90deg);
+          transform-origin: 50% 50%;
+        }
+      }
+
+      & > .score {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 300;
+        font-size: 48px;
+        line-height: 59px;
+        color: $dark;
+      }
     }
 
     & > .ratingCount {

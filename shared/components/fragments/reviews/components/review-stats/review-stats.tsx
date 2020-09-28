@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { ReviewRatio } from '../review-ratio/review-ratio';
-import classes from './review-stats.module.scss';
-import EditIcon from '@material-ui/icons/Edit';
+import { NpsStat } from './nps-stat/nps-stat';
 import { ReviewStat } from './review-stat/review-stat';
+import classes from './review-stats.module.scss';
 
 export interface Ratings {
   excellent: number;
@@ -27,15 +26,17 @@ export interface ReviewStatsProps {
   }[];
 
   tags: string[];
+  npsRates: [number, number, number, number, number, number, number, number, number, number];
 }
 
-export const ReviewStats: FC<ReviewStatsProps> = ({ index, indexDetails }) => {
+export const ReviewStats: FC<ReviewStatsProps> = ({ index, indexDetails, npsRates }) => {
   return (
     <div className={classes.reviewStats}>
-      <ReviewStat label={'Bizalmi index'} index={index} />
+      <ReviewStat label={'Bizalmi index'} index={index} radius={80} />
 
+      <NpsStat npsRates={npsRates} />
       {indexDetails.map((indexDetail, i) => (
-        <ReviewStat key={i} label={indexDetail.label} index={indexDetail.index} />
+        <ReviewStat key={i} label={indexDetail.label} index={indexDetail.index} radius={80} />
       ))}
     </div>
   );

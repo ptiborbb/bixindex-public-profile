@@ -159,7 +159,7 @@ export const mockData = (): any =>
       ],
       tags: ['Legendás szolgátatás', 'Profik', 'Pontos, tartják a határidőket'],
     },
-    npsRates: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    npsRates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   } as {
     rating: {
       value: number;
@@ -170,5 +170,5 @@ export const mockData = (): any =>
     articles: any[];
     productsAndServices: (IProduct | IService)[];
     stats: ReviewStatsProps;
-    npsRates: [number, number, number, number, number, number, number, number, number, number, number];
+    npsRates: [number, number, number, number, number, number, number, number, number, number];
   });

@@ -29,6 +29,7 @@ interface CompanyFrameProps {
   articles: any[];
   productsAndServices: any[];
   stats: any;
+  npsRates: number[];
   activeFragment: string;
 }
 
@@ -39,12 +40,13 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
   articles,
   productsAndServices,
   stats,
+  npsRates,
   activeFragment,
 }) => {
   const contentSegment = useMemo(() => {
     switch (activeFragment) {
       case 'reviews':
-        return <Reviews rating={rating} stats={stats} />;
+        return <Reviews rating={rating} stats={stats} npsRates={npsRates} />;
       case 'awards':
         return <Awards awards={awards} />;
       case 'news':
@@ -52,7 +54,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
       case 'products':
         return <Products productsAndServices={productsAndServices} />;
       default:
-        return <Reviews rating={rating} stats={stats} />;
+        return <Reviews rating={rating} stats={stats} npsRates={npsRates} />;
     }
   }, [activeFragment]);
 
