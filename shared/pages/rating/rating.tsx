@@ -1,6 +1,6 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, Typography } from '@material-ui/core';
+import { Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, Slider, Typography } from '@material-ui/core';
 import { Field, FieldArray, Form, Formik } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
+import { RadioGroup, TextField } from 'formik-material-ui';
 import React, { FC } from 'react';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import classes from './rating.module.scss';
@@ -96,59 +96,102 @@ export const Rating: FC<RatingProps> = (props) => {
         <Formik
           initialValues={{
             satisfaction: '',
+            nps: 4,
             answers: form.questions,
+            comment: '',
           }}
           onSubmit={(values) => console.log(values)}
         >
-          <Form style={{ width: '100%' }}>
-            <Grid item xs={12}>
-              <Field component={RadioGroup} name="satisfaction">
-                {satisfactionOptions.map((option) => (
-                  <FormControlLabel key={option.value} value={option.value} control={<Radio />} label={option.label} />
-                ))}
-              </Field>
-            </Grid>
-
-            <Grid item xs={12}>
-              <hr className={classes.verticalSpacing} />
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h6">Mit gondol az alábbiakról?</Typography>
-            </Grid>
-            <FieldArray name="answers">
-              {() => (
-                <>
-                  {form.questions.map((question, index) => (
-                    <Grid item xs={12} key={question.id}>
-                      {question.text}
-                      <Field component={RadioGroup} name={`answers.${index}.value`}>
-                        <div>
-                          {smileys.map((option) => (
-                            <FormControlLabel
-                              key={option.value}
-                              value={option.value}
-                              label=""
-                              control={<SmileyRadio smiley={option.icon} />}
-                            />
-                          ))}
-                        </div>
-                      </Field>
-                    </Grid>
+          {({ setFieldValue }) => (
+            <Form style={{ width: '100%' }}>
+              <Grid item xs={12}>
+                <Field component={RadioGroup} name="satisfaction">
+                  {satisfactionOptions.map((option) => (
+                    <FormControlLabel
+                      key={option.value}
+                      value={option.value}
+                      control={<Radio />}
+                      label={option.label}
+                    />
                   ))}
-                </>
-              )}
-            </FieldArray>
+                </Field>
+              </Grid>
 
-            <Grid item xs={12}>
-              <hr className={classes.verticalSpacing} />
-            </Grid>
+              <Grid item xs={12}>
+                <hr className={classes.verticalSpacing} />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="h6">
+                  Mennyire valószínű, hogy ajánlaná a cég termékeit / szolgáltatásait illetve magát a céget
+                  barátainak/kollégáinak?
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Slider
+                  defaultValue={4}
+                  name="nps"
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  onChange={(event, value) => setFieldValue('nps', value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <hr className={classes.verticalSpacing} />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="h6">Mit gondol az alábbiakról?</Typography>
+              </Grid>
+              <FieldArray name="answers">
+                {() => (
+                  <>
+                    {form.questions.map((question, index) => (
+                      <Grid item xs={12} key={question.id}>
+                        {question.text}
+                        <Field component={RadioGroup} name={`answers.${index}.value`}>
+                          <div>
+                            {smileys.map((option) => (
+                              <FormControlLabel
+                                key={option.value}
+                                value={option.value}
+                                label=""
+                                control={<SmileyRadio smiley={option.icon} />}
+                              />
+                            ))}
+                          </div>
+                        </Field>
+                      </Grid>
+                    ))}
+                  </>
+                )}
+              </FieldArray>
 
-            <Grid item xs={12}>
-              <Button size="large" variant="contained" type="submit">
-                Értékelés küldése
-              </Button>
-            </Grid>
-          </Form>
+              <Grid item xs={12}>
+                <hr className={classes.verticalSpacing} />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  component={TextField}
+                  label="Kérük röviden foglalja össze tapasztalait"
+                  name="comment"
+                  fullWidth
+                  multiline
+                  rows={10}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <div className={classes.verticalSpacing} />
+              </Grid>
+              <Grid item xs={12} className={classes.flexRight}>
+                <Button size="large" variant="contained" type="submit" color="primary">
+                  Értékelés küldése
+                </Button>
+              </Grid>
+            </Form>
+          )}
         </Formik>
       </Grid>
     </div>
