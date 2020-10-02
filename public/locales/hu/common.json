@@ -61,12 +61,14 @@
     "NUM_OF_USERS": "Felhasználók száma",
     "NUM_OF_SUBSCRIBERS": "Előfizetők száma"
   },
-  "LOGIN": {
+  "AUTH": {
+    "NAME": "Név",
     "EMAIL": "Email cím",
     "PASSWORD": "Jelszó",
     "CONFIRM_PASSWORD": "Jelszó megerősítés",
     "PASSWORD_MATCH": "A jelszavaknak meg kell egyeznie",
-    "SUBMIT": "Belépés",
+    "LOGIN": "Belépés",
+    "REGISTER": "Regisztráció",
     "FORGOT_PASSWORD": "Elfelejtett jelszó",
     "REQUIRED": "A mező kitöltése kötelező",
     "INVALID_EMAIL": "Hibás email cím",
