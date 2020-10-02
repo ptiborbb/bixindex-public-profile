@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@codingsans/bixindex-common": "1.3.65",
+    "@codingsans/bixindex-common": "1.3.67",
     "@date-io/date-fns": "1",
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",

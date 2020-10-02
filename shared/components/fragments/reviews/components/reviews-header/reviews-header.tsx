@@ -4,18 +4,15 @@ import classes from './reviews-header.module.scss';
 import EditIcon from '@material-ui/icons/Edit';
 
 interface ReviewsHeaderProps {
-  rating: {
-    value: number;
-    count: number;
-  };
+  stats: any;
 }
 
-export const ReviewsHeader: FC<ReviewsHeaderProps> = ({ rating }) => {
+export const ReviewsHeader: FC<ReviewsHeaderProps> = ({ stats }) => {
   return (
     <div className={classes.reviewsHeader}>
       <div className={classes.reviewsSummary}>
-        <ReviewRatio value={rating.value} />
-        <div>{rating.count} értékelés alapján</div>
+        <ReviewRatio value={stats.index.score} />
+        <div>{stats.index.ratingCount} értékelés alapján</div>
       </div>
       <div className={classes.reviewsActions}>
         <button type="button" className={classes.companyWriteReview}>

@@ -1,19 +1,27 @@
 import Head from 'next/head';
-import { FC, useMemo, useState } from 'react';
+import { FC, useMemo, useState, useEffect } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
 import classes from './public-profile.module.scss';
+import { useApp } from '../../app.context';
+import { useRouter } from 'next/router';
 
-interface PublicProfileProps {
-  publicProfile: any;
-}
-
-export const PublicProfile: FC<PublicProfileProps> = (props) => {
-  const publicProfile = useMemo(() => props?.publicProfile, [props]);
+export const PublicProfile: FC = () => {
+  const {
+    publicProfileService,
+    state: {
+      publicProfile: { profilePage },
+    },
+  } = useApp();
   const [activeFragment, setFragment] = useState(() => 'reviews');
+  const router = useRouter();
+  const alias = router.query.companyAlias as string;
+  useEffect(() => {
+    publicProfileService.getPublicProfileByAlias(alias);
+  }, [publicProfileService]);
   return (
     <div>
       <Head>
@@ -23,7 +31,7 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
           href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
         />
       </Head>
-      {publicProfile && (
+      {profilePage && (
         <>
           <div className={classes.headerBlock}>
             <div className={classes.container}>
@@ -35,9 +43,9 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
             </div>
             <div className={classes.container}>
               <CompanyHeader
-                title={publicProfile.profile.name}
-                logoPath={publicProfile.profile.logo}
-                companyType={publicProfile.profile.type}
+                title={profilePage.profile.name}
+                logoPath={profilePage.profile.logo}
+                companyType={profilePage.profile.type}
                 activate={(fragment) => setFragment(fragment)}
               />
             </div>
@@ -46,13 +54,13 @@ export const PublicProfile: FC<PublicProfileProps> = (props) => {
             <div className={classes.container}>
               <CompanyFrame
                 activeFragment={activeFragment}
-                rating={publicProfile.rating}
-                profile={publicProfile.profile}
-                awards={publicProfile.awards}
-                articles={publicProfile.articles}
-                stats={publicProfile.stats}
-                npsRates={publicProfile.npsRates}
-                productsAndServices={publicProfile.productsAndServices}
+                ratings={profilePage.ratings}
+                profile={profilePage.profile}
+                awards={profilePage.awards}
+                articles={profilePage.articles}
+                stats={profilePage.stats}
+                npsRates={profilePage.npsRates}
+                productsAndServices={profilePage.productsAndServices}
               />
             </div>
           </div>

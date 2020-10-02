@@ -4,18 +4,18 @@ import { ReviewsHeader } from './components/reviews-header/reviews-header';
 import classes from './reviews.module.scss';
 
 interface ReviewsProps {
-  rating: {
-    value: number;
+  ratings: {
+    items: any[];
     count: number;
   };
   stats: any;
   npsRates: number[];
 }
 
-export const Reviews: FC<ReviewsProps> = ({ rating, stats, npsRates }) => {
+export const Reviews: FC<ReviewsProps> = ({ ratings, stats, npsRates }) => {
   return (
     <div className={classes.reviews}>
-      <ReviewsHeader rating={rating} />
+      <ReviewsHeader stats={stats} />
       <ReviewsDetail
         filter={{
           name: '',

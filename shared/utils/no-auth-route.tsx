@@ -18,8 +18,6 @@ export const createNoAuthRouteComponent = (Child: FunctionComponent): NextPage =
           namespacesRequired: ['common'],
         };
       }
-      ctx.res.writeHead(301, { Location: '/profile' });
-      ctx.res.end();
       return {
         namespacesRequired: ['common'],
       };

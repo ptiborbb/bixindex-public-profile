@@ -10,6 +10,7 @@ import '../styles/globals.scss';
 import { AppContext } from '../shared/app.context';
 import { TranslateContext } from '../shared/translate.context';
 import { authServiceFactory } from '../shared/services/auth.service';
+import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 
 const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element => {
   const [state, dispatch] = useReducer<AppReducer>(appReducer, {
@@ -20,6 +21,7 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
 
   const bixClient = useMemo(() => createBixindexClient({ baseURL: '/api', responseInterceptors: [] }), []);
   const authService = useMemo(() => authServiceFactory(bixClient, dispatch), [bixClient]);
+  const publicProfileService = useMemo(() => publicProfileServiceFactory(bixClient, dispatch), [bixClient]);
 
   return (
     <AppContext.Provider
@@ -27,9 +29,10 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
         state,
         dispatch,
         authService,
+        publicProfileService,
       }}
     >
-      <ContextDevTool context={AppContext} id="bixAdminFrontend" displayName="Bix Admin Frontend" />
+      <ContextDevTool context={AppContext} id="bixPublicProfile" displayName="Bix Public Profile" />
       <TranslateContext.Provider value={{ i18n, t }}>
         <Component {...pageProps} />
         <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} hideProgressBar={true} />
