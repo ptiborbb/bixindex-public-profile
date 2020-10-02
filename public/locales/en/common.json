@@ -60,12 +60,14 @@
     "NUM_OF_USERS": "Number of users",
     "NUM_OF_SUBSCRIBERS": "Number of subscribers"
   },
-  "LOGIN": {
+  "AUTH": {
+    "NAME": "Name",
     "EMAIL": "Email address",
     "PASSWORD": "Password",
     "CONFIRM_PASSWORD": "Confirm password",
     "PASSWORD_MATCH": "Passwords must match",
-    "SUBMIT": "Login",
+    "LOGIN": "Login",
+    "REGISTER": "Register",
     "FORGOT_PASSWORD": "Forgot password",
     "REQUIRED": "This field is required",
     "INVALID_EMAIL": "Invalid email address",
