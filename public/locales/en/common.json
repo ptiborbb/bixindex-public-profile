@@ -1,0 +1,184 @@
+{
+  "COMMON": {
+    "BACK": "Back",
+    "SUMMARY": "Summary",
+    "UNKOWN_ERROR": "An unknown error has occurred",
+    "HISTORY_PLACEHOLDER": "Latest {{month}} month",
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "ID",
+        "NAME": "Name",
+        "EMAIL": "E-mail",
+        "ROLE": "Role",
+        "PHONE": "Phone",
+        "COMPANY": "Company",
+        "OWNER": "Owner",
+        "COUPON_TYPE": "Coupon Type",
+        "AMOUNT": "Amount",
+        "SUBSCRIPTION_TYPE": "Subscription Type",
+        "NUMBER_OF_REVIEWS": "Number of Reviews",
+        "TYPE": "Type",
+        "STARTDATE": "Start date",
+        "ENDDATE": "End date",
+        "DATE": "Date",
+        "STATUS": "Status",
+        "HAS_POST": "Has post?",
+        "COUPON_CODE": "Coupon code",
+        "MAIN_CATEGORY": "Main category",
+        "SUB_CATEGORY": "Subcategory",
+        "TAX_NUMBER": "Tax number",
+        "RANK": "Rank",
+        "POSITION": "Position",
+        "POSTED_COMPANY": "Reviewed company",
+        "EXPIRATION": "Expiration",
+        "REVIEW": "Review"
+      }
+    }
+  },
+  "COMPANIES": {
+    "TITLE": "Companies",
+    "HISTORY_COMPANIES_LABEL": "Changes of companies number",
+    "ALL_COMPANIES": "All companies",
+    "AT_LEAST_TEN": "Companies with at least 10 reviews",
+    "WITH_SUBSCRIPTION": "Companies with subscriptions",
+    "PUBLIC_PROFILES": "Public profiles",
+    "RELATED_USERS": "Related users",
+    "RELATED_SUBSCRIPTIONS": "Related subscriptions",
+    "TAX_NUMBER": "Tax number",
+    "ACTIVITY_TYPE": "Activity type",
+    "NUMBER_OF_EMPLOYEES": "Number of employees",
+    "YEARLY_REVENUE": "Yearly revenue",
+    "SEARCH_HELPER_TEXT": "Company name, tax number, managing person, e-mail"
+  },
+  "ENUMS": {
+    "ADMIN": "Admin",
+    "NORMAL": "Normal"
+  },
+  "HEADER": {
+    "TITLE": "hello header {{propName}}",
+    "PUBLIC_PROFILE_NUM": "Number of public profiles",
+    "NUM_OF_USERS": "Number of users",
+    "NUM_OF_SUBSCRIBERS": "Number of subscribers"
+  },
+  "LOGIN": {
+    "EMAIL": "Email address",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "PASSWORD_MATCH": "Passwords must match",
+    "SUBMIT": "Login",
+    "FORGOT_PASSWORD": "Forgot password",
+    "REQUIRED": "This field is required",
+    "INVALID_EMAIL": "Invalid email address",
+    "FORGOT_PASSWORD_SUBMIT": "Reset my password",
+    "BACK_TO_LOGIN": "Back to login page",
+    "RESET": "Reset password",
+    "FAILED": "Invalid username and/or password."
+  },
+  "ROUTES": {
+    "USERS": "Users",
+    "COUPONS": "Coupons",
+    "COMPANIES": "Companies",
+    "REVIEWS": "Reviews",
+    "SUBSCRIPTIONS": "Subscriptions",
+    "BEST_EXPERIENCE": "Best user experience",
+    "OWNERSHIP_REQUESTS": "Ownership requests"
+  },
+  "COUPONS": {
+    "TITLE": "Coupons",
+    "ADD_COUPON": "Add coupon",
+    "COUPON_CODE": "Coupon code",
+    "AMOUNT": "Amount",
+    "CASH": "Cash",
+    "PERCENT": "Percent",
+    "AFFILIATE_PARTNER": "Affiliate partner",
+    "SEARCH_HELPER_TEXT": "Name, company name"
+  },
+  "REVIEWS": {
+    "TITLE": "Reviews",
+    "SUBTITLE": "Companies that have reached 10 / 25 / 50 / 100 / 250 / 500 / 1000 reviews",
+    "ALL_REVIEWS": "All reviews",
+    "LEVEL-UPS": "Level-ups",
+    "NUMBER_OF_LEVEL-UPS": "Number of level-ups",
+    "SEARCH_HELPER_TEXT": "Name, company name"
+  },
+  "SUBSCRIPTIONS": {
+    "PAYMENT_TYPES": {
+      "TRANSFER": "Transfer"
+    },
+    "TITLE": "Subscriptions",
+    "ACTIVE_SUBSCRIBERS": "Active subscribers",
+    "PASSIVE_SUBSCRIBERS": "Passive subscribers",
+    "YEARLY_SUBSCRIPTION_WEIGHT": "Yearly subscription weight",
+    "FREE": "Free",
+    "BIX_BASIC": "BIX Basic",
+    "BIX_PRO": "BIX Pro",
+    "BIX_ENTERPRISE": "BIX Enterprise",
+    "SEARCH_HELPER_TEXT": "Name, company name"
+  },
+  "SUBSCRIPTION_DETAILS": {
+    "CHANGES_SAVED": "Status updated!",
+    "CHANGES_ERROR": "Error updating status!",
+    "ORDER_STATUS": "Order status",
+    "REDEEM_COUPON": "Redeem coupon",
+    "ACTIVE": "Active",
+    "PASSIVE": "Passive",
+    "SIX_MONTHS": "6 months",
+    "TWELVE_MONTHS": "12 months",
+    "PACKAGE_STATUS": "Package status",
+    "PLAN_NAME": "Plan name",
+    "PAYMENT_PERIOD": "Payment period",
+    "DATE_OF_CREATION": "Start date",
+    "NEXT_BILLING_DATE": "Next billing date",
+    "PAYMENT_TYPE": "Payment type",
+    "PLAN_PRICE": "Plan price",
+    "COUPON_CODE": "Coupon code",
+    "DISCOUNT_AMOUNT": "Discount amount",
+    "TOTAL_PRICE": "Total price"
+  },
+  "TABLE": {
+    "TOOLBAR": {
+      "LIST": "List",
+      "SEARCH_SUBMIT": "Search",
+      "SEARCH": "Search",
+      "ADD": "Add"
+    },
+    "BODY_HEADER_TOOLTIP": "Sort for {{columnLabel}}"
+  },
+  "USERS": {
+    "ADD_NEW": {
+      "TITLE": "Add new User",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone number",
+      "BIO": "Bio",
+      "SKILLSET": "Skillset",
+      "ADD": "Add",
+      "ADMIN": "Admin",
+      "NORMAL": "Normal"
+    },
+    "NEW_COMPANY_MODAL": {
+      "NAME": "Name",
+      "TITLE": "Assign company to user",
+      "NATIONALITY": "Nationality",
+      "TYPE": "Type",
+      "TAXNUMBER": "Tax number",
+      "REVENUE": "Revenue",
+      "SECTOR": "Sector",
+      "SITE": "Site",
+      "INDUSTRY": "Industry",
+      "ROLE": "Role",
+      "ADD": "Add",
+      "RESET": "Reset"
+    },
+    "TITLE": "Users",
+    "HISTORY_USERS_LABEL": "Changes of new users",
+    "ALL_USERS": "All users",
+    "VERIFIED_USERS": "Verified users",
+    "BACK": "Back",
+    "ADD_COMPANY": "Add company",
+    "MANAGED_COMPANIES": "Managed companies",
+    "RATED_COMPANIES": "Rated companies",
+    "SUBSCRIPTION_LIST": "List of subscriptions",
+    "SEARCH_HELPER_TEXT": "By name, email or phone number"
+  }
+}

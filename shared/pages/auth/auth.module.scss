@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 200px;
+}
+.button {
+  margin: 10px 0;
+}

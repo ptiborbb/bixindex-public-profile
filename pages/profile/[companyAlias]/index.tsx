@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { GetServerSidePropsContext } from 'next';
-import Page from '../index';
-import { mockData } from '../../shared/data/mockData';
+import Page from '../../index';
+import { mockData } from '../../../shared/data/mockData';
 
 export default Page;
 
