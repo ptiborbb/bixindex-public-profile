@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { FC, useMemo, useState, useEffect } from 'react';
+import { FC, useMemo, useState, useEffect, useCallback } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
@@ -22,6 +22,7 @@ export const PublicProfile: FC = () => {
   useEffect(() => {
     publicProfileService.getPublicProfileByAlias(alias);
   }, [publicProfileService]);
+
   return (
     <div>
       <Head>

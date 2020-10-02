@@ -1,22 +1,42 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, Slider, Typography } from '@material-ui/core';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
-import React, { FC } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import classes from './rating.module.scss';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
-import { createAuthRouteComponent } from '../../utils/auth-route';
 import { mockForm } from '../../data/mockForm';
+import { useApp } from '../../app.context';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
-interface RatingProps {
-  form: any;
-}
+export const Rating: FC = (props) => {
+  const router = useRouter();
+  const companyFormID = router.query.companyFormID as string;
 
-export const Rating: FC<RatingProps> = (props) => {
-  const form = props.form || mockForm();
+  const {
+    ratingService,
+    state: {
+      rating: { form },
+    },
+  } = useApp();
+
+  useEffect(() => {
+    ratingService.getFormByID(companyFormID, 'hu');
+  }, [ratingService]);
+
+  const handleSubmitReview = useCallback(
+    (rating) => {
+      ratingService.submitReview(rating);
+    },
+    [ratingService],
+  );
+
+  const companyForm = form || mockForm();
 
   const satisfactionOptions = [
     {
@@ -35,19 +55,19 @@ export const Rating: FC<RatingProps> = (props) => {
 
   const smileys = [
     {
-      value: 'Bad',
+      value: '5',
       icon: <SentimentVeryDissatisfiedIcon />,
     },
     {
-      value: 'Mediocre',
+      value: '6.8',
       icon: <SentimentDissatisfiedIcon />,
     },
     {
-      value: 'Good',
+      value: '8.3',
       icon: <SentimentSatisfiedIcon />,
     },
     {
-      value: 'Excellent',
+      value: '10',
       icon: <SentimentVerySatisfiedIcon />,
     },
   ];
@@ -60,7 +80,7 @@ export const Rating: FC<RatingProps> = (props) => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.companyName}>
-            {form.companyName}
+            {companyForm.companyName}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -73,15 +93,16 @@ export const Rating: FC<RatingProps> = (props) => {
           initialValues={{
             satisfaction: '',
             nps: 4,
-            answers: form.questions,
+            answers: companyForm.questions,
             comment: '',
           }}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             const parsedValues = {
               ...values,
-              answers: values.answers.map((answer) => ({ questionID: answer.id, value: answer.value })),
+              companyFormID,
+              answers: values.answers.map((answer) => ({ questionID: answer.id, value: parseFloat(answer.value) })),
             };
-            console.log(parsedValues);
+            handleSubmitReview(parsedValues);
             setSubmitting(false);
             resetForm();
           }}
@@ -131,7 +152,7 @@ export const Rating: FC<RatingProps> = (props) => {
               <FieldArray name="answers">
                 {() => (
                   <>
-                    {form.questions.map((question, index) => (
+                    {companyForm.questions.map((question, index) => (
                       <Grid item xs={12} key={question.id}>
                         {question.text}
                         <Field component={RadioGroup} name={`answers.${index}.value`}>
