@@ -14,12 +14,24 @@ export const Auth: FunctionComponent = () => {
   const router = useRouter();
 
   const { authService } = useApp();
+  const companyFormID = router.query.companyFormID as string;
 
   const login = useCallback(
     (email: string, password: string) => {
       return authService
         .login(email, password)
-        .then(() => router.push('/'))
+        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('')))
+        .then(() => setError({ isError: false, message: '' }))
+        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+    },
+    [authService],
+  );
+
+  const register = useCallback(
+    (name: string, email: string, password: string) => {
+      return authService
+        .register(name, email, password)
+        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('')))
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
