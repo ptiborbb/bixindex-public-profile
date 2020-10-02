@@ -1,0 +1,16 @@
+@import '../../../styles/variables.scss';
+
+.root {
+  padding: 60px;
+  & .companyName {
+    color: $teal;
+    font-weight: bold;
+  }
+  & .verticalSpacing {
+    margin: 48px 0;
+  }
+  & .flexRight {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
