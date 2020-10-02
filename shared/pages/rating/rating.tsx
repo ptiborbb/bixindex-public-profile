@@ -9,69 +9,45 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import { createAuthRouteComponent } from '../../utils/auth-route';
+import { mockForm } from '../../data/mockForm';
 
 interface RatingProps {
   form: any;
 }
 
 export const Rating: FC<RatingProps> = (props) => {
+  const form = props.form || mockForm();
+
   const satisfactionOptions = [
     {
       label: 'Többet kaptam, mint vártam',
-      value: '10',
+      value: 'MORE',
     },
     {
       label: 'Pont annyit kaptam, mint vártam',
-      value: '8.3',
+      value: 'SAME',
     },
     {
       label: 'Kevesebbet kaptam, mint vártam',
-      value: '5',
+      value: 'LESS',
     },
   ];
 
-  const form = {
-    id: 'e74bf648-c432-42ce-9cda-a83cec34bb9d',
-    companyName: 'Some company',
-    questions: [
-      {
-        id: 'dd11c5f5-7c80-40e4-b73f-716ca180f2c0',
-        text: 'Value for Money',
-        value: '',
-      },
-      {
-        id: 'f8d38fa0-ca16-4d42-9cae-1074d5171b53',
-        text: 'Quality',
-        value: '',
-      },
-      {
-        id: '6794e478-3170-4967-a7a2-b44c7f8b2585',
-        text: 'Warranty',
-        value: '',
-      },
-      {
-        id: '729694c5-2b94-4c25-809b-99aad87ce653',
-        text: 'Communication',
-        value: '',
-      },
-    ],
-  };
-
   const smileys = [
     {
-      value: '0',
+      value: 'Bad',
       icon: <SentimentVeryDissatisfiedIcon />,
     },
     {
-      value: '3',
+      value: 'Mediocre',
       icon: <SentimentDissatisfiedIcon />,
     },
     {
-      value: '6',
+      value: 'Good',
       icon: <SentimentSatisfiedIcon />,
     },
     {
-      value: '10',
+      value: 'Excellent',
       icon: <SentimentVerySatisfiedIcon />,
     },
   ];
@@ -100,7 +76,15 @@ export const Rating: FC<RatingProps> = (props) => {
             answers: form.questions,
             comment: '',
           }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            const parsedValues = {
+              ...values,
+              answers: values.answers.map((answer) => ({ questionID: answer.id, value: answer.value })),
+            };
+            console.log(parsedValues);
+            setSubmitting(false);
+            resetForm();
+          }}
         >
           {({ setFieldValue }) => (
             <Form style={{ width: '100%' }}>
