@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+.root {
+  & .companyName {
+    color: $teal;
+    font-weight: bold;
+  }
+  & .verticalSpacing {
+    margin: 48px 0;
+  }
+}
