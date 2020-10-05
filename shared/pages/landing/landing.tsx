@@ -9,9 +9,11 @@ import piacProfitLogo from '../../../public/images/landing/piac-profit-logo.png'
 import trendfmLogo from '../../../public/images/landing/trendfm-logo.png';
 import vilaggazdasagLogo from '../../../public/images/landing/vilaggazdasag-logo.png';
 import { Header } from '../../components/header/header';
+import { useTranslate } from '../../translate.context';
 import classes from './landing.module.scss';
 
 export const Landing: FunctionComponent = () => {
+  const { t } = useTranslate();
   return (
     <div>
       <Head>
@@ -29,12 +31,12 @@ export const Landing: FunctionComponent = () => {
         <div className={classes.headerBlockInner}>
           <Grid container spacing={3}>
             <Grid item xs={8}>
-              <h1 className={classes.mainTitle}>Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.</h1>
-              <h1 className={classes.mainTitle}>Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.</h1>
-              <h2 className={classes.desc}>Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:</h2>
-              <Button>Mutasd meg!</Button>
+              <h1 className={classes.mainTitle}>{t('LANDING.MAIN_1')}</h1>
+              <h1 className={classes.mainTitle}>{t('LANDING.MAIN_2')}</h1>
+              <h2 className={classes.desc}>{t('LANDING.MAIN_3')}</h2>
+              <Button>{t('LANDING.CTA_1')}</Button>
               <Button variant="text" color="default" className={classes.learnMoreBtn}>
-                Többet akarok tudni a BIX-ről!
+                {t('LANDING.CTA_2')}
               </Button>
               <div className={classes.headerBlockLogos}>
                 <a
@@ -70,11 +72,9 @@ export const Landing: FunctionComponent = () => {
         </div>
       </div>
       <div className={classes.learnMore}>
-        <h2 className={classes.title}>
-          Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések
-        </h2>
-        <h4 className={classes.desc}>A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!</h4>
-        <Button>Mutasd a csomagokat!</Button>
+        <h2 className={classes.title}>{t('LANDING.HEAD_1')}</h2>
+        <h4 className={classes.desc}>{t('LANDING.SUBHEAD_1')}</h4>
+        <Button>{t('LANDING.CTA_3')}</Button>
       </div>
     </div>
   );

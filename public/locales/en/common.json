@@ -182,5 +182,15 @@
     "RATED_COMPANIES": "Rated companies",
     "SUBSCRIPTION_LIST": "List of subscriptions",
     "SEARCH_HELPER_TEXT": "By name, email or phone number"
+  },
+  "LANDING": {
+    "MAIN_1": "Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.",
+    "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
+    "MAIN_3": "Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:",
+    "CTA_1": "Mutasd meg!",
+    "CTA_2": "Többet akarok tudni a BIX-ről!",
+    "HEAD_1": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
+    "SUBHEAD_1": "A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!",
+    "CTA_3": "Mutasd a csomagokat!"
   }
 }
