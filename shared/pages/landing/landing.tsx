@@ -3,17 +3,21 @@ import Grid from '@material-ui/core/Grid';
 import Head from 'next/head';
 import { FunctionComponent } from 'react';
 import logo from '../../../public/bix_logo.svg';
+import barabasArpad from '../../../public/images/landing/barabas-arpad.png';
+import cserpesIstvan from '../../../public/images/landing/cserpes-istvan.png';
 import homeHeaderBixImage from '../../../public/images/landing/home-header-bix-image.png';
 import horizontalStars from '../../../public/images/landing/horizontal-stars.png';
 import indexLogo from '../../../public/images/landing/index-logo.png';
 import mainFeaturesDatacontrol from '../../../public/images/landing/main-features-datacontrol.png';
 import mainFeaturesGears from '../../../public/images/landing/main-features-gears.png';
 import mainFeaturesReport from '../../../public/images/landing/main-features-report.png';
+import markovichBela from '../../../public/images/landing/markovich-bela.png';
 import piacProfitLogo from '../../../public/images/landing/piac-profit-logo.png';
 import trendfmLogo from '../../../public/images/landing/trendfm-logo.png';
 import vilaggazdasagLogo from '../../../public/images/landing/vilaggazdasag-logo.png';
 import { Header } from '../../components/header/header';
 import { LandingFeatureCard } from '../../components/landing-feature-card/landing-feature-card';
+import { LandingTestimonialCard } from '../../components/landing-testimonial-card/landing-testimonial-card';
 import { useTranslate } from '../../translate.context';
 import classes from './landing.module.scss';
 
@@ -112,6 +116,40 @@ export const Landing: FunctionComponent = () => {
               desc={t('LANDING.MAIN_FEATURES_BOX.FEATURE_4.DESC')}
               cta={t('LANDING.MAIN_FEATURES_BOX.FEATURE_4.CTA')}
             ></LandingFeatureCard>
+          </Grid>
+        </Grid>
+      </div>
+      <div className={classes.testimonials}>
+        <h2 className={classes.hashtag}>{t('LANDING.MAIN_TESTIMONIAL_BOX.HASHTAG')}</h2>
+        <h2 className={classes.title}>{t('LANDING.MAIN_TESTIMONIAL_BOX.HEAD')}</h2>
+        <h4 className={classes.desc}>{t('LANDING.MAIN_TESTIMONIAL_BOX.SUBHEAD')}</h4>
+        <Grid container spacing={3} className={classes.mt40}>
+          <Grid item sm={4}>
+            <LandingTestimonialCard
+              avatar={barabasArpad}
+              name={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_1.NAME')}
+              title={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_1.TITLE')}
+              desc={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_1.DESC')}
+              hashtag={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_1.HASHTAG')}
+            ></LandingTestimonialCard>
+          </Grid>
+          <Grid item sm={4}>
+            <LandingTestimonialCard
+              avatar={cserpesIstvan}
+              name={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_2.NAME')}
+              title={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_2.TITLE')}
+              desc={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_2.DESC')}
+              hashtag={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_2.HASHTAG')}
+            ></LandingTestimonialCard>
+          </Grid>
+          <Grid item sm={4}>
+            <LandingTestimonialCard
+              avatar={markovichBela}
+              name={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_3.NAME')}
+              title={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_3.TITLE')}
+              desc={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_3.DESC')}
+              hashtag={t('LANDING.MAIN_TESTIMONIAL_BOX.TESTIMONIAL_3.HASHTAG')}
+            ></LandingTestimonialCard>
           </Grid>
         </Grid>
       </div>

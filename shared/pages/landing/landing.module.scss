@@ -23,10 +23,19 @@
   max-width: 100%;
 }
 
+.hashtag {
+  font-weight: 300;
+  font-size: 2.5em;
+  line-height: 1.2;
+  color: $primary;
+  margin-bottom: 0;
+}
+
 .title {
   font-size: 2.5em;
   line-height: 1.2;
   color: $dark;
+  margin-top: 0;
 }
 
 .desc {
@@ -99,5 +108,10 @@
 
 .learnMore {
   @include container(70px);
+  text-align: center;
+}
+
+.testimonials {
+  @include container(100px);
   text-align: center;
 }
