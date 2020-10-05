@@ -4,18 +4,23 @@ import Head from 'next/head';
 import { FunctionComponent } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import homeHeaderBixImage from '../../../public/images/landing/home-header-bix-image.png';
+import horizontalStars from '../../../public/images/landing/horizontal-stars.png';
 import indexLogo from '../../../public/images/landing/index-logo.png';
+import mainFeaturesDatacontrol from '../../../public/images/landing/main-features-datacontrol.png';
+import mainFeaturesGears from '../../../public/images/landing/main-features-gears.png';
+import mainFeaturesReport from '../../../public/images/landing/main-features-report.png';
 import piacProfitLogo from '../../../public/images/landing/piac-profit-logo.png';
 import trendfmLogo from '../../../public/images/landing/trendfm-logo.png';
 import vilaggazdasagLogo from '../../../public/images/landing/vilaggazdasag-logo.png';
 import { Header } from '../../components/header/header';
+import { LandingFeatureCard } from '../../components/landing-feature-card/landing-feature-card';
 import { useTranslate } from '../../translate.context';
 import classes from './landing.module.scss';
 
 export const Landing: FunctionComponent = () => {
   const { t } = useTranslate();
   return (
-    <div>
+    <div className={classes.baseSize}>
       <Head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link
@@ -30,13 +35,13 @@ export const Landing: FunctionComponent = () => {
         <div className={classes.divider}></div>
         <div className={classes.headerBlockInner}>
           <Grid container spacing={3}>
-            <Grid item xs={8}>
-              <h1 className={classes.mainTitle}>{t('LANDING.MAIN_1')}</h1>
-              <h1 className={classes.mainTitle}>{t('LANDING.MAIN_2')}</h1>
-              <h2 className={classes.desc}>{t('LANDING.MAIN_3')}</h2>
-              <Button>{t('LANDING.CTA_1')}</Button>
+            <Grid item sm={8}>
+              <h1 className={classes.mainTitle}>{t('LANDING.HEAD_BOX.MAIN_1')}</h1>
+              <h1 className={classes.mainTitle}>{t('LANDING.HEAD_BOX.MAIN_2')}</h1>
+              <h2 className={classes.desc}>{t('LANDING.HEAD_BOX.MAIN_3')}</h2>
+              <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
               <Button variant="text" color="default" className={classes.learnMoreBtn}>
-                {t('LANDING.CTA_2')}
+                {t('LANDING.HEAD_BOX.CTA_2')}
               </Button>
               <div className={classes.headerBlockLogos}>
                 <a
@@ -65,16 +70,50 @@ export const Landing: FunctionComponent = () => {
                 </a>
               </div>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item sm={4}>
               <img className={classes.img} src={homeHeaderBixImage} />
             </Grid>
           </Grid>
         </div>
       </div>
       <div className={classes.learnMore}>
-        <h2 className={classes.title}>{t('LANDING.HEAD_1')}</h2>
-        <h4 className={classes.desc}>{t('LANDING.SUBHEAD_1')}</h4>
-        <Button>{t('LANDING.CTA_3')}</Button>
+        <h2 className={classes.title}>{t('LANDING.MAIN_FEATURES_BOX.HEAD')}</h2>
+        <h4 className={classes.desc}>{t('LANDING.MAIN_FEATURES_BOX.SUBHEAD')}</h4>
+        <Button>{t('LANDING.MAIN_FEATURES_BOX.CTA')}</Button>
+        <Grid container spacing={3} className={classes.mt40}>
+          <Grid item sm={3}>
+            <LandingFeatureCard
+              icon={mainFeaturesGears}
+              title={t('LANDING.MAIN_FEATURES_BOX.FEATURE_1.TITLE')}
+              desc={t('LANDING.MAIN_FEATURES_BOX.FEATURE_1.DESC')}
+              cta={t('LANDING.MAIN_FEATURES_BOX.FEATURE_1.CTA')}
+            ></LandingFeatureCard>
+          </Grid>
+          <Grid item sm={3}>
+            <LandingFeatureCard
+              icon={mainFeaturesDatacontrol}
+              title={t('LANDING.MAIN_FEATURES_BOX.FEATURE_2.TITLE')}
+              desc={t('LANDING.MAIN_FEATURES_BOX.FEATURE_2.DESC')}
+              cta={t('LANDING.MAIN_FEATURES_BOX.FEATURE_2.CTA')}
+            ></LandingFeatureCard>
+          </Grid>
+          <Grid item sm={3}>
+            <LandingFeatureCard
+              icon={mainFeaturesReport}
+              title={t('LANDING.MAIN_FEATURES_BOX.FEATURE_3.TITLE')}
+              desc={t('LANDING.MAIN_FEATURES_BOX.FEATURE_3.DESC')}
+              cta={t('LANDING.MAIN_FEATURES_BOX.FEATURE_3.CTA')}
+            ></LandingFeatureCard>
+          </Grid>
+          <Grid item sm={3}>
+            <LandingFeatureCard
+              icon={horizontalStars}
+              title={t('LANDING.MAIN_FEATURES_BOX.FEATURE_4.TITLE')}
+              desc={t('LANDING.MAIN_FEATURES_BOX.FEATURE_4.DESC')}
+              cta={t('LANDING.MAIN_FEATURES_BOX.FEATURE_4.CTA')}
+            ></LandingFeatureCard>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );

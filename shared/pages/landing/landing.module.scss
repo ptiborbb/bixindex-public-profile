@@ -1,5 +1,9 @@
 @import '../../../styles/variables.scss';
 
+.baseSize {
+  font-size: 14px;
+}
+
 @mixin container($margin-y: 0) {
   width: 100%;
   max-width: 1170px;
@@ -11,12 +15,16 @@
   @include container;
 }
 
+.mt40 {
+  margin-top: 40px !important;
+}
+
 .img {
   max-width: 100%;
 }
 
 .title {
-  font-size: 2.2em;
+  font-size: 2.5em;
   line-height: 1.2;
   color: $dark;
 }

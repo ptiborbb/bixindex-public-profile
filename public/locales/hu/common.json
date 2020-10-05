@@ -188,13 +188,37 @@
     "SEARCH_HELPER_TEXT": "Név, e-mail, telefonszám alapján"
   },
   "LANDING": {
-    "MAIN_1": "Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.",
-    "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
-    "MAIN_3": "Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:",
-    "CTA_1": "Mutasd meg!",
-    "CTA_2": "Többet akarok tudni a BIX-ről!",
-    "HEAD_1": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
-    "SUBHEAD_1": "A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!",
-    "CTA_3": "Mutasd a csomagokat!"
+    "HEAD_BOX": {
+      "MAIN_1": "Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.",
+      "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
+      "MAIN_3": "Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:",
+      "CTA_1": "Mutasd meg!",
+      "CTA_2": "Többet akarok tudni a BIX-ről!"
+    },
+    "MAIN_FEATURES_BOX": {
+      "HEAD": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
+      "SUBHEAD": "A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!",
+      "CTA": "Mutasd a csomagokat!",
+      "FEATURE_1": {
+        "TITLE": "Automatizált elégedettségmérés",
+        "DESC": "Tudd minden pillanatban, mit gondolnak az ügyfeleid. Szolgáld ki őket úgy, ahogyan ők szeretnék.",
+        "CTA": "Első lépések"
+      },
+      "FEATURE_2": {
+        "TITLE": "Ellenőrzött és hiteles adatok",
+        "DESC": "Dolgozz hiteles, telefonon ellenőrzött véleményekből. Kerüld el a tévutakat, ne fuss bele pénznyelő zsákutcákba.",
+        "CTA": "Ez érdekel"
+      },
+      "FEATURE_3": {
+        "TITLE": "Professzionális vezetői riport",
+        "DESC": "Hónapról hónapra tudni fogod, mivel elégedettek (vagy elégedetlenek) a partnereid, és hol érdemes fejleszteni.",
+        "CTA": "Akarom tudni"
+      },
+      "FEATURE_4": {
+        "TITLE": "Bizalomépítő értékelések",
+        "DESC": "Szerezz új ügyfeleket a meglévő ügyfeleid véleményével. Generálj leadeket a BIX B2B rating segítségével.",
+        "CTA": "Akarok új ügyfeleket"
+      }
+    }
   }
 }

@@ -39,6 +39,7 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
       MuiButton: {
         variant: 'contained',
         color: 'secondary',
+        size: 'large',
         style: {
           padding: '15px',
           width: '17em',

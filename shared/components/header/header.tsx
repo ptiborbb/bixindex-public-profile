@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button';
 import { FC } from 'react';
 import classes from './header.module.scss';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -26,9 +27,9 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         </div>
       </div>
       <div className={classes.cta}>
-        <button type="button" className={classes.ctaButton}>
+        <Button className={classes.ctaButton}>
           Ügyfélkapu
-        </button>
+        </Button>
       </div>
     </header>
   );
