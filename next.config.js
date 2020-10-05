@@ -1,13 +1,13 @@
-const withImages = require("next-images");
+const withImages = require('next-images');
 
-// const { nextI18NextRewrites } = require('next-i18next/rewrites');
+const { nextI18NextRewrites } = require('next-i18next/rewrites');
 
-// const localeSubpaths = {};
+const localeSubpaths = {};
 
 module.exports = {
   ...withImages(),
-  //   rewrites: async () => nextI18NextRewrites(localeSubpaths),
-  //   publicRuntimeConfig: {
-  //     localeSubpaths,
-  //   },
+  rewrites: async () => nextI18NextRewrites(localeSubpaths),
+  publicRuntimeConfig: {
+    localeSubpaths,
+  },
 };

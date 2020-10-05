@@ -1,3 +1,4 @@
-import { PublicProfile } from '../shared/pages/public-profile/public-profile';
+import { Auth } from '../shared/pages/auth/auth';
+import { createNoAuthRouteComponent } from '../shared/utils/no-auth-route';
 
-export default PublicProfile;
+export default createNoAuthRouteComponent(Auth);

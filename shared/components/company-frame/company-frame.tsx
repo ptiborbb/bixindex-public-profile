@@ -20,11 +20,11 @@ import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
 interface CompanyFrameProps {
-  rating: {
-    value: number;
+  ratings: {
+    items: any[];
     count: number;
   };
-  profile: IProfile;
+  profile: any;
   awards: any[];
   articles: any[];
   productsAndServices: any[];
@@ -34,7 +34,7 @@ interface CompanyFrameProps {
 }
 
 export const CompanyFrame: FC<CompanyFrameProps> = ({
-  rating,
+  ratings,
   profile,
   awards,
   articles,
@@ -46,7 +46,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
   const contentSegment = useMemo(() => {
     switch (activeFragment) {
       case 'reviews':
-        return <Reviews rating={rating} stats={stats} npsRates={npsRates} />;
+        return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
       case 'awards':
         return <Awards awards={awards} />;
       case 'news':
@@ -54,10 +54,10 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
       case 'products':
         return <Products productsAndServices={productsAndServices} />;
       default:
-        return <Reviews rating={rating} stats={stats} npsRates={npsRates} />;
+        return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
     }
   }, [activeFragment]);
-
+  console.log(productsAndServices);
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
@@ -70,8 +70,8 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
             <GradeIcon className={`${classes.ratingStar} `} />
           </div>
           <div className={classes.captionText}>Bizalmi index</div>
-          <div className={classes.ratingCounter}>{rating.value}</div>
-          <div className={classes.captionText}>ÖSSZESEN {rating.count} DB ÉRTÉKELÉS</div>
+          <div className={classes.ratingCounter}>{stats.index.score}</div>
+          <div className={classes.captionText}>ÖSSZESEN {stats.index.ratingCount} DB ÉRTÉKELÉS</div>
         </div>
 
         <div className={classes.detailsTitle}>Cégadatok</div>
@@ -105,16 +105,8 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
           <div className={classes.blockLabel}>Termékek és szolgáltatások</div>
 
           <div className={classes.chipBlock}>
-            {profile.products.map((product, i) => (
+            {productsAndServices.map((product, i) => (
               <Chip key={i} text={product.name} />
-            ))}
-          </div>
-
-          <div className={classes.blockLabel}>Szakterület</div>
-
-          <div className={classes.chipBlock}>
-            {profile.services.map((service, i) => (
-              <Chip key={i} text={service.name} />
             ))}
           </div>
 

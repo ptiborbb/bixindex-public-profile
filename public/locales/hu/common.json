@@ -1,0 +1,190 @@
+{
+  "COMMON": {
+    "BACK": "Vissza",
+    "SUMMARY": "Összegzés",
+    "UNKOWN_ERROR": "Ismeretlen hiba történt",
+    "HISTORY_PLACEHOLDER": "Elmúlt {{month}} hónap",
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "Azonosító",
+        "NAME": "Név",
+        "EMAIL": "E-mail",
+        "ROLE": "Jogosultság",
+        "PHONE": "Tel",
+        "EDIT": "Szerkesztés",
+        "COMPANY": "Cég",
+        "OWNER": "Tulajdonos",
+        "COUPON_TYPE": "Kedvezmény típusa",
+        "AMOUNT": "Kedvezmény mértéke",
+        "SUBSCRIPTION_TYPE": "Előfizetés típusa",
+        "NUMBER_OF_REVIEWS": "Értékelések száma",
+        "TYPE": "Típus",
+        "STARTDATE": "Kötés dátuma",
+        "ENDDATE": "Lejárat dátuma",
+        "DATE": "Dátum",
+        "STATUS": "Státusz",
+        "HAS_POST": "Van postja?",
+        "COUPON_CODE": "Kupon kód",
+        "MAIN_CATEGORY": "Fő kategória",
+        "SUB_CATEGORY": "Alkategória",
+        "TAX_NUMBER": "Adószám",
+        "RANK": "Titulus",
+        "POSITION": "Pozíció",
+        "POSTED_COMPANY": "Értékelt cég",
+        "EXPIRATION": "Lejárat",
+        "REVIEW": "Értékelés"
+      }
+    }
+  },
+  "COMPANIES": {
+    "TITLE": "Cégek",
+    "HISTORY_COMPANIES_LABEL": "Kezelt cégek számának alakulása",
+    "ALL_COMPANIES": "Kezelt cégek a rendszerben",
+    "AT_LEAST_TEN": "Cégek, akikről legalább 10 értékelés van",
+    "WITH_SUBSCRIPTION": "Cégek, akikhez tartozik előfizetés",
+    "PUBLIC_PROFILES": "Nyilvános profilok listája",
+    "RELATED_USERS": "Kapcsolódó felhasználók",
+    "RELATED_SUBSCRIPTIONS": "Kapcsolódó előfizetések",
+    "TAX_NUMBER": "Adószám",
+    "ACTIVITY_TYPE": "Tevékenység típusa",
+    "NUMBER_OF_EMPLOYEES": "Foglalkoztatottak száma",
+    "YEARLY_REVENUE": "Éves árbevétel",
+    "SEARCH_HELPER_TEXT": "Cégnév, adószám, kezelő személy, e-mail"
+  },
+  "ENUMS": {
+    "ADMIN": "Admin",
+    "NORMAL": "Felhasználó"
+  },
+  "HEADER": {
+    "TITLE": "hello hungarian header {{propName}}",
+    "PUBLIC_PROFILE_NUM": "Nyilvános profilok száma",
+    "NUM_OF_USERS": "Felhasználók száma",
+    "NUM_OF_SUBSCRIBERS": "Előfizetők száma"
+  },
+  "AUTH": {
+    "NAME": "Név",
+    "EMAIL": "Email cím",
+    "PASSWORD": "Jelszó",
+    "CONFIRM_PASSWORD": "Jelszó megerősítés",
+    "PASSWORD_MATCH": "A jelszavaknak meg kell egyeznie",
+    "LOGIN": "Belépés",
+    "REGISTER": "Regisztráció",
+    "FORGOT_PASSWORD": "Elfelejtett jelszó",
+    "REQUIRED": "A mező kitöltése kötelező",
+    "INVALID_EMAIL": "Hibás email cím",
+    "FORGOT_PASSWORD_SUBMIT": "Jelszó helyreállítása",
+    "BACK_TO_LOGIN": "Vissza a bejelentkezéshez",
+    "RESET": "Jelszó helyreállítása",
+    "FAILED": "Hibás email cím és/vagy jelszó."
+  },
+  "ROUTES": {
+    "USERS": "Felhasználók",
+    "COUPONS": "Kuponok",
+    "COMPANIES": "Cégek",
+    "REVIEWS": "Értékelések",
+    "SUBSCRIPTIONS": "Előfizetések",
+    "BEST_EXPERIENCE": "Legjobb ügyfélélmény",
+    "OWNERSHIP_REQUESTS": "Tulajdonjog kérések"
+  },
+  "COUPONS": {
+    "TITLE": "Kuponok",
+    "ADD_COUPON": "Kupon hozzáadása",
+    "COUPON_CODE": "Kupon kód",
+    "AMOUNT": "Kedvezmény mértéke",
+    "CASH": "Pénzösszeg",
+    "PERCENT": "Százalék",
+    "AFFILIATE_PARTNER": "Tulajdonos",
+    "SEARCH_HELPER_TEXT": "Név, cégnév"
+  },
+  "REVIEWS": {
+    "TITLE": "Értékelések",
+    "SUBTITLE": "Cégek amelyek átlépéték a 10 / 25 / 50 / 100 / 250 / 500 / 1000 értékelést",
+    "ALL_REVIEWS": "Összes értékelés",
+    "LEVEL-UPS": "Szintlépők",
+    "NUMBER_OF_LEVEL-UPS": "Szintlépők száma",
+    "SEARCH_HELPER_TEXT": "Név, cégnév"
+  },
+  "SUBSCRIPTIONS": {
+    "PAYMENT_TYPES": {
+      "TRANSFER": "Átutalás"
+    },
+    "TITLE": "Előfizetések",
+    "ACTIVE_SUBSCRIBERS": "Aktív előfizetők száma",
+    "PASSIVE_SUBSCRIBERS": "Lejárt előfizetések száma",
+    "YEARLY_SUBSCRIPTION_WEIGHT": "Yearly subscription weight",
+    "FREE": "Free",
+    "BIX_BASIC": "BIX Basic",
+    "BIX_PRO": "BIX Pro",
+    "BIX_ENTERPRISE": "BIX Enterprise",
+    "SEARCH_HELPER_TEXT": "Név, cégnév"
+  },
+  "SUBSCRIPTION_DETAILS": {
+    "CHANGES_SAVED": "Státuz frissítve!",
+    "CHANGES_ERROR": "Hiba a mentésnél!",
+    "ORDER_STATUS": "Rendelés státusza",
+    "REDEEM_COUPON": "Kupon felhasználása",
+    "ACTIVE": "Aktiv",
+    "PASSIVE": "Passzív",
+    "SIX_MONTHS": "6 hónap",
+    "TWELVE_MONTHS": "12 hónap",
+    "PACKAGE_STATUS": "Rendelés státusza",
+    "PLAN_NAME": "Előfizetési csomag",
+    "PAYMENT_PERIOD": "Előfizetés típusa",
+    "DATE_OF_CREATION": "Előfizetés kezdete",
+    "NEXT_BILLING_DATE": "Fizetés esedékesség",
+    "PAYMENT_TYPE": "Fizetés módja",
+    "PLAN_PRICE": "Eredeti ár",
+    "COUPON_CODE": "Kuponkód",
+    "DISCOUNT_AMOUNT": "Kedvezmény összege",
+    "TOTAL_PRICE": "Végösszeg"
+  },
+  "TABLE": {
+    "TOOLBAR": {
+      "LIST": "Lista",
+      "SEARCH_SUBMIT": "Keresés",
+      "SEARCH": "Keresés",
+      "ADD": "Létrehozás"
+    },
+    "BODY_HEADER_TOOLTIP": "Sort for {{columnLabel}}"
+  },
+  "USERS_TABLE": {
+    "NAME": "Név"
+  },
+  "USERS": {
+    "ADD_NEW": {
+      "TITLE": "Új felhasználó hozzáadása",
+      "NAME": "Név",
+      "EMAIL": "Email",
+      "PHONE": "Telefonszám",
+      "BIO": "Bio",
+      "SKILLSET": "Skillset",
+      "ADD": "Hozzáadás",
+      "ADMIN": "Admin",
+      "NORMAL": "Felhasználó"
+    },
+    "NEW_COMPANY_MODAL": {
+      "NAME": "Név",
+      "TITLE": "Cég hozzárendelése felhasználóhoz",
+      "NATIONALITY": "Ország",
+      "TYPE": "Típus",
+      "TAXNUMBER": "Adószám",
+      "REVENUE": "Éves bevétel",
+      "SECTOR": "Szektor",
+      "SITE": "Weboldal",
+      "INDUSTRY": "Ipar",
+      "ROLE": "Szerep",
+      "ADD": "Hozzáadás",
+      "RESET": "Törlés"
+    },
+    "TITLE": "Felhasználók",
+    "HISTORY_USERS_LABEL": "Új felhasználók számának alakulása",
+    "ALL_USERS": "Összes felhasználó",
+    "VERIFIED_USERS": "Hitelesített felhasználók",
+    "BACK": "Vissza",
+    "ADD_COMPANY": "Cég hozzáadása",
+    "MANAGED_COMPANIES": "Kezelt cégek",
+    "RATED_COMPANIES": "Értékelt cégek",
+    "SUBSCRIPTION_LIST": "Előfizetések listája",
+    "SEARCH_HELPER_TEXT": "Név, e-mail, telefonszám alapján"
+  }
+}
