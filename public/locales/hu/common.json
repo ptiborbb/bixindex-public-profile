@@ -59,7 +59,12 @@
     "TITLE": "hello hungarian header {{propName}}",
     "PUBLIC_PROFILE_NUM": "Nyilvános profilok száma",
     "NUM_OF_USERS": "Felhasználók száma",
-    "NUM_OF_SUBSCRIBERS": "Előfizetők száma"
+    "NUM_OF_SUBSCRIBERS": "Előfizetők száma",
+    "FUNCTIONS": "Funkciók",
+    "SUBSCRIPTION": "Elõfizetés",
+    "BLOG": "Blog",
+    "COMPANY_SEARCH": "Cégkeresõ",
+    "CUSTOMER_PORTAL": "Ügyfélkapu"
   },
   "AUTH": {
     "NAME": "Név",

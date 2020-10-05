@@ -58,7 +58,12 @@
     "TITLE": "hello header {{propName}}",
     "PUBLIC_PROFILE_NUM": "Number of public profiles",
     "NUM_OF_USERS": "Number of users",
-    "NUM_OF_SUBSCRIBERS": "Number of subscribers"
+    "NUM_OF_SUBSCRIBERS": "Number of subscribers",
+    "FUNCTIONS": "Funkciók",
+    "SUBSCRIPTION": "Elõfizetés",
+    "BLOG": "Blog",
+    "COMPANY_SEARCH": "Cégkeresõ",
+    "CUSTOMER_PORTAL": "Ügyfélkapu"
   },
   "AUTH": {
     "NAME": "Name",
