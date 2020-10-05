@@ -19,6 +19,7 @@ export const PublicProfile: FC = () => {
   const [activeFragment, setFragment] = useState(() => 'reviews');
   const router = useRouter();
   const alias = router.query.companyAlias as string;
+  const companyFormID = 'companyFormID';
   useEffect(() => {
     publicProfileService.getPublicProfileByAlias(alias);
   }, [publicProfileService]);
@@ -44,6 +45,8 @@ export const PublicProfile: FC = () => {
             </div>
             <div className={classes.container}>
               <CompanyHeader
+                companyAlias={alias}
+                companyFormID={companyFormID}
                 title={profilePage.profile.name}
                 logoPath={profilePage.profile.logo}
                 companyType={profilePage.profile.type}
@@ -54,6 +57,8 @@ export const PublicProfile: FC = () => {
           <div className={classes.frameFix}>
             <div className={classes.container}>
               <CompanyFrame
+                companyAlias={alias}
+                companyFormID={companyFormID}
                 activeFragment={activeFragment}
                 ratings={profilePage.ratings}
                 profile={profilePage.profile}

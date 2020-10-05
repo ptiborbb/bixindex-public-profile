@@ -4,21 +4,27 @@ import EditIcon from '@material-ui/icons/Edit';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import WorkIcon from '@material-ui/icons/Work';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { FC } from 'react';
 import classes from './company-header.module.scss';
 
 interface CompanyHeaderProps {
+  companyAlias: string;
+  companyFormID: string;
   title: string;
   logoPath: string;
   companyType: ECompanyTypes;
   activate: (fragment: string) => void;
 }
 
-export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, companyType, activate }) => {
-  const router = useRouter();
-  const companyAlias = (router?.query?.companyAlias as string) || '';
-  console.log({ companyAlias });
+export const CompanyHeader: FC<CompanyHeaderProps> = ({
+  companyAlias,
+  companyFormID,
+  title,
+  logoPath,
+  companyType,
+  activate,
+}) => {
   return (
     <div className={classes.companyHeader}>
       <div className={classes.companyHeaderTitle}>
@@ -45,9 +51,15 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({ title, logoPath, company
         </div>
       </div>
       <div className={classes.companyHeaderLinksLine}>
-        <button type="button" className={classes.companyWriteReview}>
-          Értékelés írása <EditIcon className={classes.reviewIcon} />
-        </button>
+        <Link
+          href="/bix-profil/[companyAlias]/ertekeles/[companyFormID]"
+          as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
+          passHref
+        >
+          <a type="button" className={classes.companyWriteReview}>
+            Értékelés írása <EditIcon className={classes.reviewIcon} />
+          </a>
+        </Link>
         <div className={classes.companyHeaderLinks}>
           <div onClick={() => activate('reviews')}>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</a>

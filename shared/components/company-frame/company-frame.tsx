@@ -20,6 +20,8 @@ import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
 interface CompanyFrameProps {
+  companyAlias: string;
+  companyFormID: string;
   ratings: {
     items: any[];
     count: number;
@@ -34,6 +36,8 @@ interface CompanyFrameProps {
 }
 
 export const CompanyFrame: FC<CompanyFrameProps> = ({
+  companyAlias,
+  companyFormID,
   ratings,
   profile,
   awards,
@@ -46,7 +50,15 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
   const contentSegment = useMemo(() => {
     switch (activeFragment) {
       case 'reviews':
-        return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
+        return (
+          <Reviews
+            companyAlias={companyAlias}
+            companyFormID={companyFormID}
+            ratings={ratings}
+            stats={stats}
+            npsRates={npsRates}
+          />
+        );
       case 'awards':
         return <Awards awards={awards} />;
       case 'news':
@@ -54,7 +66,15 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
       case 'products':
         return <Products productsAndServices={productsAndServices} />;
       default:
-        return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
+        return (
+          <Reviews
+            companyAlias={companyAlias}
+            companyFormID={companyFormID}
+            ratings={ratings}
+            stats={stats}
+            npsRates={npsRates}
+          />
+        );
     }
   }, [activeFragment]);
   console.log(productsAndServices);
