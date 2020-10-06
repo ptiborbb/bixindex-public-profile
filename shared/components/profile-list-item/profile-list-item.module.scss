@@ -1,0 +1,47 @@
+@import '../../../styles/variables.scss';
+
+.profileListItem {
+  width: 100%;
+  margin-top: 1rem;
+  cursor: pointer;
+  .header {
+    display: flex;
+    align-items: center;
+    .logo {
+      height: 112px !important;
+      width: 112px !important;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      img {
+        width: 75%;
+      }
+    }
+    .title {
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+      .ratingStar {
+        color: lightgray;
+      }
+      .ratingStarActive {
+        color: #bf9855;
+      }
+      .starHolder {
+        display: flex;
+      }
+    }
+  }
+  .ratingDetails {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}
+
+.profileListItem:hover {
+  background-color: lightseagreen;
+}

@@ -31,11 +31,18 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
       <div className={classes.companySidebar}>
         <div className={classes.ratingBlock}>
           <div>
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} `} />
+            {Array(5)
+              .fill(0)
+              .map((_, i) => {
+                return (
+                  <GradeIcon
+                    key={i}
+                    className={`${classes.ratingStar}${
+                      Math.round(stats.index.score / 2) > i ? ' ' + classes.ratingStarActive : ''
+                    }`}
+                  />
+                );
+              })}
           </div>
           <div className={classes.captionText}>Bizalmi index</div>
           <div className={classes.ratingCounter}>{(stats.index.score as number)?.toFixed(2)}</div>

@@ -9,7 +9,6 @@ interface StarCounterProps {
 
 export const StarCounter: FC<StarCounterProps> = ({ stars, count }) => {
   const starOptions = useMemo(() => Array.from({ length: 5 }).map((_, i) => ({ isActive: i <= stars })), [stars]);
-
   return (
     <div className={classes.starCounter}>
       {starOptions.map((option, i) =>
@@ -19,7 +18,7 @@ export const StarCounter: FC<StarCounterProps> = ({ stars, count }) => {
           <GradeOutlined key={i} className={classes.star} />
         ),
       )}
-      {count && <span className={classes.counter}>{count}</span>}
+      {(count || count === 0) && <span className={classes.counter}>{count}</span>}
     </div>
   );
 };

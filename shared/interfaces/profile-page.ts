@@ -1,5 +1,14 @@
 import { ECompanyTypes } from '@codingsans/bixindex-common';
 
+export interface RatingItem {
+  name: string;
+  logo: string;
+  value: number;
+  date: string;
+  nps: number;
+  comment: string;
+}
+
 export interface ProfilePage {
   profile: {
     id: string;
@@ -57,14 +66,7 @@ export interface ProfilePage {
     speciality: string;
   }[];
   ratings: {
-    items: {
-      name: string;
-      logo: string;
-      value: number;
-      date: Date;
-      nps: number;
-      comment: string;
-    }[];
+    items: RatingItem[];
     count: number;
     countsByValue: number[];
   };

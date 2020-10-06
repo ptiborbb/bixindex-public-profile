@@ -4,7 +4,7 @@ const next = require('next');
 
 const devProxy = {
   '/api': {
-    target: 'https://bixindex-backend-local.herokuapp.com/',
+    target: 'http://localhost:1337/', //'https://bixindex-backend-local.herokuapp.com/',
     pathRewrite: { '^/api': '' },
     changeOrigin: true,
   },
