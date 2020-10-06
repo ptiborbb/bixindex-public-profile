@@ -45,7 +45,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
               })}
           </div>
           <div className={classes.captionText}>Bizalmi index</div>
-          <div className={classes.ratingCounter}>{stats.index.score}</div>
+          <div className={classes.ratingCounter}>{(stats.index.score as number).toFixed(2)}</div>
           <div className={classes.captionText}>ÖSSZESEN {stats.index.ratingCount} DB ÉRTÉKELÉS</div>
         </div>
 

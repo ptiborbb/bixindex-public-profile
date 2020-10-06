@@ -19,6 +19,10 @@
   margin-top: 40px !important;
 }
 
+.mt150 {
+  margin-top: 150px !important;
+}
+
 .img {
   max-width: 100%;
 }
@@ -91,7 +95,7 @@
     line-height: 1.35;
   }
 
-  .desc {
+  .mainDesc {
     color: hsla(0, 0%, 100%, 0.8);
     font-weight: 300;
     font-size: 1.3em;
@@ -113,5 +117,58 @@
 
 .testimonials {
   @include container(100px);
+  text-align: center;
+}
+
+.highlightedBlock {
+  background-image: $bix-bg-gradient;
+  min-height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin: 100px 0;
+
+  &Inner {
+    @include container;
+  }
+
+  .highlightedTitle {
+    color: $white;
+    font-weight: 600;
+    font-size: 3em;
+    margin: 0;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .highlightedCta {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.heros {
+  @include container;
+
+  .heroSubtitle {
+    text-transform: uppercase;
+    color: $primary;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 30px;
+    height: 30px;
+    padding-left: 50px;
+    margin-bottom: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+
+.features {
+  @include container;
   text-align: center;
 }
