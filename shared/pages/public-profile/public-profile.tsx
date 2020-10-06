@@ -18,7 +18,6 @@ export const PublicProfile: FC = () => {
   const { t } = useTranslate();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
-  const companyFormID = 'companyFormID';
   const hash = router.asPath.split('#')[1];
 
   const {
@@ -47,7 +46,7 @@ export const PublicProfile: FC = () => {
         return (
           <Reviews
             companyAlias={alias}
-            companyFormID={companyFormID}
+            companyFormID={profilePage.profile.defaultFormID}
             ratings={profilePage.ratings}
             stats={profilePage.stats}
             npsRates={profilePage.npsRates}
@@ -63,7 +62,7 @@ export const PublicProfile: FC = () => {
         return (
           <Reviews
             companyAlias={alias}
-            companyFormID={companyFormID}
+            companyFormID={profilePage.profile.defaultFormID}
             ratings={profilePage.ratings}
             stats={profilePage.stats}
             npsRates={profilePage.npsRates}
@@ -90,7 +89,7 @@ export const PublicProfile: FC = () => {
             <div className={classes.container}>
               <CompanyHeader
                 companyAlias={alias}
-                companyFormID={companyFormID}
+                companyFormID={profilePage.profile.defaultFormID}
                 title={profilePage.profile.name}
                 logoPath={profilePage.profile.logo}
                 companyType={profilePage.profile.type}
