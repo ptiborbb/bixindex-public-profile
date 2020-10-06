@@ -42,12 +42,15 @@ export const Auth: FunctionComponent = () => {
 
   const { authService } = useApp();
   const companyFormID = router.query.companyFormID as string;
+  const companyAlias = router.query.companyAlias as string;
 
   const login = useCallback(
     (email: string, password: string) => {
       return authService
         .login(email, password)
-        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('')))
+        .then(() =>
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(''),
+        )
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },

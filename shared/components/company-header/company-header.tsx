@@ -51,15 +51,13 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
         </div>
       </div>
       <div className={classes.companyHeaderLinksLine}>
-        <Link
-          href="/bix-profil/[companyAlias]/ertekeles/[companyFormID]"
-          as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
-          passHref
+        <a
+          type="button"
+          className={classes.companyWriteReview}
+          href={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
         >
-          <a type="button" className={classes.companyWriteReview}>
-            Értékelés írása <EditIcon className={classes.reviewIcon} />
-          </a>
-        </Link>
+          Értékelés írása <EditIcon className={classes.reviewIcon} />
+        </a>
         <div className={classes.companyHeaderLinks}>
           <div onClick={() => activate('reviews')}>
             <a className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</a>
