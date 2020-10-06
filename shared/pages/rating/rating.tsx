@@ -54,15 +54,15 @@ export const Rating: FC = () => {
   const satisfactionOptions = [
     {
       label: 'Többet kaptam, mint vártam',
-      value: 'MORE',
+      value: '10',
     },
     {
       label: 'Pont annyit kaptam, mint vártam',
-      value: 'SAME',
+      value: '7.5',
     },
     {
       label: 'Kevesebbet kaptam, mint vártam',
-      value: 'LESS',
+      value: '6',
     },
   ];
 
@@ -146,6 +146,7 @@ export const Rating: FC = () => {
                       onSubmit={(values, { setSubmitting, resetForm }) => {
                         const parsedValues = {
                           ...values,
+                          satisfaction: parseFloat(values.satisfaction),
                           companyFormID,
                           answers: values.answers.map((answer) => ({
                             questionID: answer.id,
