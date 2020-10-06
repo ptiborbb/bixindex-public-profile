@@ -1,7 +1,8 @@
 import { IProfile } from '@codingsans/bixindex-common';
+import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 
 export interface IProfileListState {
-  profiles: IProfile[];
+  profiles: IProfileSummary[];
   page: number;
   rowsPerPage: number;
   count: number;

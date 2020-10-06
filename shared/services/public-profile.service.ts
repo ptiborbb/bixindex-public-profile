@@ -3,6 +3,7 @@ import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
 import { getProfiles, getProfilesFail, getProfilesSuccess } from '../pages/profile-list/store/actions';
 import { getPublicProfile, getPublicProfileFail, getPublicProfileSuccess } from '../pages/public-profile/store/actions';
+import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 
 export interface IPublicProfileService {
   getPublicProfileByAlias(alias: string): void;
@@ -25,7 +26,7 @@ export const publicProfileServiceFactory = (
           sort: '',
         })
         .then((profileList) =>
-          dispatch(getProfilesSuccess({ ...(profileList as { items: IProfile[]; count: number }) })),
+          dispatch(getProfilesSuccess({ ...(profileList as { items: IProfileSummary[]; count: number }) })),
         )
         .catch((error) => dispatch(getProfilesFail({ error })));
     },
