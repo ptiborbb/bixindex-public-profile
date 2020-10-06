@@ -1,0 +1,66 @@
+@import '../../../styles/variables.scss';
+
+.card {
+  height: 100%;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.headerContainer {
+  display: flex;
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: top;
+    margin-right: 15px;
+  }
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .name {
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin: 0;
+    text-align: left;
+  }
+
+  .title {
+    font-weight: 300;
+    font-size: 1.1em;
+    line-height: 1.61em;
+    margin: 0;
+    text-align: left;
+    color: #9f9f9f;
+  }
+}
+
+.desc {
+  line-height: 1.4em;
+  font-size: 1.2em;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.hashtag {
+  color: $primary;
+  line-height: 1.4em;
+  font-size: 1.1em;
+  font-weight: 400;
+  margin-bottom: 0;
+}

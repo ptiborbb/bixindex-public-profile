@@ -58,7 +58,12 @@
     "TITLE": "hello header {{propName}}",
     "PUBLIC_PROFILE_NUM": "Number of public profiles",
     "NUM_OF_USERS": "Number of users",
-    "NUM_OF_SUBSCRIBERS": "Number of subscribers"
+    "NUM_OF_SUBSCRIBERS": "Number of subscribers",
+    "FUNCTIONS": "Funkciók",
+    "SUBSCRIPTION": "Elõfizetés",
+    "BLOG": "Blog",
+    "COMPANY_SEARCH": "Cégkeresõ",
+    "CUSTOMER_PORTAL": "Ügyfélkapu"
   },
   "AUTH": {
     "NAME": "Name",
@@ -182,5 +187,62 @@
     "RATED_COMPANIES": "Rated companies",
     "SUBSCRIPTION_LIST": "List of subscriptions",
     "SEARCH_HELPER_TEXT": "By name, email or phone number"
+  },
+  "LANDING": {
+    "HEAD_BOX": {
+      "MAIN_1": "Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.",
+      "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
+      "MAIN_3": "Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:",
+      "CTA_1": "Mutasd meg!",
+      "CTA_2": "Többet akarok tudni a BIX-ről!"
+    },
+    "MAIN_FEATURES_BOX": {
+      "HEAD": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
+      "SUBHEAD": "A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!",
+      "CTA": "Mutasd a csomagokat!",
+      "FEATURE_1": {
+        "TITLE": "Automatizált elégedettségmérés",
+        "DESC": "Tudd minden pillanatban, mit gondolnak az ügyfeleid. Szolgáld ki őket úgy, ahogyan ők szeretnék.",
+        "CTA": "Első lépések"
+      },
+      "FEATURE_2": {
+        "TITLE": "Ellenőrzött és hiteles adatok",
+        "DESC": "Dolgozz hiteles, telefonon ellenőrzött véleményekből. Kerüld el a tévutakat, ne fuss bele pénznyelő zsákutcákba.",
+        "CTA": "Ez érdekel"
+      },
+      "FEATURE_3": {
+        "TITLE": "Professzionális vezetői riport",
+        "DESC": "Hónapról hónapra tudni fogod, mivel elégedettek (vagy elégedetlenek) a partnereid, és hol érdemes fejleszteni.",
+        "CTA": "Akarom tudni"
+      },
+      "FEATURE_4": {
+        "TITLE": "Bizalomépítő értékelések",
+        "DESC": "Szerezz új ügyfeleket a meglévő ügyfeleid véleményével. Generálj leadeket a BIX B2B rating segítségével.",
+        "CTA": "Akarok új ügyfeleket"
+      }
+    },
+    "MAIN_TESTIMONIAL_BOX": {
+      "HASHTAG": "#elpirulunk",
+      "HEAD": "A legnagyobbak szerint is különleges a BIX!",
+      "SUBHEAD": "Nem a spanyolviaszt találtuk fel - a BIX a bizalom újrafelfedezéséről és a modern üzleti döntéstámogatásról szól.",
+      "TESTIMONIAL_1": {
+        "NAME": "Barabás Árpád",
+        "TITLE": "Barabás Téglakő",
+        "DESC": "Zseniális, hogy mostantól minden munkatársunk folyamatosan figyel majd a partnerek elégedettségére, mert értékelés készül róla. A #BIX az ipar booking.com-ja.",
+        "HASHTAG": "#eztimádom"
+      },
+      "TESTIMONIAL_2": {
+        "NAME": "Cserpes István",
+        "TITLE": "Cserpes Sajtműhely",
+        "DESC": "Lehet, hogy adatokat állítunk elő, de végül az egész a kapcsolatainkról szól. Ettől nagyszerű. Hogy megerősíti a partneri kapcsolatokat.",
+        "HASHTAG": "#vezetőknekfontos"
+      },
+      "TESTIMONIAL_3": {
+        "NAME": "Markovich Béla",
+        "TITLE": "Mapei",
+        "DESC": "Ha valaki ránk keres a Google-ben, fontos neki, hogy találjon véleményeket. A BIX meg kiemelten és profin tálalja őket. Nekünk már hozott új megrendelőt.",
+        "HASHTAG": "#ezprofi"
+      }
+    }
   }
 }

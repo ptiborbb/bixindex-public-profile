@@ -1,19 +1,20 @@
 import { createBixindexClient } from '@codingsans/bixindex-common';
+import { ThemeProvider } from '@material-ui/core/styles';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import createPalette from '@material-ui/core/styles/createPalette';
 import App, { AppProps } from 'next/app';
 import { useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import { toast, ToastContainer } from 'react-toastify';
 import { appWithTranslation, useTranslation } from '../i18n';
-import { AppReducer } from '../store/reducer';
-import { appReducer, initialAppState } from '../store/state';
-import '../styles/globals.scss';
 import { AppContext } from '../shared/app.context';
-import { TranslateContext } from '../shared/translate.context';
 import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 import { ratingServiceFactory } from '../shared/services/rating.service';
-import createPalette from '@material-ui/core/styles/createPalette';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { TranslateContext } from '../shared/translate.context';
+import { AppReducer } from '../store/reducer';
+import { appReducer, initialAppState } from '../store/state';
+import '../styles/globals.scss';
 
 const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element => {
   const [state, dispatch] = useReducer<AppReducer>(appReducer, {
@@ -35,15 +36,10 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
       MuiAccordion: {
         elevation: 4,
       },
-      MuiTextField: {
-        InputLabelProps: {
-          shrink: true,
-        },
-        variant: 'outlined',
-      },
       MuiButton: {
         variant: 'contained',
         color: 'secondary',
+        size: 'large',
         style: {
           padding: '15px',
           width: '17em',

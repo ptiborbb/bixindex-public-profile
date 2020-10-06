@@ -1,4 +1,4 @@
-import { Auth } from '../shared/pages/auth/auth';
+import { Landing } from '../shared/pages/landing/landing';
 import { createNoAuthRouteComponent } from '../shared/utils/no-auth-route';
 
-export default createNoAuthRouteComponent(Auth);
+export default createNoAuthRouteComponent(Landing);
