@@ -12,6 +12,7 @@ export const createAuthRouteComponent = (Child: FunctionComponent): NextPage => 
     const host = get(ctx, 'req.headers.host', '');
     const authGuard = authGuardServiceFactory(host);
     const companyFormID = get(ctx, 'query.companyFormID', undefined);
+    const companyAlias = get(ctx, 'query.companyAlias', undefined);
     if (ctx.req) {
       const user = await authGuard.getUser(get(ctx, 'req.headers.cookie', ''));
       if (user) {
@@ -21,7 +22,11 @@ export const createAuthRouteComponent = (Child: FunctionComponent): NextPage => 
         };
       }
 
-      ctx.res.writeHead(301, { Location: `/auth${companyFormID ? '?companyFormID=' + companyFormID : ''}` });
+      ctx.res.writeHead(301, {
+        Location: `/auth?${companyAlias ? 'companyAlias=' + companyAlias : ''}${
+          companyFormID ? '&companyFormID=' + companyFormID : ''
+        }`,
+      });
       ctx.res.end();
       return {
         namespacesRequired: ['common'],
