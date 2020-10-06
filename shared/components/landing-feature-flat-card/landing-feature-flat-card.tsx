@@ -1,18 +1,18 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { FC } from 'react';
-import classes from './landing-feature-card.module.scss';
+import classes from './landing-feature-flat-card.module.scss';
 
-interface LandingFeatureCardProps {
+interface LandingFeatureFlatCardProps {
   icon: string;
   title: string;
   desc: string;
   cta: string;
 }
 
-export const LandingFeatureCard: FC<LandingFeatureCardProps> = ({ icon, title, desc, cta }) => {
+export const LandingFeatureFlatCard: FC<LandingFeatureFlatCardProps> = ({ icon, title, desc, cta }) => {
   return (
-    <Card className={classes.h100}>
+    <Card elevation={0}>
       <CardContent className={classes.cardContainer}>
         <div className={classes.imgContainer}>
           <img src={icon} />

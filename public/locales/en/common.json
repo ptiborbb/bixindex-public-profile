@@ -1,5 +1,6 @@
 {
   "COMMON": {
+    "PAGE_TITLE": "Cégek, akikkel nyugodtan dolgozhatsz! - BIX",
     "BACK": "Back",
     "SUMMARY": "Summary",
     "UNKOWN_ERROR": "An unknown error has occurred",
@@ -242,6 +243,145 @@
         "TITLE": "Mapei",
         "DESC": "Ha valaki ránk keres a Google-ben, fontos neki, hogy találjon véleményeket. A BIX meg kiemelten és profin tálalja őket. Nekünk már hozott új megrendelőt.",
         "HASHTAG": "#ezprofi"
+      }
+    },
+    "HIGHLIGHTED_1": {
+      "TITLE": "Még nem méred az ügyfélelégedettséget? Vagy nincs rá egy professzionális automatizált rendszered? A BIX minden vezető álma!",
+      "CTA": "Nekem is erre van szükségem!"
+    },
+    "HEROS": {
+      "HERO_1": {
+        "SUBTITLE": "Automatizált elégedettségmérés",
+        "TITLE": "Tudd minden pillanatban, mit gondolnak az ügyfeleid!",
+        "DESC": "Évi egy elégedettség mérés? Ugyan már. A hagyományos értékelési rendszerek elavultak, túl kevés információt adnak, túl későn. Takaríts meg pénzt, időt és energiát azzal, hogy automatizálod az elégedettségmérést a cégedben. Így nem kell hosszú heteket, hónapokat várnod a problémák felbukkanására és valós időben meg is tudod oldani azokat.",
+        "Q": "Miért érdemes automatizálni az elégedettségmérést?",
+        "A": {
+          "A_1": "Folyamatos törődést jelent a meglévő ügyfelekkel",
+          "A_2": "Azonnali beavatkozási lehetőség lesz a kezedben",
+          "A_3": "Tűpontos (és hiteles) ügyfélvisszajelzéseket kapsz",
+          "A_4": "Újraaktiválhatod a régi ügyfeleidet"
+        },
+        "CTA": {
+          "CTA_1": "Naprakész akarok lenni!",
+          "CTA_2": "Mondj többet erről!"
+        }
+      },
+      "HERO_2": {
+        "SUBTITLE": "Ellenőrzött és hiteles adatok",
+        "TITLE": "Vezetői döntéseket csak pontos információk birtokában hozhatsz",
+        "DESC": "A professzionális döntéselőkészítés érdekében az ügyfélértékeléseket telefonon is ellenőrizzük. Azért, hogy a vezetőként hozott döntéseid még megalapozottabbak legyenek, a Bisnode által szolgáltatott üzleti adatokkal is összefésüljük a kapott információkat. Így egy olyan komplex, a pénzügyi és elégedettségi adatokat egyesítő tudáscsomagot kapsz, amivel minimalizálhatod a vezetői hibaszázalékodat.",
+        "Q": "Ezért érdemes hiteles és ellenőrzött információkból dolgozni:",
+        "A": {
+          "A_1": "Tényekre és nem véleményekre támaszkodsz",
+          "A_2": "Azonnal kiderül, ha gond van az ügyféllel",
+          "A_3": "Növeled és mélyíted a vevőid elkötelezettségét",
+          "A_4": "Továbbajánlásokat generálsz, új ügyfeleket szerzel"
+        },
+        "CTA": {
+          "CTA_1": "Automatizálom a folyamatot!",
+          "CTA_2": "Mondj többet erről!"
+        }
+      },
+      "HERO_3": {
+        "SUBTITLE": "Professzionális vezetői riport",
+        "TITLE": "Hónapról hónapra látod, mivel elégedettek a partnereid (és hol érdemes fejleszteni)",
+        "DESC": "Miért jó az, hogy minden hónap 10. napján megkapod a cégedre és munkakörödre (ügyvezető, marketingvezető stb.) szabott vezetői riportot? Könnyen átlátható, grafikus formában látod majd a „vevőid gondolkodását”, gyorsan értesülsz a vakfoltjaidról, a kapott objektív információk pedig utat mutatnak a termékfejlesztésben, javítják a terméked, szolgáltatásod ár-érték arányát, emelik a kiszolgálás minőségét és növelik a ügyfélmegtartó képességedet.",
+        "Q": "Ezért fogod szeretni a BIX vezetői riportjait:",
+        "A": {
+          "A_1": "Óraműpontossággal érkezik, tudsz vele tervezni",
+          "A_2": "Könnyen átlátható, részrehajlásmentes",
+          "A_3": "Megmutatja, miben vagytok erősek",
+          "A_4": "Nyílegyenesen rámutat a fejlesztendő területekre"
+        },
+        "CTA": {
+          "CTA_1": "Ilyen riportokra van szükségem",
+          "CTA_2": "Mondj többet erről!"
+        }
+      },
+      "HERO_4": {
+        "SUBTITLE": "Bizalomépítő értékelések",
+        "TITLE": "A leendő vásárlóidat leginkább a meglevő vevőid tapasztalata érdekli",
+        "DESC": "A Google-ben keresők 86%-a ügyfélvéleményeket keres. A beszerzők ma már nemcsak a pénzügyi beszámolót nézik, hanem kifejezetten ügyfélvéleményekre keresnek rá. A potenciális ügyfeleid, beszállítóid a BIX – B2B rating profilod átnézése után könnyen és gyorsan döntenek majd melletted, hiszen a meglévő vásárlóid elégedettsége hitelesíti a termékedet, szolgáltatásodat. A BIX így konvertálja az ügyfeleid lojalitását első osztályú vevőszerző eszközzé.",
+        "Q": "Ezeken a területeken segít a BIX – B2B rating:",
+        "A": {
+          "A_1": "Új megrendeléseket, új partnerkapcsolatokat hoz",
+          "A_2": "Elemel a konkurenciától, aki nem használja a BIX-et",
+          "A_3": "A publikus index támogatja a SEO-t, jobb keresőpozíciók",
+          "A_4": "Hitelességet kölcsönöz és bizalmat épít irántad"
+        },
+        "CTA": {
+          "CTA_1": "Jöhetnek az új vevők!",
+          "CTA_2": "Mondj többet erről!"
+        }
+      }
+    },
+    "HIGHLIGHTED_2": {
+      "TITLE": "Egy professzionális platform, ami helyettem foglalkozik az ügyfeleimmel",
+      "CTA": "Ilyet szeretnék!"
+    },
+    "FEATURES_BOX": {
+      "HASHTAG": "#ésnemállunkmeg",
+      "HEAD": "A BIX már most is hatékony – mégis folyamatosan fejlesztjük",
+      "SUBHEAD": "Egy termék sosincs kész. A rendszer finomhangolásával és fejlesztésével az a célunk, hogy még több, még pontosabb, még hasznosabb információt adhassunk át neked, amivel még sikeresebb céget építhetsz",
+      "FEATURE_1": {
+        "TITLE": "Google integráció",
+        "DESC": "A Google külön kiemeli a BIX-profilokat. Ez is jelzi, hogy az információ, amit előállítunk, értékes a keresőmotorok számára.",
+        "CTA": "Nézd meg, hogy működik"
+      },
+      "FEATURE_2": {
+        "TITLE": "Bővülő cégadatbázis",
+        "DESC": "Folyamatosan fejlesztjük a cégkeresőnket, hiszen egyre többen keresnek partnert a BIX cégek között.",
+        "CTA": "Csekkold a céges toplistát"
+      },
+      "FEATURE_3": {
+        "TITLE": "BIX Profil",
+        "DESC": "A profilod útlevél a sikerhez. A leendő ügyfeleid ezen keresztül ismernek meg, így rendszeresen új funkciókkal bővítjük.",
+        "CTA": "Lapozz bele a profilokba"
+      },
+      "FEATURE_4": {
+        "TITLE": "Egyedi mérés",
+        "DESC": "Többet vagy mást kérdeznél a partnereidtől, amit a BIX? Közösen összeállítjuk a saját kérdéssorodat és a cégedre szabjuk az értékelési folyamatot",
+        "CTA": "2019 márciusától elérhető funkció"
+      },
+      "FEATURE_5": {
+        "TITLE": "Saját ügyfélkapu",
+        "DESC": "Itt találod a számláidat, kezeled az ügyféllistádat, válaszolsz az értékelésekre és frissíted, szerkeszted a profilodat.",
+        "CTA": "Benézek az ügyfélkapun"
+      },
+      "FEATURE_6": {
+        "TITLE": "Extra adatok",
+        "DESC": "A vezetői riportokból már tudjuk, kik a legjobb ügyfeleid és melyik a legnépszerűbb szolgáltatásod. És ez csak a kezdet.",
+        "CTA": "Szeretem a számokat, mutasd"
+      },
+      "FEATURE_7": {
+        "TITLE": "Értékelésgyűjtés",
+        "DESC": "Az ügyféllista és az értékelésgyűjtő mechanizmus a rendszer szíve és motorja. Ma átlagosan 35-40%-os az elérési hatékonyságunk és folyamatosan javulnak a számaink.",
+        "CTA": "Magyarázd el a folyamatot"
+      },
+      "FEATURE_8": {
+        "TITLE": "Értékelés megújítás",
+        "DESC": "Aki már értékelt téged, újra megkérdezzük. Automatikusan, meghatározott időközönként, életben tartva az üzleti kapcsolatotokat és ösztönözve az újravásárlást.",
+        "CTA": "Nézd meg, hogy csináljuk"
+      },
+      "FEATURE_9": {
+        "TITLE": "Lead generálás",
+        "DESC": "Értékeléskor, megújításkor és a telefonos ellenőrzésnél begyűjtött információk révén folyamatosan finomítjuk a rendszerünket, hogy a BIX még több potenciális vevőt hozzon neked.",
+        "CTA": "Nézd meg, hol tartunk most"
+      },
+      "FEATURE_10": {
+        "TITLE": "Hitelességépítés",
+        "DESC": "Építsd be a weboldaladba, az e-mail aláírásodba, vagy a weboldalad footerébe a BIX által szállított ügyfélvéleményeket. A bizalom és a hitelesség a marketing legértékesebb valutája.",
+        "CTA": "Mutasd a widgeteket"
+      },
+      "FEATURE_11": {
+        "TITLE": "Integráció",
+        "DESC": "A legfontosabb hazai számlázóprogrammal (#szamlazzhu) és CRM rendszerrel (#minicrm) már megépült az adathíd. De itt nem állunk meg.",
+        "CTA": "Nézd meg, mi készül"
+      },
+      "FEATURE_12": {
+        "TITLE": "Véleménygaléria",
+        "DESC": "Miért tennél megkérdőjelezhető hitelességű ügyfélvisszajelzéseket a weboldaladra, ha ellenőrzött és objektív forrásból is meríthetsz? A BIX rendszeréből automatikusan átemelheted a vevőid feedbackjeit.",
+        "CTA": "Lapozz bele az egyedi galériádba"
       }
     }
   }
