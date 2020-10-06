@@ -22,6 +22,8 @@ import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
 import { Chip } from '../../../../chip/chip';
 import { ReviewStats, ReviewStatsProps } from '../review-stats/review-stats';
+import { RatingItem } from '../../../../../interfaces/profile-page';
+import { ReviewItem } from '../review-item/review-item';
 
 interface ReviewsDetailProps {
   filter: ReviewFilter;
@@ -29,9 +31,19 @@ interface ReviewsDetailProps {
   products: IProduct[];
   services: IService[];
   stats: ReviewStatsProps;
+  ratings: RatingItem[];
+  ratingCountsByValue: number[];
 }
 
-export const ReviewsDetail: FC<ReviewsDetailProps> = ({ filter, filterChanged, products, services, stats }) => {
+export const ReviewsDetail: FC<ReviewsDetailProps> = ({
+  filter,
+  filterChanged,
+  products,
+  services,
+  stats,
+  ratings,
+  ratingCountsByValue,
+}) => {
   const [opened, setOpened] = useState(false);
   return (
     <div className={classes.reviewsDetail}>
@@ -50,21 +62,12 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({ filter, filterChanged, p
 
       <div className={classes.filterBlock}>
         <div>
-          <span onClick={() => filterChanged({ ...filter, stars: 5 })}>
-            <StarCounter stars={5} count={42} />
-          </span>
-          <span onClick={() => filterChanged({ ...filter, stars: 4 })}>
-            <StarCounter stars={4} count={42} />
-          </span>
-          <span onClick={() => filterChanged({ ...filter, stars: 3 })}>
-            <StarCounter stars={3} count={42} />
-          </span>
-          <span onClick={() => filterChanged({ ...filter, stars: 2 })}>
-            <StarCounter stars={2} count={42} />
-          </span>
-          <span onClick={() => filterChanged({ ...filter, stars: 1 })}>
-            <StarCounter stars={1} count={42} />
-          </span>
+          {ratingCountsByValue &&
+            ratingCountsByValue.map((count, i) => (
+              <span key={i} onClick={() => filterChanged({ ...filter, stars: i })}>
+                <StarCounter stars={+i} count={count} />
+              </span>
+            ))}
         </div>
 
         <div className={classes.filterInputs}>
@@ -133,53 +136,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({ filter, filterChanged, p
 
       <div className={classes.separator}></div>
 
-      <div className={classes.reviewCard}>
-        <div className={classes.reviewerInfo}>
-          <div className={classes.avatar}>
-            <img alt={'Joska Pista'} src={avatar} />
-          </div>
-          <div className={classes.reviewer}>
-            <div className={classes.name}>Joska Pista</div>
-            <div className={classes.role}>Ügyvezető: Cégnév</div>
-          </div>
-          <div className={classes.details}>
-            <div className={classes.ratingLine}>
-              <StarCounter stars={5} /> <span className={classes.rating}>9.4</span>
-            </div>
-            <div className={classes.date}>Ellenőrzés dátuma: 2018.12.11</div>
-            <div className={classes.share}>
-              <div className={classes.shareBlock}>
-                <div className={classes.shareOptions}>
-                  <div className={classes.shareFb}>
-                    <img alt="facebook" src={fbIcon} />
-                  </div>
-                  <div className={classes.shareSeparator}></div>
-                  <div className={classes.shareIn}>
-                    <img alt="linkedin" src={inIcon} />
-                  </div>
-                </div>
-                <Fab className={classes.shareButton} size="small" aria-label="share">
-                  <Share className={classes.shareIcon} />
-                </Fab>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={classes.npsInfo}>NPS: Ajánló</div>
-        <div className={classes.badReview}>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </div>
-        </div>
-        <div className={classes.product}>
-          <div className={classes.productTitle}>Értékelt termékek</div>
-          <div className={classes.chips}>
-            <Chip text={'MRD+ vezetői klub'} />
-          </div>
-        </div>
-      </div>
+      {ratings && ratings.map((rating, i) => <ReviewItem key={i} rating={rating} />)}
 
       <div className={classes.pager}>
         <div className={classes.pageNumber}>1. oldal</div>
