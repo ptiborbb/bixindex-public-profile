@@ -11,9 +11,11 @@ import { News } from '../../components/fragments/news/news';
 import { Products } from '../../components/fragments/products/products';
 import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
+import { useTranslate } from '../../translate.context';
 import classes from './public-profile.module.scss';
 
 export const PublicProfile: FC = () => {
+  const { t } = useTranslate();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = 'companyFormID';
@@ -73,11 +75,7 @@ export const PublicProfile: FC = () => {
   return (
     <div>
       <Head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-        />
+        <title>{t('COMMON.PAGE_TITLE')}</title>
       </Head>
       {profilePage && (
         <>

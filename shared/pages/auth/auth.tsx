@@ -1,18 +1,18 @@
 import { Button, FormControl, FormHelperText, Grid, InputAdornment, makeStyles, Paper } from '@material-ui/core';
+import LockIcon from '@material-ui/icons/Lock';
+import MailIcon from '@material-ui/icons/Mail';
+import PersonIcon from '@material-ui/icons/Person';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useState } from 'react';
 import * as Yup from 'yup';
+import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
+import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
-import logo from '../../../public/bix_logo.svg';
-import MailIcon from '@material-ui/icons/Mail';
-import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
-import { Footer } from '../../components/footer/footer';
 
 const useInputFieldStyle = makeStyles({
   root: {

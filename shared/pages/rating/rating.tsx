@@ -16,9 +16,11 @@ import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
+import { useTranslate } from '../../translate.context';
 import classes from './rating.module.scss';
 
-export const Rating: FC = (props) => {
+export const Rating: FC = () => {
+  const { t } = useTranslate();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
@@ -86,11 +88,7 @@ export const Rating: FC = (props) => {
   return (
     <div>
       <Head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-        />
+        <title>{t('COMMON.PAGE_TITLE')}</title>
       </Head>
       {profilePage && (
         <>

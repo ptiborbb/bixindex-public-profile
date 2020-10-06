@@ -4,6 +4,7 @@ import { IAuthService } from './services/auth.service';
 import { IPublicProfileService } from './services/public-profile.service';
 import { IRatingService } from './services/rating.service';
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 interface IAppContext {
   state: IAppState;
   dispatch: Dispatch<unknown>;
