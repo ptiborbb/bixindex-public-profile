@@ -45,6 +45,7 @@ export const Rating: FC = () => {
   const handleSubmitReview = useCallback(
     (rating) => {
       ratingService.submitReview(rating);
+      return router.push(`/bix-profil/${alias}`);
     },
     [ratingService],
   );
