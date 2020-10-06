@@ -32,6 +32,12 @@ export const ProfileList: FC = () => {
     }
   }, [publicProfileService, searchText]);
 
+  useEffect(() => {
+    return () => {
+      publicProfileService.resetProfiles();
+    };
+  }, [publicProfileService]);
+
   return (
     <>
       <div className={classes.headerBlock}>

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getProfiles, getProfilesFail, getProfilesSuccess } from './actions';
+import { getProfiles, getProfilesFail, getProfilesSuccess, resetProfileList } from './actions';
 import { initialProfileListState } from './state';
 export const profileListReducer = createReducer(initialProfileListState, (builder) => {
   builder
@@ -13,6 +13,9 @@ export const profileListReducer = createReducer(initialProfileListState, (builde
     })
     .addCase(getProfilesFail, (state) => {
       state.profiles = null;
+    })
+    .addCase(resetProfileList, (state) => {
+      state.profiles = initialProfileListState.profiles;
     })
     .addDefaultCase((state) => state);
 });
