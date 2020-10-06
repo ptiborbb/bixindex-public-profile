@@ -57,7 +57,6 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
         return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
     }
   }, [activeFragment]);
-  console.log(productsAndServices);
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
