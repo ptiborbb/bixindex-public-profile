@@ -1,108 +1,101 @@
 @import '../../../styles/variables.scss';
 
-.headerBlock {
-  background-image: $bix-bg-gradient;
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
 
-  .divider {
-    background: rgba(255, 255, 255, 0.4);
-    height: 1px;
-  }
-}
+  .headerBlock {
+    background-image: $bix-bg-gradient;
 
-.container {
-  width: 100%;
-  max-width: 1170px;
-  margin: 0 auto;
-
-  .pageTitle {
-    font-size: 40px;
-    color: $grey-dark;
-    text-align: center;
-    margin: 50px 0;
-    font-weight: bold;
+    .divider {
+      background: rgba(255, 255, 255, 0.4);
+      height: 1px;
+    }
   }
 
-  .paper {
-    width: 100%;
-    max-width: 470px;
-    padding: 30px 15px;
+  .pageContent {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-grow: 1;
+    padding-bottom: 50px;
 
-    .title {
-      font-size: 24px;
+    .pageTitle {
+      font-size: 40px;
       color: $grey-dark;
+      text-align: center;
+      margin: 50px 0;
       font-weight: bold;
-      text-align: center;
-      > span {
-        color: $teal;
-        text-decoration: underline;
-      }
     }
 
-    .description {
+    .paper {
       width: 100%;
-      max-width: 300px;
-      text-align: center;
-      color: $teal;
-      font-size: 1rem;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      position: relative;
-      &:before {
-        position: absolute;
-        content: '';
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background-color: $teal;
-      }
-      > span {
-        position: relative;
-        z-index: 1;
-        white-space: nowrap;
-        padding: 0 10px;
-        background-color: $white;
-      }
-    }
-
-    .form {
+      max-width: 470px;
+      padding: 30px 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100%;
-      max-width: 300px;
+      -webkit-box-shadow: 0px 0px 16px 0px rgba(175, 175, 175, 0.4);
+      -moz-box-shadow: 0px 0px 16px 0px rgba(175, 175, 175, 0.4);
+      box-shadow: 0px 0px 16px 0px rgba(175, 175, 175, 0.4);
+      border-radius: 8px;
 
-      .formInput {
-        margin: 25px 0;
-
-        > label {
-          font-size: 14px;
-          color: $grey-dark;
-          transform: scale(1);
-        }
-
-        legend {
-          max-width: 0;
-        }
-
-        svg {
-          color: #c8c8c8
-        }
-
-        input {
-          padding-top: 14px;
-          padding-bottom: 14px;
+      .title {
+        font-size: 24px;
+        color: $grey-dark;
+        font-weight: bold;
+        text-align: center;
+        > span {
+          color: $teal;
+          text-decoration: underline;
         }
       }
 
-      .button {
+      .description {
         width: 100%;
-        margin: 40px 0;
-        > button {
-          width: 100% !important;
+        max-width: 300px;
+        text-align: center;
+        color: $teal;
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        &:before {
+          position: absolute;
+          content: '';
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: $teal;
+        }
+        > span {
+          position: relative;
+          z-index: 1;
+          white-space: nowrap;
+          padding: 0 10px;
+          background-color: $white;
+        }
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 300px;
+
+        .formInput {
+          margin: 25px 0;
+        }
+
+        .button {
+          width: 100%;
+          margin: 40px 0;
+          > button {
+            width: 100% !important;
+          }
         }
       }
     }

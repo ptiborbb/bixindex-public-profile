@@ -1,4 +1,4 @@
-import { Button, FormControl, FormHelperText, Grid, InputAdornment, Paper } from '@material-ui/core';
+import { Button, FormControl, FormHelperText, Grid, InputAdornment, makeStyles, Paper } from '@material-ui/core';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
@@ -9,10 +9,32 @@ import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
 import logo from '../../../public/bix_logo.svg';
-import Head from 'next/head';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
+import { Footer } from '../../components/footer/footer';
+
+const useInputFieldStyle = makeStyles({
+  root: {
+    color: '#c8c8c8',
+    borderRadius: '2px',
+    borderColor: '#c8c8c8',
+    backgroundColor: '#fafafa',
+  },
+  input: {
+    color: '#5e5e5e',
+    paddingTop: '14px',
+    paddingBottom: '14px',
+  },
+});
+
+const useInputLabelStyle = makeStyles({
+  root: {
+    fontSize: '14px',
+    color: '#5e5e5e',
+    transform: 'translateY(-20px) scale(1)',
+  },
+});
 
 export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
@@ -56,11 +78,16 @@ export const Auth: FunctionComponent = () => {
     name: Yup.string().required(t('AUTH.REQUIRED')),
   });
 
+  const inputFieldStyle = useInputFieldStyle();
+  const inputLabelStyle = useInputLabelStyle();
+
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface ILoginFormValues {
     email: string;
     password: string;
   }
 
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRegisterFormValues {
     name: string;
     email: string;
@@ -68,44 +95,127 @@ export const Auth: FunctionComponent = () => {
   }
 
   return (
-    <div>
-      <Head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-        />
-      </Head>
-      <>
-        <div className={classes.headerBlock}>
-          <div className={classes.container}>
-            <Header logoPath={logo} />
-          </div>
-          <div className={classes.divider}></div>
+    <section className={classes.pageWrapper}>
+      <div className={classes.headerBlock}>
+        <div className="container">
+          <Header logoPath={logo} />
         </div>
-        <div className={classes.container}>
-          <h1 className={classes.pageTitle}>Azonosítás</h1>
-          <Grid container justify="center" spacing={3}>
-            <Grid item xs md={5}>
-              <Paper className={classes.paper}>
+        <div className={classes.divider}></div>
+      </div>
+      <div className={`container ${classes.pageContent}`}>
+        <h1 className={classes.pageTitle}>{t('LOGIN_REGISTER.TITLE')}</h1>
+        <Grid container justify="center" spacing={3}>
+          <Grid item xs md={5}>
+            <Paper className={classes.paper}>
+              <h2 className={classes.title}>
+                <span>{t('LOGIN_REGISTER.NO_BIX_ACCOUNT_COLOR_PART')}</span> {t('LOGIN_REGISTER.NO_BIX_ACCOUNT_PART_2')}
+              </h2>
+              <div className={classes.description}>
+                <span>{t('LOGIN_REGISTER.IDENTIFICATION_WITH_EMAIL')}</span>
+              </div>
+              <Formik
+                initialValues={{
+                  name: '',
+                  email: '',
+                  password: '',
+                }}
+                validationSchema={registerValidationSchema}
+                onSubmit={(
+                  values: IRegisterFormValues,
+                  { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
+                ) => {
+                  return register(values.name, values.email, values.password).then(() => {
+                    setSubmitting(false);
+                    resetForm();
+                  });
+                }}
+              >
+                <Form className={classes.form} noValidate>
+                  <FormControl error={error.isError} fullWidth>
+                    <Field
+                      id="name"
+                      name="name"
+                      label={t('AUTH.NAME')}
+                      component={TextField}
+                      fullWidth
+                      className={classes.formInput}
+                      InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                      InputProps={{
+                        classes: inputFieldStyle,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <Field
+                      id="email"
+                      name="email"
+                      label={t('AUTH.EMAIL')}
+                      component={TextField}
+                      fullWidth
+                      className={classes.formInput}
+                      InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                      InputProps={{
+                        classes: inputFieldStyle,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MailIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <Field
+                      id="password"
+                      type="password"
+                      name="password"
+                      label={t('AUTH.PASSWORD')}
+                      component={TextField}
+                      fullWidth
+                      className={classes.formInput}
+                      InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                      InputProps={{
+                        classes: inputFieldStyle,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <LockIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <FormHelperText>{error.message}</FormHelperText>
+                  </FormControl>
+                  <div className={classes.button}>
+                    <Button type="submit" variant="contained" color="secondary" fullWidth>
+                      {t('AUTH.REGISTER')}
+                    </Button>
+                  </div>
+                </Form>
+              </Formik>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <Paper className={classes.paper}>
+              <Grid container justify="center" spacing={3}>
                 <h2 className={classes.title}>
-                  <span>Nincs</span> még BIX accountod?
+                  <span>{t('LOGIN_REGISTER.HAS_BIX_ACCOUNT_COLOR_PART')}</span>{' '}
+                  {t('LOGIN_REGISTER.HAS_BIX_ACCOUNT_PART_2')}
                 </h2>
                 <div className={classes.description}>
-                  <span>Azonosítás e-mail címmel</span>
+                  <span>{t('LOGIN_REGISTER.LOGIN_WITH_EMAIL')}</span>
                 </div>
                 <Formik
                   initialValues={{
-                    name: '',
                     email: '',
                     password: '',
                   }}
-                  validationSchema={registerValidationSchema}
+                  validationSchema={loginValidationSchema}
                   onSubmit={(
-                    values: IRegisterFormValues,
-                    { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
+                    values: ILoginFormValues,
+                    { setSubmitting, resetForm }: FormikHelpers<ILoginFormValues>,
                   ) => {
-                    return register(values.name, values.email, values.password).then(() => {
+                    return login(values.email, values.password).then(() => {
                       setSubmitting(false);
                       resetForm();
                     });
@@ -114,30 +224,15 @@ export const Auth: FunctionComponent = () => {
                   <Form className={classes.form} noValidate>
                     <FormControl error={error.isError} fullWidth>
                       <Field
-                        id="name"
-                        name="name"
-                        label={t('AUTH.NAME')}
-                        component={TextField}
-                        fullWidth
-                        // variant="outlined"
-                        // className={classes.formInput}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PersonIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <Field
                         id="email"
                         name="email"
                         label={t('AUTH.EMAIL')}
                         component={TextField}
                         fullWidth
-                        // variant="outlined"
-                        // className={classes.formInput}
+                        className={classes.formInput}
+                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                         InputProps={{
+                          classes: inputFieldStyle,
                           startAdornment: (
                             <InputAdornment position="start">
                               <MailIcon />
@@ -145,6 +240,7 @@ export const Auth: FunctionComponent = () => {
                           ),
                         }}
                       />
+
                       <Field
                         id="password"
                         type="password"
@@ -152,9 +248,10 @@ export const Auth: FunctionComponent = () => {
                         label={t('AUTH.PASSWORD')}
                         component={TextField}
                         fullWidth
-                        // variant="outlined"
-                        // className={classes.formInput}
+                        className={classes.formInput}
+                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                         InputProps={{
+                          classes: inputFieldStyle,
                           startAdornment: (
                             <InputAdornment position="start">
                               <LockIcon />
@@ -166,90 +263,17 @@ export const Auth: FunctionComponent = () => {
                     </FormControl>
                     <div className={classes.button}>
                       <Button type="submit" variant="contained" color="secondary" fullWidth>
-                        {t('AUTH.REGISTER')}
+                        {t('AUTH.LOGIN')}
                       </Button>
                     </div>
                   </Form>
                 </Formik>
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Paper className={classes.paper}>
-                <Grid container justify="center" spacing={3}>
-                  <h2 className={classes.title}>
-                    <span>Van</span> már BIX accountod?
-                  </h2>
-                  <div className={classes.description}>
-                    <span>Belépés e-mail címmel</span>
-                  </div>
-                  <Formik
-                    initialValues={{
-                      email: '',
-                      password: '',
-                    }}
-                    validationSchema={loginValidationSchema}
-                    onSubmit={(
-                      values: ILoginFormValues,
-                      { setSubmitting, resetForm }: FormikHelpers<ILoginFormValues>,
-                    ) => {
-                      return login(values.email, values.password).then(() => {
-                        setSubmitting(false);
-                        resetForm();
-                      });
-                    }}
-                  >
-                    <Form className={classes.form} noValidate>
-                      <FormControl error={error.isError} fullWidth>
-                        <Field
-                          id="email"
-                          name="email"
-                          label={t('AUTH.EMAIL')}
-                          component={TextField}
-                          fullWidth
-                          // variant="outlined"
-                          // className={classes.formInput}
-                          InputProps={{
-                            shrink: 'true',
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <MailIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-
-                        <Field
-                          id="password"
-                          type="password"
-                          name="password"
-                          label={t('AUTH.PASSWORD')}
-                          component={TextField}
-                          fullWidth
-                          // className={classes.formInput}
-                          InputProps={{
-                            shrink: 'true',
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <LockIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <FormHelperText>{error.message}</FormHelperText>
-                      </FormControl>
-                      <div className={classes.button}>
-                        <Button type="submit" variant="contained" color="secondary" fullWidth>
-                          {t('AUTH.LOGIN')}
-                        </Button>
-                      </div>
-                    </Form>
-                  </Formik>
-                </Grid>
-              </Paper>
-            </Grid>
+              </Grid>
+            </Paper>
           </Grid>
-        </div>
-      </>
-    </div>
+        </Grid>
+      </div>
+      <Footer logoPath={logo}></Footer>
+    </section>
   );
 };
