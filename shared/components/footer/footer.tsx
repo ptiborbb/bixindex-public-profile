@@ -1,10 +1,10 @@
 import { Grid } from '@material-ui/core';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import MailIcon from '@material-ui/icons/Mail';
+import PhoneIcon from '@material-ui/icons/Phone';
 import { FC } from 'react';
 import { useTranslate } from '../../translate.context';
 import classes from './footer.module.scss';
-import PhoneIcon from '@material-ui/icons/Phone';
-import MailIcon from '@material-ui/icons/Mail';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 export interface FooterProps {
   logoPath: string;
