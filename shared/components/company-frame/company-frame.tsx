@@ -20,43 +20,12 @@ import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
 interface CompanyFrameProps {
-  ratings: {
-    items: any[];
-    count: number;
-  };
   profile: any;
-  awards: any[];
-  articles: any[];
   productsAndServices: any[];
   stats: any;
-  npsRates: number[];
-  activeFragment: string;
 }
 
-export const CompanyFrame: FC<CompanyFrameProps> = ({
-  ratings,
-  profile,
-  awards,
-  articles,
-  productsAndServices,
-  stats,
-  npsRates,
-  activeFragment,
-}) => {
-  const contentSegment = useMemo(() => {
-    switch (activeFragment) {
-      case 'reviews':
-        return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
-      case 'awards':
-        return <Awards awards={awards} />;
-      case 'news':
-        return <News articles={articles} />;
-      case 'products':
-        return <Products productsAndServices={productsAndServices} />;
-      default:
-        return <Reviews ratings={ratings} stats={stats} npsRates={npsRates} />;
-    }
-  }, [activeFragment]);
+export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, productsAndServices, stats }) => {
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
@@ -125,7 +94,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({
         </div>
       </div>
 
-      <div className={classes.companyContent}>{contentSegment}</div>
+      <div className={classes.companyContent}>{children}</div>
     </div>
   );
 };
