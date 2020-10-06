@@ -14,8 +14,8 @@ export const ReviewsHeader: FC<ReviewsHeaderProps> = ({ companyAlias, companyFor
   return (
     <div className={classes.reviewsHeader}>
       <div className={classes.reviewsSummary}>
-        <ReviewRatio value={stats.index.score} />
-        <div>{stats.index.ratingCount} értékelés alapján</div>
+        <ReviewRatio value={Math.round(stats.index.score * 10) / 10} />
+        <div className={classes.reviewsCount}>{stats.index.ratingCount} értékelés alapján</div>
       </div>
       <div className={classes.reviewsActions}>
         <a

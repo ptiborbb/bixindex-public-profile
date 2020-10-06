@@ -9,6 +9,9 @@
   .reviewsSummary {
     display: flex;
     align-items: center;
+    .reviewsCount {
+      margin-left: 1rem;
+    }
   }
 
   .companyWriteReview {
