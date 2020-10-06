@@ -33,6 +33,9 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
       MuiCard: {
         elevation: 4,
       },
+      MuiTextField: {
+        variant: 'outlined',
+      },
       MuiAccordion: {
         elevation: 4,
       },

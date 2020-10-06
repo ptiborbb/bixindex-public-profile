@@ -2,6 +2,7 @@ import { IBixindexClient } from '@codingsans/bixindex-common';
 import { Dispatch } from 'react';
 import { getPublicProfile, getPublicProfileSuccess, getPublicProfileFail } from '../pages/public-profile/store/actions';
 import { ProfilePage } from '../interfaces/profile-page';
+import { mockData } from '../data/mockData';
 
 export interface IPublicProfileService {
   getPublicProfileByAlias(alias: string): void;
@@ -19,6 +20,7 @@ export const publicProfileServiceFactory = (
         .getProfileByCompany(alias, 'ALIAS')
         .then((profilePage) => dispatch(getPublicProfileSuccess({ profilePage: profilePage as ProfilePage })))
         .catch((error) => dispatch(getPublicProfileFail({ error })));
+      // .catch(() => dispatch(getPublicProfileSuccess({ profilePage: mockData() as ProfilePage })));
     },
   };
 };
