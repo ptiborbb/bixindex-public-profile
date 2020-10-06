@@ -248,5 +248,16 @@
         "HASHTAG": "#ezprofi"
       }
     }
+  },
+  "FOOTER": {
+    "CONTACT": {
+      "TITLE": "Kapcsolat",
+      "PHONE_NUMBER": "+36 20 369 19 52",
+      "EMAIL": "office@bixindex.hu",
+      "ADDRESS": "1095 Budapest, Soroksári út 48. 10.ép. 2.em. 20."
+    },
+    "NAV": {
+      "LINK": "Legjobb Ügyfélélmény 2020"
+    }
   }
 }

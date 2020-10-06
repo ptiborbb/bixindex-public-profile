@@ -25,22 +25,22 @@ export const Footer: FC<FooterProps> = ({ logoPath }) => {
               <div className={classes.link}>{t('HEADER.SUBSCRIPTION')}</div>
               <div className={classes.link}>{t('HEADER.BLOG')}</div>
               <div className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</div>
-              <div className={classes.link}>Legjobb Ügyfélélmény 2020</div>
+              <div className={classes.link}>{t('FOOTER.NAV.LINK')}</div>
             </nav>
           </Grid>
           <Grid item xs={12} md={4} className={classes.contact}>
-            <h4 className={classes.title}>Kapcsolat</h4>
+            <h4 className={classes.title}>{t('FOOTER.CONTACT.TITLE')}</h4>
             <div className={classes.contactTypeContainer}>
               <PhoneIcon />
-              <span className={classes.phoneNumber}>+36 20 369 19 52</span>
+              <span className={classes.phoneNumber}>{t('FOOTER.CONTACT.PHONE_NUMBER')}</span>
             </div>
             <div className={classes.contactTypeContainer}>
               <MailIcon />
-              <span>office@bixindex.hu</span>
+              <span>{t('FOOTER.CONTACT.EMAIL')}</span>
             </div>
             <div className={classes.contactTypeContainer}>
               <LocationOnIcon />
-              <span>1095 Budapest, Soroksári út 48. 10.ép. 2.em. 20.</span>
+              <span>{t('FOOTER.CONTACT.ADDRESS')}</span>
             </div>
           </Grid>
         </Grid>
