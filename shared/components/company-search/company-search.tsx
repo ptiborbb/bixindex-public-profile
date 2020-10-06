@@ -13,7 +13,7 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
   const { t } = useTranslate();
   const router = useRouter();
   const searchValidationSchema = Yup.object({
-    text: Yup.string().required('Ez a mező kötelező'),
+    text: Yup.string().required(''),
   });
   const [error, setError] = useState({ isError: false, message: '' });
 
@@ -27,7 +27,7 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
       }}
       validationSchema={searchValidationSchema}
       onSubmit={(values: ISearchTextFormValues, { setSubmitting, resetForm }: FormikHelpers<ISearchTextFormValues>) => {
-        router.push('/profiles/[searchText]', `/profiles/${values.text}`);
+        router.push('/cegkereso/[searchText]', `/cegkereso/${values.text}`);
         setSubmitting(false);
         resetForm();
       }}
@@ -37,11 +37,12 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
         <div className={classes.searchInputBlock}>
           <FormControl className={classes.searchControl} error={error.isError}>
             <Field id="text" name="text" component={TextField} className={classes.searchInput} />
-            <FormHelperText>{error.message}</FormHelperText>
           </FormControl>
-          <Button type="submit" className={classes.searchButton}>
-            Keresés
-          </Button>
+          <div>
+            <Button type="submit" className={classes.searchButton}>
+              Keresés
+            </Button>
+          </div>
         </div>
         <div className={classes.searchExamples}>
           <b>Gyorskeresés:</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
