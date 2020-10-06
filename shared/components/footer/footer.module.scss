@@ -1,0 +1,41 @@
+@import '../../../styles/variables.scss';
+
+.footer {
+  background-image: $bix-bg-gradient;
+  padding: 75px 0;
+  color: $white;
+  font-size: 1rem;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    img {
+      width: 162px;
+      height: auto;
+    }
+  }
+
+  .link {
+    padding: 10px 0;
+  }
+
+  .contact {
+    .title {
+      font-size: 1rem;
+      font-weight: normal;
+      margin: 0 0 10px;
+    }
+
+    .contactTypeContainer {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      > span {
+        padding-left: 1rem;
+        &.phoneNumber {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
