@@ -1,11 +1,25 @@
 @import '../../../styles/variables.scss';
 
+@mixin container($margin-y: 0) {
+  width: 100%;
+  max-width: 1170px;
+  margin: $margin-y auto;
+  padding: 0 20px;
+}
+
+.container {
+  @include container;
+}
+
 .listWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  @include container(100px);
+
+  h3 {
+    font-size: 1.6em;
+    line-height: 1.4em;
+    margin-bottom: 30px;
+    font-weight: 300;
+  }
 }
 
 .companySearch {
@@ -39,69 +53,16 @@
     }
   }
 }
-
-.baseSize {
-  font-size: 14px;
-}
-
-@mixin container($margin-y: 0) {
-  width: 100%;
-  max-width: 1170px;
-  margin: $margin-y auto;
-  padding: 0 20px;
-}
-
-.container {
-  @include container;
-}
-
-.mt40 {
-  margin-top: 40px !important;
-}
-
-.mt150 {
-  margin-top: 150px !important;
-}
-
-.img {
-  max-width: 100%;
-}
-
-.hashtag {
-  font-weight: 300;
-  font-size: 2.5em;
-  line-height: 1.2;
-  color: $primary;
-  margin-bottom: 0;
-}
-
-.title {
-  font-size: 2.5em;
-  line-height: 1.2;
-  color: $dark;
-  margin-top: 0;
-}
-
-.desc {
-  font-size: 16px;
-  line-height: 1.45em;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-weight: 400;
-  color: $dark;
+.divider {
+  background: rgba(255, 255, 255, 0.4);
+  height: 1px;
 }
 
 .headerBlock {
   background-image: $bix-bg-gradient;
   min-height: 83vh;
-  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
-
-  .divider {
-    background: rgba(255, 255, 255, 0.4);
-    height: 1px;
-  }
 
   &Inner {
     @include container;
@@ -110,21 +71,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  &Logos {
-    margin-top: 50px;
-
-    a {
-      display: inline-block;
-      margin-right: 20px;
-    }
-
-    img {
-      max-height: 20px;
-      opacity: 0.7;
-      margin-top: 20px;
-    }
   }
 
   .mainTitle {
@@ -142,81 +88,4 @@
     margin-bottom: 25px;
     line-height: 1.35;
   }
-
-  .mainDesc {
-    color: hsla(0, 0%, 100%, 0.8);
-    font-weight: 300;
-    font-size: 1.3em;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    line-height: 1.2;
-  }
-
-  .learnMoreBtn {
-    color: white;
-    margin-left: 70px;
-  }
-}
-
-.learnMore {
-  @include container(70px);
-  text-align: center;
-}
-
-.testimonials {
-  @include container(100px);
-  text-align: center;
-}
-
-.highlightedBlock {
-  background-image: $bix-bg-gradient;
-  min-height: 270px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  margin: 100px 0;
-
-  &Inner {
-    @include container;
-  }
-
-  .highlightedTitle {
-    color: $white;
-    font-weight: 600;
-    font-size: 3em;
-    margin: 0;
-    line-height: 1.2;
-    text-align: center;
-  }
-
-  .highlightedCta {
-    position: absolute;
-    bottom: -28px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.heros {
-  @include container;
-
-  .heroSubtitle {
-    text-transform: uppercase;
-    color: $primary;
-    font-size: 1.2em;
-    font-weight: 600;
-    line-height: 30px;
-    height: 30px;
-    padding-left: 50px;
-    margin-bottom: 40px;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-}
-
-.features {
-  @include container;
-  text-align: center;
 }
