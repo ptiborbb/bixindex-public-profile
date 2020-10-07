@@ -1,16 +1,16 @@
-import React, { FC, useEffect } from 'react';
-import { useApp } from '../../app.context';
-import { useRouter } from 'next/router';
-import classes from './profile-list.module.scss';
-import { ProfileListItem } from '../../components/profile-list-item/profile-list-item';
-import { Header } from '../../components/header/header';
-import logo from '../../../public/bix_logo.svg';
-import { Button, FormControl, Grid, Typography } from '@material-ui/core';
-import { useTranslate } from '../../translate.context';
+import { Button, Grid, Typography } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
-import SearchIcon from '@material-ui/icons/Search';
+import { useRouter } from 'next/router';
+import React, { FC, useEffect } from 'react';
 import * as Yup from 'yup';
+import logo from '../../../public/bix_logo.svg';
+import { useApp } from '../../app.context';
+import { Header } from '../../components/header/header';
+import { ProfileListItem } from '../../components/profile-list-item/profile-list-item';
+import { useTranslate } from '../../translate.context';
+import classes from './profile-list.module.scss';
 
 interface ISearchTextFormValues {
   text: string;

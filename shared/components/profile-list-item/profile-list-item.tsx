@@ -38,7 +38,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
                           <GradeIcon
                             key={i}
                             className={`${classes.ratingStar}${
-                              Math.round(profile.ratings.score / 2) > i ? ' ' + classes.ratingStarActive : ''
+                              Math.round(profile.ratings.score / 2) > i ? ` ${classes.ratingStarActive}` : ''
                             }`}
                           />
                         );
