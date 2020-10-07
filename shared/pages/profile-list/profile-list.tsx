@@ -2,11 +2,13 @@ import { Button, Grid, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
+import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { ProfileListItem } from '../../components/profile-list-item/profile-list-item';
 import { useTranslate } from '../../translate.context';
@@ -25,7 +27,8 @@ export const ProfileList: FC = () => {
     },
   } = useApp();
   const router = useRouter();
-  const searchText = router.query.searchText as string;
+  const searchText = (router.query.searchText as string) || '';
+
   useEffect(() => {
     if (searchText) {
       publicProfileService.searchProfilesByName(page, rowsPerPage, searchText);
@@ -40,6 +43,9 @@ export const ProfileList: FC = () => {
 
   return (
     <>
+      <Head>
+        <title>{t('COMMON.PAGE_TITLE')}</title>
+      </Head>
       <div className={classes.headerBlock}>
         <div className={classes.container}>
           <Header logoPath={logo} />
@@ -87,16 +93,25 @@ export const ProfileList: FC = () => {
                 />
               </div>
               <div className={classes.searchExamples}>
-                <b>Gyorskeresés:</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
+                <b>{t('COMPANY_SEARCH.QUICK_SEARCH')}</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
               </div>
             </Form>
           </Formik>
         </div>
+
+        <div className={classes.divider}></div>
       </div>
 
-      <div className={classes.listWrapper}>
-        {profiles && profiles.map((profile, i) => <ProfileListItem key={i} profile={profile} />)}
-      </div>
+      {profiles && (
+        <div className={classes.listWrapper}>
+          <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>
+          {profiles.map((profile, i) => (
+            <ProfileListItem key={i} profile={profile} />
+          ))}
+        </div>
+      )}
+
+      <Footer logoPath={logo}></Footer>
     </>
   );
 };

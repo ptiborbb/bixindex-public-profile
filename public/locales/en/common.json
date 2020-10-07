@@ -404,5 +404,15 @@
     "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
     "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
     "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
+  },
+  "COMPANY_SEARCH": {
+    "RESULTS_NUMBER": "Találatok száma: {{count}}",
+    "QUICK_SEARCH": "Gyorskeresés:",
+    "MAIN_PROFILE": "Főprofil:",
+    "BIX_INDEX": "Bizalmi Index",
+    "BIX_COUNT": "Összesen {{count}} db értékelés",
+    "PRODUCTS": "Termékek",
+    "WRITE_REVIEW": "Értékelés írása",
+    "BIX_PROFILE": "BIX Profil"
   }
 }
