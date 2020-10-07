@@ -55,7 +55,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
             <div className={classes.index}>
               <span className={classes.mainScore}>{Math.round(profile.ratings.score * 100) / 100}</span>/10
             </div>
-            <div className={classes.count}>{t('COMPANY_SEARCH.BIX_INDEX', { count: profile.ratings.count })}</div>
+            <div className={classes.count}>{t('COMPANY_SEARCH.BIX_COUNT', { count: profile.ratings.count })}</div>
           </div>
         </div>
         <div className={classes.columns}>
