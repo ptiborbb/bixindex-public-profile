@@ -164,15 +164,16 @@ export const Rating: FC = () => {
                         resetForm();
                       }}
                       validationSchema={Yup.object({
+                        satisfaction: Yup.string().required(),
                         answers: Yup.array().of(
                           Yup.object({
-                            id: Yup.string().required(),
-                            value: Yup.string().required(),
+                            id: Yup.string().required(t('COMMON.REQUIRED')),
+                            value: Yup.string().required(t('COMMON.REQUIRED')),
                           }),
                         ),
-                        positive: Yup.string().required(),
-                        negative: Yup.string().required(),
-                        summary: Yup.string().required(),
+                        positive: Yup.string().required(t('COMMON.REQUIRED')),
+                        negative: Yup.string().required(t('COMMON.REQUIRED')),
+                        summary: Yup.string().required(t('COMMON.REQUIRED')),
                       })}
                       enableReinitialize
                     >
@@ -189,6 +190,9 @@ export const Rating: FC = () => {
                                 />
                               ))}
                             </Field>
+                            <FormHelperText className={classes.errorMsg}>
+                              {errors?.satisfaction && !!submitCount ? t('COMMON.REQUIRED') : ''}
+                            </FormHelperText>
                           </Grid>
 
                           <Grid item xs={12}>
