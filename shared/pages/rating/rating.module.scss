@@ -32,3 +32,33 @@
 .frameFix {
   overflow: hidden;
 }
+
+.errorMsg {
+  color: #ff3739 !important;
+}
+
+.positive {
+  color: #00d014;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  margin-top: 20px !important;
+}
+
+.negative {
+  color: #ff3739;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  margin-top: 20px !important;
+}
+.summary {
+  color: #656565;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  margin-top: 20px !important;
+}
+.spacingRight {
+  margin-right: 10px;
+}

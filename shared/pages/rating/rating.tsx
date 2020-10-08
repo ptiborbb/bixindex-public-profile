@@ -1,4 +1,5 @@
-import { Button, FormControlLabel, Grid, Radio, Slider, Typography } from '@material-ui/core';
+import { Button, FormControlLabel, FormHelperText, Grid, Radio, Slider, Typography } from '@material-ui/core';
+import { ThumbUp } from '@material-ui/icons';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -19,6 +20,7 @@ import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
 import { useTranslate } from '../../translate.context';
 import classes from './rating.module.scss';
+import * as Yup from 'yup';
 
 export const Rating: FC = () => {
   const { t } = useTranslate();
@@ -143,7 +145,9 @@ export const Rating: FC = () => {
                         satisfaction: '',
                         nps: 4,
                         answers: companyForm.questions,
-                        comment: '',
+                        positive: '',
+                        negative: '',
+                        summary: '',
                       }}
                       onSubmit={(values, { setSubmitting, resetForm }) => {
                         const parsedValues = {
@@ -159,8 +163,20 @@ export const Rating: FC = () => {
                         setSubmitting(false);
                         resetForm();
                       }}
+                      validationSchema={Yup.object({
+                        answers: Yup.array().of(
+                          Yup.object({
+                            id: Yup.string().required(),
+                            value: Yup.string().required(),
+                          }),
+                        ),
+                        positive: Yup.string().required(),
+                        negative: Yup.string().required(),
+                        summary: Yup.string().required(),
+                      })}
+                      enableReinitialize
                     >
-                      {({ setFieldValue }) => (
+                      {({ setFieldValue, errors, submitCount }) => (
                         <Form style={{ width: '100%' }}>
                           <Grid item xs={12}>
                             <Field component={RadioGroup} name="satisfaction">
@@ -222,6 +238,9 @@ export const Rating: FC = () => {
                                         ))}
                                       </div>
                                     </Field>
+                                    <FormHelperText className={classes.errorMsg}>
+                                      {errors?.answers && !!submitCount ? t('COMMON.REQUIRED') : ''}
+                                    </FormHelperText>
                                   </Grid>
                                 ))}
                               </>
@@ -232,13 +251,48 @@ export const Rating: FC = () => {
                             <hr className={classes.verticalSpacing} />
                           </Grid>
                           <Grid item xs={12}>
+                            <Typography className={classes.positive}>
+                              <ThumbUp className={classes.spacingRight} />
+                              Kérjük, néhány karakterben mondja el pozitív tapasztalatait:
+                            </Typography>
                             <Field
                               component={TextField}
-                              label="Kérük röviden foglalja össze tapasztalait"
-                              name="comment"
+                              label=""
+                              name="positive"
                               fullWidth
                               multiline
-                              rows={10}
+                              rows={5}
+                              variant="outlined"
+                            />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Typography className={classes.negative}>
+                              <ThumbUp className={classes.spacingRight} />
+                              Kérjük, néhány karakterben mondja el negatív tapasztalatait:
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Field
+                              component={TextField}
+                              label=""
+                              name="negative"
+                              fullWidth
+                              multiline
+                              rows={5}
+                              variant="outlined"
+                            />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Typography className={classes.summary}>
+                              Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről
+                            </Typography>
+                            <Field
+                              component={TextField}
+                              label=""
+                              name="summary"
+                              fullWidth
+                              multiline
+                              rows={2}
                               variant="outlined"
                             />
                           </Grid>
