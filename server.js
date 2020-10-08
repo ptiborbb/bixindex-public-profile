@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 const express = require('express');
 const next = require('next');
+const { createServer } = require('https');
+const fs = require('fs');
 
 const devProxy = {
   '/api': {
@@ -21,6 +23,11 @@ const app = next({
 
 const handle = app.getRequestHandler();
 
+const httpsOptions = {
+  key: fs.readFileSync('./certificates/localhost.key'),
+  cert: fs.readFileSync('./certificates/localhost.crt'),
+};
+
 let server;
 app
   .prepare()
@@ -38,12 +45,18 @@ app
     // Default catch-all handler to allow Next.js to handle all other routes
     server.all('*', (req, res) => handle(req, res));
 
-    server.listen(port, host, (err) => {
+    createServer(httpsOptions, server).listen(port, host, (err) => {
       if (err) {
         throw err;
       }
       console.log(`> Ready on port ${port} [${env}]`);
     });
+    // server.listen(port, host, (err) => {
+    //   if (err) {
+    //     throw err;
+    //   }
+    //   console.log(`> Ready on port ${port} [${env}]`);
+    // });
   })
   .catch((err) => {
     console.log('An error occurred, unable to start the server');

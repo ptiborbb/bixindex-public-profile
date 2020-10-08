@@ -11,6 +11,7 @@ import {
   resetPasswordSuccess,
   registerSuccess,
 } from '../store/actions';
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IAuthService {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;

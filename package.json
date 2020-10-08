@@ -28,6 +28,8 @@
     "react-combine-reducers": "1.0.4",
     "react-context-devtool": "2.0.0",
     "react-dom": "16.13.1",
+    "react-facebook-login": "4.1.1",
+    "react-google-login": "5.1.21",
     "react-toastify": "6.0.8",
     "sass": "1.26.10",
     "yup": "0.29.3"
