@@ -97,20 +97,18 @@ export const ProfileList: FC = () => {
                 {Array(4)
                   .fill(null)
                   .map((_, i) => (
-                    <>
-                      <span
-                        key={i}
-                        onClick={async () => {
-                          await router.push(
-                            '/cegkereso/[searchText]',
-                            `/cegkereso/${t(`COMPANY_SEARCH.QUICK_SEARCH.S_${i + 1}`)}`,
-                          );
-                        }}
-                      >
-                        {t(`COMPANY_SEARCH.QUICK_SEARCH.S_${i + 1}`)}
-                      </span>
+                    <span
+                      key={i}
+                      onClick={async () => {
+                        await router.push(
+                          '/cegkereso/[searchText]',
+                          `/cegkereso/${t(`COMPANY_SEARCH.QUICK_SEARCH.S_${i + 1}`)}`,
+                        );
+                      }}
+                    >
+                      {t(`COMPANY_SEARCH.QUICK_SEARCH.S_${i + 1}`)}
                       {i < 3 && `, `}
-                    </>
+                    </span>
                   ))}
               </div>
             </Form>
