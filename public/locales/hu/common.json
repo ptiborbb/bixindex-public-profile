@@ -411,7 +411,13 @@
   },
   "COMPANY_SEARCH": {
     "RESULTS_NUMBER": "Találatok száma: {{count}}",
-    "QUICK_SEARCH": "Gyorskeresés:",
+    "QUICK_SEARCH": {
+      "LABEL": "Gyorskeresés:",
+      "S_1": "Könyvelők",
+      "S_2": "Marketingesek",
+      "S_3": "HR szolgáltatók",
+      "S_4": "Építőipar"
+    },
     "MAIN_PROFILE": "Főprofil:",
     "BIX_INDEX": "Bizalmi Index",
     "BIX_COUNT": "Összesen {{count}} db értékelés",

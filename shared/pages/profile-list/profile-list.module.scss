@@ -22,6 +22,14 @@
   }
 }
 
+.searchExamples span {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
 .companySearch {
   color: white;
 

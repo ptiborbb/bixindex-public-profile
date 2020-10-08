@@ -93,7 +93,25 @@ export const ProfileList: FC = () => {
                 />
               </div>
               <div className={classes.searchExamples}>
-                <b>{t('COMPANY_SEARCH.QUICK_SEARCH')}</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
+                <b>{t('COMPANY_SEARCH.QUICK_SEARCH.LABEL')}</b>{' '}
+                {Array(4)
+                  .fill(null)
+                  .map((_, i) => (
+                    <>
+                      <span
+                        key={i}
+                        onClick={async () => {
+                          await router.push(
+                            '/cegkereso/[searchText]',
+                            `/cegkereso/${t(`COMPANY_SEARCH.QUICK_SEARCH.S_${i + 1}`)}`,
+                          );
+                        }}
+                      >
+                        {t(`COMPANY_SEARCH.QUICK_SEARCH.S_${i + 1}`)}
+                      </span>
+                      {i < 3 && `, `}
+                    </>
+                  ))}
               </div>
             </Form>
           </Formik>
