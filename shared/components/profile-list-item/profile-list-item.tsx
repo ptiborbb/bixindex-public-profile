@@ -2,7 +2,6 @@ import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/prof
 import { Button } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import GradeIcon from '@material-ui/icons/Grade';
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 import quoteMarkBg from '../../../public/images/quote-mark-bg.png';
 import { useTranslate } from '../../translate.context';
@@ -14,12 +13,11 @@ interface ProfileListItemProps {
 
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
   const { t } = useTranslate();
-  const router = useRouter();
   return (
-    <div
-      onClick={async () => {
-        await router.push('/bix-profil/[companyAlias]', `/bix-profil/${profile.company.companyAlias}`);
-      }}
+    <a
+      href={`/bix-profil/${profile.company.companyAlias}`}
+      target="_blank"
+      rel="noreferrer"
       className={classes.profileListItem}
     >
       <div className={classes.leftCorner}>
@@ -102,6 +100,6 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
