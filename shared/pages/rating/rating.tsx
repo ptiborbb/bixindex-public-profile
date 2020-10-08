@@ -14,6 +14,7 @@ import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
+import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
 import { useTranslate } from '../../translate.context';
@@ -184,7 +185,7 @@ export const Rating: FC = () => {
                             </Typography>
                           </Grid>
                           <Grid item xs={12}>
-                            <Slider
+                            <CustomSlider
                               defaultValue={4}
                               name="nps"
                               valueLabelDisplay="auto"
@@ -192,7 +193,9 @@ export const Rating: FC = () => {
                               marks
                               min={0}
                               max={10}
+                              track={false}
                               onChange={(event, value) => setFieldValue('nps', value)}
+                              className={classes.npsSlider}
                             />
                           </Grid>
                           <Grid item xs={12}>
