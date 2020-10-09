@@ -121,13 +121,11 @@ export const Auth: FunctionComponent = () => {
   const inputFieldStyle = useInputFieldStyle();
   const inputLabelStyle = useInputLabelStyle();
 
-  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface ILoginFormValues {
     email: string;
     password: string;
   }
 
-  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRegisterFormValues {
     name: string;
     email: string;

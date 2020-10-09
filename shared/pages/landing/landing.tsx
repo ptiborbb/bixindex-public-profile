@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
 import Head from 'next/head';
 import { FunctionComponent } from 'react';
 import logo from '../../../public/bix_logo.svg';
@@ -189,12 +190,23 @@ export const Landing: FunctionComponent = () => {
               <h4 className={classes.desc}>
                 <b>{t('LANDING.HEROS.HERO_1.Q')}</b>
               </h4>
-              <ul>
-                <li>{t('LANDING.HEROS.HERO_1.A.A_1')}</li>
-                <li>{t('LANDING.HEROS.HERO_1.A.A_2')}</li>
-                <li>{t('LANDING.HEROS.HERO_1.A.A_3')}</li>
-                <li>{t('LANDING.HEROS.HERO_1.A.A_4')}</li>
-              </ul>
+              <div className={classes.checks}>
+                <div>
+                  <Icon>check</Icon> {t('LANDING.HEROS.HERO_1.A.A_1')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_1.A.A_2')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_1.A.A_3')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_1.A.A_4')}
+                </div>
+              </div>
               <div className={classes.mt40}>
                 <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_1')}</Button>
                 <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_2')}</Button>
@@ -217,12 +229,24 @@ export const Landing: FunctionComponent = () => {
               <h4 className={classes.desc}>
                 <b>{t('LANDING.HEROS.HERO_2.Q')}</b>
               </h4>
-              <ul>
-                <li>{t('LANDING.HEROS.HERO_2.A.A_1')}</li>
-                <li>{t('LANDING.HEROS.HERO_2.A.A_2')}</li>
-                <li>{t('LANDING.HEROS.HERO_2.A.A_3')}</li>
-                <li>{t('LANDING.HEROS.HERO_2.A.A_4')}</li>
-              </ul>
+              <div className={classes.checks}>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_2.A.A_1')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_2.A.A_2')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_2.A.A_3')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_2.A.A_4')}
+                </div>
+              </div>
               <div className={classes.mt40}>
                 <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_1')}</Button>
                 <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_2')}</Button>
@@ -239,12 +263,24 @@ export const Landing: FunctionComponent = () => {
               <h4 className={classes.desc}>
                 <b>{t('LANDING.HEROS.HERO_3.Q')}</b>
               </h4>
-              <ul>
-                <li>{t('LANDING.HEROS.HERO_3.A.A_1')}</li>
-                <li>{t('LANDING.HEROS.HERO_3.A.A_2')}</li>
-                <li>{t('LANDING.HEROS.HERO_3.A.A_3')}</li>
-                <li>{t('LANDING.HEROS.HERO_3.A.A_4')}</li>
-              </ul>
+              <div className={classes.checks}>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_3.A.A_1')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_3.A.A_2')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_3.A.A_3')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_3.A.A_4')}
+                </div>
+              </div>
               <div className={classes.mt40}>
                 <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_1')}</Button>
                 <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_2')}</Button>
@@ -267,12 +303,24 @@ export const Landing: FunctionComponent = () => {
               <h4 className={classes.desc}>
                 <b>{t('LANDING.HEROS.HERO_4.Q')}</b>
               </h4>
-              <ul>
-                <li>{t('LANDING.HEROS.HERO_4.A.A_1')}</li>
-                <li>{t('LANDING.HEROS.HERO_4.A.A_2')}</li>
-                <li>{t('LANDING.HEROS.HERO_4.A.A_3')}</li>
-                <li>{t('LANDING.HEROS.HERO_4.A.A_4')}</li>
-              </ul>
+              <div className={classes.checks}>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_4.A.A_1')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_4.A.A_2')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_4.A.A_3')}
+                </div>
+                <div>
+                  <Icon>check</Icon>
+                  {t('LANDING.HEROS.HERO_4.A.A_4')}
+                </div>
+              </div>
               <div className={classes.mt40}>
                 <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_1')}</Button>
                 <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_2')}</Button>

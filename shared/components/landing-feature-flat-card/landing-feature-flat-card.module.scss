@@ -29,6 +29,8 @@
 }
 
 .cta {
+  display: flex;
+  align-items: center;
   color: $dark-red;
 
   &:hover {

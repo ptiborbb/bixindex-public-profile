@@ -23,8 +23,8 @@ export const createAuthRouteComponent = (Child: FunctionComponent): NextPage => 
       }
 
       ctx.res.writeHead(301, {
-        Location: `/auth?${companyAlias ? 'companyAlias=' + companyAlias : ''}${
-          companyFormID ? '&companyFormID=' + companyFormID : ''
+        Location: `/auth?${companyAlias ? `companyAlias=${companyAlias}` : ''}${
+          companyFormID ? `&companyFormID=${companyFormID}` : ''
         }`,
       });
       ctx.res.end();

@@ -2,12 +2,8 @@
   "extends": ["plugin:react/recommended", "@codingsans/eslint-config/typescript-recommended"],
   "ignorePatterns": ["*.js"],
   "rules": {
-    "@typescript-eslint/interface-name-prefix": [
-      "error",
-      {
-        "prefixWithI": "never"
-      }
-    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-floating-promises": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off"
   },

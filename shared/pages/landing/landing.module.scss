@@ -49,6 +49,11 @@
   margin-bottom: 15px;
   font-weight: 400;
   color: $dark;
+
+  b {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
 }
 
 .headerBlock {
@@ -171,4 +176,22 @@
 .features {
   @include container;
   text-align: center;
+}
+
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+
+  div {
+    display: flex;
+    align-items: center;
+    width: calc(50% - 20px);
+    min-width: 200px;
+    margin: 20px 20px 0 0;
+
+    span {
+      margin-right: 10px;
+      color: $secondary;
+    }
+  }
 }
