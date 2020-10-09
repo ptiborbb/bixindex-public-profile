@@ -1,4 +1,15 @@
-import { Avatar, Button, FormControlLabel, FormHelperText, Grid, Radio, Slider, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Button,
+  FormControlLabel,
+  FormHelperText,
+  Grid,
+  ListItem,
+  MenuItem,
+  Radio,
+  Slider,
+  Typography,
+} from '@material-ui/core';
 import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
@@ -345,7 +356,80 @@ export const Rating: FC = () => {
                               </div>
                             </>
                           ) : (
-                            <>asd</>
+                            <>
+                              <Grid item xs={12}>
+                                <Grid container spacing={1}>
+                                  <Grid item xs={12}>
+                                    <Typography variant="h5" className={classes.summary}>
+                                      Azonosítás
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={12}>
+                                    <div>fb google linkedin...</div>
+                                  </Grid>
+                                  <Grid item xs={12}>
+                                    <div>cégként magánszemélyként</div>
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>Vezetéknév</Typography>
+                                    <Field
+                                      component={TextField}
+                                      label=""
+                                      name="lastname"
+                                      fullWidth
+                                      variant="outlined"
+                                    />
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>Keresztnév</Typography>
+                                    <Field
+                                      component={TextField}
+                                      label=""
+                                      name="firstname"
+                                      fullWidth
+                                      variant="outlined"
+                                    />
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>E-mail</Typography>
+                                    <Field component={TextField} label="" name="email" fullWidth variant="outlined" />
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>Telefonszám</Typography>
+                                    <Field component={TextField} label="" name="phone" fullWidth variant="outlined" />
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>Cégnév</Typography>
+                                    <Field component={TextField} label="" name="company" fullWidth variant="outlined" />
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>Beosztás</Typography>
+                                    <Field
+                                      component={TextField}
+                                      label=""
+                                      name="position"
+                                      fullWidth
+                                      variant="outlined"
+                                    />
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography className={classes.summary}>Nyilvánosság</Typography>
+                                    <Field
+                                      component={TextField}
+                                      label=""
+                                      name="public"
+                                      select
+                                      fullWidth
+                                      variant="outlined"
+                                    >
+                                      <MenuItem value="PUBLIC">Nyilvános</MenuItem>
+                                      <MenuItem value="COMPANY">Csak a cég számára</MenuItem>
+                                      <MenuItem value="ANONYMUS">Anoním</MenuItem>
+                                    </Field>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            </>
                           )}
                           <Grid item xs={12}>
                             <div className={classes.verticalSpacing} />
