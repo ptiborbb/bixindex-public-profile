@@ -76,13 +76,24 @@
     "PASSWORD_MATCH": "A jelszavaknak meg kell egyeznie",
     "LOGIN": "Belépés",
     "REGISTER": "Regisztráció",
-    "FORGOT_PASSWORD": "Elfelejtett jelszó",
+    "FORGOT_PASSWORD": "Elfelejtett jelszó?",
     "REQUIRED": "A mező kitöltése kötelező",
     "INVALID_EMAIL": "Hibás email cím",
     "FORGOT_PASSWORD_SUBMIT": "Jelszó helyreállítása",
     "BACK_TO_LOGIN": "Vissza a bejelentkezéshez",
     "RESET": "Jelszó helyreállítása",
-    "FAILED": "Hibás email cím és/vagy jelszó."
+    "FAILED": "Hibás email cím és/vagy jelszó.",
+    "PAGE_TITLE": "Azonosítás",
+    "CREATE": "Hozz létre egyet!",
+    "SOCIAL_LOGIN": "Lépj be egyszerűen",
+    "FB_BTN_TEXT": "Facebookkal",
+    "GOOGLE_BTN_TEXT": "Google fiókkal",
+    "IDENTIFICATION_WITH_EMAIL": "Azonosítás e-mail címmel",
+    "LOGIN_WITH_EMAIL": "Belépés e-mail címmel",
+    "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
+    "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
+    "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
+    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
   },
   "ROUTES": {
     "USERS": "Felhasználók",
@@ -400,15 +411,6 @@
     "NAV": {
       "LINK": "Legjobb Ügyfélélmény 2020"
     }
-  },
-  "LOGIN_REGISTER": {
-    "TITLE": "Azonosítás",
-    "IDENTIFICATION_WITH_EMAIL": "Azonosítás e-mail címmel",
-    "LOGIN_WITH_EMAIL": "Belépés e-mail címmel",
-    "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
-    "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
-    "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
-    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
   },
   "COMPANY_SEARCH": {
     "RESULTS_NUMBER": "Találatok száma: {{count}}",

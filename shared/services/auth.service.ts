@@ -11,8 +11,10 @@ import {
   resetPasswordSuccess,
   registerSuccess,
 } from '../store/actions';
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IAuthService {
   login: (email: string, password: string) => Promise<void>;
+  facebook: (accessToken: string) => Promise<void>;
   logout: () => Promise<void>;
   register: (name: string, email: string, pasword: string) => Promise<void>;
   getMe: () => void;
@@ -26,6 +28,14 @@ export const authServiceFactory = (bixClient: IBixindexClient, dispatch: Dispatc
     login: (email: string, password: string) => {
       return bixClient.auth
         .login(email, password)
+        .then(() => bixClient.auth.me())
+        .then((user) => {
+          dispatch(loginSuccess({ user }));
+        });
+    },
+    facebook: (accessToken: string) => {
+      return bixClient.auth
+        .facebook(accessToken)
         .then(() => bixClient.auth.me())
         .then((user) => {
           dispatch(loginSuccess({ user }));

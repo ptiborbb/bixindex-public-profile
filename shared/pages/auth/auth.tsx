@@ -13,6 +13,9 @@ import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleLogin } from 'react-google-login';
+import Link from 'next/link';
 
 const useInputFieldStyle = makeStyles({
   root: {
@@ -44,12 +47,15 @@ export const Auth: FunctionComponent = () => {
   const companyFormID = router.query.companyFormID as string;
   const companyAlias = router.query.companyAlias as string;
 
+  const fbAppId = 294368951892091;
+  const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
+
   const login = useCallback(
     (email: string, password: string) => {
       return authService
         .login(email, password)
         .then(() =>
-          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(''),
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push('/'),
         )
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
@@ -61,12 +67,43 @@ export const Auth: FunctionComponent = () => {
     (name: string, email: string, password: string) => {
       return authService
         .register(name, email, password)
-        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('')))
+        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/')))
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
     [authService, companyFormID, companyAlias],
   );
+
+  const [showRegisterForm, setRegisterForm] = useState(false);
+  const [showLoginForm, setLoginForm] = useState(false);
+
+  const registerResponseFacebook = useCallback(
+    (response: { accessToken: string } & Record<string, unknown>) => {
+      return authService
+        .facebook(response.accessToken)
+        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/')))
+        .then(() => setError({ isError: false, message: '' }))
+        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+    },
+    [authService],
+  );
+
+  const loginResponseFacebook = useCallback(
+    (response: { accessToken: string } & Record<string, unknown>) => {
+      return authService
+        .facebook(response.accessToken)
+        .then(() =>
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push('/'),
+        )
+        .then(() => setError({ isError: false, message: '' }))
+        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+    },
+    [authService],
+  );
+
+  const responseGoogle = (response): void => {
+    console.log('google', response);
+  };
 
   const [error, setError] = useState({ isError: false, message: '' });
 
@@ -104,108 +141,189 @@ export const Auth: FunctionComponent = () => {
         <div className={classes.divider}></div>
       </div>
       <div className={`container ${classes.pageContent}`}>
-        <h1 className={classes.pageTitle}>{t('LOGIN_REGISTER.TITLE')}</h1>
+        <h1 className={classes.pageTitle}>{t('AUTH.PAGE_TITLE')}</h1>
         <Grid container justify="center" spacing={3}>
           <Grid item xs md={5}>
             <Paper className={classes.paper}>
               <h2 className={classes.title}>
-                <span>{t('LOGIN_REGISTER.NO_BIX_ACCOUNT_COLOR_PART')}</span> {t('LOGIN_REGISTER.NO_BIX_ACCOUNT_PART_2')}
+                <span>{t('AUTH.NO_BIX_ACCOUNT_COLOR_PART')}</span> {t('AUTH.NO_BIX_ACCOUNT_PART_2')}
               </h2>
-              <div className={classes.description}>
-                <span>{t('LOGIN_REGISTER.IDENTIFICATION_WITH_EMAIL')}</span>
+              <div className={classes.blockTitle}>
+                <span>{t('AUTH.CREATE')}</span>
               </div>
-              <Formik
-                initialValues={{
-                  name: '',
-                  email: '',
-                  password: '',
-                }}
-                validationSchema={registerValidationSchema}
-                onSubmit={(
-                  values: IRegisterFormValues,
-                  { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
-                ) => {
-                  return register(values.name, values.email, values.password).then(() => {
-                    setSubmitting(false);
-                    resetForm();
-                  });
-                }}
+
+              <FacebookLogin
+                appId={fbAppId}
+                autoLoad={false}
+                fields="name,email,picture"
+                callback={registerResponseFacebook}
+                render={(renderProps) => (
+                  <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
+                    <span className={classes.iconPlaceholder}>
+                      <img src="/social/facebook-white.svg" />
+                    </span>
+                    {t('AUTH.FB_BTN_TEXT')}
+                  </button>
+                )}
+              />
+
+              <GoogleLogin
+                clientId={googleClientId}
+                render={(renderProps) => (
+                  <button
+                    className={`${classes.socialButton} ${classes.google}`}
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    <span className={classes.iconPlaceholder}>
+                      <img src="/social/google-white.svg" />
+                    </span>
+                    Google fiókkal
+                  </button>
+                )}
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              />
+
+              <div
+                className={`${classes.blockTitle} ${showRegisterForm ? '' : classes.collapsed} ${classes.clickable}`}
+                onClick={() => setRegisterForm(!showRegisterForm)}
               >
-                <Form className={classes.form} noValidate>
-                  <FormControl error={error.isError} fullWidth>
-                    <Field
-                      id="name"
-                      name="name"
-                      label={t('AUTH.NAME')}
-                      component={TextField}
-                      fullWidth
-                      className={classes.formInput}
-                      InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                      InputProps={{
-                        classes: inputFieldStyle,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <PersonIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <Field
-                      id="email"
-                      name="email"
-                      label={t('AUTH.EMAIL')}
-                      component={TextField}
-                      fullWidth
-                      className={classes.formInput}
-                      InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                      InputProps={{
-                        classes: inputFieldStyle,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MailIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <Field
-                      id="password"
-                      type="password"
-                      name="password"
-                      label={t('AUTH.PASSWORD')}
-                      component={TextField}
-                      fullWidth
-                      className={classes.formInput}
-                      InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                      InputProps={{
-                        classes: inputFieldStyle,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <LockIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <FormHelperText>{error.message}</FormHelperText>
-                  </FormControl>
-                  <div className={classes.button}>
-                    <Button type="submit" variant="contained" color="secondary" fullWidth>
-                      {t('AUTH.REGISTER')}
-                    </Button>
-                  </div>
-                </Form>
-              </Formik>
+                <span>{t('AUTH.IDENTIFICATION_WITH_EMAIL')}</span>
+              </div>
+              {showRegisterForm && (
+                <Formik
+                  initialValues={{
+                    name: '',
+                    email: '',
+                    password: '',
+                  }}
+                  validationSchema={registerValidationSchema}
+                  onSubmit={(
+                    values: IRegisterFormValues,
+                    { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
+                  ) => {
+                    return register(values.name, values.email, values.password).then(() => {
+                      setSubmitting(false);
+                      resetForm();
+                    });
+                  }}
+                >
+                  <Form className={classes.form} noValidate>
+                    <FormControl error={error.isError} fullWidth>
+                      <Field
+                        id="name"
+                        name="name"
+                        label={t('AUTH.NAME')}
+                        component={TextField}
+                        fullWidth
+                        className={classes.formInput}
+                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                        InputProps={{
+                          classes: inputFieldStyle,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <PersonIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <Field
+                        id="email"
+                        name="email"
+                        label={t('AUTH.EMAIL')}
+                        component={TextField}
+                        fullWidth
+                        className={classes.formInput}
+                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                        InputProps={{
+                          classes: inputFieldStyle,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <MailIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <Field
+                        id="password"
+                        type="password"
+                        name="password"
+                        label={t('AUTH.PASSWORD')}
+                        component={TextField}
+                        fullWidth
+                        className={classes.formInput}
+                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                        InputProps={{
+                          classes: inputFieldStyle,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <LockIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <FormHelperText>{error.message}</FormHelperText>
+                    </FormControl>
+                    <div className={classes.button}>
+                      <Button type="submit" variant="contained" color="secondary" fullWidth>
+                        {t('AUTH.REGISTER')}
+                      </Button>
+                    </div>
+                  </Form>
+                </Formik>
+              )}
             </Paper>
           </Grid>
           <Grid item xs={12} md={5}>
             <Paper className={classes.paper}>
-              <Grid container justify="center" spacing={3}>
-                <h2 className={classes.title}>
-                  <span>{t('LOGIN_REGISTER.HAS_BIX_ACCOUNT_COLOR_PART')}</span>{' '}
-                  {t('LOGIN_REGISTER.HAS_BIX_ACCOUNT_PART_2')}
-                </h2>
-                <div className={classes.description}>
-                  <span>{t('LOGIN_REGISTER.LOGIN_WITH_EMAIL')}</span>
-                </div>
+              <h2 className={classes.title}>
+                <span>{t('AUTH.HAS_BIX_ACCOUNT_COLOR_PART')}</span> {t('AUTH.HAS_BIX_ACCOUNT_PART_2')}
+              </h2>
+              <div className={classes.blockTitle}>
+                <span>{t('AUTH.SOCIAL_LOGIN')}</span>
+              </div>
+              <FacebookLogin
+                appId={fbAppId}
+                autoLoad={false}
+                fields="name,email,picture"
+                callback={loginResponseFacebook}
+                render={(renderProps) => (
+                  <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
+                    <span className={classes.iconPlaceholder}>
+                      <img src="/social/facebook-white.svg" />
+                    </span>
+                    {t('AUTH.FB_BTN_TEXT')}
+                  </button>
+                )}
+              />
+
+              <GoogleLogin
+                clientId={googleClientId}
+                render={(renderProps) => (
+                  <button
+                    className={`${classes.socialButton} ${classes.google}`}
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    <span className={classes.iconPlaceholder}>
+                      <img src="/social/google-white.svg" />
+                    </span>
+                    {t('AUTH.GOOGLE_BTN_TEXT')}
+                  </button>
+                )}
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              />
+              <div
+                className={`${classes.blockTitle} ${showLoginForm ? '' : classes.collapsed} ${classes.clickable}`}
+                onClick={() => setLoginForm(!showLoginForm)}
+              >
+                <span>{t('AUTH.LOGIN_WITH_EMAIL')}</span>
+              </div>
+              {showLoginForm && (
                 <Formik
                   initialValues={{
                     email: '',
@@ -262,6 +380,9 @@ export const Auth: FunctionComponent = () => {
                       />
                       <FormHelperText>{error.message}</FormHelperText>
                     </FormControl>
+                    <Link href="/forgot-password">
+                      <a className={classes.forgotPassword}>{t('AUTH.FORGOT_PASSWORD')}</a>
+                    </Link>
                     <div className={classes.button}>
                       <Button type="submit" variant="contained" color="secondary" fullWidth>
                         {t('AUTH.LOGIN')}
@@ -269,7 +390,7 @@ export const Auth: FunctionComponent = () => {
                     </div>
                   </Form>
                 </Formik>
-              </Grid>
+              )}
             </Paper>
           </Grid>
         </Grid>
