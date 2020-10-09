@@ -1,0 +1,11 @@
+image: tiangolo/docker-with-compose
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - echo "Trying to build"
+    - apk add --update nodejs yarn && yarn install
+    - yarn build
