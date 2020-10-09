@@ -10,15 +10,4 @@ module.exports = {
   publicRuntimeConfig: {
     localeSubpaths,
   },
-  experimental: {
-    async redirects() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: `${process.env.BACKEND_URL}/:path*`,
-          permanent: false,
-        },
-      ];
-    },
-  },
 };
