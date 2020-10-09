@@ -1,5 +1,5 @@
 import { Button, FormControlLabel, FormHelperText, Grid, Radio, Slider, Typography } from '@material-ui/core';
-import { ThumbDown, ThumbUp } from '@material-ui/icons';
+import { ThumbUp } from '@material-ui/icons';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -8,7 +8,7 @@ import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
@@ -19,14 +19,15 @@ import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
 import { useTranslate } from '../../translate.context';
-import classes from './rating.module.scss';
+import classes from './nps.module.scss';
 import * as Yup from 'yup';
 
-export const Rating: FC = () => {
+export const NPS: FC = () => {
   const { t } = useTranslate();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
+  console.log({ query: router });
 
   const {
     ratingService,
@@ -37,48 +38,16 @@ export const Rating: FC = () => {
     },
   } = useApp();
 
-  const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
-  const validationSchema = useMemo(
-    () =>
-      !nps
-        ? Yup.object({
-            satisfaction: Yup.string().required(),
-            answers: Yup.array().of(
-              Yup.object({
-                id: Yup.string().required(t('COMMON.REQUIRED')),
-                value: Yup.string().required(t('COMMON.REQUIRED')),
-              }),
-            ),
-            positive: Yup.string().required(t('COMMON.REQUIRED')),
-            negative: Yup.string().required(t('COMMON.REQUIRED')),
-            comment: Yup.string().required(t('COMMON.REQUIRED')),
-          })
-        : Yup.object({
-            comment: Yup.string().required(t('COMMON.REQUIRED')),
-          }),
-    [nps],
-  );
-
-  useEffect(() => {
-    if (!nps) {
-      ratingService.getFormByID(companyFormID, 'hu');
-    }
-  }, [ratingService, alias, companyFormID]);
-
   useEffect(() => {
     publicProfileService.getPublicProfileByAlias(alias);
   }, [publicProfileService]);
 
   const handleSubmitReview = useCallback(
-    (rating) => {
-      if (nps) {
-        ratingService.submitNps(rating);
-      } else {
-        ratingService.submitReview(rating);
-      }
-      return router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
+    async (rating) => {
+      ratingService.submitReview(rating);
+      await router.push(`/bix-profil/${alias}`);
     },
-    [ratingService, alias],
+    [ratingService],
   );
 
   const companyForm = form || mockForm();
@@ -159,8 +128,14 @@ export const Rating: FC = () => {
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="h6" className={classes.companyName}>
-                        {profilePage.profile.name}
+                        {companyForm.companyName}
                       </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <hr className={classes.verticalSpacing} />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="h6">Összességében mennyire elégedett? </Typography>
                     </Grid>
                     <Formik
                       initialValues={{
@@ -169,14 +144,13 @@ export const Rating: FC = () => {
                         answers: companyForm.questions,
                         positive: '',
                         negative: '',
-                        comment: '',
+                        summary: '',
                       }}
                       onSubmit={(values, { setSubmitting, resetForm }) => {
                         const parsedValues = {
                           ...values,
                           satisfaction: parseFloat(values.satisfaction),
                           companyFormID,
-                          companyID: profilePage.profile.id,
                           answers: values.answers.map((answer) => ({
                             questionID: answer.id,
                             value: parseFloat(answer.value),
@@ -186,36 +160,37 @@ export const Rating: FC = () => {
                         setSubmitting(false);
                         resetForm();
                       }}
-                      validationSchema={validationSchema}
+                      validationSchema={Yup.object({
+                        satisfaction: Yup.string().required(),
+                        answers: Yup.array().of(
+                          Yup.object({
+                            id: Yup.string().required(t('COMMON.REQUIRED')),
+                            value: Yup.string().required(t('COMMON.REQUIRED')),
+                          }),
+                        ),
+                        positive: Yup.string().required(t('COMMON.REQUIRED')),
+                        negative: Yup.string().required(t('COMMON.REQUIRED')),
+                        summary: Yup.string().required(t('COMMON.REQUIRED')),
+                      })}
                       enableReinitialize
                     >
                       {({ setFieldValue, errors, submitCount }) => (
                         <Form style={{ width: '100%' }}>
-                          {!nps && (
-                            <>
-                              <Grid item xs={12}>
-                                <hr className={classes.verticalSpacing} />
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Typography variant="h6">Összességében mennyire elégedett? </Typography>
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Field component={RadioGroup} name="satisfaction">
-                                  {satisfactionOptions.map((option) => (
-                                    <FormControlLabel
-                                      key={option.value}
-                                      value={option.value}
-                                      control={<Radio />}
-                                      label={option.label}
-                                    />
-                                  ))}
-                                </Field>
-                                <FormHelperText className={classes.errorMsg}>
-                                  {errors?.satisfaction && !!submitCount ? t('COMMON.REQUIRED') : ''}
-                                </FormHelperText>
-                              </Grid>
-                            </>
-                          )}
+                          <Grid item xs={12}>
+                            <Field component={RadioGroup} name="satisfaction">
+                              {satisfactionOptions.map((option) => (
+                                <FormControlLabel
+                                  key={option.value}
+                                  value={option.value}
+                                  control={<Radio />}
+                                  label={option.label}
+                                />
+                              ))}
+                            </Field>
+                            <FormHelperText className={classes.errorMsg}>
+                              {errors?.satisfaction && !!submitCount ? t('COMMON.REQUIRED') : ''}
+                            </FormHelperText>
+                          </Grid>
 
                           <Grid item xs={12}>
                             <hr className={classes.verticalSpacing} />
@@ -240,78 +215,74 @@ export const Rating: FC = () => {
                               className={classes.npsSlider}
                             />
                           </Grid>
-                          {!nps && (
-                            <>
-                              <Grid item xs={12}>
-                                <hr className={classes.verticalSpacing} />
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Typography variant="h6">Mit gondol az alábbiakról?</Typography>
-                              </Grid>
-                              <FieldArray name="answers">
-                                {() => (
-                                  <>
-                                    {companyForm.questions.map((question, index) => (
-                                      <Grid item xs={12} key={question.id}>
-                                        {question.text}
-                                        <Field component={RadioGroup} name={`answers.${index}.value`}>
-                                          <div>
-                                            {smileys.map((option) => (
-                                              <FormControlLabel
-                                                key={option.value}
-                                                value={option.value}
-                                                label=""
-                                                control={<SmileyRadio smiley={option.icon} />}
-                                              />
-                                            ))}
-                                          </div>
-                                        </Field>
-                                        <FormHelperText className={classes.errorMsg}>
-                                          {errors?.answers && !!submitCount ? t('COMMON.REQUIRED') : ''}
-                                        </FormHelperText>
-                                      </Grid>
-                                    ))}
-                                  </>
-                                )}
-                              </FieldArray>
+                          <Grid item xs={12}>
+                            <hr className={classes.verticalSpacing} />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Typography variant="h6">Mit gondol az alábbiakról?</Typography>
+                          </Grid>
+                          <FieldArray name="answers">
+                            {() => (
+                              <>
+                                {companyForm.questions.map((question, index) => (
+                                  <Grid item xs={12} key={question.id}>
+                                    {question.text}
+                                    <Field component={RadioGroup} name={`answers.${index}.value`}>
+                                      <div>
+                                        {smileys.map((option) => (
+                                          <FormControlLabel
+                                            key={option.value}
+                                            value={option.value}
+                                            label=""
+                                            control={<SmileyRadio smiley={option.icon} />}
+                                          />
+                                        ))}
+                                      </div>
+                                    </Field>
+                                    <FormHelperText className={classes.errorMsg}>
+                                      {errors?.answers && !!submitCount ? t('COMMON.REQUIRED') : ''}
+                                    </FormHelperText>
+                                  </Grid>
+                                ))}
+                              </>
+                            )}
+                          </FieldArray>
 
-                              <Grid item xs={12}>
-                                <hr className={classes.verticalSpacing} />
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Typography className={classes.positive}>
-                                  <ThumbUp className={classes.spacingRight} />
-                                  Kérjük, néhány karakterben mondja el pozitív tapasztalatait:
-                                </Typography>
-                                <Field
-                                  component={TextField}
-                                  label=""
-                                  name="positive"
-                                  fullWidth
-                                  multiline
-                                  rows={5}
-                                  variant="outlined"
-                                />
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Typography className={classes.negative}>
-                                  <ThumbDown className={classes.spacingRight} />
-                                  Kérjük, néhány karakterben mondja el negatív tapasztalatait:
-                                </Typography>
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Field
-                                  component={TextField}
-                                  label=""
-                                  name="negative"
-                                  fullWidth
-                                  multiline
-                                  rows={5}
-                                  variant="outlined"
-                                />
-                              </Grid>
-                            </>
-                          )}
+                          <Grid item xs={12}>
+                            <hr className={classes.verticalSpacing} />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Typography className={classes.positive}>
+                              <ThumbUp className={classes.spacingRight} />
+                              Kérjük, néhány karakterben mondja el pozitív tapasztalatait:
+                            </Typography>
+                            <Field
+                              component={TextField}
+                              label=""
+                              name="positive"
+                              fullWidth
+                              multiline
+                              rows={5}
+                              variant="outlined"
+                            />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Typography className={classes.negative}>
+                              <ThumbUp className={classes.spacingRight} />
+                              Kérjük, néhány karakterben mondja el negatív tapasztalatait:
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Field
+                              component={TextField}
+                              label=""
+                              name="negative"
+                              fullWidth
+                              multiline
+                              rows={5}
+                              variant="outlined"
+                            />
+                          </Grid>
                           <Grid item xs={12}>
                             <Typography className={classes.summary}>
                               Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről
@@ -319,7 +290,7 @@ export const Rating: FC = () => {
                             <Field
                               component={TextField}
                               label=""
-                              name="comment"
+                              name="summary"
                               fullWidth
                               multiline
                               rows={2}

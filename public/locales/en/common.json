@@ -5,6 +5,7 @@
     "SUMMARY": "Summary",
     "UNKOWN_ERROR": "An unknown error has occurred",
     "HISTORY_PLACEHOLDER": "Latest {{month}} month",
+    "REQUIRED": "This field is required",
     "TABLE": {
       "COLUMNS": {
         "ID": "ID",
