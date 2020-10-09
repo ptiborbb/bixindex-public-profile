@@ -47,6 +47,11 @@ export const Auth: FunctionComponent = () => {
   const companyFormID = router.query.companyFormID as string;
   const companyAlias = router.query.companyAlias as string;
 
+  const registerRedirectUrl = companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
+  const loginRedirectUrl = companyFormID
+    ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
+    : router.push('/');
+
   const fbAppId = 294368951892091;
   const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
 
@@ -54,9 +59,7 @@ export const Auth: FunctionComponent = () => {
     (email: string, password: string) => {
       return authService
         .login(email, password)
-        .then(() =>
-          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(''),
-        )
+        .then(() => loginRedirectUrl)
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
@@ -67,7 +70,7 @@ export const Auth: FunctionComponent = () => {
     (name: string, email: string, password: string) => {
       return authService
         .register(name, email, password)
-        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('')))
+        .then(() => registerRedirectUrl)
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
@@ -81,7 +84,7 @@ export const Auth: FunctionComponent = () => {
     (response: { accessToken: string } & Record<string, unknown>) => {
       return authService
         .facebook(response.accessToken)
-        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('')))
+        .then(() => registerRedirectUrl)
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
@@ -92,9 +95,7 @@ export const Auth: FunctionComponent = () => {
     (response: { accessToken: string } & Record<string, unknown>) => {
       return authService
         .facebook(response.accessToken)
-        .then(() =>
-          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(''),
-        )
+        .then(() => loginRedirectUrl)
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
