@@ -89,7 +89,10 @@
         }
       }
 
+      $social-icon-place-size: 48px;
+
       .socialButton {
+        position: relative;
         width: 100%;
         max-width: 300px;
         text-align: center;
@@ -103,10 +106,39 @@
 
         &.google {
           background-color: $google-red;
+          .iconPlaceholder {
+            background-color: #ab3a2c;
+            > img {
+              width: 20px;
+              height: auto;
+            }
+          }
         }
 
         &.facebook {
           background-color: $fb-blue;
+          .iconPlaceholder {
+            background-color: #4f77cc;
+            > img {
+              width: 12px;
+              height: auto;
+            }
+          }
+        }
+
+        .iconPlaceholder {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          border-radius: 3px 0 0 3px;
+          width: $social-icon-place-size;
+          > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
         }
       }
 
@@ -118,16 +150,26 @@
         max-width: 300px;
 
         .formInput {
-          margin: 25px 0;
+          margin-top: 50px;
+          &:first-child {
+            margin-top: 25px;
+          }
         }
 
         .button {
           width: 100%;
-          margin: 40px 0;
+          margin: 40px 0 15px;
           > button {
             width: 100% !important;
           }
         }
+      }
+
+      .forgotPassword {
+        font-size: 12px;
+        color: #ADB5FF;
+        padding: 5px 0;
+        align-self: start;
       }
     }
   }

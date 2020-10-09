@@ -51,12 +51,6 @@ app
       }
       console.log(`> Ready on port ${port} [${env}]`);
     });
-    // server.listen(port, host, (err) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   console.log(`> Ready on port ${port} [${env}]`);
-    // });
   })
   .catch((err) => {
     console.log('An error occurred, unable to start the server');
