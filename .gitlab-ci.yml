@@ -1,0 +1,18 @@
+image: tiangolo/docker-with-compose
+
+stages:
+  - build-and-test
+
+test:
+  stage: build-and-test
+  script:
+    - echo "Linting and running tests"
+    - apk add --update nodejs yarn && yarn install
+    - yarn test
+
+build:
+  stage: build-and-test
+  script:
+    - echo "Trying to build"
+    - apk add --update nodejs yarn && yarn install
+    - yarn build
