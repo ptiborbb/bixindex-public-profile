@@ -54,7 +54,7 @@ export const Auth: FunctionComponent = () => {
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
-    [authService],
+    [authService, companyFormID, companyAlias],
   );
 
   const register = useCallback(
@@ -65,7 +65,7 @@ export const Auth: FunctionComponent = () => {
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
-    [authService],
+    [authService, companyFormID, companyAlias],
   );
 
   const [error, setError] = useState({ isError: false, message: '' });

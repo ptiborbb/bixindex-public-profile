@@ -1,8 +1,7 @@
-import { createBixindexClient, EHttpStatus, IReponseInterceptor } from '@codingsans/bixindex-common';
+import { createBixindexClient } from '@codingsans/bixindex-common';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import createPalette from '@material-ui/core/styles/createPalette';
-import { AxiosError, AxiosResponse } from 'axios';
 import App, { AppProps } from 'next/app';
 import { useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
