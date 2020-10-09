@@ -1,5 +1,5 @@
-import { Button, FormControlLabel, FormHelperText, Grid, Radio, Slider, Typography } from '@material-ui/core';
-import { ThumbDown, ThumbUp } from '@material-ui/icons';
+import { Avatar, Button, FormControlLabel, FormHelperText, Grid, Radio, Slider, Typography } from '@material-ui/core';
+import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -34,6 +34,7 @@ export const Rating: FC = () => {
     state: {
       rating: { form },
       publicProfile: { profilePage },
+      auth: { user },
     },
   } = useApp();
 
@@ -326,6 +327,26 @@ export const Rating: FC = () => {
                               variant="outlined"
                             />
                           </Grid>
+                          <Grid item xs={12}>
+                            <hr className={classes.verticalSpacing} />
+                          </Grid>
+                          {user ? (
+                            <>
+                              <Typography variant="h5" className={classes.summary}>
+                                Be vagy jelentkezve a következő néven
+                              </Typography>
+                              <div className={classes.user}>
+                                <Avatar className={classes.avatar} />
+                                <Typography variant="h6">{user.name}</Typography>
+                              </div>
+                              <div className={classes.userWarning}>
+                                <Info className={classes.spacingRight} />
+                                <Typography>Az értékelésedet ezen a néven rögzítjük!</Typography>
+                              </div>
+                            </>
+                          ) : (
+                            <>asd</>
+                          )}
                           <Grid item xs={12}>
                             <div className={classes.verticalSpacing} />
                           </Grid>

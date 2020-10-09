@@ -62,3 +62,18 @@
 .spacingRight {
   margin-right: 10px;
 }
+.user {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem !important;
+  .avatar {
+    width: 90px !important;
+    height: 90px !important;
+    margin-right: 1rem !important;
+  }
+}
+.userWarning {
+  margin-top: 2rem;
+  display: flex;
+  color: #ff3739;
+}
