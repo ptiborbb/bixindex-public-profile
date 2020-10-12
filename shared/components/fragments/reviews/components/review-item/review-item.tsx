@@ -51,7 +51,13 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
       </div>
       <div className={classes.npsInfo}>NPS: {npsToText(rating.nps)}</div>
       <div className={classes.badReview}>
-        <div>{rating.comment}</div>
+        <div>{rating.negative}</div>
+      </div>
+      <div className={classes.goodReview}>
+        <div>{rating.positive}</div>
+      </div>
+      <div className={classes.badReview}>
+        <div>{rating.summary}</div>
       </div>
     </div>
   );

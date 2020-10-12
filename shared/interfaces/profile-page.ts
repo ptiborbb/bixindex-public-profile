@@ -6,7 +6,9 @@ export interface RatingItem {
   value: number;
   date: string;
   nps: number;
-  comment: string;
+  positive?: string;
+  negative?: string;
+  summary?: string;
 }
 
 export interface ProfilePage {
