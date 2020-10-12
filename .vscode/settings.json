@@ -1,0 +1,8 @@
+{
+  "i18n-ally.localesPaths": [
+    "public/locales/en/common.json",
+    "public/locales/hu/common.json"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "react-i18n.i18nPaths": "public/locales"
+}

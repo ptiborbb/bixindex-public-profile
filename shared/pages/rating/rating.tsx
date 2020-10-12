@@ -149,6 +149,7 @@ export const Rating: FC = () => {
             comment: values.comment,
             positive: values.positive,
             negative: values.negative,
+            reference: values.reference,
             visibility: values.visiblity,
             answers: values.answers.map((answer) => ({
               questionID: answer.id,
@@ -159,7 +160,6 @@ export const Rating: FC = () => {
         }
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
       } catch (err) {
-        console.log(err.response);
         toast.error(t(`TOAST.ERROR.${err.response.data.errorCode}`));
         setSubmitting(false);
       }
@@ -171,15 +171,15 @@ export const Rating: FC = () => {
 
   const satisfactionOptions = [
     {
-      label: 'Többet kaptam, mint vártam',
+      label: t('RATING.MORE_THAN_EXPECTED'),
       value: '10',
     },
     {
-      label: 'Pont annyit kaptam, mint vártam',
+      label: t('RATING.EXACTLY_WHAT_EXPECTED'),
       value: '7.5',
     },
     {
-      label: 'Kevesebbet kaptam, mint vártam',
+      label: t('RATING.LESS_THEN_EXPECTED'),
       value: '6',
     },
   ];
@@ -241,7 +241,7 @@ export const Rating: FC = () => {
                 <div className={classes.root}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h6">A következő cégről írsz értékelést: </Typography>
+                      <Typography variant="h6">{t('RATING.WRITING_REVIEW_ON')}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="h6" className={classes.companyName}>
@@ -256,6 +256,7 @@ export const Rating: FC = () => {
                         positive: '',
                         negative: '',
                         comment: '',
+                        reference: '',
                         auth: {
                           loginOrRegister: ELoginOrRegister.REGISTER,
                           firstname: '',
@@ -283,7 +284,7 @@ export const Rating: FC = () => {
                                 <hr className={classes.verticalSpacing} />
                               </Grid>
                               <Grid item xs={12}>
-                                <Typography variant="h6">Összességében mennyire elégedett? </Typography>
+                                <Typography variant="h6">{t('RATING.SATISFACTION')} </Typography>
                               </Grid>
                               <Grid item xs={12}>
                                 <Field component={RadioGroup} name="satisfaction">
@@ -307,10 +308,7 @@ export const Rating: FC = () => {
                             <hr className={classes.verticalSpacing} />
                           </Grid>
                           <Grid item xs={12}>
-                            <Typography variant="h6">
-                              Mennyire valószínű, hogy ajánlaná a cég termékeit / szolgáltatásait illetve magát a céget
-                              barátainak/kollégáinak?
-                            </Typography>
+                            <Typography variant="h6">{t('RATING.WOULD_YOU_RECOMMEND')}</Typography>
                           </Grid>
                           <Grid item xs={12}>
                             <CustomSlider
@@ -332,7 +330,7 @@ export const Rating: FC = () => {
                                 <hr className={classes.verticalSpacing} />
                               </Grid>
                               <Grid item xs={12}>
-                                <Typography variant="h6">Mit gondol az alábbiakról?</Typography>
+                                <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                               </Grid>
                               <FieldArray name="answers">
                                 {() => (
@@ -367,7 +365,7 @@ export const Rating: FC = () => {
                               <Grid item xs={12}>
                                 <Typography className={classes.positive}>
                                   <ThumbUp className={classes.spacingRight} />
-                                  Kérjük, néhány karakterben mondja el pozitív tapasztalatait:
+                                  {t('RATING.POSITIVE')}
                                 </Typography>
                                 <Field
                                   component={TextField}
@@ -382,7 +380,7 @@ export const Rating: FC = () => {
                               <Grid item xs={12}>
                                 <Typography className={classes.negative}>
                                   <ThumbDown className={classes.spacingRight} />
-                                  Kérjük, néhány karakterben mondja el negatív tapasztalatait:
+                                  {t('RATING.NEGATIVE')}
                                 </Typography>
                               </Grid>
                               <Grid item xs={12}>
@@ -399,9 +397,7 @@ export const Rating: FC = () => {
                             </>
                           )}
                           <Grid item xs={12}>
-                            <Typography className={classes.summary}>
-                              Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről
-                            </Typography>
+                            <Typography className={classes.summary}>{t('RATING.COMMENT')}</Typography>
                             <Field
                               component={TextField}
                               label=""
@@ -418,7 +414,7 @@ export const Rating: FC = () => {
                           {user ? (
                             <>
                               <Typography variant="h5" className={classes.summary}>
-                                Be vagy jelentkezve a következő néven
+                                {t('RATING.LOGGED_IN_AS')}
                               </Typography>
                               <div className={classes.user}>
                                 <Avatar className={classes.avatar} />
@@ -426,7 +422,7 @@ export const Rating: FC = () => {
                               </div>
                               <div className={classes.userWarning}>
                                 <Info className={classes.spacingRight} />
-                                <Typography>Az értékelésedet ezen a néven rögzítjük!</Typography>
+                                <Typography>{t('RATING.SAVING_REVIEW_AS')}</Typography>
                               </div>
                             </>
                           ) : (
@@ -437,13 +433,13 @@ export const Rating: FC = () => {
                                     key="REGISTER"
                                     value="REGISTER"
                                     control={<Radio />}
-                                    label={'Nincs még BIX fiókom'}
+                                    label={t('RATING.NO_ACCOUNT_YET')}
                                   />
                                   <FormControlLabel
                                     key="LOGIN"
                                     value="LOGIN"
                                     control={<Radio />}
-                                    label={'Van már BIX fiókom'}
+                                    label={t('RATING.HAVE_A_BIX_ACCOUNT')}
                                   />
                                 </Field>
                               </Grid>
@@ -451,7 +447,7 @@ export const Rating: FC = () => {
                                 <Grid container spacing={1}>
                                   <Grid item xs={12}>
                                     <Typography variant="h5" className={classes.summary}>
-                                      Azonosítás
+                                      {t('RATING.AUTHENTICATION')}
                                     </Typography>
                                   </Grid>
                                   <Grid item xs={12} className={classes.icons}>
@@ -484,12 +480,28 @@ export const Rating: FC = () => {
                                     />
                                   </Grid>
                                   <Grid item xs={12}>
-                                    <div>cégként magánszemélyként</div>
+                                    <Typography variant="h5" className={classes.summary}>
+                                      {t('RATING.REFERENCE')}
+                                    </Typography>
+                                    <Field component={RadioGroup} name="reference">
+                                      <FormControlLabel
+                                        key="INDIVIDUAL"
+                                        value="INDIVIDUAL"
+                                        control={<Radio />}
+                                        label={t('RATING.PERSONAL')}
+                                      />
+                                      <FormControlLabel
+                                        key="COMPANY"
+                                        value="COMPANY"
+                                        control={<Radio />}
+                                        label={t('RATING.AS_COMPANY')}
+                                      />
+                                    </Field>
                                   </Grid>
                                   {values.auth.loginOrRegister === ELoginOrRegister.REGISTER ? (
                                     <>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Vezetéknév</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.LASTNAME')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -499,7 +511,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Keresztnév</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.FIRSTNAME')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -509,7 +521,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>E-mail</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -520,7 +532,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Telefonszám</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.PHONE')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -530,7 +542,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Cégnév</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.COMPANY')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -540,7 +552,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Beosztás</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.ROLE')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -550,7 +562,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Jelszó</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -561,7 +573,9 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Jelszó megerősítése</Typography>
+                                        <Typography className={classes.summary}>
+                                          {t('RATING.CONFIRM_PASSWORD')}
+                                        </Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -572,7 +586,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Nyilvánosság</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -581,16 +595,16 @@ export const Rating: FC = () => {
                                           fullWidth
                                           variant="outlined"
                                         >
-                                          <MenuItem value="PUBLIC">Nyilvános</MenuItem>
-                                          <MenuItem value="COMPANY">Csak a cég számára</MenuItem>
-                                          <MenuItem value="ANONYMUS">Anoním</MenuItem>
+                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
+                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
+                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
                                         </Field>
                                       </Grid>
                                     </>
                                   ) : (
                                     <>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>E-mail</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -600,7 +614,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Jelszó</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -611,7 +625,7 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>Nyilvánosság</Typography>
+                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
                                         <Field
                                           component={TextField}
                                           label=""
@@ -620,9 +634,9 @@ export const Rating: FC = () => {
                                           fullWidth
                                           variant="outlined"
                                         >
-                                          <MenuItem value="PUBLIC">Nyilvános</MenuItem>
-                                          <MenuItem value="COMPANY">Csak a cég számára</MenuItem>
-                                          <MenuItem value="PRIVATE">Anoním</MenuItem>
+                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
+                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
+                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
                                         </Field>
                                       </Grid>{' '}
                                     </>
@@ -636,7 +650,7 @@ export const Rating: FC = () => {
                           </Grid>
                           <Grid item xs={12} className={classes.flexRight}>
                             <Button size="large" variant="contained" type="submit" color="primary">
-                              Értékelés küldése
+                              {t('RATING.SEND_REVIEW')}
                             </Button>
                           </Grid>
                         </Form>

@@ -10,7 +10,6 @@ export const createNoAuthRouteComponent = (Child: FunctionComponent): NextPage =
 
   Page.getInitialProps = async (ctx) => {
     const host = get(ctx, 'req.headers.host', '');
-    console.log(host);
     const authGuard = authGuardServiceFactory(host);
     if (ctx.req) {
       const cookie = get(ctx, 'req.headers.cookie', '');

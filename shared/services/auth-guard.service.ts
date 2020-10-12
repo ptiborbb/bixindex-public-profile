@@ -19,7 +19,6 @@ export const authGuardServiceFactory = (origin: string): IAuthGuardService => {
           })
           .then((res) => res.data)
           .catch((error: AxiosError) => {
-            console.log(error);
             return null;
           });
         return user;
