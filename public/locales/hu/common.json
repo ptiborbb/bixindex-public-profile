@@ -427,5 +427,11 @@
     "PRODUCTS": "Termékek",
     "WRITE_REVIEW": "Értékelés írása",
     "BIX_PROFILE": "BIX Profil"
+  },
+  "TOAST": {
+    "ERROR": {
+      "UNAUTHORIZED": "Sikertelen azonosítás",
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+    }
   }
 }

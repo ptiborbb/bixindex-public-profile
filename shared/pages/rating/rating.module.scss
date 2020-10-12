@@ -77,3 +77,14 @@
   display: flex;
   color: #ff3739;
 }
+.icons {
+  display: flex;
+  align-items: center;
+  .icon {
+    cursor: pointer;
+    &.google {
+      width: 26.5px !important;
+      height: 26.5px !important;
+    }
+  }
+}
