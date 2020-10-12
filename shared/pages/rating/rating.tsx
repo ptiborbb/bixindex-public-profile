@@ -56,25 +56,31 @@ export const Rating: FC = () => {
   } = useApp();
 
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
-  const authValidation = Yup.object({
-    firstname: Yup.string().when('loginOrRegister', {
-      is: ELoginOrRegister.REGISTER,
-      then: Yup.string().required(t('COMMON.REQUIRED')),
-    }),
-    lastname: Yup.string().when('loginOrRegister', {
-      is: ELoginOrRegister.REGISTER,
-      then: Yup.string().required(t('COMMON.REQUIRED')),
-    }),
-    email: Yup.string().required(t('COMMON.REQUIRED')).email(),
-    phone: Yup.string(),
-    company: Yup.string(),
-    role: Yup.string(),
-    password: Yup.string().required(t('COMMON.REQUIRED')),
-    confirmPassword: Yup.string().when('loginOrRegister', {
-      is: ELoginOrRegister.REGISTER,
-      then: Yup.string().required(t('COMMON.REQUIRED')),
-    }),
-  });
+  const authValidation = useMemo(
+    () =>
+      !user
+        ? Yup.object({
+            firstname: Yup.string().when('loginOrRegister', {
+              is: ELoginOrRegister.REGISTER,
+              then: Yup.string().required(t('COMMON.REQUIRED')),
+            }),
+            lastname: Yup.string().when('loginOrRegister', {
+              is: ELoginOrRegister.REGISTER,
+              then: Yup.string().required(t('COMMON.REQUIRED')),
+            }),
+            email: Yup.string().required(t('COMMON.REQUIRED')).email(),
+            phone: Yup.string(),
+            company: Yup.string(),
+            role: Yup.string(),
+            password: Yup.string().required(t('COMMON.REQUIRED')),
+            confirmPassword: Yup.string().when('loginOrRegister', {
+              is: ELoginOrRegister.REGISTER,
+              then: Yup.string().required(t('COMMON.REQUIRED')),
+            }),
+          })
+        : Yup.object(),
+    [user],
+  );
   const validationSchema = useMemo(
     () =>
       !nps
@@ -95,7 +101,7 @@ export const Rating: FC = () => {
             comment: Yup.string().required(t('COMMON.REQUIRED')),
             auth: authValidation,
           }),
-    [nps],
+    [nps, authValidation],
   );
 
   const loginResponseFacebook = useCallback(
@@ -280,6 +286,7 @@ export const Rating: FC = () => {
                         <Form style={{ width: '100%' }}>
                           {!nps && (
                             <>
+                              {console.log(errors)}
                               <Grid item xs={12}>
                                 <hr className={classes.verticalSpacing} />
                               </Grid>
