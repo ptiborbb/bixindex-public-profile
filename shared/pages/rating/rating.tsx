@@ -1,5 +1,15 @@
-import { Button, FormControlLabel, FormHelperText, Grid, Radio, Slider, Typography } from '@material-ui/core';
-import { ThumbDown, ThumbUp } from '@material-ui/icons';
+import {
+  Avatar,
+  Button,
+  FormControlLabel,
+  FormHelperText,
+  Grid,
+  MenuItem,
+  Radio,
+  SvgIcon,
+  Typography,
+} from '@material-ui/core';
+import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -9,6 +19,9 @@ import { RadioGroup, TextField } from 'formik-material-ui';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
@@ -18,12 +31,15 @@ import { Header } from '../../components/header/header';
 import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
+import { ELoginOrRegister } from '../../enums/login-or-register';
 import { useTranslate } from '../../translate.context';
+import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
-import * as Yup from 'yup';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import { GoogleLogin } from 'react-google-login';
 
 export const Rating: FC = () => {
-  const { t } = useTranslate();
+  const { t, i18n } = useTranslate();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
@@ -31,13 +47,34 @@ export const Rating: FC = () => {
   const {
     ratingService,
     publicProfileService,
+    authService,
     state: {
       rating: { form },
       publicProfile: { profilePage },
+      auth: { user },
     },
   } = useApp();
 
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
+  const authValidation = Yup.object({
+    firstname: Yup.string().when('loginOrRegister', {
+      is: ELoginOrRegister.REGISTER,
+      then: Yup.string().required(t('COMMON.REQUIRED')),
+    }),
+    lastname: Yup.string().when('loginOrRegister', {
+      is: ELoginOrRegister.REGISTER,
+      then: Yup.string().required(t('COMMON.REQUIRED')),
+    }),
+    email: Yup.string().required(t('COMMON.REQUIRED')).email(),
+    phone: Yup.string(),
+    company: Yup.string(),
+    role: Yup.string(),
+    password: Yup.string().required(t('COMMON.REQUIRED')),
+    confirmPassword: Yup.string().when('loginOrRegister', {
+      is: ELoginOrRegister.REGISTER,
+      then: Yup.string().required(t('COMMON.REQUIRED')),
+    }),
+  });
   const validationSchema = useMemo(
     () =>
       !nps
@@ -52,16 +89,29 @@ export const Rating: FC = () => {
             positive: Yup.string().required(t('COMMON.REQUIRED')),
             negative: Yup.string().required(t('COMMON.REQUIRED')),
             comment: Yup.string().required(t('COMMON.REQUIRED')),
+            auth: authValidation,
           })
         : Yup.object({
             comment: Yup.string().required(t('COMMON.REQUIRED')),
+            auth: authValidation,
           }),
     [nps],
   );
 
+  const loginResponseFacebook = useCallback(
+    async (response: { accessToken: string } & Record<string, unknown>) => {
+      await authService.facebook(response.accessToken);
+    },
+    [authService],
+  );
+
+  const responseGoogle = (response): void => {
+    console.log('google', response);
+  };
+
   useEffect(() => {
     if (!nps) {
-      ratingService.getFormByID(companyFormID, 'hu');
+      ratingService.getFormByID(companyFormID, i18n.language);
     }
   }, [ratingService, alias, companyFormID]);
 
@@ -70,30 +120,66 @@ export const Rating: FC = () => {
   }, [publicProfileService]);
 
   const handleSubmitReview = useCallback(
-    (rating) => {
-      if (nps) {
-        ratingService.submitNps(rating);
-      } else {
-        ratingService.submitReview(rating);
+    async (values, setSubmitting, _resetForm) => {
+      try {
+        if (!user) {
+          if (values.auth.loginOrRegister === ELoginOrRegister.LOGIN) {
+            await authService.login(values.auth.email, values.auth.password);
+          } else {
+            await authService.register(
+              `${values.auth.firstname} ${values.auth.lastname}`,
+              values.auth.email,
+              values.auth.password,
+            );
+          }
+        }
+        if (nps) {
+          const parsedRating = {
+            companyID: profilePage.profile.id,
+            rating: values.nps,
+            visibility: values.visibility,
+            comment: values.comment,
+          };
+          await ratingService.submitNps(parsedRating);
+        } else {
+          const parsedRating = {
+            satisfaction: parseFloat(values.satisfaction),
+            nps: values.nps,
+            companyFormID,
+            comment: values.comment,
+            positive: values.positive,
+            negative: values.negative,
+            reference: values.reference,
+            visibility: values.visiblity,
+            answers: values.answers.map((answer) => ({
+              questionID: answer.id,
+              value: parseFloat(answer.value),
+            })),
+          };
+          await ratingService.submitReview(parsedRating);
+        }
+        await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
+      } catch (err) {
+        toast.error(t(`TOAST.ERROR.${err.response.data.errorCode}`));
+        setSubmitting(false);
       }
-      return router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
     },
-    [ratingService, alias],
+    [ratingService, authService, alias, profilePage, user],
   );
 
   const companyForm = form || mockForm();
 
   const satisfactionOptions = [
     {
-      label: 'Többet kaptam, mint vártam',
+      label: t('RATING.MORE_THAN_EXPECTED'),
       value: '10',
     },
     {
-      label: 'Pont annyit kaptam, mint vártam',
+      label: t('RATING.EXACTLY_WHAT_EXPECTED'),
       value: '7.5',
     },
     {
-      label: 'Kevesebbet kaptam, mint vártam',
+      label: t('RATING.LESS_THEN_EXPECTED'),
       value: '6',
     },
   ];
@@ -155,7 +241,7 @@ export const Rating: FC = () => {
                 <div className={classes.root}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h6">A következő cégről írsz értékelést: </Typography>
+                      <Typography variant="h6">{t('RATING.WRITING_REVIEW_ON')}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="h6" className={classes.companyName}>
@@ -170,26 +256,27 @@ export const Rating: FC = () => {
                         positive: '',
                         negative: '',
                         comment: '',
+                        reference: '',
+                        auth: {
+                          loginOrRegister: ELoginOrRegister.REGISTER,
+                          firstname: '',
+                          lastname: '',
+                          email: '',
+                          phone: '',
+                          company: '',
+                          role: '',
+                          password: '',
+                          confirmPassword: '',
+                        },
+                        visibility: '',
                       }}
-                      onSubmit={(values, { setSubmitting, resetForm }) => {
-                        const parsedValues = {
-                          ...values,
-                          satisfaction: parseFloat(values.satisfaction),
-                          companyFormID,
-                          companyID: profilePage.profile.id,
-                          answers: values.answers.map((answer) => ({
-                            questionID: answer.id,
-                            value: parseFloat(answer.value),
-                          })),
-                        };
-                        handleSubmitReview(parsedValues);
-                        setSubmitting(false);
-                        resetForm();
+                      onSubmit={async (values, { setSubmitting, resetForm }) => {
+                        await handleSubmitReview(values, setSubmitting, resetForm);
                       }}
                       validationSchema={validationSchema}
                       enableReinitialize
                     >
-                      {({ setFieldValue, errors, submitCount }) => (
+                      {({ setFieldValue, errors, submitCount, values }) => (
                         <Form style={{ width: '100%' }}>
                           {!nps && (
                             <>
@@ -197,7 +284,7 @@ export const Rating: FC = () => {
                                 <hr className={classes.verticalSpacing} />
                               </Grid>
                               <Grid item xs={12}>
-                                <Typography variant="h6">Összességében mennyire elégedett? </Typography>
+                                <Typography variant="h6">{t('RATING.SATISFACTION')} </Typography>
                               </Grid>
                               <Grid item xs={12}>
                                 <Field component={RadioGroup} name="satisfaction">
@@ -221,10 +308,7 @@ export const Rating: FC = () => {
                             <hr className={classes.verticalSpacing} />
                           </Grid>
                           <Grid item xs={12}>
-                            <Typography variant="h6">
-                              Mennyire valószínű, hogy ajánlaná a cég termékeit / szolgáltatásait illetve magát a céget
-                              barátainak/kollégáinak?
-                            </Typography>
+                            <Typography variant="h6">{t('RATING.WOULD_YOU_RECOMMEND')}</Typography>
                           </Grid>
                           <Grid item xs={12}>
                             <CustomSlider
@@ -246,7 +330,7 @@ export const Rating: FC = () => {
                                 <hr className={classes.verticalSpacing} />
                               </Grid>
                               <Grid item xs={12}>
-                                <Typography variant="h6">Mit gondol az alábbiakról?</Typography>
+                                <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                               </Grid>
                               <FieldArray name="answers">
                                 {() => (
@@ -281,7 +365,7 @@ export const Rating: FC = () => {
                               <Grid item xs={12}>
                                 <Typography className={classes.positive}>
                                   <ThumbUp className={classes.spacingRight} />
-                                  Kérjük, néhány karakterben mondja el pozitív tapasztalatait:
+                                  {t('RATING.POSITIVE')}
                                 </Typography>
                                 <Field
                                   component={TextField}
@@ -296,7 +380,7 @@ export const Rating: FC = () => {
                               <Grid item xs={12}>
                                 <Typography className={classes.negative}>
                                   <ThumbDown className={classes.spacingRight} />
-                                  Kérjük, néhány karakterben mondja el negatív tapasztalatait:
+                                  {t('RATING.NEGATIVE')}
                                 </Typography>
                               </Grid>
                               <Grid item xs={12}>
@@ -313,9 +397,7 @@ export const Rating: FC = () => {
                             </>
                           )}
                           <Grid item xs={12}>
-                            <Typography className={classes.summary}>
-                              Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről
-                            </Typography>
+                            <Typography className={classes.summary}>{t('RATING.COMMENT')}</Typography>
                             <Field
                               component={TextField}
                               label=""
@@ -327,11 +409,248 @@ export const Rating: FC = () => {
                             />
                           </Grid>
                           <Grid item xs={12}>
+                            <hr className={classes.verticalSpacing} />
+                          </Grid>
+                          {user ? (
+                            <>
+                              <Typography variant="h5" className={classes.summary}>
+                                {t('RATING.LOGGED_IN_AS')}
+                              </Typography>
+                              <div className={classes.user}>
+                                <Avatar className={classes.avatar} />
+                                <Typography variant="h6">{user.name}</Typography>
+                              </div>
+                              <div className={classes.userWarning}>
+                                <Info className={classes.spacingRight} />
+                                <Typography>{t('RATING.SAVING_REVIEW_AS')}</Typography>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <Grid item xs={12}>
+                                <Field component={RadioGroup} name="auth.loginOrRegister">
+                                  <FormControlLabel
+                                    key="REGISTER"
+                                    value="REGISTER"
+                                    control={<Radio />}
+                                    label={t('RATING.NO_ACCOUNT_YET')}
+                                  />
+                                  <FormControlLabel
+                                    key="LOGIN"
+                                    value="LOGIN"
+                                    control={<Radio />}
+                                    label={t('RATING.HAVE_A_BIX_ACCOUNT')}
+                                  />
+                                </Field>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Grid container spacing={1}>
+                                  <Grid item xs={12}>
+                                    <Typography variant="h5" className={classes.summary}>
+                                      {t('RATING.AUTHENTICATION')}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={12} className={classes.icons}>
+                                    <FacebookLogin
+                                      appId={fbAppId}
+                                      autoLoad={false}
+                                      fields="name,email,picture"
+                                      callback={loginResponseFacebook}
+                                      render={(renderProps) => (
+                                        <FacebookIcon
+                                          onClick={renderProps.onClick}
+                                          color="primary"
+                                          fontSize="large"
+                                          className={classes.icon}
+                                        />
+                                      )}
+                                    />
+                                    <GoogleLogin
+                                      clientId={googleClientId}
+                                      render={(renderProps) => (
+                                        <img
+                                          src="/social/Google.svg"
+                                          className={`${classes.icon} ${classes.google}`}
+                                          onClick={renderProps.onClick}
+                                        />
+                                      )}
+                                      onSuccess={responseGoogle}
+                                      onFailure={responseGoogle}
+                                      cookiePolicy={'single_host_origin'}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12}>
+                                    <Typography variant="h5" className={classes.summary}>
+                                      {t('RATING.REFERENCE')}
+                                    </Typography>
+                                    <Field component={RadioGroup} name="reference">
+                                      <FormControlLabel
+                                        key="INDIVIDUAL"
+                                        value="INDIVIDUAL"
+                                        control={<Radio />}
+                                        label={t('RATING.PERSONAL')}
+                                      />
+                                      <FormControlLabel
+                                        key="COMPANY"
+                                        value="COMPANY"
+                                        control={<Radio />}
+                                        label={t('RATING.AS_COMPANY')}
+                                      />
+                                    </Field>
+                                  </Grid>
+                                  {values.auth.loginOrRegister === ELoginOrRegister.REGISTER ? (
+                                    <>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.LASTNAME')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.lastname"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.FIRSTNAME')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.firstname"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.email"
+                                          type="email"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.PHONE')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.phone"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.COMPANY')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.company"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.ROLE')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.role"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.password"
+                                          fullWidth
+                                          type="password"
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>
+                                          {t('RATING.CONFIRM_PASSWORD')}
+                                        </Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.confirmPassword"
+                                          fullWidth
+                                          type="password"
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="visibility"
+                                          select
+                                          fullWidth
+                                          variant="outlined"
+                                        >
+                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
+                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
+                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
+                                        </Field>
+                                      </Grid>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.email"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="auth.password"
+                                          type="password"
+                                          fullWidth
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid item xs={6}>
+                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
+                                        <Field
+                                          component={TextField}
+                                          label=""
+                                          name="visibility"
+                                          select
+                                          fullWidth
+                                          variant="outlined"
+                                        >
+                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
+                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
+                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
+                                        </Field>
+                                      </Grid>{' '}
+                                    </>
+                                  )}
+                                </Grid>
+                              </Grid>
+                            </>
+                          )}
+                          <Grid item xs={12}>
                             <div className={classes.verticalSpacing} />
                           </Grid>
                           <Grid item xs={12} className={classes.flexRight}>
                             <Button size="large" variant="contained" type="submit" color="primary">
-                              Értékelés küldése
+                              {t('RATING.SEND_REVIEW')}
                             </Button>
                           </Grid>
                         </Form>

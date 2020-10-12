@@ -27,7 +27,6 @@ export const NPS: FC = () => {
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
-  console.log({ query: router });
 
   const {
     ratingService,

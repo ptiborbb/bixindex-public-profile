@@ -427,5 +427,44 @@
     "PRODUCTS": "Termékek",
     "WRITE_REVIEW": "Értékelés írása",
     "BIX_PROFILE": "BIX Profil"
+  },
+  "TOAST": {
+    "ERROR": {
+      "UNAUTHORIZED": "Sikertelen azonosítás",
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+    }
+  },
+  "RATING": {
+    "WRITING_REVIEW_ON": "A következő cégről írsz értékelést:",
+    "SATISFACTION": "Összességében mennyire elégedett?",
+    "WOULD_YOU_RECOMMEND": "Mennyire valószínű, hogy ajánlaná a cég termékeit / szolgáltatásait illetve magát a céget barátainak/kollégáinak?",
+    "WHAT_DO_YOU_THINK": "Mit gondol az alábbiakról?",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Jelszó",
+    "MORE_THAN_EXPECTED": "Többet kaptam, mint amit vártam",
+    "EXACTLY_WHAT_EXPECTED": "Pontosan azt kaptam amit vártam",
+    "LESS_THEN_EXPECTED": "Kevesebbet kaptam, mint amit vártam",
+    "POSITIVE": "Kérjük, néhány karakterben mondja el pozitív tapasztalatait:",
+    "NEGATIVE": "Kérjük, néhány karakterben mondja el negatív tapasztalatait:",
+    "COMMENT": "Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről",
+    "LOGGED_IN_AS": "Be vagy jelentkezve az alábbi néven: ",
+    "SAVING_REVIEW_AS": "Az értékelésedet ezen a néven rögzítjük!",
+    "NO_ACCOUNT_YET": "Nincs még BIX fiókom",
+    "HAVE_A_BIX_ACCOUNT": "Már van BIX fiókom",
+    "AUTHENTICATION": "Azonosítás",
+    "LASTNAME": "Vezetéknév",
+    "FIRSTNAME": "Keresztnév",
+    "PERSONAL": "Magánszemélyként",
+    "AS_COMPANY": "Cég képviseletében",
+    "PHONE": "Telefonszám",
+    "COMPANY": "Cégnév",
+    "ROLE": "Beosztás",
+    "CONFIRM_PASSWORD": "Jelszó megerősítése",
+    "VISIBILITY": "Láthatóság",
+    "PUBLIC": "Mindenki számára látható",
+    "ONLY_FOR_COMPANY": "Csak az értékelt cég számára",
+    "PRIVATE": "Privát",
+    "SEND_REVIEW": "Értékelés küldése",
+    "REFERENCE": "Hogyan kíván refenrenciát megadni?"
   }
 }

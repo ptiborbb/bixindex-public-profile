@@ -39,6 +39,9 @@ const useInputLabelStyle = makeStyles({
   },
 });
 
+export const fbAppId = 294368951892091;
+export const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
+
 export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
   const router = useRouter();
@@ -46,9 +49,6 @@ export const Auth: FunctionComponent = () => {
   const { authService } = useApp();
   const companyFormID = router.query.companyFormID as string;
   const companyAlias = router.query.companyAlias as string;
-
-  const fbAppId = 294368951892091;
-  const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
 
   const login = useCallback(
     (email: string, password: string) => {

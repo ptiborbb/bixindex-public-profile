@@ -6,6 +6,7 @@ export interface IProfileListState {
   page: number;
   rowsPerPage: number;
   count: number;
+  loading: boolean;
 }
 
 export const initialProfileListState: IProfileListState = {
@@ -13,4 +14,5 @@ export const initialProfileListState: IProfileListState = {
   page: 1,
   rowsPerPage: 10,
   count: null,
+  loading: false,
 };
