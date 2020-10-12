@@ -15,6 +15,7 @@ import {
 export interface IAuthService {
   login: (email: string, password: string) => Promise<void>;
   facebook: (accessToken: string) => Promise<void>;
+  google: (accessToken: string) => Promise<void>;
   logout: () => Promise<void>;
   register: (name: string, email: string, pasword: string) => Promise<void>;
   getMe: () => void;
@@ -36,6 +37,14 @@ export const authServiceFactory = (bixClient: IBixindexClient, dispatch: Dispatc
     facebook: (accessToken: string) => {
       return bixClient.auth
         .facebook(accessToken)
+        .then(() => bixClient.auth.me())
+        .then((user) => {
+          dispatch(loginSuccess({ user }));
+        });
+    },
+    google: (accessToken: string) => {
+      return bixClient.auth
+        .google(accessToken)
         .then(() => bixClient.auth.me())
         .then((user) => {
           dispatch(loginSuccess({ user }));
