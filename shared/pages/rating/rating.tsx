@@ -286,7 +286,6 @@ export const Rating: FC = () => {
                         <Form style={{ width: '100%' }}>
                           {!nps && (
                             <>
-                              {console.log(errors)}
                               <Grid item xs={12}>
                                 <hr className={classes.verticalSpacing} />
                               </Grid>
