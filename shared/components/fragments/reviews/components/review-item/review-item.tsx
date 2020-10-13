@@ -3,7 +3,7 @@ import classes from './review-item.module.scss';
 import { RatingItem } from '../../../../../interfaces/profile-page';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import { Fab } from '@material-ui/core';
-import { Share } from '@material-ui/icons';
+import { Share, ThumbDown, ThumbUp } from '@material-ui/icons';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
 import { Chip } from '../../../../chip/chip';
@@ -50,11 +50,13 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         </div>
       </div>
       <div className={classes.npsInfo}>NPS: {npsToText(rating.nps)}</div>
-      <div className={classes.badReview}>
-        <div>{rating.negative}</div>
-      </div>
       <div className={classes.goodReview}>
-        <div>{rating.positive}</div>
+        <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
+        {rating.positive}
+      </div>
+      <div className={classes.badReview}>
+        <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
+        {rating.negative}
       </div>
       <div className={classes.badReview}>
         <div>{rating.summary}</div>
