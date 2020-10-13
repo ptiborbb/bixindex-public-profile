@@ -152,7 +152,7 @@ export const Rating: FC = () => {
             satisfaction: parseFloat(values.satisfaction),
             nps: values.nps,
             companyFormID,
-            comment: values.comment,
+            summary: values.comment,
             positive: values.positive,
             negative: values.negative,
             reference: values.reference,
