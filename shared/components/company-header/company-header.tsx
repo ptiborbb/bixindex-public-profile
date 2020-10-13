@@ -29,8 +29,7 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
     <div className={classes.companyHeader}>
       <div className={classes.companyHeaderTitle}>
         <div className={classes.companyHeaderLogo}>
-          {/* <img alt={title} src={logoPath} /> */}
-          <WorkIcon className={classes.companyLogoIcon} />
+          {logoPath ? <img alt={title} src={logoPath} /> : <WorkIcon className={classes.companyLogoIcon} />}
         </div>
         <div className={classes.companyHeaderText}>
           <span>{title}</span>

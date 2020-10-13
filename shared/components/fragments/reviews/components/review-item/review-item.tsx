@@ -2,7 +2,7 @@ import { FC } from 'react';
 import classes from './review-item.module.scss';
 import { RatingItem } from '../../../../../interfaces/profile-page';
 import { StarCounter } from '../../../../star-counter/star-counter';
-import { Fab } from '@material-ui/core';
+import { Avatar, Fab } from '@material-ui/core';
 import { Share, ThumbDown, ThumbUp } from '@material-ui/icons';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
@@ -18,9 +18,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
   return (
     <div className={classes.reviewCard}>
       <div className={classes.reviewerInfo}>
-        <div className={classes.avatar}>
-          <img alt={rating.name} src={avatar} />
-        </div>
+        <Avatar src={rating.logo} className={classes.avatar} />
         <div className={classes.reviewer}>
           <div className={classes.name}>{rating.name}</div>
           <div className={classes.role}>Ügyvezető: Cégnév</div>
