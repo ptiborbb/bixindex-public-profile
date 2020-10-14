@@ -1,6 +1,7 @@
 import {
   Avatar,
   Button,
+  Checkbox,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -76,6 +77,10 @@ export const Rating: FC = () => {
             confirmPassword: Yup.string().when('loginOrRegister', {
               is: ELoginOrRegister.REGISTER,
               then: Yup.string().required(t('COMMON.REQUIRED')),
+            }),
+            policy: Yup.boolean().when('loginOrRegister', {
+              is: ELoginOrRegister.REGISTER,
+              then: Yup.boolean().oneOf([true], t('COMMON.REQUIRED')),
             }),
           })
         : Yup.object(),
@@ -269,10 +274,9 @@ export const Rating: FC = () => {
                           lastname: '',
                           email: '',
                           phone: '',
-                          company: '',
-                          role: '',
                           password: '',
                           confirmPassword: '',
+                          policy: false,
                         },
                         visibility: '',
                       }}
@@ -548,26 +552,6 @@ export const Rating: FC = () => {
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.COMPANY')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="auth.company"
-                                          fullWidth
-                                          variant="outlined"
-                                        />
-                                      </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.ROLE')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="auth.role"
-                                          fullWidth
-                                          variant="outlined"
-                                        />
-                                      </Grid>
-                                      <Grid item xs={6}>
                                         <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
                                         <Field
                                           component={TextField}
@@ -590,6 +574,22 @@ export const Rating: FC = () => {
                                           type="password"
                                           variant="outlined"
                                         />
+                                      </Grid>
+                                      <Grid item xs={12} className={classes.alignCenter}>
+                                        <a href={`/adatvedelmi-tajekoztato`} target="_blank" rel="noreferrer">
+                                          <Checkbox
+                                            checked={values.auth.policy}
+                                            onChange={(event, value) => {
+                                              setFieldValue('auth.policy', value);
+                                            }}
+                                            name="checkedB"
+                                            color="primary"
+                                          />
+                                          <span className={classes.link}>{t('RATING.PRIVACY_POLICY')}</span>
+                                        </a>
+                                        <FormHelperText className={classes.errorMsg}>
+                                          {errors?.auth?.policy && !!submitCount ? t('RATING.POLICy_REQUIRED') : ''}
+                                        </FormHelperText>
                                       </Grid>
                                       <Grid item xs={6}>
                                         <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>

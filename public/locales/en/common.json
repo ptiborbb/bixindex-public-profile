@@ -461,6 +461,8 @@
     "ONLY_FOR_COMPANY": "Visible for rated company",
     "PRIVATE": "Private",
     "SEND_REVIEW": "Submit review",
-    "REFERENCE": "How would you like to provide a reference?"
+    "REFERENCE": "How would you like to provide a reference?",
+    "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
+    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
   }
 }
