@@ -66,7 +66,9 @@
     "SUBSCRIPTION": "Elõfizetés",
     "BLOG": "Blog",
     "COMPANY_SEARCH": "Cégkeresõ",
-    "CUSTOMER_PORTAL": "Ügyfélkapu"
+    "CUSTOMER_PORTAL": "Ügyfélkapu",
+    "LOGOUT": "Kilépés",
+    "LOGIN": "Belépés"
   },
   "AUTH": {
     "NAME": "Név",
@@ -465,6 +467,8 @@
     "ONLY_FOR_COMPANY": "Csak az értékelt cég számára",
     "PRIVATE": "Privát",
     "SEND_REVIEW": "Értékelés küldése",
-    "REFERENCE": "Hogyan kíván refenrenciát megadni?"
+    "REFERENCE": "Hogyan kíván refenrenciát megadni?",
+    "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
+    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
   }
 }

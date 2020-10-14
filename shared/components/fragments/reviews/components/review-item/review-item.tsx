@@ -21,7 +21,6 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         <Avatar src={rating.logo} className={classes.avatar} />
         <div className={classes.reviewer}>
           <div className={classes.name}>{rating.name}</div>
-          <div className={classes.role}>Ügyvezető: Cégnév</div>
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>

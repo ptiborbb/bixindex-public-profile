@@ -1,9 +1,11 @@
 import {
   Avatar,
   Button,
+  Checkbox,
   FormControlLabel,
   FormHelperText,
   Grid,
+  InputAdornment,
   MenuItem,
   Radio,
   SvgIcon,
@@ -76,6 +78,10 @@ export const Rating: FC = () => {
             confirmPassword: Yup.string().when('loginOrRegister', {
               is: ELoginOrRegister.REGISTER,
               then: Yup.string().required(t('COMMON.REQUIRED')),
+            }),
+            policy: Yup.boolean().when('loginOrRegister', {
+              is: ELoginOrRegister.REGISTER,
+              then: Yup.boolean().oneOf([true], t('COMMON.REQUIRED')),
             }),
           })
         : Yup.object(),
@@ -269,10 +275,9 @@ export const Rating: FC = () => {
                           lastname: '',
                           email: '',
                           phone: '',
-                          company: '',
-                          role: '',
                           password: '',
                           confirmPassword: '',
+                          policy: false,
                         },
                         visibility: '',
                       }}
@@ -317,18 +322,28 @@ export const Rating: FC = () => {
                             <Typography variant="h6">{t('RATING.WOULD_YOU_RECOMMEND')}</Typography>
                           </Grid>
                           <Grid item xs={12}>
-                            <CustomSlider
-                              defaultValue={4}
-                              name="nps"
-                              valueLabelDisplay="auto"
-                              step={1}
-                              marks
-                              min={0}
-                              max={10}
-                              track={false}
-                              onChange={(event, value) => setFieldValue('nps', value)}
-                              className={classes.npsSlider}
-                            />
+                            <Grid container spacing={0} justify="space-between">
+                              <Grid item xs={12}>
+                                <CustomSlider
+                                  defaultValue={4}
+                                  name="nps"
+                                  valueLabelDisplay="auto"
+                                  step={1}
+                                  marks
+                                  min={0}
+                                  max={10}
+                                  track={false}
+                                  onChange={(event, value) => setFieldValue('nps', value)}
+                                  className={classes.npsSlider}
+                                />
+                              </Grid>
+                              <Grid item>
+                                <Typography variant="h6">{1}</Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography variant="h6">{10}</Typography>
+                              </Grid>
+                            </Grid>
                           </Grid>
                           {!nps && (
                             <>
@@ -545,26 +560,9 @@ export const Rating: FC = () => {
                                           name="auth.phone"
                                           fullWidth
                                           variant="outlined"
-                                        />
-                                      </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.COMPANY')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="auth.company"
-                                          fullWidth
-                                          variant="outlined"
-                                        />
-                                      </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.ROLE')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="auth.role"
-                                          fullWidth
-                                          variant="outlined"
+                                          InputProps={{
+                                            startAdornment: <InputAdornment position="start">+</InputAdornment>,
+                                          }}
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
@@ -590,6 +588,22 @@ export const Rating: FC = () => {
                                           type="password"
                                           variant="outlined"
                                         />
+                                      </Grid>
+                                      <Grid item xs={12} className={classes.alignCenter}>
+                                        <a href={`/adatvedelmi-tajekoztato`} target="_blank" rel="noreferrer">
+                                          <Checkbox
+                                            checked={values.auth.policy}
+                                            onChange={(event, value) => {
+                                              setFieldValue('auth.policy', value);
+                                            }}
+                                            name="checkedB"
+                                            color="primary"
+                                          />
+                                          <span className={classes.link}>{t('RATING.PRIVACY_POLICY')}</span>
+                                        </a>
+                                        <FormHelperText className={classes.errorMsg}>
+                                          {errors?.auth?.policy && !!submitCount ? t('RATING.POLICy_REQUIRED') : ''}
+                                        </FormHelperText>
                                       </Grid>
                                       <Grid item xs={6}>
                                         <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
