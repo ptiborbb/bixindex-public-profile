@@ -20,7 +20,7 @@ import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
 interface CompanyFrameProps {
-  profile: IProfile;
+  profile: any;
   productsAndServices: any[];
   stats: any;
 }
