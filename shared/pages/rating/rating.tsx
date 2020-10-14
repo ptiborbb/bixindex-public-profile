@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   FormHelperText,
   Grid,
+  InputAdornment,
   MenuItem,
   Radio,
   SvgIcon,
@@ -559,6 +560,9 @@ export const Rating: FC = () => {
                                           name="auth.phone"
                                           fullWidth
                                           variant="outlined"
+                                          InputProps={{
+                                            startAdornment: <InputAdornment position="start">+</InputAdornment>,
+                                          }}
                                         />
                                       </Grid>
                                       <Grid item xs={6}>
