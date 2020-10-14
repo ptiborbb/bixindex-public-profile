@@ -321,18 +321,28 @@ export const Rating: FC = () => {
                             <Typography variant="h6">{t('RATING.WOULD_YOU_RECOMMEND')}</Typography>
                           </Grid>
                           <Grid item xs={12}>
-                            <CustomSlider
-                              defaultValue={4}
-                              name="nps"
-                              valueLabelDisplay="auto"
-                              step={1}
-                              marks
-                              min={0}
-                              max={10}
-                              track={false}
-                              onChange={(event, value) => setFieldValue('nps', value)}
-                              className={classes.npsSlider}
-                            />
+                            <Grid container spacing={0} justify="space-between">
+                              <Grid item xs={12}>
+                                <CustomSlider
+                                  defaultValue={4}
+                                  name="nps"
+                                  valueLabelDisplay="auto"
+                                  step={1}
+                                  marks
+                                  min={0}
+                                  max={10}
+                                  track={false}
+                                  onChange={(event, value) => setFieldValue('nps', value)}
+                                  className={classes.npsSlider}
+                                />
+                              </Grid>
+                              <Grid item>
+                                <Typography variant="h6">{1}</Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography variant="h6">{10}</Typography>
+                              </Grid>
+                            </Grid>
                           </Grid>
                           {!nps && (
                             <>
