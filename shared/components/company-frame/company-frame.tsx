@@ -20,7 +20,7 @@ import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
 interface CompanyFrameProps {
-  profile: any;
+  profile: IProfile;
   productsAndServices: any[];
   stats: any;
 }
@@ -64,7 +64,17 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             value={`${profile.details.yearlyIncome.value} HUF`}
             change={profile.details.yearlyIncome.change}
           />
-          <CompanyDetailItem icon={<AssignmentIcon />} label={'Adoszam'} value={profile.details.taxNumber} />
+          {profile?.details?.taxNumber && (
+            <CompanyDetailItem
+              icon={<AssignmentIcon />}
+              label={'Adószám'}
+              value={`${profile.details.taxNumber.substring(0, 8)}-${profile.details.taxNumber.substring(
+                8,
+                9,
+              )}-${profile.details.taxNumber.substring(9, 12)}`}
+            />
+          )}
+
           <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={profile.details.address} />
           <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={profile.details.mainProfile} />
           <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
