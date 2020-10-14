@@ -2,7 +2,8 @@ import Button from '@material-ui/core/Button';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
+import { useApp } from '../../app.context';
 import { useTranslate } from '../../translate.context';
 import classes from './header.module.scss';
 
@@ -12,6 +13,17 @@ interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({ logoPath }) => {
   const { t } = useTranslate();
+  const {
+    state: {
+      auth: { user },
+    },
+    authService,
+  } = useApp();
+
+  const logout = useCallback(() => {
+    authService.logout();
+  }, [authService]);
+
   return (
     <header className={classes.header}>
       <Link href="/">
@@ -35,6 +47,17 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
       </div>
       <div className={classes.cta}>
         <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
+      </div>
+      <div className={classes.cta}>
+        {user ? (
+          <Button className={classes.logButton} onClick={logout}>
+            {t('HEADER.LOGOUT')}
+          </Button>
+        ) : (
+          <Link href="/auth">
+            <Button className={classes.logButton}>{t('HEADER.LOGIN')}</Button>
+          </Link>
+        )}
       </div>
     </header>
   );

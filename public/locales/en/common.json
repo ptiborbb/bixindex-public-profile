@@ -65,7 +65,9 @@
     "SUBSCRIPTION": "Elõfizetés",
     "BLOG": "Blog",
     "COMPANY_SEARCH": "Cégkeresõ",
-    "CUSTOMER_PORTAL": "Ügyfélkapu"
+    "CUSTOMER_PORTAL": "Ügyfélkapu",
+    "LOGOUT": "Logout",
+    "LOGIN": "Login"
   },
   "AUTH": {
     "NAME": "Name",
