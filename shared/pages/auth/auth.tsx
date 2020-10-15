@@ -4,8 +4,11 @@ import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useState } from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleLogin } from 'react-google-login';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
@@ -13,9 +16,6 @@ import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { GoogleLogin } from 'react-google-login';
-import Link from 'next/link';
 
 const useInputFieldStyle = makeStyles({
   root: {

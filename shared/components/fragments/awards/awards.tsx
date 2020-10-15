@@ -3,7 +3,7 @@ import { Award } from '../../award/award';
 import classes from './awards.module.scss';
 
 interface AwardsProps {
-  awards: any[];
+  awards: Record<string, string & Date>[];
 }
 
 export const Awards: FC<AwardsProps> = ({ awards }) => {

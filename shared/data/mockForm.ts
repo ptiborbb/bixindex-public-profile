@@ -1,6 +1,4 @@
-import { ECompanyTypes, EProductTypes, IProduct, IProfile, IService } from '@codingsans/bixindex-common';
-import { ReviewStatsProps } from '../components/fragments/reviews/components/review-stats/review-stats';
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const mockForm = (): any => ({
   id: 'e74bf648-c432-42ce-9cda-a83cec34bb9d',
   companyName: 'Some company',

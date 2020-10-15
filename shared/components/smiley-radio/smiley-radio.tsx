@@ -1,10 +1,9 @@
-import { Radio, RadioProps, SvgIconTypeMap } from '@material-ui/core';
+import { Radio, RadioProps } from '@material-ui/core';
 import React, { FC } from 'react';
 import classes from './smiley-radio.module.scss';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 interface SmileyRadioProps extends RadioProps {
-  smiley: any;
+  smiley: unknown;
 }
 
 export const SmileyRadio: FC<SmileyRadioProps> = (props: SmileyRadioProps) => {

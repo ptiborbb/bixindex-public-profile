@@ -3,7 +3,7 @@ import { Article } from '../../article/article';
 import classes from './news.module.scss';
 
 interface NewsProps {
-  articles: any[];
+  articles: Record<string, string & Date & number>[];
 }
 
 export const News: FC<NewsProps> = ({ articles }) => {

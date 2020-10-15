@@ -1,7 +1,6 @@
 import { IProduct, IService } from '@codingsans/bixindex-common';
 import DateFnsUtils from '@date-io/date-fns';
 import {
-  Fab,
   FormControlLabel,
   FormLabel,
   ListSubheader,
@@ -11,19 +10,15 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
-import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Share, ThumbDown, ThumbUp, Tune } from '@material-ui/icons';
+import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { ChangeEvent, FC, useState } from 'react';
+import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { StarCounter } from '../../../../star-counter/star-counter';
-import classes from './reviews-detail.module.scss';
-import avatar from '../../../../../../public/avatar.png';
-import fbIcon from '../../../../../../public/social/f_icon.svg';
-import inIcon from '../../../../../../public/social/in_icon.svg';
-import { Chip } from '../../../../chip/chip';
-import { ReviewStats, ReviewStatsProps } from '../review-stats/review-stats';
-import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewItem } from '../review-item/review-item';
+import { ReviewStats, ReviewStatsProps } from '../review-stats/review-stats';
+import classes from './reviews-detail.module.scss';
 
 interface ReviewsDetailProps {
   filter: ReviewFilter;

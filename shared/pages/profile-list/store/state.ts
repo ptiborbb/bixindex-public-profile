@@ -1,4 +1,3 @@
-import { IProfile } from '@codingsans/bixindex-common';
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 
 export interface IProfileListState {
