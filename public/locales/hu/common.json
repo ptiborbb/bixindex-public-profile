@@ -5,6 +5,7 @@
     "SUMMARY": "Összegzés",
     "UNKOWN_ERROR": "Ismeretlen hiba történt",
     "HISTORY_PLACEHOLDER": "Elmúlt {{month}} hónap",
+    "REQUIRED": "A mező kitöltése kötelező",
     "TABLE": {
       "COLUMNS": {
         "ID": "Azonosító",
@@ -65,7 +66,9 @@
     "SUBSCRIPTION": "Elõfizetés",
     "BLOG": "Blog",
     "COMPANY_SEARCH": "Cégkeresõ",
-    "CUSTOMER_PORTAL": "Ügyfélkapu"
+    "CUSTOMER_PORTAL": "Ügyfélkapu",
+    "LOGOUT": "Kilépés",
+    "LOGIN": "Belépés"
   },
   "AUTH": {
     "NAME": "Név",
@@ -75,13 +78,24 @@
     "PASSWORD_MATCH": "A jelszavaknak meg kell egyeznie",
     "LOGIN": "Belépés",
     "REGISTER": "Regisztráció",
-    "FORGOT_PASSWORD": "Elfelejtett jelszó",
+    "FORGOT_PASSWORD": "Elfelejtett jelszó?",
     "REQUIRED": "A mező kitöltése kötelező",
     "INVALID_EMAIL": "Hibás email cím",
     "FORGOT_PASSWORD_SUBMIT": "Jelszó helyreállítása",
     "BACK_TO_LOGIN": "Vissza a bejelentkezéshez",
     "RESET": "Jelszó helyreállítása",
-    "FAILED": "Hibás email cím és/vagy jelszó."
+    "FAILED": "Hibás email cím és/vagy jelszó.",
+    "PAGE_TITLE": "Azonosítás",
+    "CREATE": "Hozz létre egyet!",
+    "SOCIAL_LOGIN": "Lépj be egyszerűen",
+    "FB_BTN_TEXT": "Facebookkal",
+    "GOOGLE_BTN_TEXT": "Google fiókkal",
+    "IDENTIFICATION_WITH_EMAIL": "Azonosítás e-mail címmel",
+    "LOGIN_WITH_EMAIL": "Belépés e-mail címmel",
+    "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
+    "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
+    "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
+    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
   },
   "ROUTES": {
     "USERS": "Felhasználók",
@@ -400,15 +414,6 @@
       "LINK": "Legjobb Ügyfélélmény 2020"
     }
   },
-  "LOGIN_REGISTER": {
-    "TITLE": "Azonosítás",
-    "IDENTIFICATION_WITH_EMAIL": "Azonosítás e-mail címmel",
-    "LOGIN_WITH_EMAIL": "Belépés e-mail címmel",
-    "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
-    "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
-    "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
-    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
-  },
   "COMPANY_SEARCH": {
     "RESULTS_NUMBER": "Találatok száma: {{count}}",
     "QUICK_SEARCH": {
@@ -424,5 +429,46 @@
     "PRODUCTS": "Termékek",
     "WRITE_REVIEW": "Értékelés írása",
     "BIX_PROFILE": "BIX Profil"
+  },
+  "TOAST": {
+    "ERROR": {
+      "UNAUTHORIZED": "Sikertelen azonosítás",
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+    }
+  },
+  "RATING": {
+    "WRITING_REVIEW_ON": "A következő cégről írsz értékelést:",
+    "SATISFACTION": "Összességében mennyire elégedett?",
+    "WOULD_YOU_RECOMMEND": "Mennyire valószínű, hogy ajánlaná a cég termékeit / szolgáltatásait illetve magát a céget barátainak/kollégáinak?",
+    "WHAT_DO_YOU_THINK": "Mit gondol az alábbiakról?",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Jelszó",
+    "MORE_THAN_EXPECTED": "Többet kaptam, mint amit vártam",
+    "EXACTLY_WHAT_EXPECTED": "Pontosan azt kaptam amit vártam",
+    "LESS_THEN_EXPECTED": "Kevesebbet kaptam, mint amit vártam",
+    "POSITIVE": "Kérjük, néhány karakterben mondja el pozitív tapasztalatait:",
+    "NEGATIVE": "Kérjük, néhány karakterben mondja el negatív tapasztalatait:",
+    "COMMENT": "Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről",
+    "LOGGED_IN_AS": "Be vagy jelentkezve az alábbi néven: ",
+    "SAVING_REVIEW_AS": "Az értékelésedet ezen a néven rögzítjük!",
+    "NO_ACCOUNT_YET": "Nincs még BIX fiókom",
+    "HAVE_A_BIX_ACCOUNT": "Már van BIX fiókom",
+    "AUTHENTICATION": "Azonosítás",
+    "LASTNAME": "Vezetéknév",
+    "FIRSTNAME": "Keresztnév",
+    "PERSONAL": "Magánszemélyként",
+    "AS_COMPANY": "Cég képviseletében",
+    "PHONE": "Telefonszám",
+    "COMPANY": "Cégnév",
+    "ROLE": "Beosztás",
+    "CONFIRM_PASSWORD": "Jelszó megerősítése",
+    "VISIBILITY": "Láthatóság",
+    "PUBLIC": "Mindenki számára látható",
+    "ONLY_FOR_COMPANY": "Csak az értékelt cég számára",
+    "PRIVATE": "Privát",
+    "SEND_REVIEW": "Értékelés küldése",
+    "REFERENCE": "Hogyan kíván refenrenciát megadni?",
+    "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
+    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
   }
 }

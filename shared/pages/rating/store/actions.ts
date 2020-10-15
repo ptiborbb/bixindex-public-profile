@@ -11,6 +11,9 @@ export enum ERatingActionTypes {
   SUBMIT_REVIEW = '[Rating] SUBMIT_REVIEW',
   SUBMIT_REVIEW_SUCCESS = '[Rating] SUBMIT_REVIEW_SUCCESS',
   SUBMIT_REVIEW_FAIL = '[Rating] SUBMIT_REVIEW_FAIL',
+  SUBMIT_NPS = '[Rating] SUBMIT_NPS',
+  SUBMIT_NPS_SUCCESS = '[Rating] SUBMIT_NPS_SUCCESS',
+  SUBMIT_NPS_FAIL = '[Rating] SUBMIT_NPS_FAIL',
 }
 
 export const getForm = createAction<{ companyFormID: string }>(ERatingActionTypes.GET_FORM);
@@ -20,3 +23,6 @@ export const getFormFail = createAction<{ error: AxiosError }>(ERatingActionType
 export const submitReview = createAction<{ rating: unknown }>(ERatingActionTypes.SUBMIT_REVIEW);
 export const submitReviewSuccess = createAction(ERatingActionTypes.SUBMIT_REVIEW_SUCCESS);
 export const submitReviewFail = createAction<{ error: AxiosError }>(ERatingActionTypes.SUBMIT_REVIEW_FAIL);
+export const submitNPS = createAction<{ rating: unknown }>(ERatingActionTypes.SUBMIT_NPS);
+export const submitNPSSuccess = createAction(ERatingActionTypes.SUBMIT_NPS_SUCCESS);
+export const submitNPSFail = createAction<{ error: AxiosError }>(ERatingActionTypes.SUBMIT_NPS_FAIL);

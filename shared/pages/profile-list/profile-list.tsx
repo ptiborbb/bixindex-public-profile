@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Grid, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
@@ -23,7 +23,7 @@ export const ProfileList: FC = () => {
   const {
     publicProfileService,
     state: {
-      profileList: { page, profiles, rowsPerPage, count },
+      profileList: { page, profiles, rowsPerPage, count, loading },
     },
   } = useApp();
   const router = useRouter();
@@ -93,7 +93,7 @@ export const ProfileList: FC = () => {
                 />
               </div>
               <div className={classes.searchExamples}>
-                <b>{t('COMPANY_SEARCH.QUICK_SEARCH.LABEL')}</b>{' '}
+                <b>{t('COMPANY_SEARCH.QUICK_SEARCH.LABEL')}</b>
                 {Array(4)
                   .fill(null)
                   .map((_, i) => (
@@ -118,13 +118,21 @@ export const ProfileList: FC = () => {
         <div className={classes.divider}></div>
       </div>
 
-      {profiles && (
+      {profiles ? (
         <div className={classes.listWrapper}>
           <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>
           {profiles.map((profile, i) => (
             <ProfileListItem key={i} profile={profile} />
           ))}
         </div>
+      ) : (
+        <>
+          {loading && (
+            <div className={classes.spinner}>
+              <CircularProgress />
+            </div>
+          )}
+        </>
       )}
 
       <Footer logoPath={logo}></Footer>
