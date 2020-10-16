@@ -65,7 +65,9 @@
     "SUBSCRIPTION": "Elõfizetés",
     "BLOG": "Blog",
     "COMPANY_SEARCH": "Cégkeresõ",
-    "CUSTOMER_PORTAL": "Ügyfélkapu"
+    "CUSTOMER_PORTAL": "Ügyfélkapu",
+    "LOGOUT": "Logout",
+    "LOGIN": "Login"
   },
   "AUTH": {
     "NAME": "Name",
@@ -423,5 +425,46 @@
     "PRODUCTS": "Termékek",
     "WRITE_REVIEW": "Értékelés írása",
     "BIX_PROFILE": "BIX Profil"
+  },
+  "TOAST": {
+    "ERROR": {
+      "UNAUTHORIZED": "Authorization was unsuccessful",
+      "INTERNAL_SERVER_ERROR": "An unknown error has occurred"
+    }
+  },
+  "RATING": {
+    "WRITING_REVIEW_ON": "You are writing a review about:",
+    "PASSWORD": "Password",
+    "MORE_THAN_EXPECTED": "I got more than I expected",
+    "EXACTLY_WHAT_EXPECTED": "I got exactly what I expected",
+    "LESS_THEN_EXPECTED": "I got less then I expected",
+    "SATISFACTION": "Overall satisfaction",
+    "WOULD_YOU_RECOMMEND": "How likely would you to recommend the company’s products / services or the company itself to your friends / colleagues?",
+    "WHAT_DO_YOU_THINK": "What do you think about these?",
+    "POSITIVE": "Please tell us about your positive experiences in a few characters:",
+    "NEGATIVE": "Please tell us about your negative experiences in a few characters:",
+    "COMMENT": "Summarize your experience of collaboration in a short sentence",
+    "LOGGED_IN_AS": "You are logged in as:",
+    "SAVING_REVIEW_AS": "Your rating will be saved with this name!",
+    "NO_ACCOUNT_YET": "I don't have a BIX account yet",
+    "HAVE_A_BIX_ACCOUNT": "I already have a BIX acount",
+    "AUTHENTICATION": "Authentication",
+    "LASTNAME": "Last name",
+    "PERSONAL": "As individual",
+    "AS_COMPANY": "As a company",
+    "FIRSTNAME": "First name",
+    "EMAIL": "E-mail",
+    "PHONE": "Phone",
+    "COMPANY": "Company name",
+    "ROLE": "Role",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "VISIBILITY": "Visibility",
+    "PUBLIC": "Visible for everyone",
+    "ONLY_FOR_COMPANY": "Visible for rated company",
+    "PRIVATE": "Private",
+    "SEND_REVIEW": "Submit review",
+    "REFERENCE": "How would you like to provide a reference?",
+    "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
+    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
   }
 }

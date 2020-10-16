@@ -16,8 +16,8 @@ import {
 
 export interface IRatingService {
   getFormByID: (companyFormID: string, locale: string) => void;
-  submitReview: (rating: unknown) => void;
-  submitNps: (rating: unknown) => void;
+  submitReview: (rating: unknown) => Promise<void>;
+  submitNps: (rating: unknown) => Promise<void>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,24 +32,26 @@ export const ratingServiceFactory = (bixClient: IBixindexClient, dispatch: Dispa
     },
     submitReview: (rating) => {
       dispatch(submitReview({ rating }));
-      bixClient.publicProfile.profile
+      return bixClient.publicProfile.profile
         .submitReview(rating)
         .then(() => {
           dispatch(submitReviewSuccess());
         })
         .catch((error) => {
           dispatch(submitReviewFail({ error }));
+          throw error;
         });
     },
     submitNps: (rating) => {
       dispatch(submitNPS({ rating }));
-      bixClient.publicProfile.profile
+      return bixClient.publicProfile.profile
         .submitNps(rating)
         .then(() => {
           dispatch(submitNPSSuccess());
         })
-        .catch(() => {
+        .catch((error) => {
           dispatch(submitNPSFail());
+          throw error;
         });
     },
   };

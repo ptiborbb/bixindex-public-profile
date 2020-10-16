@@ -12,13 +12,15 @@ export const createNoAuthRouteComponent = (Child: FunctionComponent): NextPage =
     const host = get(ctx, 'req.headers.host', '');
     const authGuard = authGuardServiceFactory(host);
     if (ctx.req) {
-      const user = await authGuard.getUser(get(ctx, 'req.headers.cookie', ''));
+      const cookie = get(ctx, 'req.headers.cookie', '');
+      const user = await authGuard.getUser(cookie);
       if (!user) {
         return {
           namespacesRequired: ['common'],
         };
       }
       return {
+        user,
         namespacesRequired: ['common'],
       };
     } else {

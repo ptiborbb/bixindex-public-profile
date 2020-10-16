@@ -62,3 +62,36 @@
 .spacingRight {
   margin-right: 10px;
 }
+.user {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem !important;
+  .avatar {
+    width: 90px !important;
+    height: 90px !important;
+    margin-right: 1rem !important;
+  }
+}
+.userWarning {
+  margin-top: 2rem;
+  display: flex;
+  color: #ff3739;
+}
+.icons {
+  display: flex;
+  align-items: center;
+  .icon {
+    cursor: pointer;
+    &.google {
+      width: 26.5px !important;
+      height: 26.5px !important;
+    }
+  }
+}
+.alignCenter {
+  display: flex;
+  align-items: center;
+}
+.link {
+  color: blue;
+}
