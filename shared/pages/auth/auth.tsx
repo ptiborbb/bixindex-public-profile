@@ -97,7 +97,7 @@ export const Auth: FunctionComponent = () => {
   const responseGoogle = useCallback(
     (response: GoogleLoginResponse, isRegister: boolean) => {
       return authService
-        .google(response.accessToken)
+        .google(response.tokenId)
         .then(() =>
           companyFormID
             ? isRegister
