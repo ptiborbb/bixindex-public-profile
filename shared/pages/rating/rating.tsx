@@ -9,6 +9,7 @@ import {
   MenuItem,
   Radio,
   SvgIcon,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
 import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
@@ -562,6 +563,15 @@ export const Rating: FC = () => {
                                           variant="outlined"
                                           InputProps={{
                                             startAdornment: <InputAdornment position="start">+</InputAdornment>,
+                                            endAdornment: (
+                                              <Tooltip
+                                                title="Telefonszámod soha nem lesz nyilvános. Kizárólag a BIX Hungary kft munkatársai számára elérhető, az értékelés telefonos hitelesítése céljából"
+                                                arrow
+                                                placement="top"
+                                              >
+                                                <Info style={{ color: '#595959' }} />
+                                              </Tooltip>
+                                            ),
                                           }}
                                         />
                                       </Grid>
