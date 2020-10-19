@@ -1,4 +1,3 @@
-import { IProfile } from '@codingsans/bixindex-common';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
@@ -7,75 +6,44 @@ import LanguageIcon from '@material-ui/icons/Language';
 import PlaceIcon from '@material-ui/icons/Place';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { useRouter } from 'next/router';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Chip } from '../chip/chip';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
-import { Awards } from '../fragments/awards/awards';
-import { News } from '../fragments/news/news';
-import { Products } from '../fragments/products/products';
-import { Reviews } from '../fragments/reviews/reviews';
 import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface CompanyFrameProps {
-  rating: {
-    value: number;
-    count: number;
-  };
-  profile: IProfile;
+  profile: any;
+  productsAndServices: any[];
+  stats: any;
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
+// TODO missing typing
 
-export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
-  const router = useRouter();
-  const hash = useMemo(() => router.asPath.split('#')[1], [router.asPath]);
-  const contentSegment = useMemo(() => {
-    switch (hash) {
-      case 'reviews':
-        return <Reviews />;
-      case 'awards':
-        return (
-          <Awards
-            awards={[
-              {
-                image: 'https://placekitten.com/300/200',
-                date: new Date(),
-                title: 'Title',
-                description: 'Description',
-              },
-              {
-                image: 'https://placekitten.com/300/200',
-                date: new Date(),
-                title: 'Title',
-                description: 'Description',
-              },
-            ]}
-          />
-        );
-      case 'news':
-        return <News />;
-      case 'products':
-        return <Products />;
-      default:
-        return <Reviews />;
-    }
-  }, [hash]);
-
+export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, productsAndServices, stats }) => {
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
         <div className={classes.ratingBlock}>
           <div>
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} ${classes.ratingStarActive}`} />
-            <GradeIcon className={`${classes.ratingStar} `} />
+            {Array(5)
+              .fill(0)
+              .map((_, i) => {
+                return (
+                  <GradeIcon
+                    key={i}
+                    className={`${classes.ratingStar}${
+                      Math.round(stats.index.score / 2) > i ? ` ${classes.ratingStarActive}` : ''
+                    }`}
+                  />
+                );
+              })}
           </div>
           <div className={classes.captionText}>Bizalmi index</div>
-          <div className={classes.ratingCounter}>{rating.value}</div>
-          <div className={classes.captionText}>ÖSSZESEN {rating.count} DB ÉRTÉKELÉS</div>
+          <div className={classes.ratingCounter}>{(stats.index.score as number)?.toFixed(2)}</div>
+          <div className={classes.captionText}>ÖSSZESEN {stats.index.ratingCount} DB ÉRTÉKELÉS</div>
         </div>
 
         <div className={classes.detailsTitle}>Cégadatok</div>
@@ -93,7 +61,17 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
             value={`${profile.details.yearlyIncome.value} HUF`}
             change={profile.details.yearlyIncome.change}
           />
-          <CompanyDetailItem icon={<AssignmentIcon />} label={'Adoszam'} value={profile.details.taxNumber} />
+          {profile?.details?.taxNumber && (
+            <CompanyDetailItem
+              icon={<AssignmentIcon />}
+              label={'Adószám'}
+              value={`${profile.details.taxNumber.substring(0, 8)}-${profile.details.taxNumber.substring(
+                8,
+                9,
+              )}-${profile.details.taxNumber.substring(9, 12)}`}
+            />
+          )}
+
           <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={profile.details.address} />
           <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={profile.details.mainProfile} />
           <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
@@ -109,16 +87,8 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
           <div className={classes.blockLabel}>Termékek és szolgáltatások</div>
 
           <div className={classes.chipBlock}>
-            {profile.products.map((product, i) => (
+            {productsAndServices.map((product, i) => (
               <Chip key={i} text={product.name} />
-            ))}
-          </div>
-
-          <div className={classes.blockLabel}>Szakterület</div>
-
-          <div className={classes.chipBlock}>
-            {profile.services.map((service, i) => (
-              <Chip key={i} text={service.name} />
             ))}
           </div>
 
@@ -137,7 +107,8 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ rating, profile }) => {
           ))}
         </div>
       </div>
-      <div className={classes.companyContent}>{contentSegment}</div>
+
+      <div className={classes.companyContent}>{children}</div>
     </div>
   );
 };

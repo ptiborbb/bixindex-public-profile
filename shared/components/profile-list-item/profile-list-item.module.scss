@@ -1,0 +1,162 @@
+@import '../../../styles/variables.scss';
+
+.profileListItem {
+  border: 1px solid $grey;
+  width: 100%;
+  margin-top: 30px;
+  border-radius: 0.1875rem;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+
+  .leftCorner {
+    flex: 1;
+    padding: 0 20px;
+    border-right: 1px solid $grey;
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid $grey;
+
+      .logo {
+        height: 70px;
+        width: 70px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .title {
+        flex: 1;
+        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          display: flex;
+          align-items: center;
+
+          h3 {
+            margin: 0 10px 0 0;
+          }
+
+          .starHolder {
+            width: 100px;
+            min-width: 100px;
+
+            .ratingStar {
+              color: lightgray;
+            }
+
+            .ratingStarActive {
+              color: #bf9855;
+            }
+          }
+        }
+
+        .profile {
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+
+      .indexes {
+        text-align: right;
+
+        .indexTitle {
+          text-transform: uppercase;
+          color: #b4b4b4 !important;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .index {
+          font-size: 14px;
+
+          .mainScore {
+            font-size: 2.5em;
+            color: #444 !important;
+          }
+        }
+
+        .count {
+          text-transform: uppercase;
+          font-size: 11px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .columns {
+      display: flex;
+      padding: 10px 0;
+
+      p {
+        margin-top: 0;
+      }
+
+      & > div {
+        flex: 1;
+        padding: 10px;
+      }
+
+      .quote {
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border-right: 1px solid $grey;
+      }
+
+      .products {
+        border-right: 1px solid $grey;
+
+        .productsTitle {
+          text-transform: uppercase;
+          text-align: center;
+          font-weight: 500;
+          margin-bottom: 10px;
+        }
+
+        .product {
+          background-color: $grey;
+          text-align: center;
+          font-size: 14px;
+          line-height: 28px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .address {
+        p {
+          display: flex;
+          align-items: center;
+
+          span {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .rightCorner {
+    max-width: 255px;
+    padding: 0 20px;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+      height: 50%;
+      display: flex;
+      align-items: center;
+    }
+
+    .writeReview {
+      border-bottom: 1px solid $grey;
+    }
+  }
+}

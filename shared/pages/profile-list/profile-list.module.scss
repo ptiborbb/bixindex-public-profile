@@ -1,0 +1,106 @@
+@import '../../../styles/variables.scss';
+
+@mixin container($margin-y: 0) {
+  width: 100%;
+  max-width: 1170px;
+  margin: $margin-y auto;
+  padding: 0 20px;
+}
+
+.container {
+  @include container;
+}
+
+.listWrapper {
+  @include container(100px);
+
+  h3 {
+    font-size: 1.6em;
+    line-height: 1.4em;
+    margin-bottom: 30px;
+    font-weight: 300;
+  }
+}
+
+.searchExamples span {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.companySearch {
+  color: white;
+
+  .searchInputBlock {
+    box-shadow: 0px 1px 15px rgba(69, 65, 78, 0.0756624);
+
+    padding: 5px;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+
+    .searchInput {
+      border: 0;
+      outline: 0;
+      margin-right: 10px;
+      color: black;
+      background-color: white;
+      border-radius: 5px;
+    }
+
+    .searchButton {
+      border-radius: 3px;
+      border: 0;
+      outline: 0;
+      width: fit-content !important;
+      background-color: transparent !important;
+      box-shadow: unset !important;
+      color: #56aaa6 !important;
+    }
+  }
+}
+.divider {
+  background: rgba(255, 255, 255, 0.4);
+  height: 1px;
+}
+
+.headerBlock {
+  background-image: $bix-bg-gradient;
+  min-height: 83vh;
+  display: flex;
+  flex-direction: column;
+
+  &Inner {
+    @include container;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mainTitle {
+    color: $white;
+    font-weight: 600;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    line-height: 1.35;
+  }
+
+  .subTitle {
+    color: $white;
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    line-height: 1.35;
+  }
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+}

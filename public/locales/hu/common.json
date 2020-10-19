@@ -1,0 +1,474 @@
+{
+  "COMMON": {
+    "PAGE_TITLE": "Cégek, akikkel nyugodtan dolgozhatsz! - BIX ",
+    "BACK": "Vissza",
+    "SUMMARY": "Összegzés",
+    "UNKOWN_ERROR": "Ismeretlen hiba történt",
+    "HISTORY_PLACEHOLDER": "Elmúlt {{month}} hónap",
+    "REQUIRED": "A mező kitöltése kötelező",
+    "TABLE": {
+      "COLUMNS": {
+        "ID": "Azonosító",
+        "NAME": "Név",
+        "EMAIL": "E-mail",
+        "ROLE": "Jogosultság",
+        "PHONE": "Telefon",
+        "EDIT": "Szerkesztés",
+        "COMPANY": "Cég",
+        "OWNER": "Tulajdonos",
+        "COUPON_TYPE": "Kedvezmény típusa",
+        "AMOUNT": "Kedvezmény mértéke",
+        "SUBSCRIPTION_TYPE": "Előfizetés típusa",
+        "NUMBER_OF_REVIEWS": "Értékelések száma",
+        "TYPE": "Típus",
+        "STARTDATE": "Előfizetés kezdete",
+        "ENDDATE": "Lejárat dátuma",
+        "DATE": "Dátum",
+        "STATUS": "Státusz",
+        "HAS_POST": "Van értékelése?",
+        "COUPON_CODE": "Kuponkód",
+        "MAIN_CATEGORY": "Főkategória",
+        "SUB_CATEGORY": "Alkategória",
+        "TAX_NUMBER": "Adószám",
+        "RANK": "Titulus",
+        "POSITION": "Pozíció",
+        "POSTED_COMPANY": "Értékelt cég",
+        "EXPIRATION": "Lejárat",
+        "REVIEW": "Értékelés"
+      }
+    }
+  },
+  "COMPANIES": {
+    "TITLE": "Cégek",
+    "HISTORY_COMPANIES_LABEL": "Kezelt cégek számának alakulása",
+    "ALL_COMPANIES": "Kezelt cégek a rendszerben",
+    "AT_LEAST_TEN": "Cégek, akikről legalább 10 értékelés van",
+    "WITH_SUBSCRIPTION": "Cégek, akikhez tartozik előfizetés",
+    "PUBLIC_PROFILES": "Nyilvános profilok listája",
+    "RELATED_USERS": "Kapcsolódó felhasználók",
+    "RELATED_SUBSCRIPTIONS": "Kapcsolódó előfizetések",
+    "TAX_NUMBER": "Adószám",
+    "ACTIVITY_TYPE": "Tevékenység típusa",
+    "NUMBER_OF_EMPLOYEES": "Foglalkoztatottak száma",
+    "YEARLY_REVENUE": "Éves árbevétel",
+    "SEARCH_HELPER_TEXT": "Cégnév, adószám, kezelő személy, e-mail"
+  },
+  "ENUMS": {
+    "ADMIN": "Admin",
+    "NORMAL": "Felhasználó"
+  },
+  "HEADER": {
+    "TITLE": "hello hungarian header {{propName}}",
+    "PUBLIC_PROFILE_NUM": "Nyilvános profilok száma",
+    "NUM_OF_USERS": "Felhasználók száma",
+    "NUM_OF_SUBSCRIBERS": "Előfizetők száma",
+    "FUNCTIONS": "Funkciók",
+    "SUBSCRIPTION": "Elõfizetés",
+    "BLOG": "Blog",
+    "COMPANY_SEARCH": "Cégkeresõ",
+    "CUSTOMER_PORTAL": "Ügyfélkapu",
+    "LOGOUT": "Kilépés",
+    "LOGIN": "Belépés"
+  },
+  "AUTH": {
+    "NAME": "Név",
+    "EMAIL": "Email cím",
+    "PASSWORD": "Jelszó",
+    "CONFIRM_PASSWORD": "Jelszó megerősítés",
+    "PASSWORD_MATCH": "A jelszavaknak meg kell egyeznie",
+    "LOGIN": "Belépés",
+    "REGISTER": "Regisztráció",
+    "FORGOT_PASSWORD": "Elfelejtett jelszó?",
+    "REQUIRED": "A mező kitöltése kötelező",
+    "INVALID_EMAIL": "Hibás email cím",
+    "FORGOT_PASSWORD_SUBMIT": "Jelszó helyreállítása",
+    "BACK_TO_LOGIN": "Vissza a bejelentkezéshez",
+    "RESET": "Jelszó helyreállítása",
+    "FAILED": "Hibás email cím és/vagy jelszó.",
+    "PAGE_TITLE": "Azonosítás",
+    "CREATE": "Hozz létre egyet!",
+    "SOCIAL_LOGIN": "Lépj be egyszerűen",
+    "FB_BTN_TEXT": "Facebookkal",
+    "GOOGLE_BTN_TEXT": "Google fiókkal",
+    "IDENTIFICATION_WITH_EMAIL": "Azonosítás e-mail címmel",
+    "LOGIN_WITH_EMAIL": "Belépés e-mail címmel",
+    "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
+    "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
+    "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
+    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
+  },
+  "ROUTES": {
+    "USERS": "Felhasználók",
+    "COUPONS": "Kuponok",
+    "COMPANIES": "Cégek",
+    "REVIEWS": "Értékelések",
+    "SUBSCRIPTIONS": "Előfizetések",
+    "BEST_EXPERIENCE": "Legjobb Ügyfélélmény Díj",
+    "OWNERSHIP_REQUESTS": "Tulajdonjog kérések"
+  },
+  "COUPONS": {
+    "TITLE": "Kuponok",
+    "ADD_COUPON": "Kupon hozzáadása",
+    "COUPON_CODE": "Kupon kód",
+    "AMOUNT": "Kedvezmény mértéke",
+    "CASH": "Pénzösszeg",
+    "PERCENT": "Százalék",
+    "AFFILIATE_PARTNER": "Tulajdonos",
+    "SEARCH_HELPER_TEXT": "Név, cégnév"
+  },
+  "REVIEWS": {
+    "TITLE": "Értékelések",
+    "SUBTITLE": "Cégek amelyek átlépéték a 10 / 25 / 50 / 100 / 250 / 500 / 1000 értékelést",
+    "ALL_REVIEWS": "Összes értékelés",
+    "LEVEL-UPS": "Szintlépők",
+    "NUMBER_OF_LEVEL-UPS": "Szintlépők száma",
+    "SEARCH_HELPER_TEXT": "Név, cégnév"
+  },
+  "SUBSCRIPTIONS": {
+    "PAYMENT_TYPES": {
+      "TRANSFER": "Átutalás"
+    },
+    "TITLE": "Előfizetések",
+    "ACTIVE_SUBSCRIBERS": "Aktív előfizetők száma",
+    "PASSIVE_SUBSCRIBERS": "Lejárt előfizetések száma",
+    "YEARLY_SUBSCRIPTION_WEIGHT": "Éves előfizetők száma",
+    "FREE": "Free",
+    "BIX_BASIC": "BIX Basic",
+    "BIX_PRO": "BIX Pro",
+    "BIX_ENTERPRISE": "BIX Enterprise",
+    "SEARCH_HELPER_TEXT": "Név, cégnév"
+  },
+  "SUBSCRIPTION_DETAILS": {
+    "CHANGES_SAVED": "Státusz frissítve!",
+    "CHANGES_ERROR": "Hiba a mentésnél!",
+    "ORDER_STATUS": "Rendelés státusza",
+    "REDEEM_COUPON": "Kupon felhasználása",
+    "ACTIVE": "Aktív",
+    "PASSIVE": "Passzív",
+    "SIX_MONTHS": "6 hónap",
+    "TWELVE_MONTHS": "12 hónap",
+    "PACKAGE_STATUS": "Rendelés státusza",
+    "PLAN_NAME": "Előfizetési csomag",
+    "PAYMENT_PERIOD": "Előfizetés típusa",
+    "DATE_OF_CREATION": "Előfizetés kezdete",
+    "NEXT_BILLING_DATE": "Fizetés esedékesség",
+    "PAYMENT_TYPE": "Fizetés módja",
+    "PLAN_PRICE": "Eredeti ár",
+    "COUPON_CODE": "Kuponkód",
+    "DISCOUNT_AMOUNT": "Kedvezmény összege",
+    "TOTAL_PRICE": "Végösszeg"
+  },
+  "TABLE": {
+    "TOOLBAR": {
+      "LIST": "Lista",
+      "SEARCH_SUBMIT": "Keresés",
+      "SEARCH": "Keresés",
+      "ADD": "Létrehozás"
+    },
+    "BODY_HEADER_TOOLTIP": "Sort for {{columnLabel}}"
+  },
+  "USERS_TABLE": {
+    "NAME": "Név"
+  },
+  "USERS": {
+    "ADD_NEW": {
+      "TITLE": "Új felhasználó hozzáadása",
+      "NAME": "Név",
+      "EMAIL": "Email",
+      "PHONE": "Telefonszám",
+      "BIO": "Bemutatkozás",
+      "SKILLSET": "Miben tudsz segíteni?",
+      "ADD": "Hozzáadás",
+      "ADMIN": "Admin",
+      "NORMAL": "Felhasználó"
+    },
+    "NEW_COMPANY_MODAL": {
+      "NAME": "Név",
+      "TITLE": "Cég hozzárendelése felhasználóhoz",
+      "NATIONALITY": "Ország",
+      "TYPE": "Típus",
+      "TAXNUMBER": "Adószám",
+      "REVENUE": "Éves bevétel",
+      "SECTOR": "Szektor",
+      "SITE": "Weboldal",
+      "INDUSTRY": "Ipar",
+      "ROLE": "Beosztás",
+      "ADD": "Hozzáadás",
+      "RESET": "Törlés"
+    },
+    "TITLE": "Felhasználók",
+    "HISTORY_USERS_LABEL": "Új felhasználók számának alakulása",
+    "ALL_USERS": "Összes felhasználó",
+    "VERIFIED_USERS": "Hitelesített felhasználók",
+    "BACK": "Vissza",
+    "ADD_COMPANY": "Cég hozzáadása",
+    "MANAGED_COMPANIES": "Kezelt cégek",
+    "RATED_COMPANIES": "Értékelt cégek",
+    "SUBSCRIPTION_LIST": "Előfizetések listája",
+    "SEARCH_HELPER_TEXT": "Név, e-mail, telefonszám alapján"
+  },
+  "LANDING": {
+    "HEAD_BOX": {
+      "MAIN_1": "Hoztál már rossz döntést egy termék, szolgáltatás, vagy együttműködés kapcsán? Mi igen.",
+      "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
+      "MAIN_3": "Mutasd meg az ügyfeleid véleményén keresztül, hogy Te vagy a legjobb, és vedd át a Legjobb Ügyfélélmény Díjat az ország legszínvonalasabb üzleti eseményén 2020. november 27-én, a Corinthia Hotelben! ",
+      "CTA_1": "Regisztrálok!",
+      "CTA_2": "Legjobb Ügyfélélmény Díj"
+    },
+    "MAIN_FEATURES_BOX": {
+      "HEAD": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
+      "SUBHEAD": "A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!",
+      "CTA": "Mutasd a csomagokat!",
+      "FEATURE_1": {
+        "TITLE": "Automatizált elégedettségmérés",
+        "DESC": "Tudd minden pillanatban, mit gondolnak az ügyfeleid. Szolgáld ki őket úgy, ahogyan ők szeretnék.",
+        "CTA": "Első lépések"
+      },
+      "FEATURE_2": {
+        "TITLE": "Ellenőrzött és hiteles adatok",
+        "DESC": "Dolgozz hiteles, telefonon ellenőrzött véleményekből. Kerüld el a tévutakat, ne fuss bele pénznyelő zsákutcákba!",
+        "CTA": "Ez érdekel"
+      },
+      "FEATURE_3": {
+        "TITLE": "Professzionális vezetői riport",
+        "DESC": "Hónapról hónapra tudni fogod, mivel elégedettek (vagy elégedetlenek) a partnereid, és hol érdemes fejleszteni.",
+        "CTA": "Akarom tudni"
+      },
+      "FEATURE_4": {
+        "TITLE": "Bizalomépítő értékelések",
+        "DESC": "Szerezz új ügyfeleket a meglévő ügyfeleid véleményével. Generálj leadeket a BIX B2B rating segítségével.",
+        "CTA": "Akarok új ügyfeleket"
+      }
+    },
+    "MAIN_TESTIMONIAL_BOX": {
+      "HASHTAG": "#elpirulunk",
+      "HEAD": "A legnagyobbak szerint is különleges a BIX!",
+      "SUBHEAD": "Nem a spanyolviaszt találtuk fel - a BIX a bizalom újrafelfedezéséről, és a modern üzleti döntéstámogatásról szól.",
+      "TESTIMONIAL_1": {
+        "NAME": "Barabás Árpád",
+        "TITLE": "Barabás Téglakő",
+        "DESC": "Zseniális, hogy mostantól minden munkatársunk folyamatosan figyel majd a partnerek elégedettségére, mert értékelés készül róla. A #BIX az ipar booking.com-ja.",
+        "HASHTAG": "#eztimádom"
+      },
+      "TESTIMONIAL_2": {
+        "NAME": "Cserpes István",
+        "TITLE": "Cserpes Sajtműhely",
+        "DESC": "Lehet, hogy adatokat állítunk elő, de végül az egész a kapcsolatainkról szól. Ettől nagyszerű. Hogy megerősíti a partneri kapcsolatokat.",
+        "HASHTAG": "#vezetőknekfontos"
+      },
+      "TESTIMONIAL_3": {
+        "NAME": "Markovich Béla",
+        "TITLE": "Mapei",
+        "DESC": "Ha valaki ránk keres a Google-ben, fontos neki, hogy találjon véleményeket. A BIX meg kiemelten és profin tálalja őket. Nekünk már hozott új megrendelőt.",
+        "HASHTAG": "#ezprofi"
+      }
+    },
+    "HIGHLIGHTED_1": {
+      "TITLE": "Még nem méred az ügyfélelégedettséget? Vagy csak nincs rá egy professzionális automatizált rendszered? A BIX minden vezető álma!",
+      "CTA": "Nekem is erre van szükségem!"
+    },
+    "HEROS": {
+      "HERO_1": {
+        "SUBTITLE": "Automatizált elégedettségmérés",
+        "TITLE": "Tudd minden pillanatban, hogy mit gondolnak az ügyfeleid!",
+        "DESC": "Évi egy elégedettség mérés? Ugyan már. A hagyományos értékelési rendszerek elavultak, túl kevés információt adnak, túl későn. Takaríts meg pénzt, időt és energiát azzal, hogy automatizálod az elégedettségmérést a cégedben. Így nem kell hosszú heteket, hónapokat várnod a problémák felbukkanására, és valós időben meg is tudod oldani azokat.",
+        "Q": "Miért érdemes automatizálni az elégedettségmérést?",
+        "A": {
+          "A_1": "Folyamatos törődést jelent a meglévő ügyfelekkel",
+          "A_2": "Azonnali beavatkozási lehetőség lesz a kezedben",
+          "A_3": "Tűpontos (és hiteles) ügyfélvisszajelzéseket kapsz",
+          "A_4": "Újraaktiválhatod a régi ügyfeleidet"
+        },
+        "CTA": {
+          "CTA_1": "Naprakész akarok lenni!",
+          "CTA_2": "Mondj többet erről!"
+        }
+      },
+      "HERO_2": {
+        "SUBTITLE": "Ellenőrzött és hiteles adatok",
+        "TITLE": "Vezetői döntéseket csak pontos információk birtokában hozhatsz",
+        "DESC": "A professzionális döntéselőkészítés érdekében az ügyfélértékeléseket telefonon is ellenőrizzük. Azért, hogy a vezetőként hozott döntéseid még megalapozottabbak legyenek, a Bisnode által szolgáltatott üzleti adatokkal is összefésüljük a kapott információkat. Így egy olyan komplex, a pénzügyi és elégedettségi adatokat egyesítő tudáscsomagot kapsz, amivel minimalizálhatod a vezetői hibaszázalékodat.",
+        "Q": "Ezért érdemes hiteles és ellenőrzött információkból dolgozni:",
+        "A": {
+          "A_1": "Tényekre, és nem véleményekre támaszkodsz",
+          "A_2": "Azonnal kiderül, ha gond van az ügyféllel",
+          "A_3": "Növeled és mélyíted a vevőid elkötelezettségét",
+          "A_4": "Továbbajánlásokat generálsz, új ügyfeleket szerzel"
+        },
+        "CTA": {
+          "CTA_1": "Automatizálom a folyamatot!",
+          "CTA_2": "Mondj többet erről!"
+        }
+      },
+      "HERO_3": {
+        "SUBTITLE": "Professzionális vezetői riport",
+        "TITLE": "Hónapról hónapra látod, mivel elégedettek a partnereid (és hol érdemes fejleszteni)",
+        "DESC": "Miért jó az, hogy minden hónap 10. napján megkapod a cégedre és munkakörödre (ügyvezető, marketingvezető stb.) szabott vezetői riportot? Könnyen átláthatóan, grafikus formában látod majd a „vevőid gondolkodását”, gyorsan értesülsz a vakfoltjaidról, a kapott objektív információk pedig utat mutatnak a termékfejlesztésben, javítják a terméked, szolgáltatásod ár-érték arányát, emelik a kiszolgálás minőségét és növelik a ügyfélmegtartó képességedet.",
+        "Q": "Ezért fogod szeretni a BIX vezetői riportjait:",
+        "A": {
+          "A_1": "Óraműpontossággal érkezik, tudsz vele tervezni",
+          "A_2": "Könnyen átlátható, részrehajlásmentes",
+          "A_3": "Megmutatja, miben vagytok erősek",
+          "A_4": "Nyílegyenesen rámutat a fejlesztendő területekre"
+        },
+        "CTA": {
+          "CTA_1": "Ilyen riportokra van szükségem",
+          "CTA_2": "Mondj többet erről!"
+        }
+      },
+      "HERO_4": {
+        "SUBTITLE": "Bizalomépítő értékelések",
+        "TITLE": "A leendő vásárlóidat leginkább a már meglévő vevőid tapasztalata érdekli",
+        "DESC": "A Google-ben keresők 86%-a ügyfélvéleményeket keres. A beszerzők ma már nemcsak a pénzügyi beszámolót nézik, hanem kifejezetten ügyfélvéleményekre keresnek rá. A potenciális ügyfeleid, beszállítóid a BIX – B2B rating profilod átnézése után könnyen és gyorsan döntenek majd melletted, hiszen a meglévő vásárlóid elégedettsége hitelesíti a termékedet, szolgáltatásodat. A BIX így konvertálja az ügyfeleid lojalitását első osztályú vevőszerző eszközzé.",
+        "Q": "Ezeken a területeken segít a BIX – B2B rating:",
+        "A": {
+          "A_1": "Új megrendeléseket, új partnerkapcsolatokat hoz",
+          "A_2": "Elemel a konkurenciától, aki nem használja a BIX-et",
+          "A_3": "A publikus index támogatja a SEO-t, jobb keresőpozíciókat szerez",
+          "A_4": "Hitelességet kölcsönöz, és bizalmat épít irántad"
+        },
+        "CTA": {
+          "CTA_1": "Jöhetnek az új vevők!",
+          "CTA_2": "Mondj többet erről!"
+        }
+      }
+    },
+    "HIGHLIGHTED_2": {
+      "TITLE": "Egy professzionális platform, ami helyettem foglalkozik az ügyfeleimmel",
+      "CTA": "Ilyet szeretnék!"
+    },
+    "FEATURES_BOX": {
+      "HASHTAG": "#ésnemállunkmeg",
+      "HEAD": "A BIX már most is hatékony – mégis folyamatosan fejlesztjük",
+      "SUBHEAD": "Egy termék sosincs kész. A rendszer finomhangolásával és fejlesztésével az a célunk, hogy még több, még pontosabb, még hasznosabb információt adhassunk át neked, amivel egy még sikeresebb céget építhetsz",
+      "FEATURE_1": {
+        "TITLE": "Google integráció",
+        "DESC": "A Google külön kiemeli a BIX-profilokat. Ez is jelzi, hogy az információ, amit előállítunk, értékes a keresőmotorok számára.",
+        "CTA": "Nézd meg, hogy működik"
+      },
+      "FEATURE_2": {
+        "TITLE": "Bővülő cégadatbázis",
+        "DESC": "Folyamatosan fejlesztjük a cégkeresőnket, hiszen egyre többen keresnek partnert a BIX cégek között.",
+        "CTA": "Csekkold a céges toplistát"
+      },
+      "FEATURE_3": {
+        "TITLE": "BIX Profil",
+        "DESC": "A profilod útlevél a sikerhez. A leendő ügyfeleid ezen keresztül ismernek meg, így rendszeresen új funkciókkal bővítjük.",
+        "CTA": "Lapozz bele a profilokba"
+      },
+      "FEATURE_4": {
+        "TITLE": "Egyedi mérés",
+        "DESC": "Többet, vagy mást kérdeznél a partnereidtől, mint a BIX? Közösen összeállítjuk a saját kérdéssorodat és a cégedre szabjuk az értékelési folyamatot",
+        "CTA": "2019 márciusától elérhető funkció"
+      },
+      "FEATURE_5": {
+        "TITLE": "Saját ügyfélkapu",
+        "DESC": "Itt találod a számláidat, kezeled az ügyféllistádat, válaszolsz az értékelésekre és frissíted, szerkeszted a profilodat.",
+        "CTA": "Benézek az ügyfélkapun"
+      },
+      "FEATURE_6": {
+        "TITLE": "Extra adatok",
+        "DESC": "A vezetői riportokból már tudjuk, kik a legjobb ügyfeleid és melyik a legnépszerűbb szolgáltatásod. És ez csak a kezdet.",
+        "CTA": "Szeretem a számokat, mutasd!"
+      },
+      "FEATURE_7": {
+        "TITLE": "Értékelésgyűjtés",
+        "DESC": "Az ügyféllista és az értékelésgyűjtő mechanizmus a rendszer szíve és motorja. Ma átlagosan 35-40%-os az elérési hatékonyságunk és folyamatosan javulnak a számaink.",
+        "CTA": "Magyarázd el a folyamatot"
+      },
+      "FEATURE_8": {
+        "TITLE": "Értékelés megújítás",
+        "DESC": "Aki már értékelt téged, újra megkérdezzük. Automatikusan, meghatározott időközönként, életben tartva az üzleti kapcsolatotokat, és ösztönözve az újravásárlást.",
+        "CTA": "Nézd meg, hogy csináljuk"
+      },
+      "FEATURE_9": {
+        "TITLE": "Lead generálás",
+        "DESC": "Értékeléskor, megújításkor és a telefonos ellenőrzésnél begyűjtött információk révén folyamatosan finomítjuk a rendszerünket, hogy a BIX még több potenciális vevőt hozzon neked.",
+        "CTA": "Nézd meg, hol tartunk most"
+      },
+      "FEATURE_10": {
+        "TITLE": "Hitelességépítés",
+        "DESC": "Építsd be a weboldaladba, az e-mail aláírásodba, vagy a weboldalad footerébe a BIX által szállított ügyfélvéleményeket. A bizalom és a hitelesség a marketing legértékesebb valutája.",
+        "CTA": "Mutasd a widgeteket"
+      },
+      "FEATURE_11": {
+        "TITLE": "Integráció",
+        "DESC": "A legfontosabb hazai számlázóprogrammal (#szamlazzhu) és CRM rendszerrel (#minicrm) már megépült az adathíd. De itt nem állunk meg.",
+        "CTA": "Nézd meg, mi készül"
+      },
+      "FEATURE_12": {
+        "TITLE": "Véleménygaléria",
+        "DESC": "Miért tennél megkérdőjelezhető hitelességű ügyfélvisszajelzéseket a weboldaladra, ha ellenőrzött és objektív forrásból is meríthetsz? A BIX rendszeréből automatikusan átemelheted a vevőid feedbackjeit.",
+        "CTA": "Lapozz bele az egyedi galériádba"
+      }
+    }
+  },
+  "FOOTER": {
+    "CONTACT": {
+      "TITLE": "Kapcsolat",
+      "PHONE_NUMBER": "+36 20 369 19 52",
+      "EMAIL": "office@bixindex.hu",
+      "ADDRESS": "1095 Budapest, Soroksári út 48. 10.ép. 2.em. 20."
+    },
+    "NAV": {
+      "LINK": "Legjobb Ügyfélélmény 2020"
+    }
+  },
+  "COMPANY_SEARCH": {
+    "RESULTS_NUMBER": "Találatok száma: {{count}}",
+    "QUICK_SEARCH": {
+      "LABEL": "Gyorskeresés:",
+      "S_1": "Könyvelők",
+      "S_2": "Marketingesek",
+      "S_3": "HR szolgáltatók",
+      "S_4": "Építőipar"
+    },
+    "MAIN_PROFILE": "Főprofil:",
+    "BIX_INDEX": "Bizalmi Index",
+    "BIX_COUNT": "Összesen {{count}} db értékelés",
+    "PRODUCTS": "Termékek",
+    "WRITE_REVIEW": "Értékelés írása",
+    "BIX_PROFILE": "BIX Profil"
+  },
+  "TOAST": {
+    "ERROR": {
+      "UNAUTHORIZED": "Sikertelen azonosítás",
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+    }
+  },
+  "RATING": {
+    "WRITING_REVIEW_ON": "A következő cégről írsz értékelést:",
+    "SATISFACTION": "Összességében mennyire vagy elégedett?",
+    "WOULD_YOU_RECOMMEND": "Mennyire valószínű, hogy ajánlanád a cég termékeit / szolgáltatásait illetve magát a céget barátaidnak/kollégáidnak?",
+    "WHAT_DO_YOU_THINK": "Mit gondolsz az alábbiakról?",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Jelszó",
+    "MORE_THAN_EXPECTED": "Többet kaptam, mint amit vártam",
+    "EXACTLY_WHAT_EXPECTED": "Pontosan azt kaptam, amit vártam",
+    "LESS_THEN_EXPECTED": "Kevesebbet kaptam, mint amit vártam",
+    "POSITIVE": "Kérjük, néhány karakterben mondd el a pozitív tapasztalataid:",
+    "NEGATIVE": "Kérjük, néhány karakterben mondd el a negatív tapasztalataid:",
+    "COMMENT": "Egy rövid mondatban foglald össze a tapasztalataid az együttműködésről:",
+    "LOGGED_IN_AS": "Be vagy jelentkezve az alábbi néven: ",
+    "SAVING_REVIEW_AS": "Az értékelésedet ezen a néven rögzítjük!",
+    "NO_ACCOUNT_YET": "Nincs még BIX fiókom",
+    "HAVE_A_BIX_ACCOUNT": "Már van BIX fiókom",
+    "AUTHENTICATION": "Azonosítás",
+    "LASTNAME": "Vezetéknév",
+    "FIRSTNAME": "Keresztnév",
+    "PERSONAL": "Magánszemélyként",
+    "AS_COMPANY": "Cég képviseletében",
+    "PHONE": "Telefonszám",
+    "COMPANY": "Cégnév",
+    "ROLE": "Beosztás",
+    "CONFIRM_PASSWORD": "Jelszó megerősítése",
+    "VISIBILITY": "Láthatóság",
+    "PUBLIC": "Mindenki számára látható",
+    "ONLY_FOR_COMPANY": "Csak az értékelt cég számára",
+    "PRIVATE": "Privát",
+    "SEND_REVIEW": "Értékelés küldése",
+    "REFERENCE": "Hogyan szeretnél refenrenciát megadni?",
+    "POLICy_REQUIRED": "Kérünk, fogadd el az adatkezelésre vonatkozó tájékoztatónkat!",
+    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
+  }
+}

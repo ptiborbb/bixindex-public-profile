@@ -1,102 +1,117 @@
-import { ECompanyTypes, IProduct, IProfile, IService } from '@codingsans/bixindex-common';
 import Head from 'next/head';
-import { FC, useMemo } from 'react';
-import avatar from '../../../public/avatar.png';
-import bizalmiKorLogo from '../../../public/bizalmi_kor.svg';
+import { useRouter } from 'next/router';
+import { FC, useEffect, useMemo, useState } from 'react';
 import logo from '../../../public/bix_logo.svg';
+import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
+import { Awards } from '../../components/fragments/awards/awards';
+import { News } from '../../components/fragments/news/news';
+import { Products } from '../../components/fragments/products/products';
+import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
+import { useTranslate } from '../../translate.context';
 import classes from './public-profile.module.scss';
 
-export const PublicProfile: FC = (props) => {
-  const publicProfile = useMemo(
-    () =>
-      ({
-        profile: {
-          fb: 'google.com',
-          insta: 'google.com',
-          linkedin: 'google.com',
-          website: 'bixindex.hu',
-          name: 'Bizalmi Kör Kft.',
-          type: ECompanyTypes.COMPANY,
-          logo: bizalmiKorLogo,
+export const PublicProfile: FC = () => {
+  const { t } = useTranslate();
+  const router = useRouter();
+  const alias = router.query.companyAlias as string;
+  const hash = router.asPath.split('#')[1];
 
-          details: {
-            employees: {
-              value: 10,
-              change: 'up',
-            },
-            yearlyIncome: {
-              value: 100000000,
-              change: 'down',
-            },
-            taxNumber: '14780846-2-43',
-            address: '1095. Soroksári út 48. 10. ép. 2. em. 20',
-            mainProfile: 'Rendezvényszervezés',
-          },
-          products: [
-            { name: 'mrd+ vezetői klub' },
-            { name: 'bizalom gála' },
-            { name: 'bix' },
-            { name: 'TOP Vezetői klub' },
-          ],
-          services: [{ name: 'értékesítés' }, { name: 'marketing' }],
-          contacts: [
-            {
-              name: 'Letenovics - Nagy Roland',
-              email: 'roland.letenovics@bizalmikor.hu',
-              phone: '+36 30 2203 203',
-              image: avatar,
-            },
-          ],
-        },
-        rating: {
-          value: 8.96,
-          count: 85,
-        },
-      } as {
-        rating: {
-          value: number;
-          count: number;
-        };
-        profile: IProfile;
-      }),
-    [],
-  );
+  const {
+    publicProfileService,
+    state: {
+      publicProfile: { profilePage },
+    },
+  } = useApp();
+  const [activeFragment, setFragment] = useState(() => hash || 'reviews');
+
+  useEffect(() => {
+    setFragment(hash);
+  }, [hash]);
+
+  useEffect(() => {
+    publicProfileService.getPublicProfileByAlias(alias);
+  }, [publicProfileService]);
+
+  const contentSegment = useMemo(() => {
+    if (!profilePage) {
+      return undefined;
+    }
+
+    switch (activeFragment) {
+      case 'reviews':
+        return (
+          <Reviews
+            companyAlias={alias}
+            companyFormID={profilePage.profile.defaultFormID}
+            ratings={profilePage.ratings}
+            stats={profilePage.stats}
+            npsRates={profilePage.npsRates}
+          />
+        );
+      case 'awards':
+        return <Awards awards={profilePage.awards} />;
+      case 'news':
+        return <News articles={profilePage.articles} />;
+      case 'products':
+        return <Products productsAndServices={profilePage.productsAndServices} />;
+      default:
+        return (
+          <Reviews
+            companyAlias={alias}
+            companyFormID={profilePage.profile.defaultFormID}
+            ratings={profilePage.ratings}
+            stats={profilePage.stats}
+            npsRates={profilePage.npsRates}
+          />
+        );
+    }
+  }, [activeFragment, profilePage]);
 
   return (
     <div>
       <Head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-        />
+        <title>{t('COMMON.PAGE_TITLE')}</title>
       </Head>
-      <div className={classes.headerBlock}>
-        <div className={classes.container}>
-          <Header logoPath={logo} />
-        </div>
-        <div className={classes.divider}></div>
-        <div className={classes.container}>
-          <CompanySearch />
-        </div>
-        <div className={classes.container}>
-          <CompanyHeader
-            title={publicProfile.profile.name}
-            logoPath={publicProfile.profile.logo}
-            companyType={publicProfile.profile.type}
-          />
-        </div>
-      </div>
-      <div className={classes.frameFix}>
-        <div className={classes.container}>
-          {JSON.stringify({ props })}
-          <CompanyFrame rating={publicProfile.rating} profile={publicProfile.profile} />
-        </div>
-      </div>
+      {profilePage && (
+        <>
+          <div className={classes.headerBlock}>
+            <div className={classes.container}>
+              <Header logoPath={logo} />
+            </div>
+            <div className={classes.divider}></div>
+            <div className={classes.container}>
+              <CompanySearch />
+            </div>
+            <div className={classes.container}>
+              <CompanyHeader
+                companyAlias={alias}
+                companyFormID={profilePage.profile.defaultFormID}
+                title={profilePage.profile.name}
+                logoPath={profilePage.profile.logo}
+                companyType={profilePage.profile.type}
+                activate={async (fragment) => {
+                  await router.push('/bix-profil/[companyAlias]', `/bix-profil/${alias}#${fragment}`);
+                }}
+              />
+            </div>
+          </div>
+          <div className={classes.frameFix}>
+            <div className={classes.container}>
+              <CompanyFrame
+                profile={profilePage.profile}
+                stats={profilePage.stats}
+                productsAndServices={profilePage.productsAndServices}
+              >
+                {contentSegment}
+              </CompanyFrame>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

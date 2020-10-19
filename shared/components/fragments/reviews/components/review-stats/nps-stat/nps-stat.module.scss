@@ -1,0 +1,81 @@
+@import '../../../../../../../styles/variables.scss';
+
+.npsStat {
+  .npsHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $grey;
+    padding-left: 2rem;
+  }
+
+  .npsBoxes {
+    display: flex;
+
+    .npsBox {
+      border-right: 1px solid $grey;
+      padding: 1rem 2rem;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      .boxLabel {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        text-align: center;
+        text-transform: uppercase;
+
+        color: $teal;
+      }
+
+      .boxValue {
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 39px;
+        text-align: center;
+
+        color: $dark;
+      }
+    }
+  }
+
+  .npsInfo {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 20px;
+    color: $dark;
+    padding: 1rem;
+  }
+
+  .npsLine {
+    display: flex;
+    padding: 1rem 0;
+
+    .npsItem {
+      text-align: center;
+      flex-grow: 1;
+      flex-basis: 0;
+
+      .box {
+        margin-top: 0.5rem;
+        padding: 0.5rem 0;
+      }
+    }
+  }
+
+  .npsByRate {
+    display: flex;
+    padding: 1rem;
+    font-size: 14px;
+    line-height: 24px;
+    color: $dark;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+@import '../../../styles/variables.scss';
+
+.article {
+  padding: 3rem;
+
+  .details {
+    .title {
+      font-size: 24px;
+      line-height: 29px;
+      color: $dark;
+      display: flex;
+      justify-content: space-between;
+
+      .votes {
+        font-size: 16px;
+        line-height: 20px;
+        color: $dark;
+        display: flex;
+        align-items: center;
+      }
+
+      .voteIcon {
+        color: #00d014;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .type {
+      padding-top: 1rem;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ff3739;
+      display: flex;
+
+      .icon {
+        margin-right: 0.5rem;
+      }
+
+      .typeBlock {
+        display: flex;
+        align-items: center;
+      }
+
+      .date {
+        display: flex;
+        align-items: center;
+        padding-left: 3rem;
+        font-size: 14px;
+        line-height: 17px;
+        color: $grey;
+      }
+    }
+  }
+
+  .content {
+    padding-top: 1rem;
+    font-size: 16px;
+    line-height: 24px;
+    color: $dark;
+  }
+
+  .link {
+    padding-top: 1rem;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration-line: underline;
+    color: #5d92f4;
+
+    & > a {
+      display: flex;
+      align-items: center;
+
+      & > .icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 const express = require('express');
 const next = require('next');
+const { createServer } = require('https');
+const fs = require('fs');
 
 const devProxy = {
   '/api': {
-    target: 'http://bixindex-backend-local.herokuapp.com/',
+    target: 'https://bixindex-backend-local.herokuapp.com/',
     pathRewrite: { '^/api': '' },
     changeOrigin: true,
   },
@@ -20,6 +22,11 @@ const app = next({
 });
 
 const handle = app.getRequestHandler();
+
+const httpsOptions = {
+  key: fs.readFileSync('./certificates/localhost.key'),
+  cert: fs.readFileSync('./certificates/localhost.crt'),
+};
 
 let server;
 app
@@ -38,7 +45,7 @@ app
     // Default catch-all handler to allow Next.js to handle all other routes
     server.all('*', (req, res) => handle(req, res));
 
-    server.listen(port, host, (err) => {
+    createServer(httpsOptions, server).listen(port, host, (err) => {
       if (err) {
         throw err;
       }

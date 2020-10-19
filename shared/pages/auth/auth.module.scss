@@ -1,0 +1,177 @@
+@import '../../../styles/variables.scss';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+
+  .headerBlock {
+    background-image: $bix-bg-gradient;
+
+    .divider {
+      background: rgba(255, 255, 255, 0.4);
+      height: 1px;
+    }
+  }
+
+  .pageContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-bottom: 50px;
+
+    .pageTitle {
+      font-size: 40px;
+      color: $grey-dark;
+      text-align: center;
+      margin: 50px 0;
+      font-weight: bold;
+    }
+
+    .paper {
+      width: 100%;
+      max-width: 470px;
+      padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-box-shadow: 0px 0px 16px 0px rgba(175, 175, 175, 0.4);
+      -moz-box-shadow: 0px 0px 16px 0px rgba(175, 175, 175, 0.4);
+      box-shadow: 0px 0px 16px 0px rgba(175, 175, 175, 0.4);
+      border-radius: 8px;
+
+      .title {
+        font-size: 24px;
+        color: $grey-dark;
+        font-weight: bold;
+        text-align: center;
+
+        > span {
+          color: $teal;
+          text-decoration: underline;
+        }
+      }
+
+      .blockTitle {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        color: $teal;
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        &:before {
+          position: absolute;
+          content: '';
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: $teal;
+        }
+        &.clickable {
+          cursor: pointer;
+        }
+        &.collapsed {
+          color: $light-blue;
+          text-decoration: underline;
+          &:before {
+            content: none;
+          }
+        }
+        > span {
+          position: relative;
+          z-index: 1;
+          white-space: nowrap;
+          padding: 0 10px;
+          background-color: $white;
+        }
+      }
+
+      $social-icon-place-size: 48px;
+
+      .socialButton {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        cursor: pointer;
+        color: $white;
+        font-size: 1rem;
+        padding: 15px 10px 15px 48px;
+        border-radius: 3px;
+        margin: 16px 0;
+        border: none;
+
+        &.google {
+          background-color: $google-red;
+          .iconPlaceholder {
+            background-color: #ab3a2c;
+            > img {
+              width: 20px;
+              height: auto;
+            }
+          }
+        }
+
+        &.facebook {
+          background-color: $fb-blue;
+          .iconPlaceholder {
+            background-color: #4f77cc;
+            > img {
+              width: 12px;
+              height: auto;
+            }
+          }
+        }
+
+        .iconPlaceholder {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          border-radius: 3px 0 0 3px;
+          width: $social-icon-place-size;
+          > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 300px;
+
+        .formInput {
+          margin-top: 50px;
+          &:first-child {
+            margin-top: 25px;
+          }
+        }
+
+        .button {
+          width: 100%;
+          margin: 40px 0 15px;
+          > button {
+            width: 100% !important;
+          }
+        }
+      }
+
+      .forgotPassword {
+        font-size: 12px;
+        color: #adb5ff;
+        padding: 5px 0;
+        align-self: start;
+      }
+    }
+  }
+}

@@ -1,23 +1,43 @@
-import { FC } from 'react';
-import classes from './header.module.scss';
-import PhoneIcon from '@material-ui/icons/Phone';
+import Button from '@material-ui/core/Button';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import PhoneIcon from '@material-ui/icons/Phone';
+import Link from 'next/link';
+import { FC, useCallback } from 'react';
+import { useApp } from '../../app.context';
+import { useTranslate } from '../../translate.context';
+import classes from './header.module.scss';
 
 interface HeaderProps {
   logoPath: string;
 }
 
 export const Header: FC<HeaderProps> = ({ logoPath }) => {
+  const { t } = useTranslate();
+  const {
+    state: {
+      auth: { user },
+    },
+    authService,
+  } = useApp();
+
+  const logout = useCallback(() => {
+    authService.logout();
+  }, [authService]);
+
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>
-        <img alt="bix-logo" src={logoPath} />
-      </div>
+      <Link href="/">
+        <div className={classes.logo}>
+          <img alt="bix-logo" src={logoPath} />
+        </div>
+      </Link>
       <div className={classes.links}>
-        <div className={classes.link}>Funkciók</div>
-        <div className={classes.link}>Elõfizetés</div>
-        <div className={classes.link}>Blog</div>
-        <div className={classes.link}>Cégkeresõ</div>
+        <div className={classes.link}>{t('HEADER.FUNCTIONS')}</div>
+        <div className={classes.link}>{t('HEADER.SUBSCRIPTION')}</div>
+        <div className={classes.link}>{t('HEADER.BLOG')}</div>
+        <Link href="/cegkereso">
+          <a className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</a>
+        </Link>
         <div className={classes.link}>
           <PhoneIcon />
         </div>
@@ -26,9 +46,21 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         </div>
       </div>
       <div className={classes.cta}>
-        <button type="button" className={classes.ctaButton}>
-          Ügyfélkapu
-        </button>
+        <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
+      </div>
+      <div className={classes.cta}>
+        {user ? (
+          <Button className={classes.logButton} onClick={logout}>
+            {t('HEADER.LOGOUT')}
+            <meta name="description" content="Sikeres kijelentkezés! Viszont látásra!" />
+            <meta property="og:title" content="Kijelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+            <meta property="og:description" content="Sikeres kijelentkezés! Viszont látásra!" />
+          </Button>
+        ) : (
+          <Link href="/auth">
+            <Button className={classes.logButton}>{t('HEADER.LOGIN')}</Button>
+          </Link>
+        )}
       </div>
     </header>
   );

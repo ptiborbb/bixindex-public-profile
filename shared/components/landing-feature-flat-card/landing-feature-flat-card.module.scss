@@ -1,0 +1,39 @@
+@import '../../../styles/variables.scss';
+
+.cardContainer {
+  text-align: left;
+}
+
+.imgContainer {
+  height: 40px;
+
+  img {
+    max-height: 40px;
+    max-width: 100%;
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.5em;
+  line-height: 1.25em;
+  margin-top: 20px;
+  margin-bottom: 12x;
+}
+
+.desc {
+  color: $grey-dark;
+  line-height: 1.61em;
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  color: $dark-red;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

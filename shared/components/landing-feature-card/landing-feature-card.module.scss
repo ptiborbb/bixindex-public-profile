@@ -1,0 +1,50 @@
+@import '../../../styles/variables.scss';
+
+.h100 {
+  height: 100%;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.imgContainer {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-height: 80px;
+    max-width: 100%;
+  }
+}
+
+.title {
+  font-weight: 500;
+  font-size: 1.3em;
+  line-height: 1.4em;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.desc {
+  color: #9f9f9f;
+  line-height: 1.4em;
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $dark-red;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

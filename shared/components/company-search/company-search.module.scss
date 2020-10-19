@@ -9,15 +9,19 @@
     background: #ffffff;
     box-shadow: 0px 1px 15px rgba(69, 65, 78, 0.0756624);
     border-radius: 3px;
-    padding: 4px;
+    padding: 5px;
     margin: 0.5rem 0;
     display: flex;
+    align-items: center;
+
+    .searchControl {
+      flex-grow: 1;
+    }
 
     .searchInput {
       border: 0;
-      padding: 1rem;
-      flex-grow: 1;
       outline: 0;
+      margin-right: 10px;
       color: black;
     }
 

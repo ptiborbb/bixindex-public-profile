@@ -15,7 +15,12 @@
     justify-content: center;
 
     img {
+      width: 100%;
+    }
+
+    .companyLogoIcon {
       width: 75%;
+      height: 75%;
     }
   }
 
@@ -44,6 +49,7 @@
     padding-left: 160px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     .companyWriteReview {
       background: #f15c5c;
