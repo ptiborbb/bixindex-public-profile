@@ -1,14 +1,12 @@
-import { FC } from 'react';
-import classes from './review-item.module.scss';
-import { RatingItem } from '../../../../../interfaces/profile-page';
-import { StarCounter } from '../../../../star-counter/star-counter';
 import { Avatar, Fab } from '@material-ui/core';
 import { Share, ThumbDown, ThumbUp } from '@material-ui/icons';
+import { FC } from 'react';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
-import { Chip } from '../../../../chip/chip';
+import { RatingItem } from '../../../../../interfaces/profile-page';
 import { npsToText } from '../../../../../utils/nps-to-text';
-import avatar from '../../../../../../public/avatar.png';
+import { StarCounter } from '../../../../star-counter/star-counter';
+import classes from './review-item.module.scss';
 
 interface ReviewItemProps {
   rating: RatingItem;
@@ -47,6 +45,15 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         </div>
       </div>
       <div className={classes.npsInfo}>NPS: {npsToText(rating.nps)}</div>
+      <meta
+        name="description"
+        content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
+      />
+      <meta property="og:title" content="Partner Stabilitási Index - BIX - Tudd, hogy állnak a partnereid!" />
+      <meta
+        property="og:description"
+        content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
+      />
       <div className={classes.goodReview}>
         <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
         {rating.positive}

@@ -1,8 +1,6 @@
-import { IAPIResponse, IUser } from '@codingsans/bixindex-common';
-import { ProfilePage } from '../../../interfaces/profile-page';
-
 export interface IRatingState {
-  form: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: any; // TODO missing typings
 }
 
 export const initialRatingState: IRatingState = {

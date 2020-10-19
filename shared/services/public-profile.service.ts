@@ -1,4 +1,5 @@
-import { IBixindexClient, IProfile } from '@codingsans/bixindex-common';
+import { IBixindexClient } from '@codingsans/bixindex-common';
+import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
 import {
@@ -8,7 +9,6 @@ import {
   resetProfileList,
 } from '../pages/profile-list/store/actions';
 import { getPublicProfile, getPublicProfileFail, getPublicProfileSuccess } from '../pages/public-profile/store/actions';
-import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 
 export interface IPublicProfileService {
   getPublicProfileByAlias(alias: string): void;
@@ -19,7 +19,8 @@ export interface IPublicProfileService {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const publicProfileServiceFactory = (
   bixClient: IBixindexClient,
-  dispatch: Dispatch<any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dispatch: Dispatch<any>, // TODO missing typings
 ): IPublicProfileService => {
   return {
     searchProfilesByName: (page: number, rowsPerPage: number, searchText: string) => {

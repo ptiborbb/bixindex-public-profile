@@ -1,8 +1,5 @@
 import { FC, useMemo } from 'react';
-import { ReviewRatio } from '../../review-ratio/review-ratio';
 import classes from './review-rate.module.scss';
-import EditIcon from '@material-ui/icons/Edit';
-import { Ratings } from '../review-stats';
 
 export interface ReviewRateProps {
   ratingCount: number;
