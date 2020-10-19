@@ -39,7 +39,7 @@ import { useTranslate } from '../../translate.context';
 import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 
 export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
@@ -118,8 +118,15 @@ export const Rating: FC = () => {
     [authService],
   );
 
-  const responseGoogle = (response): void => {
-    console.log('google', response);
+  const responseGoogle = useCallback(
+    async (response: GoogleLoginResponse, isRegister: boolean) => {
+      await authService.google(response.tokenId);
+    },
+    [authService],
+  );
+
+  const failResponseGoogle = (): void => {
+    return;
   };
 
   useEffect(() => {
@@ -496,8 +503,8 @@ export const Rating: FC = () => {
                                           onClick={renderProps.onClick}
                                         />
                                       )}
-                                      onSuccess={responseGoogle}
-                                      onFailure={responseGoogle}
+                                      onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)}
+                                      onFailure={failResponseGoogle}
                                       cookiePolicy={'single_host_origin'}
                                     />
                                   </Grid>
