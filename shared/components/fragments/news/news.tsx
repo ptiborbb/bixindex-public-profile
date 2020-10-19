@@ -3,7 +3,8 @@ import { Article } from '../../article/article';
 import classes from './news.module.scss';
 
 interface NewsProps {
-  articles: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  articles: any[]; // TODO missing typings
 }
 
 export const News: FC<NewsProps> = ({ articles }) => {

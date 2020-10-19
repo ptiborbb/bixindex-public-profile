@@ -1,14 +1,16 @@
+import EditIcon from '@material-ui/icons/Edit';
+import Link from 'next/link';
 import { FC } from 'react';
 import { ReviewRatio } from '../review-ratio/review-ratio';
 import classes from './reviews-header.module.scss';
-import EditIcon from '@material-ui/icons/Edit';
-import Link from 'next/link';
 
 interface ReviewsHeaderProps {
   companyAlias: string;
   companyFormID: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stats: any;
 }
+// TODO missing typings
 
 export const ReviewsHeader: FC<ReviewsHeaderProps> = ({ companyAlias, companyFormID, stats }) => {
   return (

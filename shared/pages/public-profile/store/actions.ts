@@ -1,4 +1,3 @@
-import { IUser } from '@codingsans/bixindex-common';
 import { createAction } from '@reduxjs/toolkit';
 import { IDOrAlias } from '../../../enums/id-or-alias';
 import { ProfilePage } from '../../../interfaces/profile-page';

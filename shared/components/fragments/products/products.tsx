@@ -3,8 +3,10 @@ import { Product } from '../../product/product';
 import classes from './products.module.scss';
 
 interface ProductsProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   productsAndServices: any[];
 }
+// TODO missing typings
 
 export const Products: FC<ProductsProps> = ({ productsAndServices }) => {
   return (

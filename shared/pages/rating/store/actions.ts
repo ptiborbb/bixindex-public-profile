@@ -1,8 +1,5 @@
-import { IUser } from '@codingsans/bixindex-common';
 import { createAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { IDOrAlias } from '../../../enums/id-or-alias';
-import { ProfilePage } from '../../../interfaces/profile-page';
 
 export enum ERatingActionTypes {
   GET_FORM = '[Rating] GET_FORM',
@@ -17,7 +14,8 @@ export enum ERatingActionTypes {
 }
 
 export const getForm = createAction<{ companyFormID: string }>(ERatingActionTypes.GET_FORM);
-export const getFormSuccess = createAction<{ form: any }>(ERatingActionTypes.GET_FORM_SUCCESS);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getFormSuccess = createAction<{ form: any }>(ERatingActionTypes.GET_FORM_SUCCESS); // TODO missing typings
 export const getFormFail = createAction<{ error: AxiosError }>(ERatingActionTypes.GET_FORM_FAIL);
 
 export const submitReview = createAction<{ rating: unknown }>(ERatingActionTypes.SUBMIT_REVIEW);

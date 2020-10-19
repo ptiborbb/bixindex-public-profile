@@ -1,14 +1,12 @@
-import { FC } from 'react';
-import classes from './review-item.module.scss';
-import { RatingItem } from '../../../../../interfaces/profile-page';
-import { StarCounter } from '../../../../star-counter/star-counter';
 import { Avatar, Fab } from '@material-ui/core';
 import { Share, ThumbDown, ThumbUp } from '@material-ui/icons';
+import { FC } from 'react';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
-import { Chip } from '../../../../chip/chip';
+import { RatingItem } from '../../../../../interfaces/profile-page';
 import { npsToText } from '../../../../../utils/nps-to-text';
-import avatar from '../../../../../../public/avatar.png';
+import { StarCounter } from '../../../../star-counter/star-counter';
+import classes from './review-item.module.scss';
 
 interface ReviewItemProps {
   rating: RatingItem;

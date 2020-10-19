@@ -574,6 +574,7 @@ export const PrivacyPolicy: FunctionComponent = () => {
           className="bix-green"
           href="https://cdn.bixindex.hu/docs/bix-adatkezelesi-nyilatkozat.pdf"
           target="_blank"
+          rel="noreferrer"
           download=""
         >
           Letöltés

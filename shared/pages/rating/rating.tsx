@@ -8,11 +8,11 @@ import {
   InputAdornment,
   MenuItem,
   Radio,
-  SvgIcon,
   Tooltip,
   Typography,
 } from '@material-ui/core';
 import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -23,6 +23,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
@@ -38,8 +39,6 @@ import { ELoginOrRegister } from '../../enums/login-or-register';
 import { useTranslate } from '../../translate.context';
 import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 
 export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
@@ -503,7 +502,9 @@ export const Rating: FC = () => {
                                           onClick={renderProps.onClick}
                                         />
                                       )}
-                                      onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)}
+                                      onSuccess={(resp: GoogleLoginResponse) =>
+                                        responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)
+                                      }
                                       onFailure={failResponseGoogle}
                                       cookiePolicy={'single_host_origin'}
                                     />
