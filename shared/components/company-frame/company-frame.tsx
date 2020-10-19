@@ -75,8 +75,8 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             />
           )}
 
-          <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={profile.details.address} />
-          <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={profile.details.mainProfile} />
+          <CompanyDetailItem icon={<PlaceIcon />} label={'Cím'} value={profile.details.address} />
+          <CompanyDetailItem icon={<SettingsIcon />} label={'Főprofil'} value={profile.details.mainProfile} />
           <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
           <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={'cégnév1, cégnév2'} />
           <div>
