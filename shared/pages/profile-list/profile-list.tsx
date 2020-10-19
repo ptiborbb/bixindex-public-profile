@@ -55,10 +55,17 @@ export const ProfileList: FC = () => {
           <Grid container spacing={3}>
             <Grid item sm={12}>
               <Typography variant="h3" align="center" className={classes.mainTitle}>
-                {t('LANDING.HEAD_BOX.MAIN_1')}
+                Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!
               </Typography>
               <Typography variant="h3" align="center" className={classes.subTitle}>
-                {t('LANDING.HEAD_BOX.MAIN_2')}
+                Értékelj legalább 5 különböző céget minden héten november 20-ig, és{' '}
+                <a
+                  style={{ textDecoration: 'underline' }}
+                  href="https://legjobbugyfelelmeny.hu/nevezd-a-kedvenc-ceged/"
+                >
+                  nyerj
+                </a>
+                !
               </Typography>
             </Grid>
           </Grid>
