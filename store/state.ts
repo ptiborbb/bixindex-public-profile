@@ -1,13 +1,13 @@
 import combineReducers from 'react-combine-reducers';
+import { profileListReducer } from '../shared/pages/profile-list/store/reducer';
+import { initialProfileListState, IProfileListState } from '../shared/pages/profile-list/store/state';
+import { publicProfileReducer } from '../shared/pages/public-profile/store/reducer';
+import { initialPublicProfileState, IPublicProfileState } from '../shared/pages/public-profile/store/state';
+import { ratingReducer } from '../shared/pages/rating/store/reducer';
+import { initialRatingState, IRatingState } from '../shared/pages/rating/store/state';
 import { authReducer } from '../shared/store/reducer';
 import { IAuthState, initialAuthState } from '../shared/store/state';
 import { AppReducer } from './reducer';
-import { IPublicProfileState, initialPublicProfileState } from '../shared/pages/public-profile/store/state';
-import { publicProfileReducer } from '../shared/pages/public-profile/store/reducer';
-import { initialRatingState, IRatingState } from '../shared/pages/rating/store/state';
-import { ratingReducer } from '../shared/pages/rating/store/reducer';
-import { IProfileListState, initialProfileListState } from '../shared/pages/profile-list/store/state';
-import { profileListReducer } from '../shared/pages/profile-list/store/reducer';
 
 export interface IAppState {
   auth: IAuthState;

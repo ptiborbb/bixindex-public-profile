@@ -1,8 +1,5 @@
-import { createAction } from '@reduxjs/toolkit';
-import { IDOrAlias } from '../../../enums/id-or-alias';
-import { ProfilePage } from '../../../interfaces/profile-page';
-import { IProfile } from '@codingsans/bixindex-common';
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
+import { createAction } from '@reduxjs/toolkit';
 
 export enum EProfileListActionTypes {
   GET_PROFILE_LIST = '[App] GET_PROFILE_LIST',

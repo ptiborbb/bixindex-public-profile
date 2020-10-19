@@ -1,7 +1,5 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
 import { Dispatch } from 'react';
-import { getPublicProfile, getPublicProfileSuccess, getPublicProfileFail } from '../pages/public-profile/store/actions';
-import { ProfilePage } from '../interfaces/profile-page';
 import {
   getForm,
   getFormFail,

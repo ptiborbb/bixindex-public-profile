@@ -7,7 +7,6 @@ export interface IAuthGuardService {
   getUser: (cookie: string) => Promise<IUser>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const authGuardServiceFactory = (origin: string): IAuthGuardService => {
   return {
     getUser: async (cookie = '') => {
@@ -18,7 +17,7 @@ export const authGuardServiceFactory = (origin: string): IAuthGuardService => {
             headers: { cookie },
           })
           .then((res) => res.data)
-          .catch((error: AxiosError) => {
+          .catch((_error: AxiosError) => {
             return null;
           });
         return user;

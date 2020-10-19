@@ -1,4 +1,3 @@
-import { IProfile } from '@codingsans/bixindex-common';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
@@ -7,23 +6,21 @@ import LanguageIcon from '@material-ui/icons/Language';
 import PlaceIcon from '@material-ui/icons/Place';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { useRouter } from 'next/router';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Chip } from '../chip/chip';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
-import { Awards } from '../fragments/awards/awards';
-import { News } from '../fragments/news/news';
-import { Products } from '../fragments/products/products';
-import { Reviews } from '../fragments/reviews/reviews';
 import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface CompanyFrameProps {
   profile: any;
   productsAndServices: any[];
   stats: any;
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
+// TODO missing typing
 
 export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, productsAndServices, stats }) => {
   return (
@@ -38,7 +35,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
                   <GradeIcon
                     key={i}
                     className={`${classes.ratingStar}${
-                      Math.round(stats.index.score / 2) > i ? ' ' + classes.ratingStarActive : ''
+                      Math.round(stats.index.score / 2) > i ? ` ${classes.ratingStarActive}` : ''
                     }`}
                   />
                 );
@@ -64,7 +61,17 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             value={`${profile.details.yearlyIncome.value} HUF`}
             change={profile.details.yearlyIncome.change}
           />
-          <CompanyDetailItem icon={<AssignmentIcon />} label={'Adoszam'} value={profile.details.taxNumber} />
+          {profile?.details?.taxNumber && (
+            <CompanyDetailItem
+              icon={<AssignmentIcon />}
+              label={'Adószám'}
+              value={`${profile.details.taxNumber.substring(0, 8)}-${profile.details.taxNumber.substring(
+                8,
+                9,
+              )}-${profile.details.taxNumber.substring(9, 12)}`}
+            />
+          )}
+
           <CompanyDetailItem icon={<PlaceIcon />} label={'Cim'} value={profile.details.address} />
           <CompanyDetailItem icon={<SettingsIcon />} label={'Foprofil'} value={profile.details.mainProfile} />
           <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />

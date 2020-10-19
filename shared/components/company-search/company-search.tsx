@@ -1,21 +1,19 @@
-import { FC, useState } from 'react';
-import classes from './company-search.module.scss';
-import { useRouter } from 'next/router';
-import { Formik, FormikHelpers, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import { useTranslate } from '../../translate.context';
-import { FormControl, FormHelperText, Button } from '@material-ui/core';
+import { Button, FormControl } from '@material-ui/core';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
+import * as Yup from 'yup';
+import classes from './company-search.module.scss';
 
 interface CompanySearchProps {}
 
 export const CompanySearch: FC<CompanySearchProps> = () => {
-  const { t } = useTranslate();
   const router = useRouter();
   const searchValidationSchema = Yup.object({
     text: Yup.string().required(''),
   });
-  const [error, setError] = useState({ isError: false, message: '' });
+  const [error] = useState({ isError: false, message: '' });
 
   interface ISearchTextFormValues {
     text: string;

@@ -1,4 +1,3 @@
-import { IProfile } from '@codingsans/bixindex-common';
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 
 export interface IProfileListState {
@@ -12,7 +11,7 @@ export interface IProfileListState {
 export const initialProfileListState: IProfileListState = {
   profiles: null,
   page: 1,
-  rowsPerPage: 10,
+  rowsPerPage: 150,
   count: null,
   loading: false,
 };

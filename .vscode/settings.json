@@ -1,8 +1,26 @@
 {
+  "i18n-ally.keystyle": "nested",
+  "react-i18n.i18nPaths": "public/locales",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prettier.disableLanguages": ["html"],
+  "explorer.compactFolders": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
   "i18n-ally.localesPaths": [
     "public/locales/en/common.json",
     "public/locales/hu/common.json"
   ],
-  "i18n-ally.keystyle": "nested",
-  "react-i18n.i18nPaths": "public/locales"
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll"
+  ],
+  "cSpell.words": [
+    "bixindex",
+    "codingsans",
+    "formik",
+    "gitlab",
+    "languagedetector",
+    "vercel"
+  ]
 }

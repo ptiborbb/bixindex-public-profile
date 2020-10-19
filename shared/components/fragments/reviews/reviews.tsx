@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import { RatingItem } from '../../../interfaces/profile-page';
 import { ReviewsDetail } from './components/reviews-detail/reviews-detail';
 import { ReviewsHeader } from './components/reviews-header/reviews-header';
 import classes from './reviews.module.scss';
-import { RatingItem } from '../../../interfaces/profile-page';
 
 interface ReviewsProps {
   companyAlias: string;
@@ -12,9 +12,11 @@ interface ReviewsProps {
     count: number;
     countsByValue: number[];
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stats: any;
   npsRates: number[];
 }
+// TODO missing typings
 
 export const Reviews: FC<ReviewsProps> = ({ companyAlias, companyFormID, stats, npsRates, ratings }) => {
   return (

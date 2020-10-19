@@ -3,7 +3,8 @@ import { Award } from '../../award/award';
 import classes from './awards.module.scss';
 
 interface AwardsProps {
-  awards: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  awards: any[]; //TODO missing typings
 }
 
 export const Awards: FC<AwardsProps> = ({ awards }) => {
