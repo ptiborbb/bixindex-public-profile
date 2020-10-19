@@ -4,5 +4,24 @@
     "public/locales/hu/common.json"
   ],
   "i18n-ally.keystyle": "nested",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prettier.disableLanguages": [
+    "html"
+  ],
+  "explorer.compactFolders": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll"
+  ],
+  "cSpell.words": [
+    "bixindex",
+    "codingsans",
+    "gitlab",
+    "languagedetector",
+    "vercel"
+  ],
   "react-i18n.i18nPaths": "public/locales"
 }

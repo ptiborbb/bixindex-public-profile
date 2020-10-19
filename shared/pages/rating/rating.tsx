@@ -8,11 +8,11 @@ import {
   InputAdornment,
   MenuItem,
   Radio,
-  SvgIcon,
   Tooltip,
   Typography,
 } from '@material-ui/core';
 import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -23,6 +23,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
@@ -38,8 +39,6 @@ import { ELoginOrRegister } from '../../enums/login-or-register';
 import { useTranslate } from '../../translate.context';
 import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 
 export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
@@ -119,7 +118,7 @@ export const Rating: FC = () => {
   );
 
   const responseGoogle = useCallback(
-    async (response: GoogleLoginResponse, isRegister: boolean) => {
+    async (response: GoogleLoginResponse, _isRegister: boolean) => {
       await authService.google(response.tokenId);
     },
     [authService],
@@ -227,6 +226,15 @@ export const Rating: FC = () => {
     <div>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
+        <meta
+          name="description"
+          content="BIX Free csomag! Próbáld ki most ingyen a BIX-et és mérd az ügyfélelégedettséget!"
+        />
+        <meta property="og:title" content="Jogosultság - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta
+          property="og:description"
+          content="BIX Free csomag! Próbáld ki most ingyen a BIX-et és mérd az ügyfélelégedettséget!"
+        />
       </Head>
       {profilePage && (
         <>
@@ -304,6 +312,16 @@ export const Rating: FC = () => {
                               </Grid>
                               <Grid item xs={12}>
                                 <Typography variant="h6">{t('RATING.SATISFACTION')} </Typography>
+                                <meta
+                                  name="description"
+                                  content="Nézd át potenciális partneredről az eddigi tapasztalatokat, véleményeket és válaszd ki a legjobbat!"
+                                />
+                                <meta property="og:title" content="Automazitált elégedettség mérés és B2B Rating" />
+                                <meta
+                                  property="og:description"
+                                  content="Automatizáld az ügyfélelégedettség mérést a cégedben!"
+                                />
+                                <meta property="og:image" content="https://cdn.bixindex.hu/images/bixindex-og.png" />
                               </Grid>
                               <Grid item xs={12}>
                                 <Field component={RadioGroup} name="satisfaction">
@@ -503,7 +521,9 @@ export const Rating: FC = () => {
                                           onClick={renderProps.onClick}
                                         />
                                       )}
-                                      onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)}
+                                      onSuccess={(resp: GoogleLoginResponse) =>
+                                        responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)
+                                      }
                                       onFailure={failResponseGoogle}
                                       cookiePolicy={'single_host_origin'}
                                     />
