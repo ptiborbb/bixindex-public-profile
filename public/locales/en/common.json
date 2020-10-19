@@ -454,7 +454,7 @@
     "AS_COMPANY": "As a company",
     "FIRSTNAME": "First name",
     "EMAIL": "E-mail",
-    "PHONE": "Phone",
+    "PHONE": "Phone (will not be public)",
     "COMPANY": "Company name",
     "ROLE": "Role",
     "CONFIRM_PASSWORD": "Confirm password",

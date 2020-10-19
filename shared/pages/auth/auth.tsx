@@ -16,6 +16,9 @@ import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
+import Link from 'next/link';
 
 const useInputFieldStyle = makeStyles({
   root: {
@@ -77,23 +80,16 @@ export const Auth: FunctionComponent = () => {
   const [showRegisterForm, setRegisterForm] = useState(false);
   const [showLoginForm, setLoginForm] = useState(false);
 
-  const registerResponseFacebook = useCallback(
-    (response: { accessToken: string } & Record<string, unknown>) => {
-      return authService
-        .facebook(response.accessToken)
-        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/')))
-        .then(() => setError({ isError: false, message: '' }))
-        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
-    },
-    [authService],
-  );
-
-  const loginResponseFacebook = useCallback(
-    (response: { accessToken: string } & Record<string, unknown>) => {
+  const responseFacebook = useCallback(
+    (response: { accessToken: string } & Record<string, unknown>, isRegister: boolean) => {
       return authService
         .facebook(response.accessToken)
         .then(() =>
-          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push('/'),
+          companyFormID
+            ? isRegister
+              ? router.push(`/rating/${companyFormID}`)
+              : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
+            : router.push('/'),
         )
         .then(() => setError({ isError: false, message: '' }))
         .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
@@ -101,8 +97,25 @@ export const Auth: FunctionComponent = () => {
     [authService],
   );
 
-  const responseGoogle = (response): void => {
-    console.log('google', response);
+  const responseGoogle = useCallback(
+    (response: GoogleLoginResponse, isRegister: boolean) => {
+      return authService
+        .google(response.tokenId)
+        .then(() =>
+          companyFormID
+            ? isRegister
+              ? router.push(`/rating/${companyFormID}`)
+              : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
+            : router.push('/'),
+        )
+        .then(() => setError({ isError: false, message: '' }))
+        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+    },
+    [authService],
+  );
+
+  const failResponseGoogle = (): void => {
+    return setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') });
   };
 
   const [error, setError] = useState({ isError: false, message: '' });
@@ -156,7 +169,7 @@ export const Auth: FunctionComponent = () => {
                 appId={fbAppId}
                 autoLoad={false}
                 fields="name,email,picture"
-                callback={registerResponseFacebook}
+                callback={(resp) => responseFacebook(resp, true)}
                 render={(renderProps) => (
                   <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
                     <span className={classes.iconPlaceholder}>
@@ -181,8 +194,8 @@ export const Auth: FunctionComponent = () => {
                     Google fiókkal
                   </button>
                 )}
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, true)}
+                onFailure={failResponseGoogle}
                 cookiePolicy={'single_host_origin'}
               />
 
@@ -288,7 +301,7 @@ export const Auth: FunctionComponent = () => {
                 appId={fbAppId}
                 autoLoad={false}
                 fields="name,email,picture"
-                callback={loginResponseFacebook}
+                callback={(resp) => responseFacebook(resp, false)}
                 render={(renderProps) => (
                   <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
                     <span className={classes.iconPlaceholder}>
@@ -313,8 +326,8 @@ export const Auth: FunctionComponent = () => {
                     {t('AUTH.GOOGLE_BTN_TEXT')}
                   </button>
                 )}
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, false)}
+                onFailure={failResponseGoogle}
                 cookiePolicy={'single_host_origin'}
               />
               <div

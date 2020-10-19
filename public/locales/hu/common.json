@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "PAGE_TITLE": "Cégek, akikkel nyugodtan dolgozhatsz! - BIX",
+    "PAGE_TITLE": "Cégek, akikkel nyugodtan dolgozhatsz! - BIX ",
     "BACK": "Vissza",
     "SUMMARY": "Összegzés",
     "UNKOWN_ERROR": "Ismeretlen hiba történt",
@@ -12,7 +12,7 @@
         "NAME": "Név",
         "EMAIL": "E-mail",
         "ROLE": "Jogosultság",
-        "PHONE": "Tel",
+        "PHONE": "Telefon",
         "EDIT": "Szerkesztés",
         "COMPANY": "Cég",
         "OWNER": "Tulajdonos",
@@ -21,13 +21,13 @@
         "SUBSCRIPTION_TYPE": "Előfizetés típusa",
         "NUMBER_OF_REVIEWS": "Értékelések száma",
         "TYPE": "Típus",
-        "STARTDATE": "Kötés dátuma",
+        "STARTDATE": "Előfizetés kezdete",
         "ENDDATE": "Lejárat dátuma",
         "DATE": "Dátum",
         "STATUS": "Státusz",
-        "HAS_POST": "Van postja?",
-        "COUPON_CODE": "Kupon kód",
-        "MAIN_CATEGORY": "Fő kategória",
+        "HAS_POST": "Van értékelése?",
+        "COUPON_CODE": "Kuponkód",
+        "MAIN_CATEGORY": "Főkategória",
         "SUB_CATEGORY": "Alkategória",
         "TAX_NUMBER": "Adószám",
         "RANK": "Titulus",
@@ -103,7 +103,7 @@
     "COMPANIES": "Cégek",
     "REVIEWS": "Értékelések",
     "SUBSCRIPTIONS": "Előfizetések",
-    "BEST_EXPERIENCE": "Legjobb ügyfélélmény",
+    "BEST_EXPERIENCE": "Legjobb Ügyfélélmény Díj",
     "OWNERSHIP_REQUESTS": "Tulajdonjog kérések"
   },
   "COUPONS": {
@@ -131,7 +131,7 @@
     "TITLE": "Előfizetések",
     "ACTIVE_SUBSCRIBERS": "Aktív előfizetők száma",
     "PASSIVE_SUBSCRIBERS": "Lejárt előfizetések száma",
-    "YEARLY_SUBSCRIPTION_WEIGHT": "Yearly subscription weight",
+    "YEARLY_SUBSCRIPTION_WEIGHT": "Éves előfizetők száma",
     "FREE": "Free",
     "BIX_BASIC": "BIX Basic",
     "BIX_PRO": "BIX Pro",
@@ -139,11 +139,11 @@
     "SEARCH_HELPER_TEXT": "Név, cégnév"
   },
   "SUBSCRIPTION_DETAILS": {
-    "CHANGES_SAVED": "Státuz frissítve!",
+    "CHANGES_SAVED": "Státusz frissítve!",
     "CHANGES_ERROR": "Hiba a mentésnél!",
     "ORDER_STATUS": "Rendelés státusza",
     "REDEEM_COUPON": "Kupon felhasználása",
-    "ACTIVE": "Aktiv",
+    "ACTIVE": "Aktív",
     "PASSIVE": "Passzív",
     "SIX_MONTHS": "6 hónap",
     "TWELVE_MONTHS": "12 hónap",
@@ -176,8 +176,8 @@
       "NAME": "Név",
       "EMAIL": "Email",
       "PHONE": "Telefonszám",
-      "BIO": "Bio",
-      "SKILLSET": "Skillset",
+      "BIO": "Bemutatkozás",
+      "SKILLSET": "Miben tudsz segíteni?",
       "ADD": "Hozzáadás",
       "ADMIN": "Admin",
       "NORMAL": "Felhasználó"
@@ -192,7 +192,7 @@
       "SECTOR": "Szektor",
       "SITE": "Weboldal",
       "INDUSTRY": "Ipar",
-      "ROLE": "Szerep",
+      "ROLE": "Beosztás",
       "ADD": "Hozzáadás",
       "RESET": "Törlés"
     },
@@ -209,11 +209,11 @@
   },
   "LANDING": {
     "HEAD_BOX": {
-      "MAIN_1": "Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.",
+      "MAIN_1": "Hoztál már rossz döntést egy termék, szolgáltatás, vagy együttműködés kapcsán? Mi igen.",
       "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
-      "MAIN_3": "Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:",
-      "CTA_1": "Mutasd meg!",
-      "CTA_2": "Többet akarok tudni a BIX-ről!"
+      "MAIN_3": "Mutasd meg az ügyfeleid véleményén keresztül, hogy Te vagy a legjobb, és vedd át a Legjobb Ügyfélélmény Díjat az ország legszínvonalasabb üzleti eseményén 2020. november 27-én, a Corinthia Hotelben! ",
+      "CTA_1": "Regisztrálok!",
+      "CTA_2": "Legjobb Ügyfélélmény Díj"
     },
     "MAIN_FEATURES_BOX": {
       "HEAD": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
@@ -226,7 +226,7 @@
       },
       "FEATURE_2": {
         "TITLE": "Ellenőrzött és hiteles adatok",
-        "DESC": "Dolgozz hiteles, telefonon ellenőrzött véleményekből. Kerüld el a tévutakat, ne fuss bele pénznyelő zsákutcákba.",
+        "DESC": "Dolgozz hiteles, telefonon ellenőrzött véleményekből. Kerüld el a tévutakat, ne fuss bele pénznyelő zsákutcákba!",
         "CTA": "Ez érdekel"
       },
       "FEATURE_3": {
@@ -243,7 +243,7 @@
     "MAIN_TESTIMONIAL_BOX": {
       "HASHTAG": "#elpirulunk",
       "HEAD": "A legnagyobbak szerint is különleges a BIX!",
-      "SUBHEAD": "Nem a spanyolviaszt találtuk fel - a BIX a bizalom újrafelfedezéséről és a modern üzleti döntéstámogatásról szól.",
+      "SUBHEAD": "Nem a spanyolviaszt találtuk fel - a BIX a bizalom újrafelfedezéséről, és a modern üzleti döntéstámogatásról szól.",
       "TESTIMONIAL_1": {
         "NAME": "Barabás Árpád",
         "TITLE": "Barabás Téglakő",
@@ -264,14 +264,14 @@
       }
     },
     "HIGHLIGHTED_1": {
-      "TITLE": "Még nem méred az ügyfélelégedettséget? Vagy nincs rá egy professzionális automatizált rendszered? A BIX minden vezető álma!",
+      "TITLE": "Még nem méred az ügyfélelégedettséget? Vagy csak nincs rá egy professzionális automatizált rendszered? A BIX minden vezető álma!",
       "CTA": "Nekem is erre van szükségem!"
     },
     "HEROS": {
       "HERO_1": {
         "SUBTITLE": "Automatizált elégedettségmérés",
-        "TITLE": "Tudd minden pillanatban, mit gondolnak az ügyfeleid!",
-        "DESC": "Évi egy elégedettség mérés? Ugyan már. A hagyományos értékelési rendszerek elavultak, túl kevés információt adnak, túl későn. Takaríts meg pénzt, időt és energiát azzal, hogy automatizálod az elégedettségmérést a cégedben. Így nem kell hosszú heteket, hónapokat várnod a problémák felbukkanására és valós időben meg is tudod oldani azokat.",
+        "TITLE": "Tudd minden pillanatban, hogy mit gondolnak az ügyfeleid!",
+        "DESC": "Évi egy elégedettség mérés? Ugyan már. A hagyományos értékelési rendszerek elavultak, túl kevés információt adnak, túl későn. Takaríts meg pénzt, időt és energiát azzal, hogy automatizálod az elégedettségmérést a cégedben. Így nem kell hosszú heteket, hónapokat várnod a problémák felbukkanására, és valós időben meg is tudod oldani azokat.",
         "Q": "Miért érdemes automatizálni az elégedettségmérést?",
         "A": {
           "A_1": "Folyamatos törődést jelent a meglévő ügyfelekkel",
@@ -290,7 +290,7 @@
         "DESC": "A professzionális döntéselőkészítés érdekében az ügyfélértékeléseket telefonon is ellenőrizzük. Azért, hogy a vezetőként hozott döntéseid még megalapozottabbak legyenek, a Bisnode által szolgáltatott üzleti adatokkal is összefésüljük a kapott információkat. Így egy olyan komplex, a pénzügyi és elégedettségi adatokat egyesítő tudáscsomagot kapsz, amivel minimalizálhatod a vezetői hibaszázalékodat.",
         "Q": "Ezért érdemes hiteles és ellenőrzött információkból dolgozni:",
         "A": {
-          "A_1": "Tényekre és nem véleményekre támaszkodsz",
+          "A_1": "Tényekre, és nem véleményekre támaszkodsz",
           "A_2": "Azonnal kiderül, ha gond van az ügyféllel",
           "A_3": "Növeled és mélyíted a vevőid elkötelezettségét",
           "A_4": "Továbbajánlásokat generálsz, új ügyfeleket szerzel"
@@ -303,7 +303,7 @@
       "HERO_3": {
         "SUBTITLE": "Professzionális vezetői riport",
         "TITLE": "Hónapról hónapra látod, mivel elégedettek a partnereid (és hol érdemes fejleszteni)",
-        "DESC": "Miért jó az, hogy minden hónap 10. napján megkapod a cégedre és munkakörödre (ügyvezető, marketingvezető stb.) szabott vezetői riportot? Könnyen átlátható, grafikus formában látod majd a „vevőid gondolkodását”, gyorsan értesülsz a vakfoltjaidról, a kapott objektív információk pedig utat mutatnak a termékfejlesztésben, javítják a terméked, szolgáltatásod ár-érték arányát, emelik a kiszolgálás minőségét és növelik a ügyfélmegtartó képességedet.",
+        "DESC": "Miért jó az, hogy minden hónap 10. napján megkapod a cégedre és munkakörödre (ügyvezető, marketingvezető stb.) szabott vezetői riportot? Könnyen átláthatóan, grafikus formában látod majd a „vevőid gondolkodását”, gyorsan értesülsz a vakfoltjaidról, a kapott objektív információk pedig utat mutatnak a termékfejlesztésben, javítják a terméked, szolgáltatásod ár-érték arányát, emelik a kiszolgálás minőségét és növelik a ügyfélmegtartó képességedet.",
         "Q": "Ezért fogod szeretni a BIX vezetői riportjait:",
         "A": {
           "A_1": "Óraműpontossággal érkezik, tudsz vele tervezni",
@@ -318,14 +318,14 @@
       },
       "HERO_4": {
         "SUBTITLE": "Bizalomépítő értékelések",
-        "TITLE": "A leendő vásárlóidat leginkább a meglevő vevőid tapasztalata érdekli",
+        "TITLE": "A leendő vásárlóidat leginkább a már meglévő vevőid tapasztalata érdekli",
         "DESC": "A Google-ben keresők 86%-a ügyfélvéleményeket keres. A beszerzők ma már nemcsak a pénzügyi beszámolót nézik, hanem kifejezetten ügyfélvéleményekre keresnek rá. A potenciális ügyfeleid, beszállítóid a BIX – B2B rating profilod átnézése után könnyen és gyorsan döntenek majd melletted, hiszen a meglévő vásárlóid elégedettsége hitelesíti a termékedet, szolgáltatásodat. A BIX így konvertálja az ügyfeleid lojalitását első osztályú vevőszerző eszközzé.",
         "Q": "Ezeken a területeken segít a BIX – B2B rating:",
         "A": {
           "A_1": "Új megrendeléseket, új partnerkapcsolatokat hoz",
           "A_2": "Elemel a konkurenciától, aki nem használja a BIX-et",
-          "A_3": "A publikus index támogatja a SEO-t, jobb keresőpozíciók",
-          "A_4": "Hitelességet kölcsönöz és bizalmat épít irántad"
+          "A_3": "A publikus index támogatja a SEO-t, jobb keresőpozíciókat szerez",
+          "A_4": "Hitelességet kölcsönöz, és bizalmat épít irántad"
         },
         "CTA": {
           "CTA_1": "Jöhetnek az új vevők!",
@@ -340,7 +340,7 @@
     "FEATURES_BOX": {
       "HASHTAG": "#ésnemállunkmeg",
       "HEAD": "A BIX már most is hatékony – mégis folyamatosan fejlesztjük",
-      "SUBHEAD": "Egy termék sosincs kész. A rendszer finomhangolásával és fejlesztésével az a célunk, hogy még több, még pontosabb, még hasznosabb információt adhassunk át neked, amivel még sikeresebb céget építhetsz",
+      "SUBHEAD": "Egy termék sosincs kész. A rendszer finomhangolásával és fejlesztésével az a célunk, hogy még több, még pontosabb, még hasznosabb információt adhassunk át neked, amivel egy még sikeresebb céget építhetsz",
       "FEATURE_1": {
         "TITLE": "Google integráció",
         "DESC": "A Google külön kiemeli a BIX-profilokat. Ez is jelzi, hogy az információ, amit előállítunk, értékes a keresőmotorok számára.",
@@ -358,7 +358,7 @@
       },
       "FEATURE_4": {
         "TITLE": "Egyedi mérés",
-        "DESC": "Többet vagy mást kérdeznél a partnereidtől, amit a BIX? Közösen összeállítjuk a saját kérdéssorodat és a cégedre szabjuk az értékelési folyamatot",
+        "DESC": "Többet, vagy mást kérdeznél a partnereidtől, mint a BIX? Közösen összeállítjuk a saját kérdéssorodat és a cégedre szabjuk az értékelési folyamatot",
         "CTA": "2019 márciusától elérhető funkció"
       },
       "FEATURE_5": {
@@ -369,7 +369,7 @@
       "FEATURE_6": {
         "TITLE": "Extra adatok",
         "DESC": "A vezetői riportokból már tudjuk, kik a legjobb ügyfeleid és melyik a legnépszerűbb szolgáltatásod. És ez csak a kezdet.",
-        "CTA": "Szeretem a számokat, mutasd"
+        "CTA": "Szeretem a számokat, mutasd!"
       },
       "FEATURE_7": {
         "TITLE": "Értékelésgyűjtés",
@@ -378,7 +378,7 @@
       },
       "FEATURE_8": {
         "TITLE": "Értékelés megújítás",
-        "DESC": "Aki már értékelt téged, újra megkérdezzük. Automatikusan, meghatározott időközönként, életben tartva az üzleti kapcsolatotokat és ösztönözve az újravásárlást.",
+        "DESC": "Aki már értékelt téged, újra megkérdezzük. Automatikusan, meghatározott időközönként, életben tartva az üzleti kapcsolatotokat, és ösztönözve az újravásárlást.",
         "CTA": "Nézd meg, hogy csináljuk"
       },
       "FEATURE_9": {
@@ -438,17 +438,17 @@
   },
   "RATING": {
     "WRITING_REVIEW_ON": "A következő cégről írsz értékelést:",
-    "SATISFACTION": "Összességében mennyire elégedett?",
-    "WOULD_YOU_RECOMMEND": "Mennyire valószínű, hogy ajánlaná a cég termékeit / szolgáltatásait illetve magát a céget barátainak/kollégáinak?",
-    "WHAT_DO_YOU_THINK": "Mit gondol az alábbiakról?",
+    "SATISFACTION": "Összességében mennyire vagy elégedett?",
+    "WOULD_YOU_RECOMMEND": "Mennyire valószínű, hogy ajánlanád a cég termékeit / szolgáltatásait illetve magát a céget barátaidnak/kollégáidnak?",
+    "WHAT_DO_YOU_THINK": "Mit gondolsz az alábbiakról?",
     "EMAIL": "E-mail",
     "PASSWORD": "Jelszó",
     "MORE_THAN_EXPECTED": "Többet kaptam, mint amit vártam",
-    "EXACTLY_WHAT_EXPECTED": "Pontosan azt kaptam amit vártam",
+    "EXACTLY_WHAT_EXPECTED": "Pontosan azt kaptam, amit vártam",
     "LESS_THEN_EXPECTED": "Kevesebbet kaptam, mint amit vártam",
-    "POSITIVE": "Kérjük, néhány karakterben mondja el pozitív tapasztalatait:",
-    "NEGATIVE": "Kérjük, néhány karakterben mondja el negatív tapasztalatait:",
-    "COMMENT": "Egy rövid mondatban foglalja össze tapasztalatát az együttműködésről",
+    "POSITIVE": "Kérjük, néhány karakterben mondd el a pozitív tapasztalataid:",
+    "NEGATIVE": "Kérjük, néhány karakterben mondd el a negatív tapasztalataid:",
+    "COMMENT": "Egy rövid mondatban foglald össze a tapasztalataid az együttműködésről:",
     "LOGGED_IN_AS": "Be vagy jelentkezve az alábbi néven: ",
     "SAVING_REVIEW_AS": "Az értékelésedet ezen a néven rögzítjük!",
     "NO_ACCOUNT_YET": "Nincs még BIX fiókom",
@@ -467,8 +467,8 @@
     "ONLY_FOR_COMPANY": "Csak az értékelt cég számára",
     "PRIVATE": "Privát",
     "SEND_REVIEW": "Értékelés küldése",
-    "REFERENCE": "Hogyan kíván refenrenciát megadni?",
-    "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
+    "REFERENCE": "Hogyan szeretnél refenrenciát megadni?",
+    "POLICy_REQUIRED": "Kérünk, fogadd el az adatkezelésre vonatkozó tájékoztatónkat!",
     "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
   }
 }

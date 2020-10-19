@@ -8,6 +8,8 @@ import {
   InputAdornment,
   MenuItem,
   Radio,
+  SvgIcon,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
 import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
@@ -38,6 +40,8 @@ import { ELoginOrRegister } from '../../enums/login-or-register';
 import { useTranslate } from '../../translate.context';
 import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 
 export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
@@ -116,8 +120,15 @@ export const Rating: FC = () => {
     [authService],
   );
 
-  const responseGoogle = (response): void => {
-    console.log('google', response);
+  const responseGoogle = useCallback(
+    async (response: GoogleLoginResponse, isRegister: boolean) => {
+      await authService.google(response.tokenId);
+    },
+    [authService],
+  );
+
+  const failResponseGoogle = (): void => {
+    return;
   };
 
   useEffect(() => {
@@ -494,8 +505,8 @@ export const Rating: FC = () => {
                                           onClick={renderProps.onClick}
                                         />
                                       )}
-                                      onSuccess={responseGoogle}
-                                      onFailure={responseGoogle}
+                                      onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)}
+                                      onFailure={failResponseGoogle}
                                       cookiePolicy={'single_host_origin'}
                                     />
                                   </Grid>
@@ -561,6 +572,15 @@ export const Rating: FC = () => {
                                           variant="outlined"
                                           InputProps={{
                                             startAdornment: <InputAdornment position="start">+</InputAdornment>,
+                                            endAdornment: (
+                                              <Tooltip
+                                                title="Telefonszámod soha nem lesz nyilvános. Kizárólag a BIX Hungary kft munkatársai számára elérhető, az értékelés telefonos hitelesítése céljából"
+                                                arrow
+                                                placement="top"
+                                              >
+                                                <Info style={{ color: '#595959' }} />
+                                              </Tooltip>
+                                            ),
                                           }}
                                         />
                                       </Grid>
