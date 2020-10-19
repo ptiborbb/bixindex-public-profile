@@ -21,6 +21,9 @@ export const PrivacyPolicy: FunctionComponent = () => {
         </div>
       </div>
       <div className={classes.content}>
+        <meta name="description" content="Tudd meg mik az előnyei, ha rendelkezel BIX felhasználóval!" />
+        <meta property="og:title" content="Adatkezelési tájékoztató - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta property="og:description" content="Tudd meg mik az előnyei, ha rendelkezel BIX felhasználóval!" />
         <h4>
           BIX Hungary Kft. (székhely: 1095 Budapest, Soroksári út 48. 10.ép. 2/20., adószám: 26375078-2-43, cégjegyzék
           szám: 01-09-326936), a továbbiakban: Társaság.
@@ -44,6 +47,9 @@ export const PrivacyPolicy: FunctionComponent = () => {
           Soroksári út 48. 10.ép. 2/20., adószám: 26375078-2-43, cégjegyzék szám: 01-09-326936) végzi (a továbbiakban:
           Adatkezelő).
         </p>
+        <meta name="description" content="Tudd meg kinek és miért érték a BIX!" />
+        <meta property="og:title" content="Ellenőrzött Adatok - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
         <br />
         <br />
         <h5>Az Adatkezelő elérhetőségei:</h5>
@@ -586,6 +592,9 @@ export const PrivacyPolicy: FunctionComponent = () => {
       <div className={classes.mt150}>
         <Footer logoPath={logo}></Footer>
       </div>
+      <meta name="description" content="Próbáld ki, hogy van-e jogosultságod a BIX-re!" />
+      <meta property="og:title" content="Jogosultság - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+      <meta property="og:description" content="Próbáld ki, hogy van-e jogosultságod a BIX-re!" />
     </>
   );
 };

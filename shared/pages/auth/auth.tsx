@@ -150,6 +150,9 @@ export const Auth: FunctionComponent = () => {
         </div>
         <div className={classes.divider}></div>
       </div>
+      <meta name="description" content="Jelentkezz be a BIX ügyfélkapujába!" />
+      <meta property="og:title" content="Bejelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+      <meta property="og:description" content="Jelentkezz be a BIX ügyfélkapujába!" />
       <div className={`container ${classes.pageContent}`}>
         <h1 className={classes.pageTitle}>{t('AUTH.PAGE_TITLE')}</h1>
         <Grid container justify="center" spacing={3}>
@@ -280,6 +283,9 @@ export const Auth: FunctionComponent = () => {
                       <Button type="submit" variant="contained" color="secondary" fullWidth>
                         {t('AUTH.REGISTER')}
                       </Button>
+                      <meta name="description" content="Regisztrálj a BIX ügyfélkapujába!" />
+                      <meta property="og:title" content="Regisztráció - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+                      <meta property="og:description" content="Regisztrálj be a BIX ügyfélkapujába!" />
                     </div>
                   </Form>
                 </Formik>
@@ -393,6 +399,12 @@ export const Auth: FunctionComponent = () => {
                     <Link href="/forgot-password">
                       <a className={classes.forgotPassword}>{t('AUTH.FORGOT_PASSWORD')}</a>
                     </Link>
+                    <meta name="description" content="Állítson be új jelszót a fiókjához!" />
+                    <meta
+                      property="og:title"
+                      content="Új jelszó beállítása - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                    />
+                    <meta property="og:description" content="Állítson be új jelszót a fiókjához!" />
                     <div className={classes.button}>
                       <Button type="submit" variant="contained" color="secondary" fullWidth>
                         {t('AUTH.LOGIN')}

@@ -118,7 +118,7 @@ export const Rating: FC = () => {
   );
 
   const responseGoogle = useCallback(
-    async (response: GoogleLoginResponse, isRegister: boolean) => {
+    async (response: GoogleLoginResponse, _isRegister: boolean) => {
       await authService.google(response.tokenId);
     },
     [authService],
@@ -226,6 +226,15 @@ export const Rating: FC = () => {
     <div>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
+        <meta
+          name="description"
+          content="BIX Free csomag! Próbáld ki most ingyen a BIX-et és mérd az ügyfélelégedettséget!"
+        />
+        <meta property="og:title" content="Jogosultság - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta
+          property="og:description"
+          content="BIX Free csomag! Próbáld ki most ingyen a BIX-et és mérd az ügyfélelégedettséget!"
+        />
       </Head>
       {profilePage && (
         <>
@@ -303,6 +312,16 @@ export const Rating: FC = () => {
                               </Grid>
                               <Grid item xs={12}>
                                 <Typography variant="h6">{t('RATING.SATISFACTION')} </Typography>
+                                <meta
+                                  name="description"
+                                  content="Nézd át potenciális partneredről az eddigi tapasztalatokat, véleményeket és válaszd ki a legjobbat!"
+                                />
+                                <meta property="og:title" content="Automazitált elégedettség mérés és B2B Rating" />
+                                <meta
+                                  property="og:description"
+                                  content="Automatizáld az ügyfélelégedettség mérést a cégedben!"
+                                />
+                                <meta property="og:image" content="https://cdn.bixindex.hu/images/bixindex-og.png" />
                               </Grid>
                               <Grid item xs={12}>
                                 <Field component={RadioGroup} name="satisfaction">

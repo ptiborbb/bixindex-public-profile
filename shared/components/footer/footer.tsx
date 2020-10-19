@@ -30,6 +30,9 @@ export const Footer: FC<FooterProps> = ({ logoPath }) => {
           </Grid>
           <Grid item xs={12} md={4} className={classes.contact}>
             <h4 className={classes.title}>{t('FOOTER.CONTACT.TITLE')}</h4>
+            <meta name="description" content="Vedd fel velünk a kapcsolatot!" />
+            <meta property="og:title" content="Kapcsolat - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+            <meta property="og:description" content="Vedd fel velünk a kapcsolatot!" />
             <div className={classes.contactTypeContainer}>
               <PhoneIcon />
               <span className={classes.phoneNumber}>{t('FOOTER.CONTACT.PHONE_NUMBER')}</span>

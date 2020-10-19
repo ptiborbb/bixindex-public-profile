@@ -52,6 +52,9 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         {user ? (
           <Button className={classes.logButton} onClick={logout}>
             {t('HEADER.LOGOUT')}
+            <meta name="description" content="Sikeres kijelentkezés! Viszont látásra!" />
+            <meta property="og:title" content="Kijelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+            <meta property="og:description" content="Sikeres kijelentkezés! Viszont látásra!" />
           </Button>
         ) : (
           <Link href="/auth">

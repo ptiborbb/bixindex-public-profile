@@ -45,6 +45,15 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         </div>
       </div>
       <div className={classes.npsInfo}>NPS: {npsToText(rating.nps)}</div>
+      <meta
+        name="description"
+        content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
+      />
+      <meta property="og:title" content="Partner Stabilitási Index - BIX - Tudd, hogy állnak a partnereid!" />
+      <meta
+        property="og:description"
+        content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
+      />
       <div className={classes.goodReview}>
         <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
         {rating.positive}

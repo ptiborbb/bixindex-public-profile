@@ -50,6 +50,18 @@ export const Landing: FunctionComponent = () => {
     <>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
+        <meta name="description" content="Ismerd meg víziónkat és csapatunkat!" />
+        <meta property="og:title" content="Rólunk - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta property="og:description" content="Ismerd meg víziónkat és csapatunkat!" />
+        <meta
+          name="description"
+          content="Nézd át potenciális partneredről az eddigi tapasztalatokat, véleményeket és válaszd ki a legjobbat!"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Automazitált elégedettség mérés és B2B Rating" />
+        <meta property="og:description" content="Automatizáld az ügyfélelégedettség mérést a cégedben!" />
+        <meta property="og:image" content="https://cdn.bixindex.hu/images/bixindex-og.png" />
+        <meta property="og:url" content="https://bixindex.hu/" />
       </Head>
       <div className={classes.baseSize}>
         <div className={classes.headerBlock}>
@@ -63,6 +75,12 @@ export const Landing: FunctionComponent = () => {
                 <h1 className={classes.mainTitle}>{t('LANDING.HEAD_BOX.MAIN_1')}</h1>
                 <h1 className={classes.mainTitle}>{t('LANDING.HEAD_BOX.MAIN_2')}</h1>
                 <h2 className={classes.mainDesc}>{t('LANDING.HEAD_BOX.MAIN_3')}</h2>
+                <meta name="description" content="Tudd meg kinek és miért érték a BIX!" />
+                <meta
+                  property="og:title"
+                  content="Legjobb Ügyfélélmény Díj 2020 - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                />
+                <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
                 <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
                 <Button variant="text" color="default" className={classes.learnMoreBtn}>
                   {t('LANDING.HEAD_BOX.CTA_2')}
@@ -128,6 +146,15 @@ export const Landing: FunctionComponent = () => {
                 desc={t('LANDING.MAIN_FEATURES_BOX.FEATURE_3.DESC')}
                 cta={t('LANDING.MAIN_FEATURES_BOX.FEATURE_3.CTA')}
               ></LandingFeatureCard>
+              <meta
+                name="description"
+                content="BIX Free csomag! Próbáld ki most ingyen a BIX-et és mérd az ügyfélelégedettséget!"
+              />
+              <meta property="og:title" content="Jogosultság - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+              <meta
+                property="og:description"
+                content="BIX Free csomag! Próbáld ki most ingyen a BIX-et és mérd az ügyfélelégedettséget!"
+              />
             </Grid>
             <Grid item sm={3}>
               <LandingFeatureCard
@@ -372,6 +399,8 @@ export const Landing: FunctionComponent = () => {
                 desc={t('LANDING.FEATURES_BOX.FEATURE_4.DESC')}
                 cta={t('LANDING.FEATURES_BOX.FEATURE_4.CTA')}
               ></LandingFeatureFlatCard>
+              <meta name="og:description" content="Automatizáld az ügyfélelégedettség mérést a cégedben!" />
+              <meta property="og:image" content="https://cdn.bixindex.hu/images/bixindex-og.png" />
             </Grid>
             <Grid item sm={4}>
               <LandingFeatureFlatCard

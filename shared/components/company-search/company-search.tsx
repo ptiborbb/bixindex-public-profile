@@ -45,6 +45,15 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
         <div className={classes.searchExamples}>
           <b>Gyorskeresés:</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
         </div>
+        <meta
+          name="description"
+          content="Céginformációk, vélemények. Keress a teljes magyar cégadatbázisban, olvass és írj véleményeket szolgáltatókról, gyártókról, kereskedőkről!"
+        />
+        <meta property="og:title" content="Cégkereső - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta
+          property="og:description"
+          content="Találd meg a következő partnered tevékenységi köre, és a vele kapcsolatos üzleti tapasztalatok alapján!"
+        />
       </Form>
     </Formik>
   );
