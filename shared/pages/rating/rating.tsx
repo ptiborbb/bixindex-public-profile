@@ -464,7 +464,7 @@ export const Rating: FC = () => {
                                 {t('RATING.LOGGED_IN_AS')}
                               </Typography>
                               <div className={classes.user}>
-                                <Avatar className={classes.avatar} />
+                                <Avatar className={classes.avatar} src={user.image} />
                                 <Typography variant="h6">{user.name}</Typography>
                               </div>
                               <div className={classes.userWarning}>
