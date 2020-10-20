@@ -8,7 +8,7 @@ import { useTranslate } from '../../translate.context';
 import classes from './profile-list-item.module.scss';
 
 interface ProfileListItemProps {
-  profile: IProfileSummary & { actualRevenue: number };
+  profile: IProfileSummary;
 }
 
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
