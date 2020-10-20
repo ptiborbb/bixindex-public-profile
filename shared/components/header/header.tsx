@@ -46,7 +46,9 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         </div>
       </div>
       <div className={classes.cta}>
-        <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
+        <Link href="https://ugyfelkapu.bixindex.hu">
+          <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
+        </Link>
       </div>
       <div className={classes.cta}>
         {user ? (
