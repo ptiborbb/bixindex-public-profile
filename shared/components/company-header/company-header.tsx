@@ -5,6 +5,7 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import WorkIcon from '@material-ui/icons/Work';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import classes from './company-header.module.scss';
 
@@ -25,6 +26,9 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
   companyType,
   activate,
 }) => {
+  const router = useRouter();
+  const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
+
   return (
     <div className={classes.companyHeader}>
       <div className={classes.companyHeaderTitle}>
@@ -52,7 +56,7 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
       </div>
       <div className={classes.companyHeaderLinksLine}>
         <Link
-          href="/bix-profil/[companyAlias]/ertekeles/[companyFormID]"
+          href={{ pathname: '/bix-profil/[companyAlias]/ertekeles/[companyFormID]', query: { by: by as string } }}
           as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
           passHref
         >
