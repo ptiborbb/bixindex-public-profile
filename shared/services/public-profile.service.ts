@@ -11,7 +11,7 @@ import {
 import { getPublicProfile, getPublicProfileFail, getPublicProfileSuccess } from '../pages/public-profile/store/actions';
 
 export interface IPublicProfileService {
-  getPublicProfileByAlias(alias: string): void;
+  getPublicProfileByIDOrAlias(identifier: string, IDOrAlias: 'ID' | 'ALIAS'): void;
   searchProfilesByName(page: number, rowsPerPage: number, searchText: string): void;
   resetProfiles(): void;
 }
@@ -37,10 +37,10 @@ export const publicProfileServiceFactory = (
         )
         .catch((error) => dispatch(getProfilesFail({ error })));
     },
-    getPublicProfileByAlias: (alias: string) => {
+    getPublicProfileByIDOrAlias: (identifier, IDOrAlias) => {
       dispatch(getPublicProfile());
       bixClient.publicProfile.profile
-        .getProfileByCompany(alias, 'ALIAS')
+        .getProfileByCompany(identifier, IDOrAlias)
         .then((profilePage) => dispatch(getPublicProfileSuccess({ profilePage: profilePage as ProfilePage })))
         .catch((error) => dispatch(getPublicProfileFail({ error })));
       // .catch(() => dispatch(getPublicProfileSuccess({ profilePage: mockData() as ProfilePage })));

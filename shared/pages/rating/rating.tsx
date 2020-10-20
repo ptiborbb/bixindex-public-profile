@@ -45,6 +45,7 @@ export const Rating: FC = () => {
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
+  const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
 
   const {
     ratingService,
@@ -135,7 +136,7 @@ export const Rating: FC = () => {
   }, [ratingService, alias, companyFormID]);
 
   useEffect(() => {
-    publicProfileService.getPublicProfileByAlias(alias);
+    publicProfileService.getPublicProfileByIDOrAlias(alias, by);
   }, [publicProfileService]);
 
   const handleSubmitReview = useCallback(
@@ -254,7 +255,7 @@ export const Rating: FC = () => {
                 logoPath={profilePage.profile.logo}
                 companyType={profilePage.profile.type}
                 activate={async (fragment) => {
-                  await router.push('/bix-profil/[companyAlias]', `/bix-profil/${alias}#${fragment}`);
+                  await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}#${fragment}`);
                 }}
               />
             </div>

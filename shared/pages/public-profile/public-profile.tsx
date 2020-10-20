@@ -19,6 +19,8 @@ export const PublicProfile: FC = () => {
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const hash = router.asPath.split('#')[1];
+  const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
+  console.log(router);
 
   const {
     publicProfileService,
@@ -33,7 +35,7 @@ export const PublicProfile: FC = () => {
   }, [hash]);
 
   useEffect(() => {
-    publicProfileService.getPublicProfileByAlias(alias);
+    publicProfileService.getPublicProfileByIDOrAlias(alias, by);
   }, [publicProfileService]);
 
   const contentSegment = useMemo(() => {
@@ -94,7 +96,7 @@ export const PublicProfile: FC = () => {
                 logoPath={profilePage.profile.logo}
                 companyType={profilePage.profile.type}
                 activate={async (fragment) => {
-                  await router.push('/bix-profil/[companyAlias]', `/bix-profil/${alias}#${fragment}`);
+                  await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}#${fragment}`);
                 }}
               />
             </div>
