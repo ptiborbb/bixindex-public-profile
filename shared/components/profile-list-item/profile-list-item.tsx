@@ -2,13 +2,13 @@ import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/prof
 import { Button } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import GradeIcon from '@material-ui/icons/Grade';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import quoteMarkBg from '../../../public/images/quote-mark-bg.png';
 import { useTranslate } from '../../translate.context';
 import classes from './profile-list-item.module.scss';
 
 interface ProfileListItemProps {
-  profile: IProfileSummary;
+  profile: IProfileSummary & { actualRevenue: number };
 }
 
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
@@ -58,20 +58,15 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
         </div>
         <div className={classes.columns}>
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium hic, quae ex officia natus harum vel
-              facere reiciendis temporibus quod ad et esse autem! Numquam ut earum veritatis corporis aliquid?
-            </p>
-            <p>
-              <b>Teszt Elek</b>, CEO
-            </p>
+            <p></p>
+            <p>{/* <b>Teszt Elek</b>, CEO */}</p>
           </div>
           <div className={classes.products}>
             <div className={classes.productsTitle}>{t('COMPANY_SEARCH.PRODUCTS')}</div>
-            <div className={classes.product}>Kecske</div>
+            {/* <div className={classes.product}>Kecske</div>
             <div className={classes.product}>Béka</div>
             <div className={classes.product}>Kredenc</div>
-            <div className={classes.product}>Rezsó</div>
+            <div className={classes.product}>Rezsó</div> */}
           </div>
           <div className={classes.address}>
             <p>
@@ -82,7 +77,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
               <Icon>business</Icon> {profile.company.taxNumber}
             </p>
             <p>
-              <Icon>euro_symbol</Icon> 420 000 000 Ft {/* {profile.company.actualRevenue} */}
+              <Icon>euro_symbol</Icon> {profile.actualRevenue}
             </p>
             <p>
               <Icon>people</Icon> {profile.company.actualNumberOfEmployees}
@@ -92,7 +87,14 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
       </div>
       <div className={classes.rightCorner}>
         <div className={classes.writeReview}>
-          <Button endIcon={<Icon>edit</Icon>}>{t('COMPANY_SEARCH.WRITE_REVIEW')}</Button>
+          <a
+            href={`/bix-profil/${profile.company.companyAlias}/ertekeles/${profile.defaultFormID}`}
+            target="_blank"
+            rel="noreferrer"
+            className={classes.profileListItem}
+          >
+            <Button endIcon={<Icon>edit</Icon>}>{t('COMPANY_SEARCH.WRITE_REVIEW')}</Button>
+          </a>
         </div>
         <div className={classes.goBixProfil}>
           <Button variant="text" color="default" endIcon={<Icon>person</Icon>}>
