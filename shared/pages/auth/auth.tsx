@@ -4,7 +4,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
@@ -396,9 +395,9 @@ export const Auth: FunctionComponent = () => {
                       />
                       <FormHelperText>{error.message}</FormHelperText>
                     </FormControl>
-                    <Link href="/forgot-password">
+                    <a href="https://ugyfelkapu.bixindex.hu/forgot-password" target="_blank" rel="noreferrer">
                       <a className={classes.forgotPassword}>{t('AUTH.FORGOT_PASSWORD')}</a>
-                    </Link>
+                    </a>
                     <meta name="description" content="Állítson be új jelszót a fiókjához!" />
                     <meta
                       property="og:title"
