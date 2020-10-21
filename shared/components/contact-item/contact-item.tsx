@@ -14,18 +14,30 @@ export const ContactItem: FC<ContactItemProps> = ({ image, name, email, phone })
   return (
     <div className={classes.contactItem}>
       <div className={classes.contactImage}>
-        <img alt={name} src={image} />
+        {image && (
+          <>
+            <img alt={name} src={image} />
+          </>
+        )}
       </div>
       <div className={classes.contactData}>
         <div className={classes.name}>{name}</div>
         <div className={classes.email}>
-          <EmailIcon className={classes.icon} /> {email}
+          {email && (
+            <>
+              <EmailIcon className={classes.icon} /> {email}
+            </>
+          )}
         </div>
         <meta name="description" content="Tudd meg kinek és miért érték a BIX!" />
         <meta property="og:title" content="Mi az a BIX? - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
         <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
         <div className={classes.phone}>
-          <PhoneIcon className={classes.icon} /> {phone}
+          {phone && (
+            <>
+              <PhoneIcon className={classes.icon} /> {phone}
+            </>
+          )}
         </div>
       </div>
     </div>

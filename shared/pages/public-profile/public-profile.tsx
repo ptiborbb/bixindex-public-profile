@@ -1,3 +1,4 @@
+import { CircularProgress } from '@material-ui/core';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -20,7 +21,6 @@ export const PublicProfile: FC = () => {
   const alias = router.query.companyAlias as string;
   const hash = router.asPath.split('#')[1];
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  console.log(router);
 
   const {
     publicProfileService,
@@ -78,7 +78,7 @@ export const PublicProfile: FC = () => {
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
       </Head>
-      {profilePage && (
+      {profilePage ? (
         <>
           <div className={classes.headerBlock}>
             <div className={classes.container}>
@@ -113,6 +113,8 @@ export const PublicProfile: FC = () => {
             </div>
           </div>
         </>
+      ) : (
+        <CircularProgress className={classes.spinner} />
       )}
     </div>
   );

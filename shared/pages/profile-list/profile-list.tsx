@@ -58,12 +58,12 @@ export const ProfileList: FC = () => {
                 Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!
               </Typography>
               <Typography variant="h3" align="center" className={classes.subTitle}>
-                Értékelj legalább 5 különböző céget minden héten november 20-ig, és
+                {'Értékelj legalább 5 különböző céget minden héten november 20-ig, és '}
                 <a
                   style={{ textDecoration: 'underline' }}
                   href="https://legjobbugyfelelmeny.hu/nevezd-a-kedvenc-ceged/"
                 >
-                  nyerj
+                  {'nyerj'}
                 </a>
                 !
               </Typography>
