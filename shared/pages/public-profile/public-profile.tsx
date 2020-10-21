@@ -20,7 +20,6 @@ export const PublicProfile: FC = () => {
   const alias = router.query.companyAlias as string;
   const hash = router.asPath.split('#')[1];
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  console.log(router);
 
   const {
     publicProfileService,
