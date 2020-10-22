@@ -19,6 +19,9 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         <Avatar src={rating.logo} className={classes.avatar} />
         <div className={classes.reviewer}>
           <div className={classes.name}>{rating.name}</div>
+          <div className={classes.oneSenteceComment}>
+            <div>{rating.summary}</div>
+          </div>
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>
@@ -61,9 +64,6 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
       <div className={classes.badReview}>
         <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
         {rating.negative}
-      </div>
-      <div className={classes.badReview}>
-        <div>{rating.summary}</div>
       </div>
     </div>
   );

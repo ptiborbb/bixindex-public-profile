@@ -465,6 +465,7 @@
     "SEND_REVIEW": "Submit review",
     "REFERENCE": "How would you like to provide a reference?",
     "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
-    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom."
+    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom.",
+    "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét"
   }
 }
