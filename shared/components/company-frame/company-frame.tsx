@@ -13,7 +13,7 @@ import { ContactItem } from '../contact-item/contact-item';
 import { SocialIcon } from '../social-icon/social-icon';
 import classes from './company-frame.module.scss';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any  */
 interface CompanyFrameProps {
   profile: any;
   productsAndServices: any[];
