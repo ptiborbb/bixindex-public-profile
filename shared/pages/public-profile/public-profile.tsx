@@ -1,7 +1,7 @@
 import { CircularProgress } from '@material-ui/core';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
@@ -38,6 +38,23 @@ export const PublicProfile: FC = () => {
     publicProfileService.getPublicProfileByIDOrAlias(alias, by);
   }, [publicProfileService]);
 
+  const [filter, setFilter] = useState({
+    name: '',
+    productId: undefined,
+    productOrService: undefined,
+    stars: undefined,
+    date: undefined,
+    pageNumber: 1,
+  });
+  const firstUpdate = useRef(true);
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    return publicProfileService.getRatingsByProfile(alias, by, 20, (filter.pageNumber - 1) * 20, filter.stars);
+  }, [publicProfileService, filter]);
+
   const contentSegment = useMemo(() => {
     if (!profilePage) {
       return undefined;
@@ -48,10 +65,12 @@ export const PublicProfile: FC = () => {
         return (
           <Reviews
             companyAlias={alias}
-            companyFormID={profilePage.profile.defaultFormID}
+            companyFormID={profilePage.profile?.defaultFormID}
             ratings={profilePage.ratings}
             stats={profilePage.stats}
             npsRates={profilePage.npsRates}
+            filter={filter}
+            filterChanged={setFilter}
           />
         );
       case 'awards':
@@ -64,10 +83,12 @@ export const PublicProfile: FC = () => {
         return (
           <Reviews
             companyAlias={alias}
-            companyFormID={profilePage.profile.defaultFormID}
+            companyFormID={profilePage.profile?.defaultFormID}
             ratings={profilePage.ratings}
             stats={profilePage.stats}
             npsRates={profilePage.npsRates}
+            filter={filter}
+            filterChanged={setFilter}
           />
         );
     }

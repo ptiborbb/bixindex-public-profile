@@ -1,5 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getPublicProfile, getPublicProfileFail, getPublicProfileSuccess } from './actions';
+import {
+  getPublicProfile,
+  getPublicProfileFail,
+  getPublicProfileSuccess,
+  getRatingsForProfile,
+  getRatingsForProfileFail,
+  getRatingsForProfileSuccess,
+} from './actions';
 import { initialPublicProfileState } from './state';
 export const publicProfileReducer = createReducer(initialPublicProfileState, (builder) => {
   builder
@@ -13,6 +20,19 @@ export const publicProfileReducer = createReducer(initialPublicProfileState, (bu
     .addCase(getPublicProfileFail, (state) => {
       state.profilePage = null;
       state.loading = false;
+    })
+    .addCase(getRatingsForProfile, (state) => {
+      state.ratingsLoading = true;
+    })
+    .addCase(getRatingsForProfileSuccess, (state, action) => {
+      state.profilePage = {
+        ...state.profilePage,
+        ratings: action.payload.ratings,
+      };
+      state.ratingsLoading = false;
+    })
+    .addCase(getRatingsForProfileFail, (state) => {
+      state.ratingsLoading = false;
     })
     .addDefaultCase((state) => state);
 });
