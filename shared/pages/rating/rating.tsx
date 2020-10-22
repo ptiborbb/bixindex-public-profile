@@ -303,7 +303,7 @@ export const Rating: FC = () => {
                       validationSchema={validationSchema}
                       enableReinitialize
                     >
-                      {({ setFieldValue, errors, submitCount, values }) => (
+                      {({ setFieldValue, errors, submitCount, values, isValid, submitForm }) => (
                         <Form style={{ width: '100%' }}>
                           {!nps && (
                             <>
@@ -716,7 +716,14 @@ export const Rating: FC = () => {
                             <div className={classes.verticalSpacing} />
                           </Grid>
                           <Grid item xs={12} className={classes.flexRight}>
-                            <Button size="large" variant="contained" type="submit" color="primary">
+                            <Button
+                              size="large"
+                              variant="contained"
+                              color="primary"
+                              onClick={() => {
+                                isValid ? submitForm() : toast.error(t('RATING.INVALID_FORM'));
+                              }}
+                            >
                               {t('RATING.SEND_REVIEW')}
                             </Button>
                           </Grid>
