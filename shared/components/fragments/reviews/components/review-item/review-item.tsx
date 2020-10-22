@@ -19,10 +19,13 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         <Avatar src={rating.logo} className={classes.avatar} />
         <div className={classes.reviewer}>
           <div className={classes.name}>{rating.name}</div>
+          <div className={classes.oneSenteceComment}>
+            <div>{rating.summary}</div>
+          </div>
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>
-            <StarCounter stars={Math.ceil(rating.value / 2)} />{' '}
+            <StarCounter stars={Math.ceil(rating.value / 2) - 1} />{' '}
             <span className={classes.rating}>{Math.round(rating.value * 10) / 10}</span>
           </div>
           <div className={classes.date}>Ellenőrzés dátuma: {rating.date.split('T')[0]}</div>
@@ -61,9 +64,6 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
       <div className={classes.badReview}>
         <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
         {rating.negative}
-      </div>
-      <div className={classes.badReview}>
-        <div>{rating.summary}</div>
       </div>
     </div>
   );

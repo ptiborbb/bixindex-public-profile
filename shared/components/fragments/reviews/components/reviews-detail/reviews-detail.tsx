@@ -1,18 +1,6 @@
 import { IProduct, IService } from '@codingsans/bixindex-common';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  FormControlLabel,
-  FormLabel,
-  ListSubheader,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  TextField,
-} from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { ChangeEvent, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { StarCounter } from '../../../../star-counter/star-counter';
@@ -27,6 +15,7 @@ interface ReviewsDetailProps {
   services: IService[];
   stats: ReviewStatsProps;
   ratings: RatingItem[];
+  ratingCount: number;
   ratingCountsByValue: number[];
 }
 
@@ -37,6 +26,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   services,
   stats,
   ratings,
+  ratingCount,
   ratingCountsByValue,
 }) => {
   const [opened, setOpened] = useState(false);
@@ -59,87 +49,42 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <div>
           {ratingCountsByValue &&
             ratingCountsByValue.map((count, i) => (
-              <span key={i} onClick={() => filterChanged({ ...filter, stars: i })}>
+              <div
+                key={i}
+                onClick={() => {
+                  filterChanged({ ...filter, stars: filter.stars === i + 1 ? undefined : i + 1, pageNumber: 1 });
+                }}
+                className={filter.stars === i + 1 ? classes.selectedFilter : ''}
+              >
                 <StarCounter stars={+i} count={count} />
-              </span>
+              </div>
             ))}
-        </div>
-
-        <div className={classes.filterInputs}>
-          <Select
-            value={filter.productId}
-            onChange={(event: ChangeEvent<{ value: string }>) => {
-              const val = event.target.value;
-              filterChanged({ ...filter, productId: val, productOrService: 'product' });
-            }}
-          >
-            <ListSubheader>Products</ListSubheader>
-
-            {products.map((p) => (
-              <MenuItem key={p.id} value={p.id}>
-                {p.name}
-              </MenuItem>
-            ))}
-
-            <ListSubheader>Services</ListSubheader>
-
-            {services.map((s) => (
-              <MenuItem key={s.id} value={s.id}>
-                {s.name}
-              </MenuItem>
-            ))}
-          </Select>
-
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="date-picker-inline"
-              label="Date picker inline"
-              value={filter.date}
-              onChange={(date: Date) => filterChanged({ ...filter, date })}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-            />
-          </MuiPickersUtilsProvider>
-
-          <TextField
-            label="Name"
-            value={filter.name}
-            onChange={(event: ChangeEvent<{ value: string }>) => filterChanged({ ...filter, name: event.target.value })}
-          />
-        </div>
-
-        <div>
-          <FormLabel component="legend">Értékelés típusa</FormLabel>
-          <RadioGroup
-            aria-label="type"
-            name="type"
-            value={filter.type}
-            onChange={(event: ChangeEvent<{ value: string }>) =>
-              filterChanged({ ...filter, type: event.target.value as 'bix' | 'nps' })
-            }
-          >
-            <FormControlLabel value="bix" control={<Radio />} label="BIX" />
-            <FormControlLabel value="nps" control={<Radio />} label="NPS" />
-          </RadioGroup>
         </div>
       </div>
 
-      <div className={classes.separator}></div>
+      <div className={`${ratingCount > 0 ? '' : ` ${classes.hidden}`}`}>
+        <div className={`${classes.separator}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}></div>
 
-      {ratings && ratings.map((rating, i) => <ReviewItem key={i} rating={rating} />)}
+        {ratings && ratings.map((rating, i) => <ReviewItem key={i} rating={rating} />)}
 
-      <div className={classes.pager}>
-        <div className={classes.pageNumber}>1. oldal</div>
-        <div className={classes.prev}>
-          <ArrowLeft />
-        </div>
-        <div className={classes.next}>
-          <ArrowRight />
+        <div className={`${classes.pager}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}>
+          <div className={classes.pageNumber}>{filter.pageNumber}. oldal</div>
+          <div
+            onClick={() => {
+              filterChanged({ ...filter, pageNumber: filter.pageNumber - 1 });
+            }}
+            className={`${classes.prev}${filter.pageNumber > 1 ? '' : ` ${classes.hidden}`}`}
+          >
+            <ArrowLeft />
+          </div>
+          <div
+            onClick={() => {
+              filterChanged({ ...filter, pageNumber: filter.pageNumber + 1 });
+            }}
+            className={`${classes.next}${filter.pageNumber * 20 < ratingCount ? '' : ` ${classes.hidden}`}`}
+          >
+            <ArrowRight />
+          </div>
         </div>
       </div>
     </div>
