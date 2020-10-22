@@ -8,10 +8,24 @@ import {
   getProfilesSuccess,
   resetProfileList,
 } from '../pages/profile-list/store/actions';
-import { getPublicProfile, getPublicProfileFail, getPublicProfileSuccess } from '../pages/public-profile/store/actions';
+import {
+  getPublicProfile,
+  getPublicProfileFail,
+  getPublicProfileSuccess,
+  getRatingsForProfile,
+  getRatingsForProfileFail,
+  getRatingsForProfileSuccess,
+} from '../pages/public-profile/store/actions';
 
 export interface IPublicProfileService {
   getPublicProfileByIDOrAlias(identifier: string, IDOrAlias: 'ID' | 'ALIAS'): void;
+  getRatingsByProfile(
+    profileIdOrCompanyAlias: string,
+    by: 'ID' | 'ALIAS',
+    limit: number,
+    skip: number,
+    stars?: number,
+  ): void;
   searchProfilesByName(page: number, rowsPerPage: number, searchText: string): void;
   resetProfiles(): void;
 }
@@ -47,6 +61,14 @@ export const publicProfileServiceFactory = (
     },
     resetProfiles: () => {
       dispatch(resetProfileList());
+    },
+    getRatingsByProfile: (id, by, limit, skip, stars) => {
+      dispatch(getRatingsForProfile());
+      bixClient.publicProfile.profile
+        .getRatingsByProfile(id, by, limit, skip, stars)
+        .then((ratings) => dispatch(getRatingsForProfileSuccess({ ratings })))
+        .catch((error) => dispatch(getRatingsForProfileFail({ error })));
+      // .catch(() => dispatch(getPublicProfileSuccess({ profilePage: mockData() as ProfilePage })));
     },
   };
 };

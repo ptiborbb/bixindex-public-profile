@@ -26,10 +26,15 @@
     display: flex;
     justify-content: space-between;
     padding: 2rem;
+    cursor: pointer;
 
     .filterInputs {
       display: flex;
       flex-direction: column;
+    }
+
+    .selectedFilter {
+      background-color: lightgrey;
     }
   }
 
@@ -67,4 +72,8 @@
       margin-left: 0.2rem;
     }
   }
+}
+
+.hidden {
+  display: none !important;
 }

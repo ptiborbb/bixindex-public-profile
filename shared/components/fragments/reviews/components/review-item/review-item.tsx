@@ -22,7 +22,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>
-            <StarCounter stars={Math.ceil(rating.value / 2)} />{' '}
+            <StarCounter stars={Math.ceil(rating.value / 2) - 1} />{' '}
             <span className={classes.rating}>{Math.round(rating.value * 10) / 10}</span>
           </div>
           <div className={classes.date}>Ellenőrzés dátuma: {rating.date.split('T')[0]}</div>

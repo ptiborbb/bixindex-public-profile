@@ -4,5 +4,5 @@ export interface ReviewFilter {
   productOrService: 'product' | 'service';
   date: Date;
   name: string;
-  type: 'bix' | 'nps';
+  pageNumber: number;
 }
