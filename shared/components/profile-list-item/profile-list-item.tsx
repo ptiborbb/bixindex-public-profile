@@ -23,7 +23,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
       <div className={classes.leftCorner}>
         <div className={classes.header}>
           <div className={classes.logo}>
-            <img alt={profile.profile.name} src="https://via.placeholder.com/70" />
+            <img alt={profile.profile.name} src={profile.profile.logo || `https://via.placeholder.com/70`} />
           </div>
           <div className={classes.title}>
             <div className={classes.name}>
