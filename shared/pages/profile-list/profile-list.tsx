@@ -61,7 +61,7 @@ export const ProfileList: FC = () => {
                 {'Értékelj legalább 5 különböző céget minden héten november 20-ig, és '}
                 <a
                   style={{ textDecoration: 'underline' }}
-                  href="https://legjobbugyfelelmeny.hu/nevezd-a-kedvenc-ceged/"
+                  href={`${process.env.NEXT_PUBLIC_BEST_USER_EXPERIENCE}/nevezd-a-kedvenc-ceged/`}
                 >
                   {'nyerj'}
                 </a>
