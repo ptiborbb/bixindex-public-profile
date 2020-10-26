@@ -42,7 +42,11 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   }, [hash]);
 
   useEffect(() => {
-    publicProfileService.getPublicProfileByIDOrAlias(alias, by);
+    if (ssrProfilePage) {
+      publicProfileService.setPublicProfile(ssrProfilePage);
+    } else {
+      publicProfileService.getPublicProfileByIDOrAlias(alias, by);
+    }
   }, [publicProfileService]);
 
   const [filter, setFilter] = useState({
