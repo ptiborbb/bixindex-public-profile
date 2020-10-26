@@ -27,7 +27,7 @@ const useRatingStructuralData = (profilePage: ProfilePage): React.ReactNode => {
     '@type': 'LocalBusiness',
     '@id': profilePage.profile.website,
     name: profilePage.profile.name,
-    image: profilePage.profile.logo || 'https://via.placeholder.com/150',
+    image: profilePage.profile.logo || 'https://via.placeholder.com/100',
     telephone: profilePage.profile.contacts[0].phone,
     ...(profilePage.ratings.count
       ? {
