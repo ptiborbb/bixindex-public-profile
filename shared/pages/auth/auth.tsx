@@ -38,8 +38,8 @@ const useInputLabelStyle = makeStyles({
   },
 });
 
-export const fbAppId = 294368951892091;
-export const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
+export const fbAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
+export const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
@@ -395,7 +395,11 @@ export const Auth: FunctionComponent = () => {
                       />
                       <FormHelperText>{error.message}</FormHelperText>
                     </FormControl>
-                    <a href="https://ugyfelkapu.bixindex.hu/forgot-password" target="_blank" rel="noreferrer">
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}/forgot-password`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <a className={classes.forgotPassword}>{t('AUTH.FORGOT_PASSWORD')}</a>
                     </a>
                     <meta name="description" content="Állítson be új jelszót a fiókjához!" />
