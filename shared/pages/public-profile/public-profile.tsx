@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { LocalBusiness, WithContext } from 'schema-dts';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
@@ -19,6 +20,59 @@ import { useTranslate } from '../../translate.context';
 import classes from './public-profile.module.scss';
 
 type PublicProfileProps = { profilePage?: ProfilePage };
+
+const useRatingStructuralData = (profilePage: ProfilePage): React.ReactNode => {
+  const localBuisnessStructuredData: WithContext<LocalBusiness> = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': profilePage.profile.website,
+    name: profilePage.profile.name,
+    image: profilePage.profile.logo || 'https://via.placeholder.com/150',
+    telephone: profilePage.profile.contacts[0].phone,
+    ...(profilePage.ratings.count
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingCount: profilePage.ratings.count,
+            reviewCount: profilePage.ratings.count,
+            ratingValue: profilePage.stats.index.score,
+            worstRating: 0,
+            bestRating: 10,
+          },
+          review: {
+            '@type': 'Review',
+            // itemReviewed: {
+            //   '@type': 'Thing',
+            //   name: 'Service',
+            // },
+            author: { '@type': 'Person', name: profilePage.ratings.items[0].name },
+            datePublished: profilePage.ratings.items[0].date,
+            reviewBody: profilePage.ratings.items[0].summary,
+            publisher: { '@type': 'Organization', name: 'Bixindex', sameAs: 'https://bixindex.hu/' },
+          },
+        }
+      : {}),
+    url: profilePage.profile.website,
+    address: {
+      '@type': 'PostalAddress',
+      // addressCountry: profilePage.profile.details.address,
+      streetAddress: profilePage.profile.details.address,
+    },
+    // description
+  };
+
+  return useMemo(
+    () => (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBuisnessStructuredData),
+        }}
+      ></script>
+    ),
+    [profilePage],
+  );
+};
 
 export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrProfilePage }) => {
   const { t } = useTranslate();
@@ -105,10 +159,13 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     }
   }, [activeFragment, profilePage]);
 
+  const ratingStructuralData = useRatingStructuralData(profilePage);
+
   return (
     <div>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
+        {ratingStructuralData}
       </Head>
       {profilePage ? (
         <>
@@ -153,7 +210,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 };
 
 PublicProfile.getInitialProps = async (ctx) => {
-  const bixApiUrl = `https://bixindex-backend.herokuapp.com`;
+  const bixApiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const bixClient = createBixindexClient({
     baseURL: bixApiUrl,
     responseInterceptors: [],
