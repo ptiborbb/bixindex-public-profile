@@ -1,17 +1,19 @@
 import { IProduct, IService } from '@codingsans/bixindex-common';
 import { FC } from 'react';
+import { useTranslate } from '../../translate.context';
 import classes from './product.module.scss';
 
 type ProductProps = IProduct & IService;
 
 export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, priceRange, description }) => {
+  const { t } = useTranslate();
   return (
     <div className={classes.product}>
       <div className={classes.details}>
         <div className={classes.mainDetails}>
           <div className={classes.name}>{name}</div>
           <div className={classes.categories}>
-            {mainCategory} | {subCategory}
+            {t(`MAIN_CATEGORIES.${mainCategory}`)} | {t(`SUBCATEGORIES.${subCategory}`)}
           </div>
         </div>
         <div className={classes.subDetails}>

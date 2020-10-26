@@ -45,7 +45,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
               </div>
             </div>
             <div className={classes.profile}>
-              {t('COMPANY_SEARCH.MAIN_PROFILE')} {profile.company.industry}
+              {t('COMPANY_SEARCH.MAIN_PROFILE')} {t(`MAIN_PROFILES.${profile?.company?.sector}`)}
             </div>
           </div>
           <div className={classes.indexes}>
@@ -58,15 +58,21 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
         </div>
         <div className={classes.columns}>
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
-            <p></p>
-            <p>{/* <b>Teszt Elek</b>, CEO */}</p>
+            <p>{profile.goodRating?.summary}</p>
+            <p>{profile.goodRating?.userName}</p>
           </div>
           <div className={classes.products}>
             <div className={classes.productsTitle}>{t('COMPANY_SEARCH.PRODUCTS')}</div>
-            {/* <div className={classes.product}>Kecske</div>
-            <div className={classes.product}>Béka</div>
-            <div className={classes.product}>Kredenc</div>
-            <div className={classes.product}>Rezsó</div> */}
+            {profile.products.slice(0, 2).map((product) => (
+              <div key={product.id} className={classes.product}>
+                {product.name}
+              </div>
+            ))}
+            {profile.services.slice(0, 2).map((service) => (
+              <div key={service.id} className={classes.product}>
+                {service.name}
+              </div>
+            ))}
           </div>
           <div className={classes.address}>
             <p>
