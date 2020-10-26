@@ -40,8 +40,8 @@ const useInputLabelStyle = makeStyles({
   },
 });
 
-export const fbAppId = 294368951892091;
-export const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
+export const fbAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
+export const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
@@ -409,10 +409,10 @@ export const Auth: FunctionComponent = () => {
                         <FormHelperText>{loginError.message}</FormHelperText>
                       </FormControl>
                       <a
-                        href="https://ugyfelkapu.bixindex.hu/forgot-password"
-                        className={classes.forgotPassword}
+                        href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}/forgot-password`}
                         target="_blank"
                         rel="noreferrer"
+                        className={classes.forgotPassword}
                       >
                         {t('AUTH.FORGOT_PASSWORD')}
                       </a>
