@@ -1,7 +1,9 @@
+import { createBixindexClient } from '@codingsans/bixindex-common';
 import { CircularProgress } from '@material-ui/core';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
@@ -12,10 +14,13 @@ import { News } from '../../components/fragments/news/news';
 import { Products } from '../../components/fragments/products/products';
 import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
+import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
 import classes from './public-profile.module.scss';
 
-export const PublicProfile: FC = () => {
+type PublicProfileProps = { profilePage?: ProfilePage };
+
+export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrProfilePage }) => {
   const { t } = useTranslate();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
@@ -25,10 +30,12 @@ export const PublicProfile: FC = () => {
   const {
     publicProfileService,
     state: {
-      publicProfile: { profilePage },
+      publicProfile: { profilePage: clientProfilePage },
     },
   } = useApp();
   const [activeFragment, setFragment] = useState(() => hash || 'reviews');
+
+  const profilePage = clientProfilePage || ssrProfilePage;
 
   useEffect(() => {
     setFragment(hash);
@@ -139,4 +146,19 @@ export const PublicProfile: FC = () => {
       )}
     </div>
   );
+};
+
+PublicProfile.getInitialProps = async (ctx) => {
+  const bixApiUrl = `https://bixindex-backend.herokuapp.com`;
+  const bixClient = createBixindexClient({
+    baseURL: bixApiUrl,
+    responseInterceptors: [],
+  });
+  const alias = ctx.query.companyAlias as string;
+  const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
+  const profilePage = (await bixClient.publicProfile.profile.getProfileByCompany(alias, by)) as ProfilePage;
+
+  return {
+    profilePage,
+  };
 };
