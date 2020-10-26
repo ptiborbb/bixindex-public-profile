@@ -6,7 +6,8 @@ import LanguageIcon from '@material-ui/icons/Language';
 import PlaceIcon from '@material-ui/icons/Place';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { FC } from 'react';
+import React, { FC } from 'react';
+import { useTranslate } from '../../translate.context';
 import { Chip } from '../chip/chip';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
@@ -23,6 +24,8 @@ interface CompanyFrameProps {
 // TODO missing typing
 
 export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, productsAndServices, stats }) => {
+  const { t, i18n } = useTranslate();
+
   return (
     <div className={classes.companyFrame}>
       <div className={classes.companySidebar}>
@@ -73,7 +76,11 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
           )}
 
           <CompanyDetailItem icon={<PlaceIcon />} label={'Cím'} value={profile.details.address} />
-          <CompanyDetailItem icon={<SettingsIcon />} label={'Főprofil'} value={profile.details.mainProfile} />
+          <CompanyDetailItem
+            icon={<SettingsIcon />}
+            label={'Főprofil'}
+            value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
+          />
           <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
           <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={''} />
           {/* TODO: kapcsolódó profilok listáját bekötni */}
