@@ -5,7 +5,7 @@ export interface RatingItem {
   logo: string;
   value: number;
   date: string;
-  nps: number;
+  nps?: number;
   positive?: string;
   negative?: string;
   summary?: string;
