@@ -57,6 +57,10 @@ export const Rating: FC = () => {
     },
   } = useApp();
 
+  const logout = useCallback(() => {
+    authService.logout();
+  }, [authService]);
+
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
   const authValidation = useMemo(
     () =>
@@ -464,8 +468,19 @@ export const Rating: FC = () => {
                                 {t('RATING.LOGGED_IN_AS')}
                               </Typography>
                               <div className={classes.user}>
-                                <Avatar className={classes.avatar} src={user.image} />
-                                <Typography variant="h6">{user.name}</Typography>
+                                <div className={classes.user}>
+                                  <Avatar className={classes.avatar} src={user.image} />
+                                  <Typography variant="h6">{user.name}</Typography>
+                                </div>
+                                <Button className={classes.logButton} onClick={logout}>
+                                  {t('HEADER.LOGOUT')}
+                                  <meta name="description" content="Sikeres kijelentkezés! Viszont látásra!" />
+                                  <meta
+                                    property="og:title"
+                                    content="Kijelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                                  />
+                                  <meta property="og:description" content="Sikeres kijelentkezés! Viszont látásra!" />
+                                </Button>
                               </div>
                               <div className={classes.userWarning}>
                                 <Info className={classes.spacingRight} />
