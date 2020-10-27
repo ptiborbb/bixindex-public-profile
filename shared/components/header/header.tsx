@@ -32,23 +32,22 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         </div>
       </Link>
       <div className={classes.links}>
-        <div className={classes.link}>{t('HEADER.FUNCTIONS')}</div>
-        <div className={classes.link}>{t('HEADER.SUBSCRIPTION')}</div>
-        <div className={classes.link}>{t('HEADER.BLOG')}</div>
         <Link href="/cegkereso">
           <a className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</a>
         </Link>
-        <div className={classes.link}>
-          <PhoneIcon />
-        </div>
-        <div className={classes.link}>
-          <EmojiEventsIcon />
+        <div className={classes.icons}>
+          <div className={classes.link}>
+            <PhoneIcon />
+          </div>
+          <div className={classes.link}>
+            <EmojiEventsIcon />
+          </div>
         </div>
       </div>
       <div className={classes.cta}>
-        <Link href="https://ugyfelkapu.bixindex.hu">
+        <a target="_blank" rel="noreferrer" href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}`}>
           <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
-        </Link>
+        </a>
       </div>
       <div className={classes.cta}>
         {user ? (

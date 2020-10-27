@@ -66,6 +66,7 @@
   display: flex;
   align-items: center;
   margin-top: 1rem !important;
+  justify-content: space-between;
   .avatar {
     width: 90px !important;
     height: 90px !important;
@@ -83,8 +84,8 @@
   .icon {
     cursor: pointer;
     &.google {
-      width: 26.5px !important;
-      height: 26.5px !important;
+      width: 100px !important;
+      height: 100px !important;
     }
   }
 }
@@ -94,4 +95,68 @@
 }
 .link {
   color: blue;
+}
+
+.socialButton {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  cursor: pointer;
+  color: $white;
+  font-size: 1rem;
+  padding: 15px 10px 15px 48px;
+  border-radius: 3px;
+  margin: 5px 0;
+  border: none;
+
+  $social-icon-place-size: 48px;
+
+  &.google {
+    background-color: $google-red;
+    .iconPlaceholder {
+      background-color: #ab3a2c;
+      > img {
+        width: 20px;
+        height: auto;
+      }
+    }
+  }
+
+  &.facebook {
+    background-color: $fb-blue;
+    .iconPlaceholder {
+      background-color: #4f77cc;
+      > img {
+        width: 12px;
+        height: auto;
+      }
+    }
+  }
+
+  .iconPlaceholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 3px 0 0 3px;
+    width: $social-icon-place-size;
+    > img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.logButton {
+  background-color: #054f6b !important;
+  color: white !important;
+  padding: 1rem !important;
+  border-radius: 3px !important;
+  outline: 0 !important;
+  border: 0 !important;
+  font-weight: bold !important;
+  width: 8em !important;
 }

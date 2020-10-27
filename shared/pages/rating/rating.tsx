@@ -12,7 +12,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
-import FacebookIcon from '@material-ui/icons/Facebook';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -57,6 +56,10 @@ export const Rating: FC = () => {
       auth: { user },
     },
   } = useApp();
+
+  const logout = useCallback(() => {
+    authService.logout();
+  }, [authService]);
 
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
   const authValidation = useMemo(
@@ -103,6 +106,7 @@ export const Rating: FC = () => {
             negative: Yup.string().required(t('COMMON.REQUIRED')),
             comment: Yup.string().required(t('COMMON.REQUIRED')),
             auth: authValidation,
+            visibility: Yup.string().required(t('COMMON.REQUIRED')),
           })
         : Yup.object({
             comment: Yup.string().required(t('COMMON.REQUIRED')),
@@ -170,7 +174,7 @@ export const Rating: FC = () => {
             positive: values.positive,
             negative: values.negative,
             reference: values.reference,
-            visibility: values.visiblity,
+            visibility: values.visibility,
             answers: values.answers.map((answer) => ({
               questionID: answer.id,
               value: parseFloat(answer.value),
@@ -304,7 +308,7 @@ export const Rating: FC = () => {
                       validationSchema={validationSchema}
                       enableReinitialize
                     >
-                      {({ setFieldValue, errors, submitCount, values }) => (
+                      {({ setFieldValue, errors, submitCount, values, isValid, submitForm }) => (
                         <Form style={{ width: '100%' }}>
                           {!nps && (
                             <>
@@ -352,7 +356,7 @@ export const Rating: FC = () => {
                             <Grid container spacing={0} justify="space-between">
                               <Grid item xs={12}>
                                 <CustomSlider
-                                  defaultValue={4}
+                                  defaultValue={8}
                                   name="nps"
                                   valueLabelDisplay="auto"
                                   step={1}
@@ -465,8 +469,19 @@ export const Rating: FC = () => {
                                 {t('RATING.LOGGED_IN_AS')}
                               </Typography>
                               <div className={classes.user}>
-                                <Avatar className={classes.avatar} src={user.image} />
-                                <Typography variant="h6">{user.name}</Typography>
+                                <div className={classes.user}>
+                                  <Avatar className={classes.avatar} src={user.image} />
+                                  <Typography variant="h6">{user.name}</Typography>
+                                </div>
+                                <Button className={classes.logButton} onClick={logout}>
+                                  {t('HEADER.LOGOUT')}
+                                  <meta name="description" content="Sikeres kijelentkezés! Viszont látásra!" />
+                                  <meta
+                                    property="og:title"
+                                    content="Kijelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                                  />
+                                  <meta property="og:description" content="Sikeres kijelentkezés! Viszont látásra!" />
+                                </Button>
                               </div>
                               <div className={classes.userWarning}>
                                 <Info className={classes.spacingRight} />
@@ -498,29 +513,39 @@ export const Rating: FC = () => {
                                       {t('RATING.AUTHENTICATION')}
                                     </Typography>
                                   </Grid>
-                                  <Grid item xs={12} className={classes.icons}>
+                                  <Grid item xs={12}>
                                     <FacebookLogin
                                       appId={fbAppId}
                                       autoLoad={false}
                                       fields="name,email,picture"
                                       callback={loginResponseFacebook}
                                       render={(renderProps) => (
-                                        <FacebookIcon
+                                        <button
+                                          className={`${classes.socialButton} ${classes.facebook}`}
                                           onClick={renderProps.onClick}
-                                          color="primary"
-                                          fontSize="large"
-                                          className={classes.icon}
-                                        />
+                                        >
+                                          <span className={classes.iconPlaceholder}>
+                                            <img src="/social/facebook-white.svg" />
+                                          </span>
+                                          {t('AUTH.FB_BTN_TEXT')}
+                                        </button>
                                       )}
                                     />
+                                  </Grid>
+                                  <Grid item xs={12}>
                                     <GoogleLogin
                                       clientId={googleClientId}
                                       render={(renderProps) => (
-                                        <img
-                                          src="/social/Google.svg"
-                                          className={`${classes.icon} ${classes.google}`}
+                                        <button
+                                          className={`${classes.socialButton} ${classes.google}`}
                                           onClick={renderProps.onClick}
-                                        />
+                                          disabled={renderProps.disabled}
+                                        >
+                                          <span className={classes.iconPlaceholder}>
+                                            <img src="/social/google-white.svg" />
+                                          </span>
+                                          {t('AUTH.GOOGLE_BTN_TEXT')}
+                                        </button>
                                       )}
                                       onSuccess={(resp: GoogleLoginResponse) =>
                                         responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)
@@ -643,21 +668,6 @@ export const Rating: FC = () => {
                                           {errors?.auth?.policy && !!submitCount ? t('RATING.POLICy_REQUIRED') : ''}
                                         </FormHelperText>
                                       </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="visibility"
-                                          select
-                                          fullWidth
-                                          variant="outlined"
-                                        >
-                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
-                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
-                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
-                                        </Field>
-                                      </Grid>
                                     </>
                                   ) : (
                                     <>
@@ -682,32 +692,32 @@ export const Rating: FC = () => {
                                           variant="outlined"
                                         />
                                       </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="visibility"
-                                          select
-                                          fullWidth
-                                          variant="outlined"
-                                        >
-                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
-                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
-                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
-                                        </Field>
-                                      </Grid>{' '}
                                     </>
                                   )}
                                 </Grid>
                               </Grid>
                             </>
                           )}
+                          <Grid item xs={6}>
+                            <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
+                            <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">
+                              <MenuItem value="VISIBLE">{t('RATING.PUBLIC')}</MenuItem>
+                              <MenuItem value="HIDDEN">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
+                              <MenuItem value="ANONYM">{t('RATING.PRIVATE')}</MenuItem>
+                            </Field>
+                          </Grid>
                           <Grid item xs={12}>
                             <div className={classes.verticalSpacing} />
                           </Grid>
                           <Grid item xs={12} className={classes.flexRight}>
-                            <Button size="large" variant="contained" type="submit" color="primary">
+                            <Button
+                              size="large"
+                              variant="contained"
+                              color="primary"
+                              onClick={() => {
+                                isValid ? submitForm() : toast.error(t('RATING.INVALID_FORM'));
+                              }}
+                            >
                               {t('RATING.SEND_REVIEW')}
                             </Button>
                           </Grid>

@@ -4,10 +4,12 @@ import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
+import { get } from 'lodash/fp';
 import { useRouter } from 'next/router';
-import { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
@@ -38,39 +40,35 @@ const useInputLabelStyle = makeStyles({
   },
 });
 
-export const fbAppId = 294368951892091;
-export const googleClientId = '386971335373-1sucn46b83mgl1cjm84qbp7j7445r0i1.apps.googleusercontent.com';
+export const fbAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
+export const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
   const router = useRouter();
 
   const { authService } = useApp();
-  const companyFormID = router.query.companyFormID as string;
-  const companyAlias = router.query.companyAlias as string;
+  const companyFormID = useMemo(() => get('query.companyFormID', router), [router]);
+  const companyAlias = useMemo(() => get('query.companyAlias', router), [router]);
 
   const login = useCallback(
     (email: string, password: string) => {
       return authService
         .login(email, password)
-        .then(() =>
-          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push('/'),
-        )
-        .then(() => setError({ isError: false, message: '' }))
-        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+        .then(() => setLoginError({ isError: false, message: '' }))
+        .catch(() => setLoginError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
-    [authService, companyFormID, companyAlias],
+    [authService],
   );
 
   const register = useCallback(
     (name: string, email: string, password: string) => {
       return authService
         .register(name, email, password)
-        .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/')))
-        .then(() => setError({ isError: false, message: '' }))
-        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+        .then(() => setRegisterError({ isError: false, message: '' }))
+        .catch(() => setRegisterError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
     },
-    [authService, companyFormID, companyAlias],
+    [authService],
   );
 
   const [showRegisterForm, setRegisterForm] = useState(false);
@@ -87,8 +85,7 @@ export const Auth: FunctionComponent = () => {
               : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
             : router.push('/'),
         )
-        .then(() => setError({ isError: false, message: '' }))
-        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+        .catch(() => toast.error(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`)));
     },
     [authService],
   );
@@ -104,22 +101,23 @@ export const Auth: FunctionComponent = () => {
               : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
             : router.push('/'),
         )
-        .then(() => setError({ isError: false, message: '' }))
-        .catch(() => setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+        .catch(() => toast.error(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`)));
     },
     [authService],
   );
 
-  const failResponseGoogle = (): void => {
-    return setError({ isError: true, message: t('COMMON.UNKOWN_ERROR') });
+  const failResponseGoogle = (): unknown => {
+    return toast.error(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`));
   };
 
-  const [error, setError] = useState({ isError: false, message: '' });
+  const [loginError, setLoginError] = useState({ isError: false, message: '' });
 
   const loginValidationSchema = Yup.object({
     email: Yup.string().email(t('AUTH.INVALID_EMAIL')).required(t('AUTH.REQUIRED')),
     password: Yup.string().required(t('AUTH.REQUIRED')),
   });
+
+  const [registerError, setRegisterError] = useState({ isError: false, message: '' });
 
   const registerValidationSchema = Yup.object({
     email: Yup.string().email(t('AUTH.INVALID_EMAIL')).required(t('AUTH.REQUIRED')),
@@ -212,6 +210,7 @@ export const Auth: FunctionComponent = () => {
                     password: '',
                   }}
                   validationSchema={registerValidationSchema}
+                  validateOnMount={true}
                   onSubmit={(
                     values: IRegisterFormValues,
                     { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
@@ -219,74 +218,83 @@ export const Auth: FunctionComponent = () => {
                     return register(values.name, values.email, values.password).then(() => {
                       setSubmitting(false);
                       resetForm();
+                      return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
                     });
                   }}
                 >
-                  <Form className={classes.form} noValidate>
-                    <FormControl error={error.isError} fullWidth>
-                      <Field
-                        id="name"
-                        name="name"
-                        label={t('AUTH.NAME')}
-                        component={TextField}
-                        fullWidth
-                        className={classes.formInput}
-                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                        InputProps={{
-                          classes: inputFieldStyle,
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PersonIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <Field
-                        id="email"
-                        name="email"
-                        label={t('AUTH.EMAIL')}
-                        component={TextField}
-                        fullWidth
-                        className={classes.formInput}
-                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                        InputProps={{
-                          classes: inputFieldStyle,
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <MailIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <Field
-                        id="password"
-                        type="password"
-                        name="password"
-                        label={t('AUTH.PASSWORD')}
-                        component={TextField}
-                        fullWidth
-                        className={classes.formInput}
-                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                        InputProps={{
-                          classes: inputFieldStyle,
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <LockIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <FormHelperText>{error.message}</FormHelperText>
-                    </FormControl>
-                    <div className={classes.button}>
-                      <Button type="submit" variant="contained" color="secondary" fullWidth>
-                        {t('AUTH.REGISTER')}
-                      </Button>
-                      <meta name="description" content="Regisztrálj a BIX ügyfélkapujába!" />
-                      <meta property="og:title" content="Regisztráció - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
-                      <meta property="og:description" content="Regisztrálj be a BIX ügyfélkapujába!" />
-                    </div>
-                  </Form>
+                  {({ isValid, isSubmitting }) => (
+                    <Form className={classes.form} noValidate>
+                      <FormControl error={registerError.isError} fullWidth>
+                        <Field
+                          id="name"
+                          name="name"
+                          label={t('AUTH.NAME')}
+                          component={TextField}
+                          fullWidth
+                          className={classes.formInput}
+                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                          InputProps={{
+                            classes: inputFieldStyle,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <PersonIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <Field
+                          id="email"
+                          name="email"
+                          label={t('AUTH.EMAIL')}
+                          component={TextField}
+                          fullWidth
+                          className={classes.formInput}
+                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                          InputProps={{
+                            classes: inputFieldStyle,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <MailIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <Field
+                          id="password"
+                          type="password"
+                          name="password"
+                          label={t('AUTH.PASSWORD')}
+                          component={TextField}
+                          fullWidth
+                          className={classes.formInput}
+                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                          InputProps={{
+                            classes: inputFieldStyle,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <LockIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <FormHelperText>{registerError.message}</FormHelperText>
+                      </FormControl>
+                      <div className={classes.button}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="secondary"
+                          fullWidth
+                          disabled={!isValid || isSubmitting}
+                        >
+                          {t('AUTH.REGISTER')}
+                        </Button>
+                        <meta name="description" content="Regisztrálj a BIX ügyfélkapujába!" />
+                        <meta property="og:title" content="Regisztráció - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+                        <meta property="og:description" content="Regisztrálj be a BIX ügyfélkapujába!" />
+                      </div>
+                    </Form>
+                  )}
                 </Formik>
               )}
             </Paper>
@@ -345,6 +353,7 @@ export const Auth: FunctionComponent = () => {
                     password: '',
                   }}
                   validationSchema={loginValidationSchema}
+                  validateOnMount={true}
                   onSubmit={(
                     values: ILoginFormValues,
                     { setSubmitting, resetForm }: FormikHelpers<ILoginFormValues>,
@@ -352,64 +361,80 @@ export const Auth: FunctionComponent = () => {
                     return login(values.email, values.password).then(() => {
                       setSubmitting(false);
                       resetForm();
+                      return companyFormID
+                        ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
+                        : router.push('/');
                     });
                   }}
                 >
-                  <Form className={classes.form} noValidate>
-                    <FormControl error={error.isError} fullWidth>
-                      <Field
-                        id="email"
-                        name="email"
-                        label={t('AUTH.EMAIL')}
-                        component={TextField}
-                        fullWidth
-                        className={classes.formInput}
-                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                        InputProps={{
-                          classes: inputFieldStyle,
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <MailIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                  {({ isValid, isSubmitting }) => (
+                    <Form className={classes.form} noValidate>
+                      <FormControl error={loginError.isError} fullWidth>
+                        <Field
+                          id="email"
+                          name="email"
+                          label={t('AUTH.EMAIL')}
+                          component={TextField}
+                          fullWidth
+                          className={classes.formInput}
+                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                          InputProps={{
+                            classes: inputFieldStyle,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <MailIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
 
-                      <Field
-                        id="password"
-                        type="password"
-                        name="password"
-                        label={t('AUTH.PASSWORD')}
-                        component={TextField}
-                        fullWidth
-                        className={classes.formInput}
-                        InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                        InputProps={{
-                          classes: inputFieldStyle,
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <LockIcon />
-                            </InputAdornment>
-                          ),
-                        }}
+                        <Field
+                          id="password"
+                          type="password"
+                          name="password"
+                          label={t('AUTH.PASSWORD')}
+                          component={TextField}
+                          fullWidth
+                          className={classes.formInput}
+                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                          InputProps={{
+                            classes: inputFieldStyle,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <LockIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <FormHelperText>{loginError.message}</FormHelperText>
+                      </FormControl>
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}/forgot-password`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={classes.forgotPassword}
+                      >
+                        {t('AUTH.FORGOT_PASSWORD')}
+                      </a>
+                      <meta name="description" content="Állítson be új jelszót a fiókjához!" />
+                      <meta
+                        property="og:title"
+                        content="Új jelszó beállítása - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
                       />
-                      <FormHelperText>{error.message}</FormHelperText>
-                    </FormControl>
-                    <a href="https://ugyfelkapu.bixindex.hu/forgot-password" target="_blank" rel="noreferrer">
-                      <a className={classes.forgotPassword}>{t('AUTH.FORGOT_PASSWORD')}</a>
-                    </a>
-                    <meta name="description" content="Állítson be új jelszót a fiókjához!" />
-                    <meta
-                      property="og:title"
-                      content="Új jelszó beállítása - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
-                    />
-                    <meta property="og:description" content="Állítson be új jelszót a fiókjához!" />
-                    <div className={classes.button}>
-                      <Button type="submit" variant="contained" color="secondary" fullWidth>
-                        {t('AUTH.LOGIN')}
-                      </Button>
-                    </div>
-                  </Form>
+                      <meta property="og:description" content="Állítson be új jelszót a fiókjához!" />
+                      <div className={classes.button}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="secondary"
+                          fullWidth
+                          disabled={!isValid || isSubmitting}
+                        >
+                          {t('AUTH.LOGIN')}
+                        </Button>
+                      </div>
+                    </Form>
+                  )}
                 </Formik>
               )}
             </Paper>
