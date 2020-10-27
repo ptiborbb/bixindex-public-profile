@@ -356,7 +356,7 @@ export const Rating: FC = () => {
                             <Grid container spacing={0} justify="space-between">
                               <Grid item xs={12}>
                                 <CustomSlider
-                                  defaultValue={4}
+                                  defaultValue={8}
                                   name="nps"
                                   valueLabelDisplay="auto"
                                   step={1}
