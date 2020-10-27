@@ -211,7 +211,9 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 
 PublicProfile.getInitialProps = async (ctx) => {
   if (!(process && process.env && process.env.NEXT_PUBLIC_BACKEND_URL)) {
-    return null;
+    return {
+      profilePage: null,
+    };
   }
   const bixApiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const bixClient = createBixindexClient({
