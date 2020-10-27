@@ -458,7 +458,7 @@
     "FIRSTNAME": "Keresztnév",
     "PERSONAL": "Magánszemélyként",
     "AS_COMPANY": "Cég képviseletében",
-    "PHONE": "Telefonszám",
+    "PHONE": "Telefonszám (soha nem lesz nyilvános)",
     "COMPANY": "Cégnév",
     "ROLE": "Beosztás",
     "CONFIRM_PASSWORD": "Jelszó megerősítése",

@@ -57,6 +57,10 @@ export const Rating: FC = () => {
     },
   } = useApp();
 
+  const logout = useCallback(() => {
+    authService.logout();
+  }, [authService]);
+
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
   const authValidation = useMemo(
     () =>
@@ -102,6 +106,7 @@ export const Rating: FC = () => {
             negative: Yup.string().required(t('COMMON.REQUIRED')),
             comment: Yup.string().required(t('COMMON.REQUIRED')),
             auth: authValidation,
+            visibility: Yup.string().required(t('COMMON.REQUIRED')),
           })
         : Yup.object({
             comment: Yup.string().required(t('COMMON.REQUIRED')),
@@ -169,7 +174,7 @@ export const Rating: FC = () => {
             positive: values.positive,
             negative: values.negative,
             reference: values.reference,
-            visibility: values.visiblity,
+            visibility: values.visibility,
             answers: values.answers.map((answer) => ({
               questionID: answer.id,
               value: parseFloat(answer.value),
@@ -464,8 +469,19 @@ export const Rating: FC = () => {
                                 {t('RATING.LOGGED_IN_AS')}
                               </Typography>
                               <div className={classes.user}>
-                                <Avatar className={classes.avatar} src={user.image} />
-                                <Typography variant="h6">{user.name}</Typography>
+                                <div className={classes.user}>
+                                  <Avatar className={classes.avatar} src={user.image} />
+                                  <Typography variant="h6">{user.name}</Typography>
+                                </div>
+                                <Button className={classes.logButton} onClick={logout}>
+                                  {t('HEADER.LOGOUT')}
+                                  <meta name="description" content="Sikeres kijelentkezés! Viszont látásra!" />
+                                  <meta
+                                    property="og:title"
+                                    content="Kijelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                                  />
+                                  <meta property="og:description" content="Sikeres kijelentkezés! Viszont látásra!" />
+                                </Button>
                               </div>
                               <div className={classes.userWarning}>
                                 <Info className={classes.spacingRight} />
@@ -652,21 +668,6 @@ export const Rating: FC = () => {
                                           {errors?.auth?.policy && !!submitCount ? t('RATING.POLICy_REQUIRED') : ''}
                                         </FormHelperText>
                                       </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="visibility"
-                                          select
-                                          fullWidth
-                                          variant="outlined"
-                                        >
-                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
-                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
-                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
-                                        </Field>
-                                      </Grid>
                                     </>
                                   ) : (
                                     <>
@@ -691,27 +692,20 @@ export const Rating: FC = () => {
                                           variant="outlined"
                                         />
                                       </Grid>
-                                      <Grid item xs={6}>
-                                        <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
-                                        <Field
-                                          component={TextField}
-                                          label=""
-                                          name="visibility"
-                                          select
-                                          fullWidth
-                                          variant="outlined"
-                                        >
-                                          <MenuItem value="PUBLIC">{t('RATING.PUBLIC')}</MenuItem>
-                                          <MenuItem value="COMPANY">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
-                                          <MenuItem value="PRIVATE">{t('RATING.PRIVATE')}</MenuItem>
-                                        </Field>
-                                      </Grid>{' '}
                                     </>
                                   )}
                                 </Grid>
                               </Grid>
                             </>
                           )}
+                          <Grid item xs={6}>
+                            <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
+                            <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">
+                              <MenuItem value="VISIBLE">{t('RATING.PUBLIC')}</MenuItem>
+                              <MenuItem value="HIDDEN">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
+                              <MenuItem value="ANONYM">{t('RATING.PRIVATE')}</MenuItem>
+                            </Field>
+                          </Grid>
                           <Grid item xs={12}>
                             <div className={classes.verticalSpacing} />
                           </Grid>

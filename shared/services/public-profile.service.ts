@@ -18,6 +18,7 @@ import {
 } from '../pages/public-profile/store/actions';
 
 export interface IPublicProfileService {
+  setPublicProfile(profilePage: ProfilePage): void;
   getPublicProfileByIDOrAlias(identifier: string, IDOrAlias: 'ID' | 'ALIAS'): void;
   getRatingsByProfile(
     profileIdOrCompanyAlias: string,
@@ -50,6 +51,9 @@ export const publicProfileServiceFactory = (
           dispatch(getProfilesSuccess({ ...(profileList as { items: IProfileSummary[]; count: number }) })),
         )
         .catch((error) => dispatch(getProfilesFail({ error })));
+    },
+    setPublicProfile: (profilePage) => {
+      dispatch(getPublicProfileSuccess({ profilePage }));
     },
     getPublicProfileByIDOrAlias: (identifier, IDOrAlias) => {
       dispatch(getPublicProfile());
