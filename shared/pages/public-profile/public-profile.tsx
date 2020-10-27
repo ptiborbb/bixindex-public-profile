@@ -21,45 +21,49 @@ import classes from './public-profile.module.scss';
 
 type PublicProfileProps = { profilePage?: ProfilePage };
 
-const useRatingStructuralData = (profilePage: ProfilePage): React.ReactNode => {
-  const localBuisnessStructuredData: WithContext<LocalBusiness> = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': profilePage.profile.website,
-    name: profilePage.profile.name,
-    image: profilePage.profile.logo || 'https://via.placeholder.com/100',
-    telephone: profilePage.profile.contacts[0].phone,
-    ...(profilePage.ratings.count
-      ? {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingCount: profilePage.ratings.count,
-            reviewCount: profilePage.ratings.count,
-            ratingValue: profilePage.stats.index.score,
-            worstRating: 0,
-            bestRating: 10,
-          },
-          review: {
-            '@type': 'Review',
-            // itemReviewed: {
-            //   '@type': 'Thing',
-            //   name: 'Service',
-            // },
-            author: { '@type': 'Person', name: profilePage.ratings.items[0].name },
-            datePublished: profilePage.ratings.items[0].date,
-            reviewBody: profilePage.ratings.items[0].summary,
-            publisher: { '@type': 'Organization', name: 'Bixindex', sameAs: 'https://bixindex.hu/' },
-          },
-        }
-      : {}),
-    url: profilePage.profile.website,
-    address: {
-      '@type': 'PostalAddress',
-      // addressCountry: profilePage.profile.details.address,
-      streetAddress: profilePage.profile.details.address,
-    },
-    // description
-  };
+const useRatingStructuralData = (profilePage: ProfilePage | null): React.ReactNode => {
+  const localBuisnessStructuredData: WithContext<LocalBusiness> | null = useMemo(
+    () =>
+      profilePage && {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        '@id': profilePage.profile.website,
+        name: profilePage.profile.name,
+        image: profilePage.profile.logo || 'https://via.placeholder.com/100',
+        telephone: profilePage.profile.contacts[0].phone,
+        ...(profilePage.ratings.count
+          ? {
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingCount: profilePage.ratings.count,
+                reviewCount: profilePage.ratings.count,
+                ratingValue: profilePage.stats.index.score,
+                worstRating: 0,
+                bestRating: 10,
+              },
+              review: {
+                '@type': 'Review',
+                // itemReviewed: {
+                //   '@type': 'Thing',
+                //   name: 'Service',
+                // },
+                author: { '@type': 'Person', name: profilePage.ratings.items[0].name },
+                datePublished: profilePage.ratings.items[0].date,
+                reviewBody: profilePage.ratings.items[0].summary,
+                publisher: { '@type': 'Organization', name: 'Bixindex', sameAs: 'https://bixindex.hu/' },
+              },
+            }
+          : {}),
+        url: profilePage.profile.website,
+        address: {
+          '@type': 'PostalAddress',
+          // addressCountry: profilePage.profile.details.address,
+          streetAddress: profilePage.profile.details.address,
+        },
+        // description
+      },
+    [profilePage],
+  );
 
   return useMemo(
     () => (
@@ -70,7 +74,7 @@ const useRatingStructuralData = (profilePage: ProfilePage): React.ReactNode => {
         }}
       ></script>
     ),
-    [profilePage],
+    [localBuisnessStructuredData],
   );
 };
 
@@ -210,7 +214,12 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 };
 
 PublicProfile.getInitialProps = async (ctx) => {
-  const bixApiUrl = `https://bixindex-backend-staging.herokuapp.com`;
+  if (!(process && process.env && process.env.NEXT_PUBLIC_BACKEND_URL)) {
+    return {
+      profilePage: null,
+    };
+  }
+  const bixApiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const bixClient = createBixindexClient({
     baseURL: bixApiUrl,
     responseInterceptors: [],

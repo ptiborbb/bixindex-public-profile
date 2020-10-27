@@ -58,7 +58,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
         </div>
         <div className={classes.columns}>
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
-            <p>{profile.goodRating?.summary}</p>
+            <p>{profile.goodRating?.positive}</p>
             <p>{profile.goodRating?.userName}</p>
           </div>
           <div className={classes.products}>
