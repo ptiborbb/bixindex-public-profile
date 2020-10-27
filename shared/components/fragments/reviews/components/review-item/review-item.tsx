@@ -1,6 +1,7 @@
 import { Avatar, Fab } from '@material-ui/core';
 import { Share, ThumbDown, ThumbUp } from '@material-ui/icons';
 import { FC } from 'react';
+import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
 import { RatingItem } from '../../../../../interfaces/profile-page';
@@ -16,9 +17,9 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
   return (
     <div className={classes.reviewCard}>
       <div className={classes.reviewerInfo}>
-        <Avatar src={rating.logo} className={classes.avatar} />
+        <Avatar src={rating.logo || verifiedUser} className={classes.avatar} />
         <div className={classes.reviewer}>
-          <div className={classes.name}>{rating.name}</div>
+          <div className={classes.name}>{rating.name || 'ELLENŐRZÖTT REFERENCIA'}</div>
           <div className={classes.oneSenteceComment}>
             <div>{rating.summary}</div>
           </div>
