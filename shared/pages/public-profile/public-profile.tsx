@@ -210,10 +210,8 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 };
 
 PublicProfile.getInitialProps = async (ctx) => {
-  if (!(process && process.env)) {
-    return {};
-  }
-  const bixApiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const bixApiUrl =
+    (process && process.env && process.env.NEXT_PUBLIC_BACKEND_URL) || 'https://bixindex-backend.herokuapp.com/';
   const bixClient = createBixindexClient({
     baseURL: bixApiUrl,
     responseInterceptors: [],
