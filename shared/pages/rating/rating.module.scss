@@ -66,6 +66,7 @@
   display: flex;
   align-items: center;
   margin-top: 1rem !important;
+  justify-content: space-between;
   .avatar {
     width: 90px !important;
     height: 90px !important;
@@ -147,4 +148,15 @@
       transform: translate(-50%, -50%);
     }
   }
+}
+
+.logButton {
+  background-color: #054f6b !important;
+  color: white !important;
+  padding: 1rem !important;
+  border-radius: 3px !important;
+  outline: 0 !important;
+  border: 0 !important;
+  font-weight: bold !important;
+  width: 8em !important;
 }
