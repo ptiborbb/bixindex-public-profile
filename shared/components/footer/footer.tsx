@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
+import Link from 'next/link';
 import { FC } from 'react';
 import { useTranslate } from '../../translate.context';
 import classes from './footer.module.scss';
@@ -21,11 +22,15 @@ export const Footer: FC<FooterProps> = ({ logoPath }) => {
           </Grid>
           <Grid item xs={12} md={4}>
             <nav>
-              <div className={classes.link}>{t('HEADER.FUNCTIONS')}</div>
+              {/* <div className={classes.link}>{t('HEADER.FUNCTIONS')}</div>
               <div className={classes.link}>{t('HEADER.SUBSCRIPTION')}</div>
-              <div className={classes.link}>{t('HEADER.BLOG')}</div>
-              <div className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</div>
-              <div className={classes.link}>{t('FOOTER.NAV.LINK')}</div>
+              <div className={classes.link}>{t('HEADER.BLOG')}</div> */}
+              <Link href="/cegkereso">
+                <div className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</div>
+              </Link>
+              <Link href="/cegkereso">
+                <div className={classes.link}>{t('FOOTER.NAV.LINK')}</div>
+              </Link>
             </nav>
           </Grid>
           <Grid item xs={12} md={4} className={classes.contact}>
