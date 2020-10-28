@@ -146,6 +146,13 @@
     margin: 0;
     line-height: 1.2;
     text-align: center;
+
+    @media screen and (max-width: 910px) {
+      font-size: 2em;
+    }
+    @media screen and (max-width: 430px) {
+      font-size: 1.6em;
+    }
   }
 
   .highlightedCta {
