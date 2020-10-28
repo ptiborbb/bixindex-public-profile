@@ -1,9 +1,10 @@
 @import '../../../styles/variables.scss';
 
 .header {
-  height: 80px;
+  padding: 12px 0;
+  min-height: 80px;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 
   .logo {
     display: flex;

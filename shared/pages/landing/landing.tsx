@@ -2,6 +2,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import Head from 'next/head';
+import Link from 'next/link';
 import { FunctionComponent } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import b2bRatingImage from '../../../public/images/landing/b2b-rating-image.png';
@@ -81,10 +82,14 @@ export const Landing: FunctionComponent = () => {
                   content="Legjobb Ügyfélélmény Díj 2020 - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
                 />
                 <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
-                <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
-                <Button variant="text" color="default" className={classes.learnMoreBtn}>
-                  {t('LANDING.HEAD_BOX.CTA_2')}
-                </Button>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
+                </Link>
+                <Link href="/cegkereso">
+                  <Button variant="text" color="default" className={classes.learnMoreBtn}>
+                    {t('LANDING.HEAD_BOX.CTA_2')}
+                  </Button>
+                </Link>
                 <div className={classes.headerBlockLogos}>
                   <a
                     href="https://index.hu/gazdasag/2018/11/23/felmilliard_forint_tiz_startupnak/"
@@ -121,7 +126,9 @@ export const Landing: FunctionComponent = () => {
         <div className={classes.learnMore}>
           <h2 className={classes.title}>{t('LANDING.MAIN_FEATURES_BOX.HEAD')}</h2>
           <h4 className={classes.desc}>{t('LANDING.MAIN_FEATURES_BOX.SUBHEAD')}</h4>
-          <Button>{t('LANDING.MAIN_FEATURES_BOX.CTA')}</Button>
+          <Link href="/cegkereso">
+            <Button>{t('LANDING.MAIN_FEATURES_BOX.CTA')}</Button>
+          </Link>
           <Grid container spacing={3} className={classes.mt40}>
             <Grid item sm={3}>
               <LandingFeatureCard
@@ -203,7 +210,9 @@ export const Landing: FunctionComponent = () => {
         <div className={classes.highlightedBlock}>
           <div className={classes.highlightedBlockInner}>
             <h1 className={classes.highlightedTitle}>{t('LANDING.HIGHLIGHTED_1.TITLE')}</h1>
-            <Button className={classes.highlightedCta}>{t('LANDING.HIGHLIGHTED_1.CTA')}</Button>
+            <Link href="/cegkereso">
+              <Button className={classes.highlightedCta}>{t('LANDING.HIGHLIGHTED_1.CTA')}</Button>
+            </Link>
           </div>
         </div>
         <div className={classes.heros}>
@@ -235,8 +244,12 @@ export const Landing: FunctionComponent = () => {
                 </div>
               </div>
               <div className={classes.mt40}>
-                <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_1')}</Button>
-                <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_2')}</Button>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_1')}</Button>
+                </Link>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_2')}</Button>
+                </Link>
               </div>
             </Grid>
             <Grid item sm={6}>
@@ -275,8 +288,12 @@ export const Landing: FunctionComponent = () => {
                 </div>
               </div>
               <div className={classes.mt40}>
-                <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_1')}</Button>
-                <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_2')}</Button>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_1')}</Button>
+                </Link>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_2')}</Button>
+                </Link>
               </div>
             </Grid>
           </Grid>
@@ -309,8 +326,12 @@ export const Landing: FunctionComponent = () => {
                 </div>
               </div>
               <div className={classes.mt40}>
-                <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_1')}</Button>
-                <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_2')}</Button>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_1')}</Button>
+                </Link>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_2')}</Button>
+                </Link>
               </div>
             </Grid>
             <Grid item sm={6}>
@@ -349,8 +370,12 @@ export const Landing: FunctionComponent = () => {
                 </div>
               </div>
               <div className={classes.mt40}>
-                <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_1')}</Button>
-                <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_2')}</Button>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_1')}</Button>
+                </Link>
+                <Link href="/cegkereso">
+                  <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_2')}</Button>
+                </Link>
               </div>
             </Grid>
           </Grid>
@@ -358,7 +383,9 @@ export const Landing: FunctionComponent = () => {
         <div className={classes.highlightedBlock}>
           <div className={classes.highlightedBlockInner}>
             <h1 className={classes.highlightedTitle}>{t('LANDING.HIGHLIGHTED_2.TITLE')}</h1>
-            <Button className={classes.highlightedCta}>{t('LANDING.HIGHLIGHTED_2.CTA')}</Button>
+            <Link href="/cegkereso">
+              <Button className={classes.highlightedCta}>{t('LANDING.HIGHLIGHTED_2.CTA')}</Button>
+            </Link>
           </div>
         </div>
         <div className={classes.features}>
