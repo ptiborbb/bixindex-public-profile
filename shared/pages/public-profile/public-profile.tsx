@@ -214,7 +214,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 };
 
 PublicProfile.getInitialProps = async (ctx) => {
-  if (!(process && process.env && process.env.NEXT_PUBLIC_BACKEND_URL)) {
+  if (!(process && process.env && process.env.NEXT_PUBLIC_BACKEND_URL) || !ctx.req) {
     return {
       profilePage: null,
     };
