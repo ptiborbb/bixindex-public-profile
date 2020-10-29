@@ -14,7 +14,7 @@ export const Award: FC<AwardProps> = ({ image, date, title, description }) => {
       <div className={classes.image} style={{ backgroundImage: `url(${image})` }}></div>
       <div className={classes.body}>
         <div className={classes.type}>
-          Dij<span className={classes.date}>{date}</span>
+          Díj<span className={classes.date}>{date}</span>
         </div>
         <div className={classes.title}>{title}</div>
         <div className={classes.description}>{description}</div>

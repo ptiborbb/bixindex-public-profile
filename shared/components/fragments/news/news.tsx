@@ -15,7 +15,7 @@ export const News: FC<NewsProps> = ({ articles }) => {
           {i > 0 && <div className={classes.separator}></div>}
           <Article
             votes={award.votes}
-            date={award.title}
+            date={new Date(award.date)}
             title={award.title}
             type={award.type}
             content={award.content}

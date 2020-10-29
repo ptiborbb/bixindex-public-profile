@@ -692,5 +692,12 @@
     "POS_SYSTEMS": "POS rendszerek ",
     "RESTAURANT_EQUIPMENT": "Vendéglátó egység felszerelések",
     "OTHER": "Egyéb"
+  },
+  "NEWS_TYPES": {
+    "AWARD": "Díj",
+    "ARTICLE": "Sajtó megjelenés",
+    "CONFERENCE": "Konferencia",
+    "MILESTONE": "Mérföldkõ",
+    "NEW_PRODUCT": "Új termék"
   }
 }
