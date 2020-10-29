@@ -300,7 +300,7 @@ export const Rating: FC = () => {
                           confirmPassword: '',
                           policy: false,
                         },
-                        visibility: '',
+                        visibility: 'VISIBLE',
                       }}
                       onSubmit={async (values, { setSubmitting, resetForm }) => {
                         await handleSubmitReview(values, setSubmitting, resetForm);
