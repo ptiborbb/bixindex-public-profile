@@ -470,7 +470,8 @@
     "REFERENCE": "Hogyan szeretnél refenrenciát megadni?",
     "POLICy_REQUIRED": "Kérünk, fogadd el az adatkezelésre vonatkozó tájékoztatónkat!",
     "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom.",
-    "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét"
+    "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét",
+    "VISIBILITY_INFO": "Itt választhatod ki az értékelésed anonimitásának beállításait."
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Gyártó",

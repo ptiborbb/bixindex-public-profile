@@ -300,7 +300,7 @@ export const Rating: FC = () => {
                           confirmPassword: '',
                           policy: false,
                         },
-                        visibility: '',
+                        visibility: 'VISIBLE',
                       }}
                       onSubmit={async (values, { setSubmitting, resetForm }) => {
                         await handleSubmitReview(values, setSubmitting, resetForm);
@@ -700,6 +700,7 @@ export const Rating: FC = () => {
                           )}
                           <Grid item xs={6}>
                             <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
+                            <Typography variant="caption">{t('RATING.VISIBILITY_INFO')}</Typography>
                             <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">
                               <MenuItem value="VISIBLE">{t('RATING.PUBLIC')}</MenuItem>
                               <MenuItem value="HIDDEN">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>

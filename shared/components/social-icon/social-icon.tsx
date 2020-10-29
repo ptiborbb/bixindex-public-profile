@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
-import classes from './social-icon.module.scss';
 import facebook from '../../../public/social/Facebook.svg';
-import insta from '../../../public/social/Google.svg';
+import insta from '../../../public/social/Insta.svg';
 import linkedin from '../../../public/social/Linkedin.svg';
+import classes from './social-icon.module.scss';
 
 interface SocialIconProps {
   type: 'facebook' | 'insta' | 'linkedin';

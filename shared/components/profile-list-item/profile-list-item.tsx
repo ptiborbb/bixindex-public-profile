@@ -59,7 +59,10 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
         <div className={classes.columns}>
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
             <p>{profile.goodRating?.positive}</p>
-            <p>{profile.goodRating?.userName}</p>
+            <p>
+              {'- '}
+              {profile.goodRating?.userName || 'ELLENŐRZÖTT REFERENCIA'}
+            </p>
           </div>
           <div className={classes.products}>
             <div className={classes.productsTitle}>{t('COMPANY_SEARCH.PRODUCTS')}</div>
