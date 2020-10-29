@@ -188,6 +188,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                 title={profilePage.profile.name}
                 logoPath={profilePage.profile.logo}
                 companyType={profilePage.profile.type}
+                activeTab={activeFragment}
                 activate={async (fragment) => {
                   await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}#${fragment}`);
                 }}
