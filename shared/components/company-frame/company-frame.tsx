@@ -81,7 +81,13 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             label={'Főprofil'}
             value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
           />
-          <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
+          <a
+            href={`${profile.website.startsWith('http') ? '' : '//'}${profile.website}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
+          </a>
           <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={''} />
           {/* TODO: kapcsolódó profilok listáját bekötni */}
           <div>
