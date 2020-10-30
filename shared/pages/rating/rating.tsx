@@ -20,10 +20,10 @@ import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
@@ -41,6 +41,7 @@ import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
@@ -184,7 +185,7 @@ export const Rating: FC = () => {
         }
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
       } catch (err) {
-        toast.error(t(`TOAST.ERROR.${err.response.data.errorCode}`));
+        enqueueSnackbar(t(`TOAST.ERROR.${err.response.data.errorCode}`), { variant: 'error' });
         setSubmitting(false);
       }
     },
@@ -723,8 +724,9 @@ export const Rating: FC = () => {
                               variant="contained"
                               color="primary"
                               onClick={() => {
-                                console.log(errors);
-                                isValid ? submitForm() : toast.error(t('RATING.INVALID_FORM'));
+                                isValid
+                                  ? submitForm()
+                                  : enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
                               }}
                             >
                               {t('RATING.SEND_REVIEW')}
