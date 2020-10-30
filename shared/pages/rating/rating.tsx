@@ -20,10 +20,10 @@ import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
@@ -41,6 +41,7 @@ import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
@@ -112,7 +113,7 @@ export const Rating: FC = () => {
             comment: Yup.string().required(t('COMMON.REQUIRED')),
             auth: authValidation,
           }),
-    [nps, authValidation],
+    [nps, authValidation, user],
   );
 
   const loginResponseFacebook = useCallback(
@@ -184,7 +185,7 @@ export const Rating: FC = () => {
         }
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
       } catch (err) {
-        toast.error(t(`TOAST.ERROR.${err.response.data.errorCode}`));
+        enqueueSnackbar(t(`TOAST.ERROR.${err.response.data.errorCode}`), { variant: 'error' });
         setSubmitting(false);
       }
     },
@@ -284,7 +285,7 @@ export const Rating: FC = () => {
                     <Formik
                       initialValues={{
                         satisfaction: '',
-                        nps: 4,
+                        nps: 8,
                         answers: companyForm.questions,
                         positive: '',
                         negative: '',
@@ -308,7 +309,7 @@ export const Rating: FC = () => {
                       validationSchema={validationSchema}
                       enableReinitialize
                     >
-                      {({ setFieldValue, errors, submitCount, values, isValid, submitForm }) => (
+                      {({ setFieldValue, errors, submitCount, values, isValid, submitForm, validateForm }) => (
                         <Form style={{ width: '100%' }}>
                           {!nps && (
                             <>
@@ -356,7 +357,7 @@ export const Rating: FC = () => {
                             <Grid container spacing={0} justify="space-between">
                               <Grid item xs={12}>
                                 <CustomSlider
-                                  defaultValue={8}
+                                  defaultValue={values.nps}
                                   name="nps"
                                   valueLabelDisplay="auto"
                                   step={1}
@@ -518,7 +519,10 @@ export const Rating: FC = () => {
                                       appId={fbAppId}
                                       autoLoad={false}
                                       fields="name,email,picture"
-                                      callback={loginResponseFacebook}
+                                      callback={async (response) => {
+                                        await loginResponseFacebook(response);
+                                        await validateForm();
+                                      }}
                                       render={(renderProps) => (
                                         <button
                                           className={`${classes.socialButton} ${classes.facebook}`}
@@ -547,9 +551,13 @@ export const Rating: FC = () => {
                                           {t('AUTH.GOOGLE_BTN_TEXT')}
                                         </button>
                                       )}
-                                      onSuccess={(resp: GoogleLoginResponse) =>
-                                        responseGoogle(resp, values.auth.loginOrRegister === ELoginOrRegister.REGISTER)
-                                      }
+                                      onSuccess={async (resp: GoogleLoginResponse) => {
+                                        await responseGoogle(
+                                          resp,
+                                          values.auth.loginOrRegister === ELoginOrRegister.REGISTER,
+                                        );
+                                        await validateForm();
+                                      }}
                                       onFailure={failResponseGoogle}
                                       cookiePolicy={'single_host_origin'}
                                     />
@@ -716,7 +724,9 @@ export const Rating: FC = () => {
                               variant="contained"
                               color="primary"
                               onClick={() => {
-                                isValid ? submitForm() : toast.error(t('RATING.INVALID_FORM'));
+                                isValid
+                                  ? submitForm()
+                                  : enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
                               }}
                             >
                               {t('RATING.SEND_REVIEW')}
