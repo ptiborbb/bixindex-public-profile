@@ -1,4 +1,4 @@
-import { Rating } from '../../../../../shared/pages/rating/rating';
+import { PublicProfile } from '../../../../../shared/pages/public-profile/public-profile';
 import { createNoAuthRouteComponent } from '../../../../../shared/utils/no-auth-route';
 
-export default createNoAuthRouteComponent(Rating);
+export default createNoAuthRouteComponent(PublicProfile);

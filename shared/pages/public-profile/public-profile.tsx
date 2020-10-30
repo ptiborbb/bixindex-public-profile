@@ -3,9 +3,10 @@ import { CircularProgress } from '@material-ui/core';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { LocalBusiness, WithContext } from 'schema-dts';
 import logo from '../../../public/bix_logo.svg';
+import ogProfileBg from '../../../public/images/bix_profil_og.png';
 import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
@@ -17,11 +18,12 @@ import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
+import { Rating } from '../rating/rating';
 import classes from './public-profile.module.scss';
 
 type PublicProfileProps = { profilePage?: ProfilePage };
 
-const useRatingStructuralData = (profilePage: ProfilePage | null): React.ReactNode => {
+const useRatingStructuralData = (profilePage: ProfilePage | null): ReactNode => {
   const localBuisnessStructuredData: WithContext<LocalBusiness> | null = useMemo(
     () =>
       profilePage && {
@@ -77,6 +79,51 @@ const useRatingStructuralData = (profilePage: ProfilePage | null): React.ReactNo
     [localBuisnessStructuredData],
   );
 };
+
+type OgMetaProperties = 'og:url' | 'og:type' | 'og:title' | 'og:image' | 'og:description';
+
+type IOgMetaData = [OgMetaProperties, string];
+
+const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
+  const { asPath, route } = useRouter();
+  return useMemo(
+    () =>
+      profilePage && route === '/bix-profil/[companyAlias]/ertekeles/[companyFormID]'
+        ? [
+            ['og:url', process.env.NEXT_PUBLIC_PROFILE_URL ? `${process.env.NEXT_PUBLIC_PROFILE_URL}${asPath}` : ''],
+            ['og:type', 'website'],
+            ['og:title', `Jelölt vagyok a Legjobb Ügyfélélmény díjra!`],
+            [
+              'og:description',
+              `Készíts értékelést a ${profilePage.profile.name}-vel való együttműködésről, és segítsd, hogy megnyerje a Legjobb Ügyfélélmény díjat! `,
+            ],
+            ['og:image', ogProfileBg],
+          ]
+        : [
+            ['og:url', process.env.NEXT_PUBLIC_PROFILE_URL ? `${process.env.NEXT_PUBLIC_PROFILE_URL}${asPath}` : ''],
+            ['og:type', 'website'],
+            ['og:title', `${profilePage.profile.name}: Vélemények, értékelések, céginformációk`],
+            [
+              'og:description',
+              `Ezen az oldalon ${profilePage.ratings.count} db értékelést olvashatsz a ${profilePage.profile.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`,
+            ],
+            ['og:image', ogProfileBg],
+          ],
+    [profilePage, route],
+  );
+};
+
+const useOgMetaElements = (metadata: IOgMetaData[] | null): ReactNode =>
+  useMemo(
+    () =>
+      metadata &&
+      metadata.map((data) => (
+        <>
+          <meta property={data[0]} content={data[1]} />
+        </>
+      )),
+    [metadata],
+  );
 
 export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrProfilePage }) => {
   const { t } = useTranslate();
@@ -165,11 +212,15 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 
   const ratingStructuralData = useRatingStructuralData(profilePage);
 
+  const ogMetaData = useOgMetaData(profilePage);
+  const ogMetaElements = useOgMetaElements(ogMetaData);
+
   return (
     <div>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
         {ratingStructuralData}
+        {ogMetaElements}
       </Head>
       {profilePage ? (
         <>
@@ -202,7 +253,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                 stats={profilePage.stats}
                 productsAndServices={profilePage.productsAndServices}
               >
-                {contentSegment}
+                {router.route === '/bix-profil/[companyAlias]/ertekeles/[companyFormID]' ? <Rating /> : contentSegment}
               </CompanyFrame>
             </div>
           </div>
