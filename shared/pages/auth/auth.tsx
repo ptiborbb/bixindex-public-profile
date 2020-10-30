@@ -6,10 +6,10 @@ import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { get } from 'lodash/fp';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
@@ -46,6 +46,7 @@ export const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
   const router = useRouter();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const { authService } = useApp();
   const companyFormID = useMemo(() => get('query.companyFormID', router), [router]);
@@ -85,7 +86,7 @@ export const Auth: FunctionComponent = () => {
               : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
             : router.push('/'),
         )
-        .catch(() => toast.error(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`)));
+        .catch(() => enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' }));
     },
     [authService],
   );
@@ -101,13 +102,13 @@ export const Auth: FunctionComponent = () => {
               : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
             : router.push('/'),
         )
-        .catch(() => toast.error(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`)));
+        .catch(() => enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' }));
     },
     [authService],
   );
 
   const failResponseGoogle = (): unknown => {
-    return toast.error(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`));
+    return enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' });
   };
 
   const [loginError, setLoginError] = useState({ isError: false, message: '' });
