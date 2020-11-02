@@ -14,11 +14,13 @@ interface ProfileListItemProps {
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
   const { t } = useTranslate();
   return (
-    <div
-      onClick={() => window && window.open(`/bix-profil/${profile.company.companyAlias}`, '_blank', 'rel=noreferrer')}
-      className={classes.profileListItem}
-    >
-      <div className={classes.leftCorner}>
+    <div className={classes.profileListItem}>
+      <a
+        href={`/bix-profil/${profile.company.companyAlias}`}
+        target="_blank"
+        rel="noreferrer"
+        className={classes.leftCorner}
+      >
         <div className={classes.header}>
           <div className={classes.logo}>
             <img alt={profile.profile.name} src={profile.profile.logo || `https://via.placeholder.com/70`} />
@@ -95,7 +97,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
             </p>
           </div>
         </div>
-      </div>
+      </a>
       <div className={classes.rightCorner}>
         <div className={classes.writeReview}>
           <a
