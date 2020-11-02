@@ -107,8 +107,8 @@ export const Auth: FunctionComponent = () => {
     [authService],
   );
 
-  const failResponseGoogle = (): unknown => {
-    return enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' });
+  const failResponseGoogle = (reason): unknown => {
+    return enqueueSnackbar(reason.details, { variant: 'error' });
   };
 
   const [loginError, setLoginError] = useState({ isError: false, message: '' });
