@@ -1,5 +1,5 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import GradeIcon from '@material-ui/icons/Grade';
 import React, { FC } from 'react';
@@ -58,11 +58,15 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
         </div>
         <div className={classes.columns}>
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
-            <p>{profile.goodRating?.positive}</p>
-            <p>
-              {'- '}
-              {profile.goodRating?.userName || 'ELLENŐRZÖTT REFERENCIA'}
-            </p>
+            {profile.goodRating && (
+              <>
+                <p>{profile.goodRating?.positive}</p>
+                <Typography variant="caption" className={classes.reviewWriter}>
+                  {'- '}
+                  {profile.goodRating?.userName}
+                </Typography>
+              </>
+            )}
           </div>
           <div className={classes.products}>
             <div className={classes.productsTitle}>{t('COMPANY_SEARCH.PRODUCTS')}</div>
