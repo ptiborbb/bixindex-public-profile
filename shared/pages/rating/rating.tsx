@@ -186,7 +186,43 @@ export const Rating: FC = () => {
     [ratingService, authService, alias, profilePage, user],
   );
 
-  const companyForm = form || mockForm();
+  const companyForm: Record<string, unknown> & { questions: { id: string; text: string; value: string }[] } =
+    form || mockForm();
+
+  const initialAnswers = useMemo(
+    () =>
+      companyForm.questions.reduce((acc, { value, ...rest }) => {
+        if (value) {
+          return [...acc, { ...rest, value }];
+        }
+        return [...acc, { ...rest }];
+      }, []),
+    [companyForm.questions],
+  );
+
+  const formInitialValues = useMemo(
+    () => ({
+      satisfaction: '',
+      nps: 8,
+      answers: initialAnswers,
+      positive: '',
+      negative: '',
+      comment: '',
+      reference: '',
+      auth: {
+        loginOrRegister: ELoginOrRegister.REGISTER,
+        firstname: '',
+        lastname: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
+        policy: false,
+      },
+      visibility: 'VISIBLE',
+    }),
+    [initialAnswers, ELoginOrRegister],
+  );
 
   const satisfactionOptions = [
     {
@@ -236,26 +272,7 @@ export const Rating: FC = () => {
               </Typography>
             </Grid>
             <Formik
-              initialValues={{
-                satisfaction: '',
-                nps: 8,
-                answers: companyForm.questions,
-                positive: '',
-                negative: '',
-                comment: '',
-                reference: '',
-                auth: {
-                  loginOrRegister: ELoginOrRegister.REGISTER,
-                  firstname: '',
-                  lastname: '',
-                  email: '',
-                  phone: '',
-                  password: '',
-                  confirmPassword: '',
-                  policy: false,
-                },
-                visibility: 'VISIBLE',
-              }}
+              initialValues={formInitialValues}
               onSubmit={async (values, { setSubmitting, resetForm }) => {
                 await handleSubmitReview(values, setSubmitting, resetForm);
               }}
@@ -271,16 +288,6 @@ export const Rating: FC = () => {
                       </Grid>
                       <Grid item xs={12}>
                         <Typography variant="h6">{t('RATING.SATISFACTION')} </Typography>
-                        <meta
-                          name="description"
-                          content="Nézd át potenciális partneredről az eddigi tapasztalatokat, véleményeket és válaszd ki a legjobbat!"
-                        />
-                        <meta property="og:title" content="Automazitált elégedettség mérés és B2B Rating" />
-                        <meta
-                          property="og:description"
-                          content="Automatizáld az ügyfélelégedettség mérést a cégedben!"
-                        />
-                        <meta property="og:image" content="https://cdn.bixindex.hu/images/bixindex-og.png" />
                       </Grid>
                       <Grid item xs={12}>
                         <Field component={RadioGroup} name="satisfaction">

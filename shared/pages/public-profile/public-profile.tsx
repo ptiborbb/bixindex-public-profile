@@ -114,16 +114,9 @@ const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
 };
 
 const useOgMetaElements = (metadata: IOgMetaData[] | null): ReactNode =>
-  useMemo(
-    () =>
-      metadata &&
-      metadata.map((data) => (
-        <>
-          <meta property={data[0]} content={data[1]} />
-        </>
-      )),
-    [metadata],
-  );
+  useMemo(() => metadata && metadata.map((data, i) => <meta key={i} property={data[0]} content={data[1]} />), [
+    metadata,
+  ]);
 
 export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrProfilePage }) => {
   const { t } = useTranslate();

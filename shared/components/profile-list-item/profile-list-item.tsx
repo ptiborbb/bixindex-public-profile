@@ -14,10 +14,8 @@ interface ProfileListItemProps {
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
   const { t } = useTranslate();
   return (
-    <a
-      href={`/bix-profil/${profile.company.companyAlias}`}
-      target="_blank"
-      rel="noreferrer"
+    <div
+      onClick={() => window && window.open(`/bix-profil/${profile.company.companyAlias}`, '_blank', 'rel=noreferrer')}
       className={classes.profileListItem}
     >
       <div className={classes.leftCorner}>
@@ -111,6 +109,6 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           </Button>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
