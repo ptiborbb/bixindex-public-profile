@@ -73,8 +73,8 @@ export const ProfileList: FC = () => {
             initialValues={{
               text: '',
             }}
-            validationSchema={Yup.object({
-              text: Yup.string().required(''),
+            validationSchema={Yup.object().shape({
+              text: Yup.string().required(t('COMMON.REQUIRED')),
             })}
             onSubmit={(values, { setSubmitting, resetForm }: FormikHelpers<ISearchTextFormValues>) => {
               router.push('/cegkereso/[searchText]', `/cegkereso/${values.text}`);
