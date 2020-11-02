@@ -1,6 +1,7 @@
-import { Link, ThumbUp } from '@material-ui/icons';
-import { InfoRounded, Public } from '@material-ui/icons';
+import { InfoRounded, Link, Public, ThumbUp } from '@material-ui/icons';
+import { format } from 'date-fns';
 import { FC } from 'react';
+import { useTranslate } from '../../translate.context';
 import classes from './article.module.scss';
 
 interface ArticleProps {
@@ -13,6 +14,7 @@ interface ArticleProps {
 }
 
 export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, link }) => {
+  const { t } = useTranslate();
   return (
     <div className={classes.article}>
       <div className={classes.details}>
@@ -25,10 +27,10 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
         </div>
         <div className={classes.type}>
           <span className={classes.typeBlock}>
-            <InfoRounded fontSize="small" className={classes.icon} /> {type}
+            <InfoRounded fontSize="small" className={classes.icon} /> {t(`NEWS_TYPES.${type}`)}
           </span>
           <span className={classes.date}>
-            <Public fontSize="small" className={classes.icon} /> {date}
+            <Public fontSize="small" className={classes.icon} /> {format(date, 'yyyy.MM.dd. HH:mm')}
           </span>
         </div>
       </div>

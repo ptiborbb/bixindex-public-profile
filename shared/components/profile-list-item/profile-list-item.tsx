@@ -1,5 +1,5 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import GradeIcon from '@material-ui/icons/Grade';
 import React, { FC } from 'react';
@@ -14,13 +14,13 @@ interface ProfileListItemProps {
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
   const { t } = useTranslate();
   return (
-    <a
-      href={`/bix-profil/${profile.company.companyAlias}`}
-      target="_blank"
-      rel="noreferrer"
-      className={classes.profileListItem}
-    >
-      <div className={classes.leftCorner}>
+    <div className={classes.profileListItem}>
+      <a
+        href={`/bix-profil/${profile.company.companyAlias}`}
+        target="_blank"
+        rel="noreferrer"
+        className={classes.leftCorner}
+      >
         <div className={classes.header}>
           <div className={classes.logo}>
             <img alt={profile.profile.name} src={profile.profile.logo || `https://via.placeholder.com/70`} />
@@ -58,8 +58,15 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
         </div>
         <div className={classes.columns}>
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
-            <p>{profile.goodRating?.positive}</p>
-            <p>{profile.goodRating?.userName}</p>
+            {profile.goodRating && (
+              <>
+                <p>{profile.goodRating?.positive}</p>
+                <Typography variant="caption" className={classes.reviewWriter}>
+                  {'- '}
+                  {profile.goodRating?.userName}
+                </Typography>
+              </>
+            )}
           </div>
           <div className={classes.products}>
             <div className={classes.productsTitle}>{t('COMPANY_SEARCH.PRODUCTS')}</div>
@@ -90,7 +97,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
             </p>
           </div>
         </div>
-      </div>
+      </a>
       <div className={classes.rightCorner}>
         <div className={classes.writeReview}>
           <a
@@ -103,11 +110,13 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           </a>
         </div>
         <div className={classes.goBixProfil}>
-          <Button variant="text" color="default" endIcon={<Icon>person</Icon>}>
-            {t('COMPANY_SEARCH.BIX_PROFILE')}
-          </Button>
+          <a href={`/bix-profil/${profile.company.companyAlias}`} target="_blank" rel="noreferrer">
+            <Button variant="text" color="default" endIcon={<Icon>person</Icon>}>
+              {t('COMPANY_SEARCH.BIX_PROFILE')}
+            </Button>
+          </a>
         </div>
       </div>
-    </a>
+    </div>
   );
 };

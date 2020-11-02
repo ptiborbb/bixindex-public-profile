@@ -15,6 +15,7 @@ interface CompanyHeaderProps {
   title: string;
   logoPath: string;
   companyType: ECompanyTypes;
+  activeTab?: string;
   activate: (fragment: string) => void;
 }
 
@@ -24,6 +25,7 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
   title,
   logoPath,
   companyType,
+  activeTab,
   activate,
 }) => {
   const router = useRouter();
@@ -66,16 +68,20 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
         </Link>
         <div className={classes.companyHeaderLinks}>
           <div onClick={() => activate('reviews')}>
-            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Értékelések</a>
+            <a className={`${classes.companyHeaderLink} ${activeTab === 'reviews' ? classes.active : ''}`}>
+              Értékelések
+            </a>
           </div>
           <div onClick={() => activate('awards')}>
-            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Díjak</a>
+            <a className={`${classes.companyHeaderLink} ${activeTab === 'awards' ? classes.active : ''}`}>Díjak</a>
           </div>
           <div onClick={() => activate('news')}>
-            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Hírek</a>
+            <a className={`${classes.companyHeaderLink} ${activeTab === 'news' ? classes.active : ''}`}>Hírek</a>
           </div>
           <div onClick={() => activate('products')}>
-            <a className={`${classes.companyHeaderLink} ${classes.active}`}>Termékek/szolgáltatások</a>
+            <a className={`${classes.companyHeaderLink} ${activeTab === 'products' ? classes.active : ''}`}>
+              Termékek/szolgáltatások
+            </a>
           </div>
         </div>
       </div>

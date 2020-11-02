@@ -81,13 +81,39 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             label={'Főprofil'}
             value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
           />
-          <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
+          <a
+            href={`${profile.website.startsWith('http') ? '' : '//'}${profile.website}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
+          </a>
           <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={''} />
           {/* TODO: kapcsolódó profilok listáját bekötni */}
           <div>
-            {profile.fb && <SocialIcon type={'facebook'} />}
-            {profile.insta && <SocialIcon type={'insta'} />}
-            {profile.linkedin && <SocialIcon type={'linkedin'} />}
+            {profile.fb && (
+              <a href={`${profile.fb.startsWith('http') ? '' : '//'}${profile.fb}`} target="_blank" rel="noreferrer">
+                <SocialIcon type={'facebook'} />
+              </a>
+            )}
+            {profile.insta && (
+              <a
+                href={`${profile.insta.startsWith('http') ? '' : '//'}${profile.insta}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SocialIcon type={'insta'} />
+              </a>
+            )}
+            {profile.linkedin && (
+              <a
+                href={`${profile.linkedin.startsWith('http') ? '' : '//'}${profile.linkedin}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SocialIcon type={'linkedin'} />
+              </a>
+            )}
           </div>
 
           <div className={classes.separator}></div>

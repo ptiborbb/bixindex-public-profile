@@ -3,9 +3,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import createPalette from '@material-ui/core/styles/createPalette';
 import App, { AppProps } from 'next/app';
+import { SnackbarProvider } from 'notistack';
 import { useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
-import { toast, ToastContainer } from 'react-toastify';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
 import { authServiceFactory } from '../shared/services/auth.service';
@@ -78,8 +78,9 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
       >
         <ContextDevTool context={AppContext} id="bixPublicProfile" displayName="Bix Public Profile" />
         <TranslateContext.Provider value={{ i18n, t }}>
-          <Component {...pageProps} />
-          <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} hideProgressBar={true} />
+          <SnackbarProvider maxSnack={10} anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+            <Component {...pageProps} />
+          </SnackbarProvider>
         </TranslateContext.Provider>
       </AppContext.Provider>
     </ThemeProvider>
