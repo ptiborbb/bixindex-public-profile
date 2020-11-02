@@ -110,9 +110,16 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           </a>
         </div>
         <div className={classes.goBixProfil}>
-          <Button variant="text" color="default" endIcon={<Icon>person</Icon>}>
-            {t('COMPANY_SEARCH.BIX_PROFILE')}
-          </Button>
+          <a
+            href={`/bix-profil/${profile.company.companyAlias}`}
+            target="_blank"
+            rel="noreferrer"
+            className={classes.leftCorner}
+          >
+            <Button variant="text" color="default" endIcon={<Icon>person</Icon>}>
+              {t('COMPANY_SEARCH.BIX_PROFILE')}
+            </Button>
+          </a>
         </div>
       </div>
     </div>
