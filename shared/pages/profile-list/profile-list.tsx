@@ -125,21 +125,19 @@ export const ProfileList: FC = () => {
         <div className={classes.divider}></div>
       </div>
 
-      {profiles ? (
+      {count && (
         <div className={classes.listWrapper}>
           <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>
-          {profiles.map((profile, i) => (
+          {profiles?.map((profile, i) => (
             <ProfileListItem key={i} profile={profile} />
           ))}
         </div>
-      ) : (
-        <>
-          {loading && (
-            <div className={classes.spinner}>
-              <CircularProgress />
-            </div>
-          )}
-        </>
+      )}
+
+      {loading && (
+        <div className={classes.spinner}>
+          <CircularProgress />
+        </div>
       )}
 
       <Footer logoPath={logo}></Footer>

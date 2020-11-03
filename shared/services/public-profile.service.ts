@@ -5,6 +5,7 @@ import { ProfilePage } from '../interfaces/profile-page';
 import {
   getProfiles,
   getProfilesFail,
+  getProfilesPartial,
   getProfilesSuccess,
   resetProfileList,
 } from '../pages/profile-list/store/actions';
@@ -37,20 +38,33 @@ export const publicProfileServiceFactory = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>, // TODO missing typings
 ): IPublicProfileService => {
+  let searchProfilesByNameMutex: string | null = null;
   return {
-    searchProfilesByName: (page: number, rowsPerPage: number, searchText: string) => {
-      dispatch(getProfiles({ page, rowsPerPage }));
-      bixClient.publicProfile.profile
-        .searchProfilesByName({
-          filter: searchText,
-          page,
-          pageSize: rowsPerPage,
-          sort: '',
-        })
-        .then((profileList) =>
-          dispatch(getProfilesSuccess({ ...(profileList as { items: IProfileSummary[]; count: number }) })),
-        )
-        .catch((error) => dispatch(getProfilesFail({ error })));
+    searchProfilesByName: async (page: number, rowsPerPage: number, searchText: string) => {
+      const sessionId = Math.random().toString(36).substr(2, 9);
+      searchProfilesByNameMutex = sessionId;
+      dispatch(getProfiles({ page, rowsPerPage, sessionId }));
+
+      try {
+        for (let i = 0; i < rowsPerPage; i++) {
+          if (searchProfilesByNameMutex !== sessionId) {
+            break;
+          }
+          const profileList = await bixClient.publicProfile.profile.searchProfilesByName({
+            filter: searchText,
+            page: (page - 1) * rowsPerPage + i + 1,
+            pageSize: 1,
+            sort: '',
+          });
+          dispatch(getProfilesPartial({ ...(profileList as { items: IProfileSummary[]; count: number }), sessionId }));
+          if (!profileList.items.length) {
+            break;
+          }
+        }
+        dispatch(getProfilesSuccess({ sessionId }));
+      } catch (error) {
+        dispatch(getProfilesFail({ error, sessionId }));
+      }
     },
     setPublicProfile: (profilePage) => {
       dispatch(getPublicProfileSuccess({ profilePage }));
