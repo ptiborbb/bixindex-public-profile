@@ -102,10 +102,10 @@ const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
         : [
             ['og:url', process.env.NEXT_PUBLIC_PROFILE_URL ? `${process.env.NEXT_PUBLIC_PROFILE_URL}${asPath}` : ''],
             ['og:type', 'website'],
-            ['og:title', `${profilePage.profile.name}: Vélemények, értékelések, céginformációk`],
+            ['og:title', `${profilePage?.profile?.name}: Vélemények, értékelések, céginformációk`],
             [
               'og:description',
-              `Ezen az oldalon ${profilePage.ratings.count} db értékelést olvashatsz a ${profilePage.profile.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`,
+              `Ezen az oldalon ${profilePage?.ratings?.count} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`,
             ],
             ['og:image', ogProfileBg],
           ],
