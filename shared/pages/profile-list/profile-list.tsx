@@ -1,10 +1,12 @@
-import { Button, CircularProgress, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
+import Infinite from 'react-infinite';
 import * as Yup from 'yup';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
@@ -125,20 +127,28 @@ export const ProfileList: FC = () => {
         <div className={classes.divider}></div>
       </div>
 
-      {count && (
-        <div className={classes.listWrapper}>
-          <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>
+      <div className={classes.listWrapper}>
+        {count !== null && <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>}
+        <Infinite
+          elementHeight={360}
+          containerHeight={Math.max(720, (profiles?.length + 1) * 360)}
+          loadingSpinnerDelegate={
+            <Skeleton style={{ marginTop: 30 }} height={330} animation={'pulse'} variant={'rect'} />
+          }
+          isInfiniteLoading={loading}
+          onInfiniteLoad={() => {
+            if (searchText) {
+              publicProfileService.searchProfilesByName(page + 1, rowsPerPage, searchText);
+            }
+          }}
+          useWindowAsScrollContainer={true}
+          infiniteLoadBeginEdgeOffset={page * rowsPerPage >= count ? null : 200}
+        >
           {profiles?.map((profile, i) => (
             <ProfileListItem key={i} profile={profile} />
           ))}
-        </div>
-      )}
-
-      {loading && (
-        <div className={classes.spinner}>
-          <CircularProgress />
-        </div>
-      )}
+        </Infinite>
+      </div>
 
       <Footer logoPath={logo}></Footer>
     </>

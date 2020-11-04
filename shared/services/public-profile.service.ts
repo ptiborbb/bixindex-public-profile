@@ -43,7 +43,7 @@ export const publicProfileServiceFactory = (
     searchProfilesByName: async (page: number, rowsPerPage: number, searchText: string) => {
       const sessionId = Math.random().toString(36).substr(2, 9);
       searchProfilesByNameMutex = sessionId;
-      dispatch(getProfiles({ page, rowsPerPage, sessionId }));
+      dispatch(getProfiles({ page, rowsPerPage, sessionId, searchText }));
 
       try {
         for (let i = 0; i < rowsPerPage; i++) {
