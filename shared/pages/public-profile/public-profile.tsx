@@ -209,7 +209,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   const ogMetaElements = useOgMetaElements(ogMetaData);
 
   return (
-    <div>
+    <div className={classes.publicProfile}>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
         {ratingStructuralData}
