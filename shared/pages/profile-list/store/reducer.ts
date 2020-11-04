@@ -9,6 +9,7 @@ export const profileListReducer = createReducer(initialProfileListState, (builde
       state.sessionId = action.payload.sessionId;
       state.loading = true;
       if (state.searchText !== action.payload.searchText) {
+        state.count = initialProfileListState.count;
         state.profiles = initialProfileListState.profiles;
         state.searchText = action.payload.searchText;
       }

@@ -128,7 +128,7 @@ export const ProfileList: FC = () => {
       </div>
 
       <div className={classes.listWrapper}>
-        {count && <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>}
+        {count !== null && <h3>{t('COMPANY_SEARCH.RESULTS_NUMBER', { count })}</h3>}
         <Infinite
           elementHeight={360}
           containerHeight={Math.max(720, (profiles?.length + 1) * 360)}
