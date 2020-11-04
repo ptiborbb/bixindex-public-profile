@@ -5,7 +5,7 @@ import classes from './product.module.scss';
 
 type ProductProps = IProduct & IService;
 
-export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, priceRange, description }) => {
+export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, pricing, description }) => {
   const { t } = useTranslate();
   return (
     <div className={classes.product}>
@@ -18,7 +18,7 @@ export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, pri
         </div>
         <div className={classes.subDetails}>
           <div className={classes.priceLabel}>Árazás</div>
-          <div className={classes.price}>{priceRange}</div>
+          <div className={classes.price}>{pricing}</div>
         </div>
       </div>
 
