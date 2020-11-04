@@ -53,4 +53,21 @@
     line-height: 20px;
     color: $dark;
   }
+  .attachmentLabel {
+    padding-top: 0.5rem;
+    font-weight: bold;
+  }
+  .attachmentWrapper {
+    display: inline-block;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    .attachment {
+      width: 240px !important;
+      height: 130px !important;
+    }
+  }
+}
+.modalImage {
+  max-width: 85vw;
+  max-height: 85vh;
 }
