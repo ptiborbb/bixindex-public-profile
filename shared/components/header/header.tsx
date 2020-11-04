@@ -39,9 +39,11 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
           <div className={classes.link}>
             <PhoneIcon />
           </div>
-          <div className={classes.link}>
-            <EmojiEventsIcon />
-          </div>
+          <Link href="https://legjobbugyfelelmeny.hu">
+            <div className={classes.link}>
+              <EmojiEventsIcon />
+            </div>
+          </Link>
         </div>
       </div>
       <div className={classes.cta}>
