@@ -85,7 +85,7 @@ export const Landing: FunctionComponent = () => {
                 <Link href="/cegkereso">
                   <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
                 </Link>
-                <Link href="/cegkereso">
+                <Link href="https://legjobbugyfelelmeny.hu">
                   <Button variant="text" color="default" className={classes.learnMoreBtn}>
                     {t('LANDING.HEAD_BOX.CTA_2')}
                   </Button>
