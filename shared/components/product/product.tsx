@@ -8,7 +8,15 @@ import classes from './product.module.scss';
 
 type ProductProps = IProduct & IService;
 
-export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, priceRange, description, image }) => {
+export const Product: FC<ProductProps> = ({
+  name,
+  mainCategory,
+  subCategory,
+  priceRange,
+  description,
+  image,
+  specialty,
+}) => {
   const { t } = useTranslate();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   return (
@@ -20,14 +28,21 @@ export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, pri
             {t(`MAIN_CATEGORIES.${mainCategory}`)} | {t(`SUBCATEGORIES.${subCategory}`)}
           </div>
         </div>
-        <div className={classes.subDetails}>
-          <div className={classes.priceLabel}>Árazás</div>
-          <div className={classes.price}>{priceRange}</div>
-        </div>
+        {priceRange && (
+          <div className={classes.subDetails}>
+            <div className={classes.priceLabel}>Árazás</div>
+            <div className={classes.price}>{priceRange}</div>
+          </div>
+        )}
       </div>
+      <div className={classes.specialty}>{specialty}</div>
 
-      <div className={classes.descriptionLabel}>Leírás</div>
-      <div className={classes.description}>{description}</div>
+      {description && (
+        <>
+          <div className={classes.descriptionLabel}>Leírás</div>
+          <div className={classes.description}>{description}</div>
+        </>
+      )}
       {image && (
         <>
           <div className={classes.descriptionLabel}>Kép</div>

@@ -14,7 +14,7 @@ export const Products: FC<ProductsProps> = ({ productsAndServices }) => {
       {productsAndServices.map((product, i) => (
         <div key={i}>
           {i > 0 && <div className={classes.separator}></div>}
-          <Product {...product} priceRange={product.pricing} />
+          <Product {...product} priceRange={product.pricing} specialty={product.speciality} />
         </div>
       ))}
     </div>
