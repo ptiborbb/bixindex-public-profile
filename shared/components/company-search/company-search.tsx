@@ -42,9 +42,6 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
             </Button>
           </div>
         </div>
-        <div className={classes.searchExamples}>
-          <b>Gyorskeresés:</b> Könyvelők, Marketingesek, HR szolgáltatók, Építőipar
-        </div>
         <meta
           name="description"
           content="Céginformációk, vélemények. Keress a teljes magyar cégadatbázisban, olvass és írj véleményeket szolgáltatókról, gyártókról, kereskedőkről!"

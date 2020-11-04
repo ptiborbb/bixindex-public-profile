@@ -21,12 +21,14 @@
     font-weight: 300;
   }
 }
+.searchExamples {
+  display: none;
+  span {
+    cursor: pointer;
 
-.searchExamples span {
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.75;
+    &:hover {
+      opacity: 0.75;
+    }
   }
 }
 

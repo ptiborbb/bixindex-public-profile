@@ -59,6 +59,19 @@
     color: $dark;
   }
 
+  .attachmentLabel {
+    padding-top: 0.5rem;
+    font-weight: bold;
+  }
+  .attachmentWrapper {
+    display: inline-block;
+    cursor: pointer;
+    .attachment {
+      width: 240px !important;
+      height: 130px !important;
+    }
+  }
+
   .link {
     padding-top: 1rem;
     font-size: 16px;
@@ -75,4 +88,9 @@
       }
     }
   }
+}
+
+.modalImage {
+  max-width: 85vw;
+  max-height: 85vh;
 }

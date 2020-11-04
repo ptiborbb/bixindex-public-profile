@@ -10,16 +10,17 @@ interface NewsProps {
 export const News: FC<NewsProps> = ({ articles }) => {
   return (
     <div className={classes.news}>
-      {articles.map((award, i) => (
+      {articles.map((article, i) => (
         <div key={i}>
           {i > 0 && <div className={classes.separator}></div>}
           <Article
-            votes={award.votes}
-            date={new Date(award.date)}
-            title={award.title}
-            type={award.type}
-            content={award.content}
-            link={award.link}
+            votes={article.votes}
+            date={new Date(article.date)}
+            title={article.title}
+            type={article.type}
+            content={article.content}
+            link={article.link}
+            image={article.image}
           />
         </div>
       ))}
