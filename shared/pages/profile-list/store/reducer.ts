@@ -8,7 +8,10 @@ export const profileListReducer = createReducer(initialProfileListState, (builde
       state.rowsPerPage = action.payload.rowsPerPage;
       state.sessionId = action.payload.sessionId;
       state.loading = true;
-      state.profiles = initialProfileListState.profiles;
+      if (state.searchText !== action.payload.searchText) {
+        state.profiles = initialProfileListState.profiles;
+        state.searchText = action.payload.searchText;
+      }
     })
     .addCase(getProfilesPartial, (state, action) => {
       if (action.payload.sessionId === state.sessionId) {

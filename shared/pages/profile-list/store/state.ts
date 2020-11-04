@@ -6,14 +6,16 @@ export interface IProfileListState {
   rowsPerPage: number;
   count: number | null;
   loading: boolean;
+  searchText: string | null;
   sessionId: string | null;
 }
 
 export const initialProfileListState: IProfileListState = {
   profiles: null,
   page: 1,
-  rowsPerPage: 10,
+  rowsPerPage: 1,
   count: null,
   loading: false,
+  searchText: null,
   sessionId: null,
 };

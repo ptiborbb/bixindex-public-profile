@@ -9,7 +9,7 @@ export enum EProfileListActionTypes {
   RESET_PROFILE_LIST = '[App] RESET_PROFILE_LIST',
 }
 
-export const getProfiles = createAction<{ page: number; rowsPerPage: number; sessionId: string }>(
+export const getProfiles = createAction<{ page: number; rowsPerPage: number; searchText: string; sessionId: string }>(
   EProfileListActionTypes.GET_PROFILE_LIST,
 );
 export const getProfilesPartial = createAction<{ items: IProfileSummary[]; count: number; sessionId: string }>(
