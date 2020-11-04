@@ -61,7 +61,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
           <CompanyDetailItem
             icon={<AutorenewIcon />}
             label={'Éves forgalom'}
-            value={`${profile.details.yearlyIncome.value} HUF`}
+            value={`${profile.details.yearlyIncome.value.toLocaleString()} HUF`}
             change={profile.details.yearlyIncome.change}
           />
           {profile?.details?.taxNumber && (

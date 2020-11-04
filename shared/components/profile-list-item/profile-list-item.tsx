@@ -90,7 +90,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
               <Icon>business</Icon> {profile.company.taxNumber.replace(/(\d{8})(\d{1})(\d{2})/, '$1-$2-$3')}
             </p>
             <p>
-              <Icon>euro_symbol</Icon> {profile.actualRevenue} HUF
+              <Icon>euro_symbol</Icon> {profile.actualRevenue.toLocaleString()} HUF
             </p>
             <p>
               <Icon>people</Icon> {profile.company.actualNumberOfEmployees} fő
