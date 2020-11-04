@@ -33,7 +33,7 @@ export const ProfileList: FC = () => {
 
   useEffect(() => {
     if (searchText) {
-      publicProfileService.searchProfilesByName(page, rowsPerPage, searchText);
+      publicProfileService.searchProfilesByName(1, rowsPerPage, searchText);
     }
   }, [publicProfileService, searchText]);
 
