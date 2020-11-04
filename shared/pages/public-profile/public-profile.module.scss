@@ -1,27 +1,24 @@
 @import '../../../styles/variables.scss';
 
-.publicProfile {
-  width: max-content;
-  .container {
-    max-width: 1170px;
-    margin: 0 auto;
-  }
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
 
-  .headerBlock {
-    background-image: $bix-bg-gradient;
+.headerBlock {
+  background-image: $bix-bg-gradient;
 
-    .divider {
-      background: rgba(255, 255, 255, 0.4);
-      height: 1px;
-    }
+  .divider {
+    background: rgba(255, 255, 255, 0.4);
+    height: 1px;
   }
+}
 
-  .frameFix {
-    overflow: hidden;
-  }
-  .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-  }
+.frameFix {
+  overflow: hidden;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }

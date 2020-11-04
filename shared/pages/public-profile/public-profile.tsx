@@ -209,7 +209,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   const ogMetaElements = useOgMetaElements(ogMetaData);
 
   return (
-    <div className={classes.publicProfile}>
+    <div>
       <Head>
         <meta name="viewport" content="width=800" />
         <title>{t('COMMON.PAGE_TITLE')}</title>
