@@ -8,7 +8,7 @@ import classes from './product.module.scss';
 
 type ProductProps = IProduct & IService;
 
-export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, priceRange, description }) => {
+export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, priceRange, description, image }) => {
   const { t } = useTranslate();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   return (
@@ -28,15 +28,19 @@ export const Product: FC<ProductProps> = ({ name, mainCategory, subCategory, pri
 
       <div className={classes.descriptionLabel}>Leírás</div>
       <div className={classes.description}>{description}</div>
-      <div className={classes.descriptionLabel}>Kép</div>
-      <div className={classes.attachmentWrapper} onClick={() => setIsImageModalOpen(true)}>
-        <Avatar className={classes.attachment} variant="square" src="https://placekitten.com/800/1000">
-          <Attachment fontSize="large" />
-        </Avatar>
-      </div>
-      <BixModal open={isImageModalOpen} onClose={() => setIsImageModalOpen(false)}>
-        <img className={classes.modalImage} src="https://placekitten.com/800/1000" />
-      </BixModal>
+      {image && (
+        <>
+          <div className={classes.descriptionLabel}>Kép</div>
+          <div className={classes.attachmentWrapper} onClick={() => setIsImageModalOpen(true)}>
+            <Avatar className={classes.attachment} variant="square" src={image}>
+              <Attachment fontSize="large" />
+            </Avatar>
+          </div>
+          <BixModal open={isImageModalOpen} onClose={() => setIsImageModalOpen(false)}>
+            <img className={classes.modalImage} src={image} />
+          </BixModal>
+        </>
+      )}
     </div>
   );
 };

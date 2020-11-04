@@ -13,9 +13,10 @@ interface ArticleProps {
   type: string;
   content: string;
   link: string;
+  image: string;
 }
 
-export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, link }) => {
+export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, link, image }) => {
   const { t } = useTranslate();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   return (
@@ -38,15 +39,20 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
         </div>
       </div>
       <div className={classes.content}>{content}</div>
-      <Typography className={classes.attachmentLabel}>Csatolmány</Typography>
-      <div className={classes.attachmentWrapper} onClick={() => setIsImageModalOpen(true)}>
-        <Avatar className={classes.attachment} variant="square" src="https://placekitten.com/800/1000">
-          <Attachment fontSize="large" />
-        </Avatar>
-      </div>
-      <BixModal open={isImageModalOpen} onClose={() => setIsImageModalOpen(false)}>
-        <img className={classes.modalImage} src="https://placekitten.com/800/1000" />
-      </BixModal>
+      {image && (
+        <>
+          <Typography className={classes.attachmentLabel}>Csatolmány</Typography>
+          <div className={classes.attachmentWrapper} onClick={() => setIsImageModalOpen(true)}>
+            <Avatar className={classes.attachment} variant="square" src="https://placekitten.com/800/1000">
+              <Attachment fontSize="large" />
+            </Avatar>
+          </div>
+          <BixModal open={isImageModalOpen} onClose={() => setIsImageModalOpen(false)}>
+            <img className={classes.modalImage} src="https://placekitten.com/800/1000" />
+          </BixModal>
+        </>
+      )}
+
       <div className={classes.link}>
         <a href={link}>
           <Link className={classes.icon} fontSize="small" /> {link}
