@@ -32,9 +32,14 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         </div>
       </Link>
       <div className={classes.links}>
-        <Link href="/cegkereso">
-          <a className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</a>
-        </Link>
+        <div className={classes.headerButtons}>
+          <Link href="/">
+            <div className={classes.link}>{t('HEADER.HOME')}</div>
+          </Link>
+          <Link href="/cegkereso">
+            <a className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</a>
+          </Link>
+        </div>
         <div className={classes.icons}>
           <div className={classes.link}>
             <PhoneIcon />
