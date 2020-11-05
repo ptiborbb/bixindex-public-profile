@@ -48,7 +48,7 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
             </Avatar>
           </div>
           <BixModal open={isImageModalOpen} onClose={() => setIsImageModalOpen(false)}>
-            <img className={classes.modalImage} src="https://placekitten.com/800/1000" />
+            <img className={classes.modalImage} src={image} />
           </BixModal>
         </>
       )}
