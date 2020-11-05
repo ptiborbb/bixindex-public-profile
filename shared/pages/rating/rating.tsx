@@ -279,7 +279,7 @@ export const Rating: FC = () => {
               validationSchema={validationSchema}
               enableReinitialize
             >
-              {({ setFieldValue, errors, submitCount, values, isValid, submitForm, validateForm }) => (
+              {({ setFieldValue, errors, submitCount, values, isValid, submitForm, validateForm, isSubmitting }) => (
                 <Form style={{ width: '100%' }}>
                   {!nps && (
                     <>
@@ -675,6 +675,7 @@ export const Rating: FC = () => {
                       onClick={() => {
                         isValid ? submitForm() : enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
                       }}
+                      disabled={isSubmitting}
                     >
                       {t('RATING.SEND_REVIEW')}
                     </Button>
