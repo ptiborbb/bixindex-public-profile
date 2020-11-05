@@ -24,7 +24,7 @@ export const ratingServiceFactory = (bixClient: IBixindexClient, dispatch: Dispa
     getFormByID: (companyFormID, locale) => {
       dispatch(getForm({ companyFormID }));
       bixClient.publicProfile.profile
-        .getFormByID(companyFormID, locale)
+        .getFormByID(`${companyFormID}asd`, locale)
         .then((form) => dispatch(getFormSuccess({ form })))
         .catch((error) => dispatch(getFormFail({ error })));
     },
