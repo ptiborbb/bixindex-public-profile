@@ -1,4 +1,9 @@
-import { createBixindexClient, EDevelopmentEnvironments, IReponseInterceptor } from '@codingsans/bixindex-common';
+import {
+  createBixindexClient,
+  EDevelopmentEnvironments,
+  EHttpStatus,
+  IReponseInterceptor,
+} from '@codingsans/bixindex-common';
 import { Button } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
@@ -37,8 +42,11 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
         return response;
       },
       onRejected: async (error: AxiosError) => {
-        Sentry.captureException(error);
-        Sentry.flush(2000);
+        const { status } = error.response;
+        if (status !== EHttpStatus.UNAUTHORIZED) {
+          Sentry.captureException(error);
+          Sentry.flush(2000);
+        }
         return Promise.reject(error);
       },
     },
