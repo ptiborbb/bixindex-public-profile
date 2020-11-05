@@ -43,7 +43,7 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
         <>
           <Typography className={classes.attachmentLabel}>Csatolmány</Typography>
           <div className={classes.attachmentWrapper} onClick={() => setIsImageModalOpen(true)}>
-            <Avatar className={classes.attachment} variant="square" src="https://placekitten.com/800/1000">
+            <Avatar className={classes.attachment} variant="square" src={image}>
               <Attachment fontSize="large" />
             </Avatar>
           </div>
