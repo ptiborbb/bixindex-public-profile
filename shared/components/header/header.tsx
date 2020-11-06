@@ -36,6 +36,9 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
           <Link href="/">
             <div className={classes.link}>{t('HEADER.HOME')}</div>
           </Link>
+          <a href="https://blog.bixindex.hu" target="_blank" rel="noreferrer">
+            <a className={classes.link}>{t('HEADER.BLOG')}</a>
+          </a>
           <Link href="/cegkereso">
             <a className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</a>
           </Link>
