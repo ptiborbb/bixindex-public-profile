@@ -17,6 +17,11 @@
     justify-content: space-between;
     flex: 1;
     margin-left: 1rem;
+    .headerButtons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
     .link {
       cursor: pointer;
       color: white;

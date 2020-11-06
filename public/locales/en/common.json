@@ -35,7 +35,9 @@
         "EXPIRATION": "Expiration",
         "REVIEW": "Review"
       }
-    }
+    },
+    "COOKIE_CONSENT": "This website uses cookies to enhance the user experience.",
+    "ACCEPT_COOKIES": "I understand"
   },
   "COMPANIES": {
     "TITLE": "Companies",
@@ -67,7 +69,8 @@
     "COMPANY_SEARCH": "Cégkeresõ",
     "CUSTOMER_PORTAL": "Ügyfélkapu",
     "LOGOUT": "Logout",
-    "LOGIN": "Login"
+    "LOGIN": "Login",
+    "HOME": "Home"
   },
   "AUTH": {
     "NAME": "Name",

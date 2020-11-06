@@ -36,7 +36,9 @@
         "EXPIRATION": "Lejárat",
         "REVIEW": "Értékelés"
       }
-    }
+    },
+    "COOKIE_CONSENT": "Ez a weboldal sütiket használ, a kényelmesebb böngészés érdekében.",
+    "ACCEPT_COOKIES": "Elfogadom"
   },
   "COMPANIES": {
     "TITLE": "Cégek",
@@ -68,7 +70,8 @@
     "COMPANY_SEARCH": "Cégkeresõ",
     "CUSTOMER_PORTAL": "Ügyfélkapu",
     "LOGOUT": "Kilépés",
-    "LOGIN": "Belépés"
+    "LOGIN": "Belépés",
+    "HOME": "Főoldal"
   },
   "AUTH": {
     "NAME": "Név",
