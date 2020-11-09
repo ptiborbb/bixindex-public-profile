@@ -131,12 +131,12 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
       publicProfile: { profilePage: clientProfilePage },
     },
   } = useApp();
-  const [activeFragment, setFragment] = useState(() => hash || 'reviews');
+  const [activeFragment, setFragment] = useState('reviews');
 
   const profilePage = clientProfilePage || ssrProfilePage;
 
   useEffect(() => {
-    setFragment(hash);
+    hash ? setFragment(hash) : 'reviews';
   }, [hash]);
 
   useEffect(() => {
@@ -155,6 +155,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     date: undefined,
     pageNumber: 1,
   });
+
   const firstUpdate = useRef(true);
   useEffect(() => {
     if (firstUpdate.current) {
@@ -168,7 +169,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     if (!profilePage) {
       return undefined;
     }
-
+    
     switch (activeFragment) {
       case 'reviews':
         return (
