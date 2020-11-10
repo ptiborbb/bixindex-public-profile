@@ -120,6 +120,7 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
                 buttonText={t('COMMON.ACCEPT_COOKIES')}
                 ButtonComponent={Button}
                 buttonStyle={{ backgroundColor: '#fff', color: '#56aaa6', fontWeight: 'bold' }}
+                data-nosnippet
               >
                 {t('COMMON.COOKIE_CONSENT')}
               </CookieConsent>

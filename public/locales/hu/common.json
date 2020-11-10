@@ -98,7 +98,9 @@
     "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
     "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
     "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
-    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
+    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?",
+    "ALREADY_EXISTS": "A felhasználó már létezik",
+    "INVALID_EMAIL_OR_PASSWORD": "HIbás email cím vagy jelszó"
   },
   "ROUTES": {
     "USERS": "Felhasználók",
@@ -431,7 +433,10 @@
     "BIX_COUNT": "Összesen {{count}} db értékelés",
     "PRODUCTS": "Termékek",
     "WRITE_REVIEW": "Értékelés írása",
-    "BIX_PROFILE": "BIX Profil"
+    "BIX_PROFILE": "BIX Profil",
+    "MAIN_TITLE": "Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!",
+    "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten november 20-ig, és ",
+    "WIN": "nyerj"
   },
   "TOAST": {
     "ERROR": {
