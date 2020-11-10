@@ -98,7 +98,9 @@
     "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
     "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
     "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
-    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?"
+    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?",
+    "ALREADY_EXISTS": "A felhasználó már létezik",
+    "INVALID_EMAIL_OR_PASSWORD": "HIbás email cím vagy jelszó"
   },
   "ROUTES": {
     "USERS": "Felhasználók",
