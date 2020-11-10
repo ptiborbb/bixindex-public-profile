@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "PAGE_TITLE": "Cégek, akikkel nyugodtan dolgozhatsz! - BIX",
+    "PAGE_TITLE": "Companies you can work with! - BIX",
     "BACK": "Back",
     "SUMMARY": "Summary",
     "UNKOWN_ERROR": "An unknown error has occurred",
@@ -63,11 +63,11 @@
     "PUBLIC_PROFILE_NUM": "Number of public profiles",
     "NUM_OF_USERS": "Number of users",
     "NUM_OF_SUBSCRIBERS": "Number of subscribers",
-    "FUNCTIONS": "Funkciók",
-    "SUBSCRIPTION": "Elõfizetés",
+    "FUNCTIONS": "Functions",
+    "SUBSCRIPTION": "Subscription",
     "BLOG": "Blog",
-    "COMPANY_SEARCH": "Cégkeresõ",
-    "CUSTOMER_PORTAL": "Ügyfélkapu",
+    "COMPANY_SEARCH": "Company search",
+    "CUSTOMER_PORTAL": "Customer portal",
     "LOGOUT": "Logout",
     "LOGIN": "Login",
     "HOME": "Home"
@@ -87,17 +87,17 @@
     "BACK_TO_LOGIN": "Back to login page",
     "RESET": "Reset password",
     "FAILED": "Invalid username and/or password.",
-    "PAGE_TITLE": "Azonosítás",
-    "CREATE": "Hozz létre egyet!",
-    "SOCIAL_LOGIN": "Lépj be egyszerűen",
-    "FB_BTN_TEXT": "Facebookkal",
-    "GOOGLE_BTN_TEXT": "Google fiókkal",
-    "IDENTIFICATION_WITH_EMAIL": "Azonosítás e-mail címmel",
-    "LOGIN_WITH_EMAIL": "Belépés e-mail címmel",
-    "NO_BIX_ACCOUNT_COLOR_PART": "Nincs",
-    "NO_BIX_ACCOUNT_PART_2": "még BIX accountod?",
-    "HAS_BIX_ACCOUNT_COLOR_PART": "Van",
-    "HAS_BIX_ACCOUNT_PART_2": "már BIX accountod?",
+    "PAGE_TITLE": "Authentication",
+    "CREATE": "Create one!",
+    "SOCIAL_LOGIN": "Log in easily",
+    "FB_BTN_TEXT": "With Facebook",
+    "GOOGLE_BTN_TEXT": "With Google",
+    "IDENTIFICATION_WITH_EMAIL": "Authenticate with e-mail",
+    "LOGIN_WITH_EMAIL": "Sign in with e-mail",
+    "NO_BIX_ACCOUNT_COLOR_PART": "I don't have",
+    "NO_BIX_ACCOUNT_PART_2": "a BIX account yet",
+    "HAS_BIX_ACCOUNT_COLOR_PART": "I already have",
+    "HAS_BIX_ACCOUNT_PART_2": "a BIX account?",
     "ALREADY_EXISTS": "This user already exists",
     "INVALID_EMAIL_OR_PASSWORD": "Invalid email address or password"
   },
@@ -210,41 +210,41 @@
   },
   "LANDING": {
     "HEAD_BOX": {
-      "MAIN_1": "Minden értékelés mögött egy tapasztalat van, ami nagyon is számít.",
-      "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
-      "MAIN_3": "Érdekel, mennyi lenne a TE vállalkozásod BIX-e? Csak 1 kattintás:",
-      "CTA_1": "Mutasd meg!",
-      "CTA_2": "Legjobb Ügyfélélmény Díj"
+      "MAIN_1": "There is an experience behind every review, that matters a lot.",
+      "MAIN_2": "Write reviews. Read reviews. Find new partners.",
+      "MAIN_3": "Are you interested in your company's BIX value? 1 click is all it takes:",
+      "CTA_1": "Show me!",
+      "CTA_2": "Best user experience award"
     },
     "MAIN_FEATURES_BOX": {
-      "HEAD": "Automatizált elégedettség mérés. Ellenőrzött tapasztalatok. Vezetői riport. Értékelések",
-      "SUBHEAD": "A BIX professzionálisan válaszolja meg a legfontosabb kérdéseket!",
-      "CTA": "Mutasd a csomagokat!",
+      "HEAD": "Automated satisfaction measurement. Verified experiences. Management report. Reviews",
+      "SUBHEAD": "BIX answers the most important questions professionally!",
+      "CTA": "Show me the plans!",
       "FEATURE_1": {
-        "TITLE": "Automatizált elégedettségmérés",
-        "DESC": "Tudd minden pillanatban, mit gondolnak az ügyfeleid. Szolgáld ki őket úgy, ahogyan ők szeretnék.",
-        "CTA": "Első lépések"
+        "TITLE": "Automated satisfaction measurement",
+        "DESC": "Know at all times, what your customers think. Serve them the way they want.",
+        "CTA": "First steps"
       },
       "FEATURE_2": {
-        "TITLE": "Ellenőrzött és hiteles adatok",
-        "DESC": "Dolgozz hiteles, telefonon ellenőrzött véleményekből. Kerüld el a tévutakat, ne fuss bele pénznyelő zsákutcákba.",
-        "CTA": "Ez érdekel"
+        "TITLE": "Verified and authentic data",
+        "DESC": "Work from authentic, phone-verified reviews. Avoid the misconceptions, don’t run into money-sinking dead ends.",
+        "CTA": "I'm interested"
       },
       "FEATURE_3": {
-        "TITLE": "Professzionális vezetői riport",
-        "DESC": "Hónapról hónapra tudni fogod, mivel elégedettek (vagy elégedetlenek) a partnereid, és hol érdemes fejleszteni.",
-        "CTA": "Akarom tudni"
+        "TITLE": "Professional management report",
+        "DESC": "You will know from month to month how satisfied (or dissatisfied) your partners are and where to improve.",
+        "CTA": "I want to know"
       },
       "FEATURE_4": {
-        "TITLE": "Bizalomépítő értékelések",
-        "DESC": "Szerezz új ügyfeleket a meglévő ügyfeleid véleményével. Generálj leadeket a BIX B2B rating segítségével.",
-        "CTA": "Akarok új ügyfeleket"
+        "TITLE": "Confidence-building reviews",
+        "DESC": "Get new customers with the reviews of your existing customers. Generate leads using the BIX B2B rating.",
+        "CTA": "I want new partners"
       }
     },
     "MAIN_TESTIMONIAL_BOX": {
-      "HASHTAG": "#elpirulunk",
-      "HEAD": "A legnagyobbak szerint is különleges a BIX!",
-      "SUBHEAD": "Nem a spanyolviaszt találtuk fel - a BIX a bizalom újrafelfedezéséről és a modern üzleti döntéstámogatásról szól.",
+      "HASHTAG": "#blush",
+      "HEAD": "BIX is special according to the !",
+      "SUBHEAD": "We didn't invent the wheel again - BIX is about rediscovering trust and about modern business decision support.",
       "TESTIMONIAL_1": {
         "NAME": "Barabás Árpád",
         "TITLE": "Barabás Téglakő",
@@ -265,171 +265,174 @@
       }
     },
     "HIGHLIGHTED_1": {
-      "TITLE": "Még nem méred az ügyfélelégedettséget? Vagy nincs rá egy professzionális automatizált rendszered? A BIX minden vezető álma!",
-      "CTA": "Nekem is erre van szükségem!"
+      "TITLE": "Not measuring customer satisfaction yet? Or do you not have a professional automated system for it? BIX is every leader's dream!",
+      "CTA": "I need that too!"
     },
     "HEROS": {
       "HERO_1": {
-        "SUBTITLE": "Automatizált elégedettségmérés",
-        "TITLE": "Tudd minden pillanatban, mit gondolnak az ügyfeleid!",
-        "DESC": "Évi egy elégedettség mérés? Ugyan már. A hagyományos értékelési rendszerek elavultak, túl kevés információt adnak, túl későn. Takaríts meg pénzt, időt és energiát azzal, hogy automatizálod az elégedettségmérést a cégedben. Így nem kell hosszú heteket, hónapokat várnod a problémák felbukkanására és valós időben meg is tudod oldani azokat.",
-        "Q": "Miért érdemes automatizálni az elégedettségmérést?",
+        "SUBTITLE": "Automated satisfaction measurement",
+        "TITLE": "Know at all times what your customers think!",
+        "DESC": "One satisfaction measurement a year? Come on. Traditional rating systems are outdated, provide too little information, too late. Save money, time and energy by automating the satisfaction measurement in your company. This way, you don't have to wait weeks or month for problems to show up and you can solve them immediately",
+        "Q": "Why should you automate your satisfaction measurement?",
         "A": {
-          "A_1": "Folyamatos törődést jelent a meglévő ügyfelekkel",
-          "A_2": "Azonnali beavatkozási lehetőség lesz a kezedben",
-          "A_3": "Tűpontos (és hiteles) ügyfélvisszajelzéseket kapsz",
-          "A_4": "Újraaktiválhatod a régi ügyfeleidet"
+          "A_1": "It means constant care for existing customers",
+          "A_2": "You will have the opportunity to act immediately",
+          "A_3": "You get precise (and authentic) customer feedback",
+          "A_4": "You can reactivate your old customers"
         },
         "CTA": {
-          "CTA_1": "Naprakész akarok lenni!",
-          "CTA_2": "Mondj többet erről!"
+          "CTA_1": "I want to be up to date!",
+          "CTA_2": "Tell me more about this!"
         }
       },
       "HERO_2": {
-        "SUBTITLE": "Ellenőrzött és hiteles adatok",
-        "TITLE": "Vezetői döntéseket csak pontos információk birtokában hozhatsz",
-        "DESC": "A professzionális döntéselőkészítés érdekében az ügyfélértékeléseket telefonon is ellenőrizzük. Azért, hogy a vezetőként hozott döntéseid még megalapozottabbak legyenek, a Bisnode által szolgáltatott üzleti adatokkal is összefésüljük a kapott információkat. Így egy olyan komplex, a pénzügyi és elégedettségi adatokat egyesítő tudáscsomagot kapsz, amivel minimalizálhatod a vezetői hibaszázalékodat.",
-        "Q": "Ezért érdemes hiteles és ellenőrzött információkból dolgozni:",
+        "SUBTITLE": "Verified and authentic data",
+        "TITLE": "You can only make decisions with accurate information",
+        "DESC": "For professional decision preparation, we also check our users' reviews by phone. To make your decisions as a leader even more informed, we merge our data with data provided by Bisnode. This gives you a complex knowledge package that combines financial and satisfaction data to minimize your managerial error rate.",
+        "Q": "Therefore, it is worth working from authentic and verified information:",
         "A": {
-          "A_1": "Tényekre és nem véleményekre támaszkodsz",
-          "A_2": "Azonnal kiderül, ha gond van az ügyféllel",
-          "A_3": "Növeled és mélyíted a vevőid elkötelezettségét",
-          "A_4": "Továbbajánlásokat generálsz, új ügyfeleket szerzel"
+          "A_1": "Rely on facts and not opinions",
+          "A_2": "It will be revealed immediately if there is a problem with the customer",
+          "A_3": "You increase and deepen the commitment of your customers",
+          "A_4": "You generate referrals, gain new customers"
         },
         "CTA": {
-          "CTA_1": "Automatizálom a folyamatot!",
-          "CTA_2": "Mondj többet erről!"
+          "CTA_1": "I automate the process!",
+          "CTA_2": "Tell me more about this!"
         }
       },
       "HERO_3": {
-        "SUBTITLE": "Professzionális vezetői riport",
-        "TITLE": "Hónapról hónapra látod, mivel elégedettek a partnereid (és hol érdemes fejleszteni)",
+        "SUBTITLE": "Professional management report",
+        "TITLE": "Month by month you see how satisfied your partners are (and where to improve)",
         "DESC": "Miért jó az, hogy minden hónap 10. napján megkapod a cégedre és munkakörödre (ügyvezető, marketingvezető stb.) szabott vezetői riportot? Könnyen átlátható, grafikus formában látod majd a „vevőid gondolkodását”, gyorsan értesülsz a vakfoltjaidról, a kapott objektív információk pedig utat mutatnak a termékfejlesztésben, javítják a terméked, szolgáltatásod ár-érték arányát, emelik a kiszolgálás minőségét és növelik a ügyfélmegtartó képességedet.",
-        "Q": "Ezért fogod szeretni a BIX vezetői riportjait:",
+        "Q": "That's why you'll love BIX's leadership reports:",
         "A": {
-          "A_1": "Óraműpontossággal érkezik, tudsz vele tervezni",
-          "A_2": "Könnyen átlátható, részrehajlásmentes",
-          "A_3": "Megmutatja, miben vagytok erősek",
-          "A_4": "Nyílegyenesen rámutat a fejlesztendő területekre"
+          "A_1": "It arrives like clockwork, you can plan with it",
+          "A_2": "Easy to understand",
+          "A_3": "Shows your strength",
+          "A_4": "Shows where to improve"
         },
         "CTA": {
-          "CTA_1": "Ilyen riportokra van szükségem",
-          "CTA_2": "Mondj többet erről!"
+          "CTA_1": "I need these reports",
+          "CTA_2": "Tell me more about this!"
         }
       },
       "HERO_4": {
-        "SUBTITLE": "Bizalomépítő értékelések",
-        "TITLE": "A leendő vásárlóidat leginkább a meglevő vevőid tapasztalata érdekli",
+        "SUBTITLE": "Confidence-building assessments",
+        "TITLE": "Your future customers are most interested in the experience of your existing customers",
         "DESC": "A Google-ben keresők 86%-a ügyfélvéleményeket keres. A beszerzők ma már nemcsak a pénzügyi beszámolót nézik, hanem kifejezetten ügyfélvéleményekre keresnek rá. A potenciális ügyfeleid, beszállítóid a BIX – B2B rating profilod átnézése után könnyen és gyorsan döntenek majd melletted, hiszen a meglévő vásárlóid elégedettsége hitelesíti a termékedet, szolgáltatásodat. A BIX így konvertálja az ügyfeleid lojalitását első osztályú vevőszerző eszközzé.",
-        "Q": "Ezeken a területeken segít a BIX – B2B rating:",
+        "Q": "BIX - B2B rating helps in these areas",
         "A": {
-          "A_1": "Új megrendeléseket, új partnerkapcsolatokat hoz",
-          "A_2": "Elemel a konkurenciától, aki nem használja a BIX-et",
-          "A_3": "A publikus index támogatja a SEO-t, jobb keresőpozíciók",
-          "A_4": "Hitelességet kölcsönöz és bizalmat épít irántad"
+          "A_1": "Brings news orders, new partnerships",
+          "A_2": "It sets you apart from the competition who doesn't use BIX",
+          "A_3": "The public index supports SEO, better search positions",
+          "A_4": "It build trust and credibility"
         },
         "CTA": {
-          "CTA_1": "Jöhetnek az új vevők!",
-          "CTA_2": "Mondj többet erről!"
+          "CTA_1": "New customers can come!",
+          "CTA_2": "Tell me more about this!"
         }
       }
     },
     "HIGHLIGHTED_2": {
-      "TITLE": "Egy professzionális platform, ami helyettem foglalkozik az ügyfeleimmel",
-      "CTA": "Ilyet szeretnék!"
+      "TITLE": "A professional platform that deals with my clients on my behalf",
+      "CTA": "I want this!"
     },
     "FEATURES_BOX": {
-      "HASHTAG": "#ésnemállunkmeg",
-      "HEAD": "A BIX már most is hatékony – mégis folyamatosan fejlesztjük",
-      "SUBHEAD": "Egy termék sosincs kész. A rendszer finomhangolásával és fejlesztésével az a célunk, hogy még több, még pontosabb, még hasznosabb információt adhassunk át neked, amivel még sikeresebb céget építhetsz",
+      "HASHTAG": "#wedontstop",
+      "HEAD": "BIX is already effective – and yet we improve",
+      "SUBHEAD": "A product is never done. By fine-tuning and improving the system, our goal is to provide you with even more, more accure, even more useful information to help you build an even more successful company",
       "FEATURE_1": {
-        "TITLE": "Google integráció",
-        "DESC": "A Google külön kiemeli a BIX-profilokat. Ez is jelzi, hogy az információ, amit előállítunk, értékes a keresőmotorok számára.",
-        "CTA": "Nézd meg, hogy működik"
+        "TITLE": "Google integration",
+        "DESC": "Google highlights BIX profiles. This also indicates that the information we generate is valuable to search engines",
+        "CTA": "See how it works"
       },
       "FEATURE_2": {
-        "TITLE": "Bővülő cégadatbázis",
-        "DESC": "Folyamatosan fejlesztjük a cégkeresőnket, hiszen egyre többen keresnek partnert a BIX cégek között.",
-        "CTA": "Csekkold a céges toplistát"
+        "TITLE": "Expanding company database",
+        "DESC": "We are constantly improving our company search, as more and more people are looking for a partner among BIX companies.",
+        "CTA": "Check the company top list"
       },
       "FEATURE_3": {
-        "TITLE": "BIX Profil",
-        "DESC": "A profilod útlevél a sikerhez. A leendő ügyfeleid ezen keresztül ismernek meg, így rendszeresen új funkciókkal bővítjük.",
-        "CTA": "Lapozz bele a profilokba"
+        "TITLE": "BIX Profile",
+        "DESC": "Your profile is a passport to success. You will get to know your future customers through this, so we will regularly add new features",
+        "CTA": "Scroll through the profiles"
       },
       "FEATURE_4": {
-        "TITLE": "Egyedi mérés",
-        "DESC": "Többet vagy mást kérdeznél a partnereidtől, amit a BIX? Közösen összeállítjuk a saját kérdéssorodat és a cégedre szabjuk az értékelési folyamatot",
-        "CTA": "2019 márciusától elérhető funkció"
+        "TITLE": "Custom measurement",
+        "DESC": "Would you ask your partners something else? Together, we can build your own set of questions.",
+        "CTA": "Feature available from March 2019"
       },
       "FEATURE_5": {
-        "TITLE": "Saját ügyfélkapu",
-        "DESC": "Itt találod a számláidat, kezeled az ügyféllistádat, válaszolsz az értékelésekre és frissíted, szerkeszted a profilodat.",
-        "CTA": "Benézek az ügyfélkapun"
+        "TITLE": "My customer portal",
+        "DESC": "Here you will find your accounts, manage your customer list, respond to reviews and update and edit your profile.",
+        "CTA": "I check out the customer portal"
       },
       "FEATURE_6": {
-        "TITLE": "Extra adatok",
-        "DESC": "A vezetői riportokból már tudjuk, kik a legjobb ügyfeleid és melyik a legnépszerűbb szolgáltatásod. És ez csak a kezdet.",
-        "CTA": "Szeretem a számokat, mutasd"
+        "TITLE": "Extra data",
+        "DESC": "From management reports, we already know who your best customers are and what is your most popular service. And this is just the beginning.",
+        "CTA": "I love numbers, show me"
       },
       "FEATURE_7": {
-        "TITLE": "Értékelésgyűjtés",
-        "DESC": "Az ügyféllista és az értékelésgyűjtő mechanizmus a rendszer szíve és motorja. Ma átlagosan 35-40%-os az elérési hatékonyságunk és folyamatosan javulnak a számaink.",
-        "CTA": "Magyarázd el a folyamatot"
+        "TITLE": "Review collection",
+        "DESC": "The customer list and rating system is the heart and engine of the system. Today, our reach efficiency is on average 35-40% and our numbers are constantly improving.",
+        "CTA": "Tell me the process"
       },
       "FEATURE_8": {
-        "TITLE": "Értékelés megújítás",
-        "DESC": "Aki már értékelt téged, újra megkérdezzük. Automatikusan, meghatározott időközönként, életben tartva az üzleti kapcsolatotokat és ösztönözve az újravásárlást.",
-        "CTA": "Nézd meg, hogy csináljuk"
+        "TITLE": "Review renewal",
+        "DESC": "Anyone who has already rated you will be asked again. Automatically, at specified intervals, keeping your business relationships alive and encouraging repurchases.",
+        "CTA": "Show me how it's done"
       },
       "FEATURE_9": {
-        "TITLE": "Lead generálás",
-        "DESC": "Értékeléskor, megújításkor és a telefonos ellenőrzésnél begyűjtött információk révén folyamatosan finomítjuk a rendszerünket, hogy a BIX még több potenciális vevőt hozzon neked.",
-        "CTA": "Nézd meg, hol tartunk most"
+        "TITLE": "Lead generation",
+        "DESC": "Through information gathered during reviews, renewals, and phone verification, we are constantly refining our system to bring even more potential customers to you.",
+        "CTA": "See where we are at"
       },
       "FEATURE_10": {
-        "TITLE": "Hitelességépítés",
-        "DESC": "Építsd be a weboldaladba, az e-mail aláírásodba, vagy a weboldalad footerébe a BIX által szállított ügyfélvéleményeket. A bizalom és a hitelesség a marketing legértékesebb valutája.",
-        "CTA": "Mutasd a widgeteket"
+        "TITLE": "Credibility building",
+        "DESC": "Incorporate customer reviews delivered by BIX into your website, email signature, or footer on your website. Trust and credibility are the most valuable currencies in marketing.",
+        "CTA": "Show me the widgets"
       },
       "FEATURE_11": {
-        "TITLE": "Integráció",
-        "DESC": "A legfontosabb hazai számlázóprogrammal (#szamlazzhu) és CRM rendszerrel (#minicrm) már megépült az adathíd. De itt nem állunk meg.",
-        "CTA": "Nézd meg, mi készül"
+        "TITLE": "Integration",
+        "DESC": "With the most important domestic billing software (#szamlazzhu) and CRM system (#minicrm) we already built the data bridge. But we don't stop here.",
+        "CTA": "See what's going on"
       },
       "FEATURE_12": {
-        "TITLE": "Véleménygaléria",
-        "DESC": "Miért tennél megkérdőjelezhető hitelességű ügyfélvisszajelzéseket a weboldaladra, ha ellenőrzött és objektív forrásból is meríthetsz? A BIX rendszeréből automatikusan átemelheted a vevőid feedbackjeit.",
-        "CTA": "Lapozz bele az egyedi galériádba"
+        "TITLE": "Opinions gallery",
+        "DESC": "Why put questionable customer feedback on your website if you can draw from both verified and objective sources? You can automatically transfer feedback from your customers from the BIX system.",
+        "CTA": "Scroll into your custom gallery"
       }
     }
   },
   "FOOTER": {
     "CONTACT": {
-      "TITLE": "Kapcsolat",
+      "TITLE": "Contact",
       "PHONE_NUMBER": "+36 20 369 19 52",
       "EMAIL": "office@bixindex.hu",
       "ADDRESS": "1095 Budapest, Soroksári út 48. 10.ép. 2.em. 20."
     },
     "NAV": {
-      "LINK": "Legjobb Ügyfélélmény 2020"
+      "LINK": "Best user experience 2020"
     }
   },
   "COMPANY_SEARCH": {
-    "RESULTS_NUMBER": "Találatok száma: {{count}}",
+    "RESULTS_NUMBER": "Number of results: {{count}}",
     "QUICK_SEARCH": {
-      "LABEL": "Gyorskeresés:",
-      "S_1": "Könyvelők",
-      "S_2": "Marketingesek",
-      "S_3": "HR szolgáltatók",
-      "S_4": "Építőipar"
+      "LABEL": "Quick search:",
+      "S_1": "Accountants",
+      "S_2": "Marketers",
+      "S_3": "HR providers",
+      "S_4": "Building industry"
     },
-    "MAIN_PROFILE": "Főprofil:",
-    "BIX_INDEX": "Bizalmi Index",
-    "BIX_COUNT": "Összesen {{count}} db értékelés",
-    "PRODUCTS": "Termékek",
-    "WRITE_REVIEW": "Értékelés írása",
-    "BIX_PROFILE": "BIX Profil"
+    "MAIN_PROFILE": "Main profile:",
+    "BIX_INDEX": "Trust Index",
+    "BIX_COUNT": "{{count}} reviews total",
+    "PRODUCTS": "Products",
+    "WRITE_REVIEW": "Write review",
+    "BIX_PROFILE": "BIX Profile",
+    "MAIN_TITLE": "We value your opinion! Seach any domestic company and share your experiences",
+    "SUB_TITLE": "Write reviews about 5 different comapny every week until 20. November, and ",
+    "WIN": "win"
   },
   "TOAST": {
     "ERROR": {
@@ -469,10 +472,10 @@
     "PRIVATE": "Private",
     "SEND_REVIEW": "Submit review",
     "REFERENCE": "How would you like to provide a reference?",
-    "POLICy_REQUIRED": "Kérjük fogadja el az adatkezelésre vonatkozó tájékoztatónkat!",
-    "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom.",
-    "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét",
-    "VISIBILITY_INFO": "Itt választhatod ki az értékelésed anonimitásának beállításait."
+    "POLICy_REQUIRED": "Please accept our privacy policy!",
+    "PRIVACY_POLICY": "I have read, understood and accept our privacy policy.",
+    "INVALID_FORM": "You didn't fill a required field. Please check the form again",
+    "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating."
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",
