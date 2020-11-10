@@ -57,7 +57,10 @@ export const Auth: FunctionComponent = () => {
       return authService
         .login(email, password)
         .then(() => setLoginError({ isError: false, message: '' }))
-        .catch(() => setLoginError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+        .catch((error) => {
+          setLoginError({ isError: true, message: t('AUTH.INVALID_EMAIL_OR_PASSWORD') });
+          throw error;
+        });
     },
     [authService],
   );
@@ -67,7 +70,10 @@ export const Auth: FunctionComponent = () => {
       return authService
         .register(name, email, password)
         .then(() => setRegisterError({ isError: false, message: '' }))
-        .catch(() => setRegisterError({ isError: true, message: t('COMMON.UNKOWN_ERROR') }));
+        .catch((error) => {
+          setRegisterError({ isError: true, message: t('AUTH.ALREADY_EXISTS') });
+          throw error;
+        });
     },
     [authService],
   );
