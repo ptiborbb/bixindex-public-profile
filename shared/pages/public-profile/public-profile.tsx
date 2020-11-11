@@ -280,8 +280,9 @@ PublicProfile.getInitialProps = async (ctx) => {
   });
   const alias = ctx.query.companyAlias as string;
   const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  const profilePage = (await bixClient.publicProfile.profile.getProfileByCompany(alias, by)) as ProfilePage;
-
+  const profilePage = (await bixClient.publicProfile.profile
+    .getProfileByCompany(alias, by)
+    .catch((_) => null)) as ProfilePage;
   return {
     profilePage,
   };
