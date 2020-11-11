@@ -11,7 +11,7 @@ interface AwardProps {
   link: string;
 }
 
-export const Award: FC<AwardProps> = ({ image, date, title, description, link = 'codingsans.com' }) => {
+export const Award: FC<AwardProps> = ({ image, date, title, description, link }) => {
   return (
     <div className={classes.award}>
       <div className={classes.image} style={{ backgroundImage: `url(${image})` }}></div>
