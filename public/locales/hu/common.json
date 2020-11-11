@@ -38,7 +38,8 @@
       }
     },
     "COOKIE_CONSENT": "Ez a weboldal sütiket használ, a kényelmesebb böngészés érdekében.",
-    "ACCEPT_COOKIES": "Elfogadom"
+    "ACCEPT_COOKIES": "Elfogadom",
+    "PAGE_NOT_FOUND": "Az oldal nem található"
   },
   "COMPANIES": {
     "TITLE": "Cégek",
@@ -708,5 +709,8 @@
     "CONFERENCE": "Konferencia",
     "MILESTONE": "Mérföldkõ",
     "NEW_PRODUCT": "Új termék"
+  },
+  "PUBLIC_PROFILE": {
+    "PROFILE_NOT_FOUND": "Sajnáljuk, a kért profil nem található."
   }
 }

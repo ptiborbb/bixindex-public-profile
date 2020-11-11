@@ -37,7 +37,8 @@
       }
     },
     "COOKIE_CONSENT": "This website uses cookies to enhance the user experience.",
-    "ACCEPT_COOKIES": "I understand"
+    "ACCEPT_COOKIES": "I understand",
+    "PAGE_NOT_FOUND": "Page not found"
   },
   "COMPANIES": {
     "TITLE": "Companies",
@@ -710,5 +711,8 @@
     "CONFERENCE": "Conference",
     "MILESTONE": "Milestone",
     "NEW_PRODUCT": "New product"
+  },
+  "PUBLIC_PROFILE": {
+    "PROFILE_NOT_FOUND": "Sorry, we didn't find the requested profile"
   }
 }
