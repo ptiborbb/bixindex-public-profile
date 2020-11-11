@@ -3,6 +3,7 @@ import { Attachment, InfoRounded, Link, Public, ThumbUp } from '@material-ui/ico
 import { format } from 'date-fns';
 import { FC, useState } from 'react';
 import { useTranslate } from '../../translate.context';
+import { convertLinkToAbsolute } from '../../utils/link-to-absolute';
 import { BixModal } from '../bix-modal/bix-modal';
 import classes from './article.module.scss';
 
@@ -39,6 +40,13 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
         </div>
       </div>
       <div className={classes.content}>{content}</div>
+      {link && (
+        <div className={classes.link}>
+          <a href={convertLinkToAbsolute(link)}>
+            <Link className={classes.icon} fontSize="small" /> {link}
+          </a>
+        </div>
+      )}
       {image && (
         <>
           <Typography className={classes.attachmentLabel}>Csatolmány</Typography>
@@ -52,12 +60,6 @@ export const Article: FC<ArticleProps> = ({ votes, date, title, type, content, l
           </BixModal>
         </>
       )}
-
-      <div className={classes.link}>
-        <a href={link}>
-          <Link className={classes.icon} fontSize="small" /> {link}
-        </a>
-      </div>
     </div>
   );
 };

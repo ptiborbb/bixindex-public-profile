@@ -13,7 +13,7 @@ export const Awards: FC<AwardsProps> = ({ awards }) => {
       {awards.map((award, i) => (
         <div key={i}>
           {i > 0 && <div className={classes.separator}></div>}
-          <Award image={award.image} date={award.year} title={award.title} description={award.text} />
+          <Award image={award.image} date={award.year} title={award.title} description={award.text} link={award.link} />
         </div>
       ))}
     </div>
