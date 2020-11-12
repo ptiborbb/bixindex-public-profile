@@ -712,5 +712,25 @@
   },
   "PUBLIC_PROFILE": {
     "PROFILE_NOT_FOUND": "Sajnáljuk, a kért profil nem található."
+  },
+  "COMPANY_FRAME": {
+    "YEARLY_INCOME": "Éves forgalom",
+    "INCOME_MODAL_TITLE": "Forgalom alakulása az elmúlt 3 évben (Millió HUF)",
+    "EMPLOYEE_MODAL_TITLE": "Létszám alakulása az elmúlt 3 évben",
+    "EMPLOYEE_NUMBER": "Létszám",
+    "PEOPLE": "fő",
+    "TAX_NUMBER": "Adószám",
+    "MAIN_PROFILE": "Főprofil",
+    "ADDRESS": "Cím",
+    "WEBSITE": "Weboldal",
+    "RELATED_PROFILES": "Kapcsolódó profilok",
+    "PRODUCTS_SERVICES": "Termékek és szolgáltatások",
+    "CONTACT": "Kapcsolattartó"
+  },
+  "NPS_TEXT": {
+    "NEGATIVE": "Ellenző",
+    "PASSIVE": "Passzív",
+    "POSITIVE": "Pozitív",
+    "NO_NPS": "Nem adott"
   }
 }

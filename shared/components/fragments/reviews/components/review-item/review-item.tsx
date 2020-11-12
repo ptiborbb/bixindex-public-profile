@@ -1,11 +1,11 @@
 import { Avatar, Fab } from '@material-ui/core';
 import { Share, ThumbDown, ThumbUp } from '@material-ui/icons';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
 import { RatingItem } from '../../../../../interfaces/profile-page';
-import { npsToText } from '../../../../../utils/nps-to-text';
+import { NpsText } from '../../../../nps-text/nps-text';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import classes from './review-item.module.scss';
 
@@ -48,7 +48,10 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
           </div>
         </div>
       </div>
-      <div className={classes.npsInfo}>NPS: {npsToText(rating.nps)}</div>
+      <div className={classes.npsInfo}>
+        <span className={classes.npsLabel}>{'NPS: '}</span>
+        <NpsText nps={rating.nps} />
+      </div>
       <meta
         name="description"
         content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
