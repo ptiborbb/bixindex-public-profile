@@ -58,12 +58,15 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             label={'Létszám'}
             value={`${profile.details.employees.value} fő`}
             change={profile.details.employees.change}
+            modalTitle={t('COMPANY_FRAME.EMPLOYEE_MODAL_TITLE')}
           />
           <CompanyDetailItem
             icon={<AutorenewIcon />}
-            label={'Éves forgalom'}
+            label={t('COMPANY_FRAME.YEARLY_INCOME')}
             value={`${profile.details.yearlyIncome.value.toLocaleString()} HUF`}
-            change={profile.details.yearlyIncome.change}
+            change={profile.details.yearlyIncome.change.toLowerCase()}
+            modalTitle={t('COMPANY_FRAME.INCOME_MODAL_TITLE')}
+            modalChartData={profile.details.revenueHistory}
           />
           {profile?.details?.taxNumber && (
             <CompanyDetailItem

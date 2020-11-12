@@ -714,5 +714,10 @@
   },
   "PUBLIC_PROFILE": {
     "PROFILE_NOT_FOUND": "Sorry, we didn't find the requested profile"
+  },
+  "COMPANY_FRAME": {
+    "YEARLY_INCOME": "Yearly revenue",
+    "INCOME_MODAL_TITLE": "Yearly income in the last 3 years (Million HUF)",
+    "EMPLOYEE_MODAL_TITLE": "Employees in the last 3 years"
   }
 }
