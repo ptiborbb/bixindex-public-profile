@@ -55,8 +55,8 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
           <div className={classes.companyName}>{profile.name}</div>
           <CompanyDetailItem
             icon={<SupervisorAccountIcon />}
-            label={'Létszám'}
-            value={`${profile.details.employees.value} fő`}
+            label={t('COMPANY_FRAME.EMPLOYEE_NUMBER')}
+            value={`${profile.details.employees.value} ${t('COMPANY_FRAME.PEOPLE')}`}
             change={profile.details.employees.change}
             modalTitle={t('COMPANY_FRAME.EMPLOYEE_MODAL_TITLE')}
           />
@@ -71,7 +71,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
           {profile?.details?.taxNumber && (
             <CompanyDetailItem
               icon={<AssignmentIcon />}
-              label={'Adószám'}
+              label={t('COMPANY_FRAME.TAX_NUMBER')}
               value={`${profile.details.taxNumber.substring(0, 8)}-${profile.details.taxNumber.substring(
                 8,
                 9,
@@ -79,16 +79,16 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             />
           )}
 
-          <CompanyDetailItem icon={<PlaceIcon />} label={'Cím'} value={profile.details.address} />
+          <CompanyDetailItem icon={<PlaceIcon />} label={t('COMPANY_FRAME.ADDRESS')} value={profile.details.address} />
           <CompanyDetailItem
             icon={<SettingsIcon />}
-            label={'Főprofil'}
+            label={t('COMPANY_FRAME.MAIN_PROFILE')}
             value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
           />
           <a href={convertLinkToAbsolute(profile.website)} target="_blank" rel="noreferrer">
-            <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
+            <CompanyDetailItem icon={<LanguageIcon />} label={t('COMPANY_FRAME.WEBSITE')} value={profile.website} />
           </a>
-          <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={''} />
+          <CompanyDetailItem icon={<AssignmentIndIcon />} label={t('COMPANY_FRAME.RELATED_PROFILES')} value={''} />
           {/* TODO: kapcsolódó profilok listáját bekötni */}
           <div>
             {profile.fb && (
@@ -110,7 +110,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
 
           <div className={classes.separator}></div>
 
-          <div className={classes.blockLabel}>Termékek és szolgáltatások</div>
+          <div className={classes.blockLabel}>{t('COMPANY_FRAME.PRODUCTS_SERVICES')}</div>
 
           <div className={classes.chipBlock}>
             {productsAndServices.map((product, i) => (
@@ -120,7 +120,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
 
           <div className={classes.separator}></div>
 
-          <div className={classes.blockLabel}>Kapcsolattartó</div>
+          <div className={classes.blockLabel}>{t('COMPANY_FRAME.CONTACT')}</div>
 
           {profile.contacts.map((contact, i) => (
             <ContactItem
