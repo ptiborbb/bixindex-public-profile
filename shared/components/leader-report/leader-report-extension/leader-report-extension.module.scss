@@ -1,0 +1,17 @@
+.leaderReportExtension {
+  padding: 80px 0;
+}
+
+.leaderReportExtensionItem img {
+  max-height: 64px;
+}
+
+.leaderReportExtensionContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h3 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+}

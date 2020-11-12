@@ -1,0 +1,34 @@
+.phoneControl {
+  padding: 80px 0;
+
+  .advantage {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .popularAdvantages {
+    margin-top: 30px;
+    h5 {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    & > div {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    & > div > div:last-child {
+      padding-left: 15px;
+    }
+  }
+}
+
+.phoneControlImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

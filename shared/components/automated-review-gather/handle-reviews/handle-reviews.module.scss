@@ -1,0 +1,32 @@
+.handleReviews {
+  padding: 80px 0;
+  background-color: #ffffff;
+
+  .popularAdvantages {
+    & > div {
+      display: flex;
+      margin-bottom: 20px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    & > div > span {
+      width: 60%;
+      text-align: left;
+    }
+
+    & > div svg {
+      display: inline-block;
+      color: #28bd52;
+      margin-right: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .handleReviews .popularAdvantages > div > span {
+    width: 65%;
+  }
+  .handleReviews .popularAdvantages > div {
+    justify-content: center !important;
+  }
+}

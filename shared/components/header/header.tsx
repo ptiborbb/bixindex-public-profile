@@ -37,10 +37,16 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
             <div className={classes.link}>{t('HEADER.HOME')}</div>
           </Link>
           <a href={process.env.NEXT_PUBLIC_BLOG_URL} target="_blank" rel="noreferrer">
-            <a className={classes.link}>{t('HEADER.BLOG')}</a>
+            <span className={classes.link}>{t('HEADER.BLOG')}</span>
           </a>
           <Link href="/cegkereso">
-            <a className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</a>
+            <span className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</span>
+          </Link>
+          <Link href="/automatizalt-elegedettsegmeres">
+            <span className={classes.link}>{t('HEADER.FUNCTIONS')}</span>
+          </Link>
+          <Link href="/ellenorzott-adatok">
+            <span className={classes.link}>{'ellenorzott-adatok'}</span>
           </Link>
         </div>
         <div className={classes.icons}>

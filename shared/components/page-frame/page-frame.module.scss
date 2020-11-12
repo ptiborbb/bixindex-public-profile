@@ -1,0 +1,50 @@
+@import '../../../styles/variables.scss';
+
+@mixin container($margin-y: 0) {
+  width: 100%;
+  max-width: 1170px;
+  margin: $margin-y auto;
+  padding: 0 20px;
+}
+
+.container {
+  @include container;
+}
+
+.divider {
+  background: rgba(255, 255, 255, 0.4);
+  height: 1px;
+}
+
+.headerBlock {
+  background-image: $bix-bg-gradient;
+  min-height: 83vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  &Inner {
+    @include container;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mainTitle {
+    color: $white;
+    font-weight: 600;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    line-height: 1.35;
+  }
+
+  .subTitle {
+    color: $white;
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    line-height: 1.35;
+  }
+}
