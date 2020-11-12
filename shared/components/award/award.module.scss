@@ -50,4 +50,21 @@
       color: $dark;
     }
   }
+
+  .link {
+    padding-top: 1rem;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration-line: underline;
+    color: #5d92f4;
+
+    & > a {
+      display: flex;
+      align-items: center;
+
+      & > .icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 }

@@ -8,6 +8,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import React, { FC } from 'react';
 import { useTranslate } from '../../translate.context';
+import { convertLinkToAbsolute } from '../../utils/link-to-absolute';
 import { Chip } from '../chip/chip';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
@@ -81,36 +82,24 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             label={'Főprofil'}
             value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
           />
-          <a
-            href={`${profile.website.startsWith('http') ? '' : '//'}${profile.website}`}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={convertLinkToAbsolute(profile.website)} target="_blank" rel="noreferrer">
             <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
           </a>
           <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={''} />
           {/* TODO: kapcsolódó profilok listáját bekötni */}
           <div>
             {profile.fb && (
-              <a href={`${profile.fb.startsWith('http') ? '' : '//'}${profile.fb}`} target="_blank" rel="noreferrer">
+              <a href={convertLinkToAbsolute(profile.fb)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'facebook'} />
               </a>
             )}
             {profile.insta && (
-              <a
-                href={`${profile.insta.startsWith('http') ? '' : '//'}${profile.insta}`}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={convertLinkToAbsolute(profile.insta)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'insta'} />
               </a>
             )}
             {profile.linkedin && (
-              <a
-                href={`${profile.linkedin.startsWith('http') ? '' : '//'}${profile.linkedin}`}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={convertLinkToAbsolute(profile.linkedin)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'linkedin'} />
               </a>
             )}
