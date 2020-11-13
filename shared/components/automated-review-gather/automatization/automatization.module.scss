@@ -22,11 +22,16 @@
     font-weight: 500;
   }
 
+  p {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6rem;
+  }
+
   .popularAdvantages > div {
     display: flex;
     margin-bottom: 20px;
     align-items: center;
-    justify-content: flex-end;
   }
 
   .popularAdvantages {
@@ -88,7 +93,6 @@
   }
   p {
     color: #999999 !important;
-    font-weight: 400;
   }
   .automatizonStepDetailImage {
     display: flex;

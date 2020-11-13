@@ -5,7 +5,7 @@ import classes from './buisness-rating.module.scss';
 
 export const BusinessRating: FC = () => (
   <section className={classes.businessRating}>
-    <div className="container mobile-margin-top-50">
+    <div className="container mb-5 mobile-margin-top-50">
       <div className="row">
         <div className="col-12 col-md-6">
           <h3>Business rating</h3>

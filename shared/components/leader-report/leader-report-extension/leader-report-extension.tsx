@@ -16,7 +16,7 @@ export const LeaderReportExtension: FC = () => (
           <h5 className="mt-32 fw-500">A legjobbra értékelt termék / szolgáltatás</h5>
           <p>Az a termék/ szolgáltatás amivel a legtöbb partner elégedett.</p>
         </div>
-        <div className={clx('col-12 col-md-6 text-center mobile-margin-top-50', classes.leaderReportExtensionIte)}>
+        <div className={clx('col-12 col-md-6 text-center mobile-margin-top-50', classes.leaderReportExtensionItem)}>
           <img src={develop} alt="díj" />
           <h5 className="mt-32 fw-500">Fejlesztendő terület az ügyfelek szerint</h5>
           <p>Az a termék/ szolgáltatás amivel a legtöbb partner elégedett.</p>
@@ -31,7 +31,7 @@ export const LeaderReportExtension: FC = () => (
             <br /> vagy gyors kezelésre szorulnak
           </p>
         </div>
-        <div className={clx('col-12 col-md-6 text-center mobile-margin-top-50', classes.leaderReportExtensionIte)}>
+        <div className={clx('col-12 col-md-6 text-center mobile-margin-top-50', classes.leaderReportExtensionItem)}>
           <img src={conversion} alt="díj" />
           <h5 className="mt-32 fw-500">Korábbi ügyfelek újra szeretnének rendelni</h5>
           <p>

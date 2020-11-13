@@ -1,9 +1,9 @@
-import CheckIcon from '@material-ui/icons/Check';
 import clx from 'classnames';
 import React, { FC } from 'react';
 import handleReviewBanner from '../../../../public/images/automated-gather-review/handle-review-banner.png';
 import { SectionHeading } from '../../heading/section-heading/section-heading';
 import { SectionSubHeading } from '../../heading/section-sub-heading/section-sub-heading';
+import { PopularAdvantage } from '../../popular-advantage/popular-advantage';
 import classes from './handle-reviews.module.scss';
 
 interface IHandleReviewProps {
@@ -25,29 +25,19 @@ export const HandleReviews: FC<IHandleReviewProps> = ({ id }) => (
           </SectionSubHeading>
         </div>
       </div>
-      <div className="row mt-40">
-        <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
-          <div>
-            <CheckIcon />
-            <span>Régi ügyfelek újra aktiválása</span>
-          </div>
-          <div>
-            <CheckIcon />
-            <span>Pontos visszajelzés az ügyfelektől</span>
-          </div>
+      <div className="row mt-4">
+        <div className={clx('col-12 col-md-5 offset-md-2', classes.popularAdvantages)}>
+          <PopularAdvantage>Régi ügyfelek újra aktiválása</PopularAdvantage>
+
+          <PopularAdvantage>Pontos visszajelzés az ügyfelektől</PopularAdvantage>
         </div>
-        <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
-          <div style={{ justifyContent: 'center' }}>
-            <CheckIcon />
-            <span>Folyamatos törődés a megrendelőkkel</span>
-          </div>
-          <div style={{ justifyContent: 'center' }}>
-            <CheckIcon />
-            <span>Azonnali lehetőség a beavatkozásra</span>
-          </div>
+        <div className={clx('col-12 col-md-5', classes.popularAdvantages)}>
+          <PopularAdvantage>Folyamatos törődés a megrendelőkkel</PopularAdvantage>
+
+          <PopularAdvantage>Azonnali lehetőség a beavatkozásra</PopularAdvantage>
         </div>
       </div>
-      <div className="row" style={{ marginTop: '100px' }}>
+      <div className="row mt-5">
         <div className="col-12">
           <img src={handleReviewBanner} alt="banner" />
         </div>

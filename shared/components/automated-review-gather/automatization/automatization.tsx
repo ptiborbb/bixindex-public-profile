@@ -1,4 +1,3 @@
-import CheckIcon from '@material-ui/icons/Check';
 import clx from 'classnames';
 import React, { FC } from 'react';
 import bixStartStep1 from '../../../../public/images/automated-gather-review/bix-start-step-1.png';
@@ -6,6 +5,7 @@ import bixStartStep2 from '../../../../public/images/automated-gather-review/bix
 import bixStartSteps from '../../../../public/images/automated-gather-review/bix-start-steps.png';
 import { SectionHeading } from '../../heading/section-heading/section-heading';
 import { SectionSubHeading } from '../../heading/section-sub-heading/section-sub-heading';
+import { PopularAdvantage } from '../../popular-advantage/popular-advantage';
 import classes from './automatization.module.scss';
 
 interface IAutomatizationProps {
@@ -58,43 +58,31 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
                 </div>
               </div>
             </div>
-            <div className="row mt-40">
+            <div className="row mt-4">
               <div className="col-12 text-center">
                 <h5>Miért érdemes automatizálni az elégedettségmérést?</h5>
               </div>
             </div>
             <div className="row mt-20 mb-40">
               <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
-                <div>
-                  <CheckIcon />
-                  <span>Folyamatos törődést jelent a meglévő ügyfelekkel</span>
-                </div>
-                <div>
-                  <CheckIcon />
-                  <span>Azonnali beavatkozási lehetőség lesz a kezedben</span>
-                </div>
+                <PopularAdvantage>Folyamatos törődést jelent a meglévő ügyfelekkel</PopularAdvantage>
+                <PopularAdvantage>Azonnali beavatkozási lehetőség lesz a kezedben</PopularAdvantage>
               </div>
               <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
-                <div style={{ justifyContent: 'flex-start' }}>
-                  <CheckIcon />
-                  <span>Tűpontos (és hiteles) ügyfélvisszajelzéseket kapsz</span>
-                </div>
-                <div style={{ justifyContent: 'flex-start' }}>
-                  <CheckIcon />
-                  <span>Újraaktiválhatod a régi ügyfeleidet</span>
-                </div>
+                <PopularAdvantage>Tűpontos (és hiteles) ügyfélvisszajelzéseket kapsz</PopularAdvantage>
+                <PopularAdvantage>Újraaktiválhatod a régi ügyfeleidet</PopularAdvantage>
               </div>
             </div>
-            <div className="row mt-40">
+            <div className="row mt-2 mb-4">
               <div className="col-12 text-center">
                 <h3>BIX bevezetésének első lépései</h3>
-                <img src={bixStartSteps} alt="bix-start-lépések" className="mt-40" />
+                <img src={bixStartSteps} alt="bix-start-lépések" className="mt-4" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="row" style={{ marginTop: '100px' }}>
+      <div className="row mt-5">
         <div className={clx('col-12 col-md-6', classes.automatizationStepDetail)}>
           <h3>#2 lépés: Folyamatos értékelések</h3>
           <p>A folyamatos értékelések két pillérre épülnek</p>
@@ -112,7 +100,7 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
             <span className="hashtag-color">#minicrm</span>
           </p>
         </div>
-        <div className={clx('col-12 col-md-6 mobile-margin-top-30', classes.automatizonStepDetailImage)}>
+        <div className={clx('col-12 col-md-6 mt-5 mobile-margin-top-30', classes.automatizonStepDetailImage)}>
           <img src={bixStartStep1} alt="bix-start-lépés-1" />
         </div>
       </div>

@@ -30,32 +30,32 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
           </SectionSubHeading>
         </div>
       </div>
-      <div className="row mt-40">
-        <div className={['col mobile-margin-top-50', classes.reviewDescriptionCardContainer].join(' ')}>
+      <div className="row mt-4">
+        <div className="col">
           <div className={classes.reviewDescriptionCard}>
             <img src={services} alt="Szolgáltató" />
             <h4>Szolgáltató</h4>
           </div>
         </div>
-        <div className={['col', classes.reviewDescriptionCardContainer].join(' ')}>
+        <div className="col">
           <div className={classes.reviewDescriptionCard}>
             <img src={manufacturer} alt="gyártó" />
             <h4>Gyártó</h4>
           </div>
         </div>
-        <div className={['col mobile-margin-top-50', classes.reviewDescriptionCardContainer].join(' ')}>
+        <div className="col">
           <div className={classes.reviewDescriptionCard}>
             <img src={wholesaler} alt="Nagykereskedelem" />
             <h4>Nagykereskedelem</h4>
           </div>
         </div>
-        <div className={['col mobile-margin-top-50', classes.reviewDescriptionCardContainer].join(' ')}>
+        <div className="col">
           <div className={classes.reviewDescriptionCard}>
             <img src={retailor} alt="Kiskereskedelem" />
             <h4>Kiskereskedelem</h4>
           </div>
         </div>
-        <div className={['col mobile-margin-top-50', classes.reviewDescriptionCardContainer].join(' ')}>
+        <div className="col">
           <div className={classes.reviewDescriptionCard}>
             <img src={event} alt="rendezvényszervező" />
             <h4>Rendezvényszervező</h4>
@@ -73,14 +73,14 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
           </SectionSubHeading>
         </div>
       </div>
-      <div className="row mt-40">
-        <div className={['col-12 col-md-4 offset-md-2', classes.reviewDescriptionCardContainer].join(' ')}>
+      <div className="row mt-5">
+        <div className="col-12 col-md-4 offset-md-2">
           <div className={classes.reviewDescriptionCard}>
             <img src={customer} alt="gyártó" />
             <h4>Megrendelő</h4>
           </div>
         </div>
-        <div className={['col-12 col-md-4 mobile-margin-top-50', classes.reviewDescriptionCardContainer].join(' ')}>
+        <div className="col-12 col-md-4">
           <div className={classes.reviewDescriptionCard}>
             <img src={retailer} alt="gyártó" />
             <h4>Beszállító</h4>
@@ -88,7 +88,7 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
         </div>
       </div>
       <div className="row" style={{ marginTop: '120px' }}>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-7">
           <SectionHeading style={{ fontSize: '2em' }}>Pontok helyett szöveges válaszok</SectionHeading>
           <p>
             A BIX kezdeti fejlesztéseinél felismertük, hogy pontozással nem tudunk elég pontos képet adni sem a
@@ -112,7 +112,7 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-5">
           <img src={review} alt="review" />
         </div>
       </div>

@@ -18,23 +18,23 @@ export const CirclesOfTrust: FC = () => (
           </h2>
         </div>
       </div>
-      <div className="row mt-40">
-        <div className={['col-12 col-md-3', classes.ccontainer].join(' ')}>
+      <div className="row mt-5">
+        <div className={['col-12 col-md-3', classes.container].join(' ')}>
           <img src={competence} alt="kompetencia" />
           <h4>Competence</h4>
           <p>(Hozzáértés - szakmaiság)</p>
         </div>
-        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.ccontainer].join(' ')}>
+        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.container].join(' ')}>
           <img src={concern} alt="kompetencia" />
           <h4>Care</h4>
           <p>(Törődés)</p>
         </div>
-        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.ccontainer].join(' ')}>
+        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.container].join(' ')}>
           <img src={consistency} alt="kompetencia" />
           <h4>Consistency</h4>
           <p>(Következetesség)</p>
         </div>
-        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.ccontainer].join(' ')}>
+        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.container].join(' ')}>
           <img src={communication} alt="kompetencia" />
           <h4>Communication</h4>
           <p>(Kommunikáció)</p>

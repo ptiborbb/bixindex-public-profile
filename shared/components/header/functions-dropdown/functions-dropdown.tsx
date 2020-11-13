@@ -13,7 +13,7 @@ export const FunctionsDropdown: FC = () => {
               <h4>
                 <Link href="/automatizalt-elegedettsegmeres#automatedReviewHeader">
                   <span>
-                    Automatizált
+                    <div className={classes.super}>Automatizált</div>
                     <span>Elégedettség mérés</span>
                   </span>
                 </Link>

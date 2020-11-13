@@ -34,7 +34,7 @@ export const ControlledData: FC = () => {
           <SectionSubHeading>
             Az értékelő űrlapok egységesek, mivel a <strong>BIX célja kettős.</strong>
           </SectionSubHeading>
-          <div className="container mt-40">
+          <div className="container mt-5">
             <div className="row">
               <div className="col-12 col-md-6 text-center">
                 <h3
