@@ -1,5 +1,6 @@
 .benchmark {
   padding: 80px 0 50px 0;
+  background-color: #ffffff;
 
   h3 {
     font-weight: 600;
@@ -16,7 +17,11 @@
   }
 
   h5 {
+    margin-top: 0;
     font-weight: 500;
+    font-size: 1.3em;
+    line-height: 1.4em;
+    margin-bottom: 15px;
   }
 
   & > div:first-child {

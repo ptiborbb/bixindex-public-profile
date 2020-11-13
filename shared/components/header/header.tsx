@@ -1,10 +1,12 @@
+import { Popover } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
-import { FC, useCallback } from 'react';
+import { FC, MouseEvent, useCallback, useState } from 'react';
 import { useApp } from '../../app.context';
 import { useTranslate } from '../../translate.context';
+import { FunctionsDropdown } from './functions-dropdown/functions-dropdown';
 import classes from './header.module.scss';
 
 interface HeaderProps {
@@ -24,6 +26,19 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
     authService.logout();
   }, [authService]);
 
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
   return (
     <header className={classes.header}>
       <Link href="/">
@@ -42,12 +57,25 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
           <Link href="/cegkereso">
             <span className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</span>
           </Link>
-          <Link href="/automatizalt-elegedettsegmeres">
-            <span className={classes.link}>{t('HEADER.FUNCTIONS')}</span>
-          </Link>
-          <Link href="/ellenorzott-adatok">
-            <span className={classes.link}>{'ellenorzott-adatok'}</span>
-          </Link>
+          <span className={classes.link} onMouseEnter={handleClick}>
+            {t('HEADER.FUNCTIONS')}
+          </span>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <FunctionsDropdown />
+          </Popover>
         </div>
         <div className={classes.icons}>
           <div className={classes.link}>

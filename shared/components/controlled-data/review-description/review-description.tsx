@@ -7,7 +7,10 @@ import retailer from '../../../../public/images/controlled-data/retailer.png';
 import review from '../../../../public/images/controlled-data/review.png';
 import services from '../../../../public/images/controlled-data/services.png';
 import wholesaler from '../../../../public/images/controlled-data/wholesaler.png';
-import classes from './review-description.module.css';
+import { SectionHeading } from '../../heading/section-heading/section-heading';
+import { SectionSubHeading } from '../../heading/section-sub-heading/section-sub-heading';
+import { PopularAdvantage } from '../../popular-advantage/popular-advantage';
+import classes from './review-description.module.scss';
 
 interface IReviewDescriptionProps {
   id: string;
@@ -18,9 +21,13 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
     <div className="container">
       <div className="row">
         <div className="col-12 text-center">
-          <h2>Űrlapok - ágazatonként</h2>
-          <h4>Azért, hogy pontosabb képet adjunk, ágazatonként más-más kérdéseket teszünk fel.</h4>
-          <h4 style={{ marginTop: '50px' }}>Jelen pillanatban három kategóriában vannak kérdéssoraink:</h4>
+          <SectionHeading>Űrlapok - ágazatonként</SectionHeading>
+          <SectionSubHeading>
+            Azért, hogy pontosabb képet adjunk, ágazatonként más-más kérdéseket teszünk fel.
+          </SectionSubHeading>
+          <SectionSubHeading style={{ marginTop: '50px' }}>
+            Jelen pillanatban három kategóriában vannak kérdéssoraink:
+          </SectionSubHeading>
         </div>
       </div>
       <div className="row mt-40">
@@ -61,7 +68,9 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
             <span className="hashtag-color">#ésnemállunkmeg:</span> folyamatosan bővítjük a kategóriákat, hogy egyre
             pontosabb és pontosabb képet adjunk.
           </p>
-          <h4 style={{ marginTop: '50px' }}>Külön mérjük a megrendelői és beszállítói elégedettséget is.</h4>
+          <SectionSubHeading style={{ marginTop: '50px' }}>
+            Külön mérjük a megrendelői és beszállítói elégedettséget is.
+          </SectionSubHeading>
         </div>
       </div>
       <div className="row mt-40">
@@ -80,7 +89,7 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
       </div>
       <div className="row" style={{ marginTop: '120px' }}>
         <div className="col-12 col-md-6">
-          <h2 style={{ fontSize: '2em' }}>Pontok helyett szöveges válaszok</h2>
+          <SectionHeading style={{ fontSize: '2em' }}>Pontok helyett szöveges válaszok</SectionHeading>
           <p>
             A BIX kezdeti fejlesztéseinél felismertük, hogy pontozással nem tudunk elég pontos képet adni sem a
             Vezetőknek sem a Piacnak.
@@ -91,13 +100,15 @@ export const ReviewDescription: FC<IReviewDescriptionProps> = ({ id }) => (
           </p>
           <div className={classes.popularAdvantages}>
             <h5>Népszerű előnyök</h5>
-            <div>
-              {/* <PopularAdvantage text="Régi ügyfelek újra aktiválása" /> */}
-              {/* <PopularAdvantage text="Pontos visszajelzés az ügyfelektől" /> */}
-            </div>
-            <div>
-              {/* <PopularAdvantage text="Folyamatos törődés a megrendelőkkel" /> */}
-              {/* <PopularAdvantage text="Azonnali lehetőség a beavatkozásra" /> */}
+            <div className="row">
+              <div className="col-6">
+                <PopularAdvantage>Régi ügyfelek újra aktiválása</PopularAdvantage>
+                <PopularAdvantage>Folyamatos törődés a megrendelőkkel</PopularAdvantage>
+              </div>
+              <div className="col-6">
+                <PopularAdvantage>Pontos visszajelzés az ügyfelektől</PopularAdvantage>
+                <PopularAdvantage>Azonnali lehetőség a beavatkozásra</PopularAdvantage>
+              </div>
             </div>
           </div>
         </div>

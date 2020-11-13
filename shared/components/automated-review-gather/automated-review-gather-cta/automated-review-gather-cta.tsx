@@ -1,3 +1,4 @@
+import clx from 'classnames';
 import React, { FC } from 'react';
 import automatedReviewGatherCTAImage from '../../../../public/images/automated-gather-review/automated-review-gather-cta.png';
 import classes from './automated-review-gather-cta.module.scss';
@@ -95,7 +96,7 @@ export const AutomatedReviewGatherCTA: FC = () => {
         <div className={classes.overlay}></div>
         <div className="container">
           <div className="row">
-            <div className={['col-md-9 col-12', classes.automatedReviewGatherCTAContainer].join(' ')}>
+            <div className={clx('col-md-9 col-12', classes.automatedReviewGatherCTAContainer)}>
               <h2>
                 Szeretnéd, ha minden héten újabb és újabb értékes ügyfélvéleménnyel gazdagodna a céged?
                 <p>Beszéljük meg, hogyan érheted ezt el folyamatos erőfeszítés nélkül.</p>

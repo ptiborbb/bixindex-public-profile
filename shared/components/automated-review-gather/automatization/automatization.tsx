@@ -1,4 +1,5 @@
 import CheckIcon from '@material-ui/icons/Check';
+import clx from 'classnames';
 import React, { FC } from 'react';
 import bixStartStep1 from '../../../../public/images/automated-gather-review/bix-start-step-1.png';
 import bixStartStep2 from '../../../../public/images/automated-gather-review/bix-start-step-2.png';
@@ -27,7 +28,7 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
             </SectionSubHeading>
             <div className="row mt-40 mb-40">
               <div className="col-12 col-md-6">
-                <div className={[classes.automatizationStepCard, classes.automatizationStepCardOne].join(' ')}>
+                <div className={clx(classes.automatizationStepCard, classes.automatizationStepCardOne)}>
                   <h3>A TE feladatod</h3>
                   <div>
                     <h4>1.</h4>
@@ -40,7 +41,7 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
                 </div>
               </div>
               <div className="col-12 col-md-6 mobile-margin-top-30">
-                <div className={[classes.automatizationStepCard].join(' ')}>
+                <div className={clx(classes.automatizationStepCard)}>
                   <h3>A MI feladatunk</h3>
                   <div>
                     <h4>1.</h4>
@@ -63,7 +64,7 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
               </div>
             </div>
             <div className="row mt-20 mb-40">
-              <div className={['col-12 col-md-6', classes.popularAdvantages].join(' ')}>
+              <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
                 <div>
                   <CheckIcon />
                   <span>Folyamatos törődést jelent a meglévő ügyfelekkel</span>
@@ -73,7 +74,7 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
                   <span>Azonnali beavatkozási lehetőség lesz a kezedben</span>
                 </div>
               </div>
-              <div className={['col-12 col-md-6', classes.popularAdvantages].join(' ')}>
+              <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
                 <div style={{ justifyContent: 'flex-start' }}>
                   <CheckIcon />
                   <span>Tűpontos (és hiteles) ügyfélvisszajelzéseket kapsz</span>
@@ -94,7 +95,7 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
         </div>
       </div>
       <div className="row" style={{ marginTop: '100px' }}>
-        <div className={['col-12 col-md-6', classes.automatizationStepDetail].join(' ')}>
+        <div className={clx('col-12 col-md-6', classes.automatizationStepDetail)}>
           <h3>#2 lépés: Folyamatos értékelések</h3>
           <p>A folyamatos értékelések két pillérre épülnek</p>
           <h4>1. Új értékelések bekérése havonta</h4>
@@ -111,15 +112,15 @@ export const Automatization: FC<IAutomatizationProps> = ({ id }) => (
             <span className="hashtag-color">#minicrm</span>
           </p>
         </div>
-        <div className={['col-12 col-md-6 mobile-margin-top-30', classes.automatizonStepDetailImage].join(' ')}>
+        <div className={clx('col-12 col-md-6 mobile-margin-top-30', classes.automatizonStepDetailImage)}>
           <img src={bixStartStep1} alt="bix-start-lépés-1" />
         </div>
       </div>
       <div className="row" style={{ marginTop: '60px' }}>
-        <div className={['col-12 col-md-6 mobile-margin-top-30', classes.automatizonStepDetailImage].join(' ')}>
+        <div className={clx('col-12 col-md-6 mobile-margin-top-30', classes.automatizonStepDetailImage)}>
           <img src={bixStartStep2} alt="bix-start-lépés-1" />
         </div>
-        <div className={['col-12 col-md-6 mobile-margin-top-30', classes.automatizationStepDetail].join(' ')}>
+        <div className={clx('col-12 col-md-6 mobile-margin-top-30', classes.automatizationStepDetail)}>
           <h4>2. A három hónapnál régebben értékelt ügyfelek &quot;újrakérdezése&quot;</h4>
           <p>
             Ez a funkció különösen értékes, hiszen frissen tartja az ügyfélállistádat, folyamatos kapcsolatot tart a

@@ -1,10 +1,11 @@
+import clx from 'classnames';
 import React, { FC } from 'react';
 import ceoPicture from '../../../../public/images/leader-report/ceo-picture.png';
 import marketingPicture from '../../../../public/images/leader-report/marketing-picture.png';
 import retailerPicture from '../../../../public/images/leader-report/retailer-picture.png';
 import { SectionHeading } from '../../heading/section-heading/section-heading';
 import { SectionSubHeading } from '../../heading/section-sub-heading/section-sub-heading';
-import classes from './user-types.module.css';
+import classes from './user-types.module.scss';
 
 interface IUserTypesProps {
   id: string;
@@ -22,7 +23,7 @@ export const UserTypes: FC<IUserTypesProps> = ({ id }) => (
         </div>
       </div>
       <div className="row mt-96">
-        <div className={['col-12 col-md-4 text-center', classes.userType].join(' ')}>
+        <div className={clx('col-12 col-md-4 text-center', classes.userType)}>
           <img src={marketingPicture} alt="marketinges" />
           <h5 className="mt-32">Marketinges</h5>
           <p className="mt-16">Kezeli a felületet</p>
@@ -31,13 +32,13 @@ export const UserTypes: FC<IUserTypesProps> = ({ id }) => (
           <p>Kezeli a profilt</p>
           <p>Kezeli a beépülő modulokat</p>
         </div>
-        <div className={['col-12 col-md-4 text-center mobile-margin-top-50', classes.userType].join(' ')}>
+        <div className={clx('col-12 col-md-4 text-center mobile-margin-top-50', classes.userType)}>
           <img src={ceoPicture} alt="ceo" />
           <h5 className="mt-32">Vezető</h5>
           <p className="mt-16">Minden amit a marketinges tud</p>
           <p>+ vezetői riportot kap</p>
         </div>
-        <div className={['col-12 col-md-4 text-center mobile-margin-top-50', classes.userType].join(' ')}>
+        <div className={clx('col-12 col-md-4 text-center mobile-margin-top-50', classes.userType)}>
           <img src={retailerPicture} alt="beszerzo" />
           <h5 className="mt-32">Beszerző</h5>
           <p className="mt-16">Keres</p>

@@ -1,4 +1,5 @@
 import CheckIcon from '@material-ui/icons/Check';
+import clx from 'classnames';
 import React, { FC } from 'react';
 import handleReviewBanner from '../../../../public/images/automated-gather-review/handle-review-banner.png';
 import { SectionHeading } from '../../heading/section-heading/section-heading';
@@ -25,7 +26,7 @@ export const HandleReviews: FC<IHandleReviewProps> = ({ id }) => (
         </div>
       </div>
       <div className="row mt-40">
-        <div className={['col-12 col-md-6', classes.popularAdvantages].join(' ')}>
+        <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
           <div>
             <CheckIcon />
             <span>Régi ügyfelek újra aktiválása</span>
@@ -35,7 +36,7 @@ export const HandleReviews: FC<IHandleReviewProps> = ({ id }) => (
             <span>Pontos visszajelzés az ügyfelektől</span>
           </div>
         </div>
-        <div className={['col-12 col-md-6', classes.popularAdvantages].join(' ')}>
+        <div className={clx('col-12 col-md-6', classes.popularAdvantages)}>
           <div style={{ justifyContent: 'center' }}>
             <CheckIcon />
             <span>Folyamatos törődés a megrendelőkkel</span>

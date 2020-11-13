@@ -4,7 +4,7 @@ import focus from '../../../../public/images/controlled-data/focus.png';
 import industry from '../../../../public/images/controlled-data/industy.png';
 import { SectionHeading } from '../../heading/section-heading/section-heading';
 import { SectionSubHeading } from '../../heading/section-sub-heading/section-sub-heading';
-import classes from './benchmark.module.css';
+import classes from './benchmark.module.scss';
 
 interface IBenchmarkProps {
   id: string;

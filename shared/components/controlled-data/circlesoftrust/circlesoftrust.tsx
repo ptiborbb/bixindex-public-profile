@@ -4,10 +4,10 @@ import competence from '../../../../public/images/controlled-data/Competence.png
 import concern from '../../../../public/images/controlled-data/Concern.png';
 import consistency from '../../../../public/images/controlled-data/Consistency.png';
 import opacityXLogo from '../../../../public/images/controlled-data/opacity-x-logo.png';
-import classes from './circlesoftrust.module.css';
+import classes from './circlesoftrust.module.scss';
 
 export const CirclesOfTrust: FC = () => (
-  <section className={classes.CirclesOfTrust} style={{ backgroundImage: `url(${opacityXLogo})` }}>
+  <section className={classes.circlesOfTrust} style={{ backgroundImage: `url(${opacityXLogo})` }}>
     <div className={classes.overlay}></div>
     <div className="container">
       <div className="row">
@@ -19,22 +19,22 @@ export const CirclesOfTrust: FC = () => (
         </div>
       </div>
       <div className="row mt-40">
-        <div className={['col-12 col-md-3', classes.CContainer].join(' ')}>
+        <div className={['col-12 col-md-3', classes.ccontainer].join(' ')}>
           <img src={competence} alt="kompetencia" />
           <h4>Competence</h4>
           <p>(Hozzáértés - szakmaiság)</p>
         </div>
-        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.CContainer].join(' ')}>
+        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.ccontainer].join(' ')}>
           <img src={concern} alt="kompetencia" />
           <h4>Care</h4>
           <p>(Törődés)</p>
         </div>
-        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.CContainer].join(' ')}>
+        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.ccontainer].join(' ')}>
           <img src={consistency} alt="kompetencia" />
           <h4>Consistency</h4>
           <p>(Következetesség)</p>
         </div>
-        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.CContainer].join(' ')}>
+        <div className={['col-12 col-md-3 mobile-margin-top-50', classes.ccontainer].join(' ')}>
           <img src={communication} alt="kompetencia" />
           <h4>Communication</h4>
           <p>(Kommunikáció)</p>

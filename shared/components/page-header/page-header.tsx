@@ -8,12 +8,21 @@ interface IPageHeaderProps {
   pageTitleImage: string;
   pageTitle: string;
   mainTitle: string;
-  subTitle: string;
+  subTitle: JSX.Element | string;
+  style?: object;
   children?: unknown;
 }
 
-export const PageHeader: FC<IPageHeaderProps> = ({ id, pageTitleImage, pageTitle, mainTitle, subTitle, children }) => (
-  <section className={['header-1', classes.pageHeader].join(' ')} id={id}>
+export const PageHeader: FC<IPageHeaderProps> = ({
+  id,
+  pageTitleImage,
+  pageTitle,
+  mainTitle,
+  subTitle,
+  style,
+  children,
+}) => (
+  <section className={['header-1', classes.pageHeader].join(' ')} id={id} style={style}>
     <div className={['container', classes.pageHeaderContainer].join(' ')}>
       <div className="row" style={{ width: '100%' }}>
         <div className="col-12">

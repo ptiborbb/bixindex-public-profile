@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import classes from './we-know-exactly.module.css';
+import { SectionHeading } from '../../heading/section-heading/section-heading';
+import classes from './we-know-exactly.module.scss';
 
 export const WeKnowExactly: FC = () => {
   // state = {
@@ -93,7 +94,9 @@ export const WeKnowExactly: FC = () => {
       <div className="container">
         <div className="row">
           <div className="col-12 text-center">
-            <h2>Mi pontosan tudjuk, hogy érdemes kérdezni, Neked annyi a dolgod, hogy jól használd a kimutatást</h2>
+            <SectionHeading>
+              Mi pontosan tudjuk, hogy érdemes kérdezni, Neked annyi a dolgod, hogy jól használd a kimutatást
+            </SectionHeading>
           </div>
         </div>
         <div className="row mt-40">

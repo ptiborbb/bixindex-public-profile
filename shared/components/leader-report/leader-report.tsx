@@ -1,23 +1,26 @@
 import Head from 'next/head';
 import React, { FC } from 'react';
-import pageTitleImage from '../../assets/images/home/icon-report.png';
+import pageTitleImage from '../../../public/images/home/icon-report.png';
+import { CallToAction } from '../controlled-data/call-to-action/call-to-action';
+import { PageFrame } from '../page-frame/page-frame';
 import { PageHeader } from '../page-header/page-header';
 import { BixSystem } from './bix-system/bix-system';
 import { LeaderReportExtension } from './leader-report-extension/leader-report-extension';
 import { LeaderReportInformation } from './leader-report-information/leader-report-information';
+import classes from './leader-report.module.scss';
 import { UserTypes } from './user-types/user-types';
 
 export const LeaderReport: FC = () => {
   const pageTitle = 'Vezetői Riport';
   return (
-    <div>
+    <div className={classes.container}>
       <Head>
         <title>{pageTitle} - BIX - Cégek, akikkel nyugodtan dolgozhatsz</title>
         <meta name="description" content="Tudd meg kinek és miért érték a BIX!" />
         <meta property="og:title" content="Vezetői Riport - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
         <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
       </Head>
-      <div>
+      <PageFrame>
         <PageHeader
           id="leaderReportHeader"
           pageTitle={pageTitle}
@@ -28,14 +31,14 @@ export const LeaderReport: FC = () => {
         <BixSystem />
         <LeaderReportInformation id="leaderReportInformation" />
         <LeaderReportExtension />
-        {/* <CallToAction
+        <CallToAction
           title="Szeretném minden hónapban tudni, mennyire elégedettek az ügyfeleim!"
           buttonText="Megrendelem a BIX-et"
           buttonLink="/elofizetes"
-        /> */}
+        />
         <UserTypes id="userTypes" />
         {/* <LeaderReportCTA /> */}
-      </div>
+      </PageFrame>
     </div>
   );
 };

@@ -1,0 +1,22 @@
+.dropwdownContainer {
+  a {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  .upperMenuItems {
+    padding: 15px;
+    h4 {
+      margin-top: 0;
+    }
+  }
+  .lowerMenuItems {
+    border-top: 1px solid #e5e5e5;
+    background-color: #f9f9f9;
+    padding: 15px;
+    a {
+      color: #aa565a !important;
+      font-size: 0.75rem;
+    }
+  }
+}

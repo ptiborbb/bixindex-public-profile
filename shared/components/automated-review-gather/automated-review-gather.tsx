@@ -24,19 +24,17 @@ export const AutomatedReviewGather: FC = () => {
           <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
         </Head>
         <PageFrame>
-          <div>
-            <PageHeader
-              id="automatedReviewHeader"
-              pageTitle={pageTitle}
-              pageTitleImage={pageTitleImage}
-              mainTitle="Tudd minden pillanatban, mit gondolnak rólad az ügyfeleid - extra erőfeszítés nélkül"
-              subTitle="A kisvállalkozások ritkán, a nagyobb cégek rendszeresen mérik az ügyfeleik elégedettségét. A BIX-et használó okos vállalatok folyamatosan."
-            />
-            <PartnerList id="partnerList" />
-            <Automatization id="automatization" />
-            <HandleReviews id="handleReviews" />
-            <AutomatedReviewGatherCTA />
-          </div>
+          <PageHeader
+            id="automatedReviewHeader"
+            pageTitle={pageTitle}
+            pageTitleImage={pageTitleImage}
+            mainTitle="Tudd minden pillanatban, mit gondolnak rólad az ügyfeleid - extra erőfeszítés nélkül"
+            subTitle="A kisvállalkozások ritkán, a nagyobb cégek rendszeresen mérik az ügyfeleik elégedettségét. A BIX-et használó okos vállalatok folyamatosan."
+          />
+          <PartnerList id="partnerList" />
+          <Automatization id="automatization" />
+          <HandleReviews id="handleReviews" />
+          <AutomatedReviewGatherCTA />
         </PageFrame>
       </div>
     </>

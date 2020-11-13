@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import BIXSystemImage from '../../../../public/images/leader-report/bix-calendar.png';
-import classes from './bix-system.module.css';
+import classes from './bix-system.module.scss';
 
 export const BixSystem: FC = () => (
   <section className={classes.bixSystem}>

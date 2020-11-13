@@ -1,0 +1,12 @@
+.popularAdvantage {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  font-size: 14px;
+  svg {
+    display: inline-block;
+    color: #28bd52;
+    margin-right: 15px;
+    max-height: 1em !important;
+  }
+}
