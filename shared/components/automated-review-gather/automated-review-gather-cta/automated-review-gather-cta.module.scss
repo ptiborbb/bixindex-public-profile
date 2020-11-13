@@ -1,0 +1,74 @@
+.automatedReviewGatherCTA {
+  padding: 80px 0;
+  position: relative;
+  color: #fff !important;
+
+  h2 {
+    font-size: 2em;
+    font-weight: 400;
+    p {
+      font-size: 0.8em;
+      font-weight: 300;
+      margin-top: 20px;
+    }
+  }
+
+  img {
+    max-height: 300px;
+  }
+}
+
+.overlay {
+  background: linear-gradient(75.1deg, #054f6b 0%, #28bd9c 100%);
+  transform: rotate(-180deg);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: -3;
+}
+
+.automatedReviewGatherCTAContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 5%;
+}
+
+.AutomatedReviewGatherContainer {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex: 5;
+  }
+
+  button {
+    margin-left: 40px;
+    flex: 3;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .automatedReviewGatherContainer {
+    flex-wrap: wrap;
+    input,
+    button {
+      flex: unset;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+  .automatedReviewGatherCTA {
+    h2 {
+      font-size: 2em;
+    }
+    img {
+      margin-top: 50px;
+    }
+  }
+}

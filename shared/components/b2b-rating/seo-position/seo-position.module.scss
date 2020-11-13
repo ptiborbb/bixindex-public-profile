@@ -1,0 +1,19 @@
+.seoPosotionContainer {
+  background-color: #ffffff;
+
+  .seoPosition {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .seoPositionText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h3 {
+      font-size: 32px;
+      font-weight: 600;
+    }
+  }
+}

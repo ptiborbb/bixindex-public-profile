@@ -1,0 +1,55 @@
+.reviewDescription {
+  padding: 80px 0;
+  background-color: #ffffff;
+
+  p {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6rem;
+  }
+
+  .reviewDescriptionCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    border: 1px solid #eee;
+    padding: 30px 0;
+    // width: 80%;
+    img {
+      max-height: 70px;
+    }
+
+    h4 {
+      color: #5e5e5e;
+      font-weight: 500;
+      font-size: 1.25em;
+    }
+  }
+
+  .popularAdvantages {
+    margin-top: 30px;
+
+    h5 {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    div {
+      margin-bottom: 20px;
+    }
+  }
+
+  .leadParagraph {
+    font-size: 2.5em;
+  }
+
+  @media screen and (max-width: 578px) {
+    .leadParagraph {
+      font-size: 2em;
+    }
+  }
+}
