@@ -1,0 +1,80 @@
+.leaderReportInformation {
+  padding: 80px 0;
+  background-color: #ffffff;
+
+  .popularAdvantages {
+    & > div {
+      display: flex;
+      margin-bottom: 20px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    & > div > span {
+      width: 65%;
+      text-align: left;
+    }
+
+    & > div svg,
+    .leaderReportContent div svg {
+      display: inline-block;
+      color: #28bd52;
+      margin-right: 15px;
+    }
+  }
+}
+
+.leaderReportInformationPiece {
+  img {
+    max-height: 60px;
+    margin-bottom: 30px;
+  }
+  h5 {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+
+.leaderReportContent {
+  h3 {
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 48px;
+  }
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+}
+
+.leaderReportImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .leaderReportInformation .popularAdvantages > div {
+    justify-content: center;
+  }
+  .leaderReportInformation .popularAdvantages > div > span {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .leaderReportInformation .popularAdvantages > div > span {
+    width: 65%;
+  }
+  .leaderReportInformation .popularAdvantages > div {
+    justify-content: center !important;
+  }
+  .leaderReportInformation .fs-32 {
+    font-size: 23px !important;
+  }
+}
