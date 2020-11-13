@@ -37,7 +37,8 @@
       }
     },
     "COOKIE_CONSENT": "This website uses cookies to enhance the user experience.",
-    "ACCEPT_COOKIES": "I understand"
+    "ACCEPT_COOKIES": "I understand",
+    "PAGE_NOT_FOUND": "Page not found"
   },
   "COMPANIES": {
     "TITLE": "Companies",
@@ -710,5 +711,28 @@
     "CONFERENCE": "Conference",
     "MILESTONE": "Milestone",
     "NEW_PRODUCT": "New product"
+  },
+  "PUBLIC_PROFILE": {
+    "PROFILE_NOT_FOUND": "Sorry, we didn't find the requested profile"
+  },
+  "COMPANY_FRAME": {
+    "YEARLY_INCOME": "Yearly revenue",
+    "INCOME_MODAL_TITLE": "Yearly income in the last 3 years (Million HUF)",
+    "EMPLOYEE_MODAL_TITLE": "Employees in the last 3 years",
+    "EMPLOYEE_NUMBER": "Number of employees",
+    "PEOPLE": "people",
+    "TAX_NUMBER": "Tax number",
+    "MAIN_PROFILE": "Main profile",
+    "ADDRESS": "Address",
+    "WEBSITE": "Website",
+    "RELATED_PROFILES": "Related profiles",
+    "PRODUCTS_SERVICES": "Products and services",
+    "CONTACT": "Contact"
+  },
+  "NPS_TEXT": {
+    "PASSIVE": "Passive",
+    "NEGATIVE": "Opposer",
+    "POSITIVE": "Recommender",
+    "NO_NPS": "Did not provide"
   }
 }

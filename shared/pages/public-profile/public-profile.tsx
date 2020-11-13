@@ -16,6 +16,7 @@ import { News } from '../../components/fragments/news/news';
 import { Products } from '../../components/fragments/products/products';
 import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
+import { PageNotFound } from '../../components/page-not-found/page-not-found';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
 import { Rating } from '../rating/rating';
@@ -128,7 +129,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   const {
     publicProfileService,
     state: {
-      publicProfile: { profilePage: clientProfilePage },
+      publicProfile: { profilePage: clientProfilePage, loading },
     },
   } = useApp();
   const [activeFragment, setFragment] = useState('reviews');
@@ -169,7 +170,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     if (!profilePage) {
       return undefined;
     }
-    
+
     switch (activeFragment) {
       case 'reviews':
         return (
@@ -254,7 +255,13 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
           </div>
         </>
       ) : (
-        <CircularProgress className={classes.spinner} />
+        <>
+          {loading ? (
+            <CircularProgress className={classes.spinner} />
+          ) : (
+            <PageNotFound text={t('PUBLIC_PROFILE.PROFILE_NOT_FOUND')} />
+          )}
+        </>
       )}
     </div>
   );
@@ -273,8 +280,9 @@ PublicProfile.getInitialProps = async (ctx) => {
   });
   const alias = ctx.query.companyAlias as string;
   const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  const profilePage = (await bixClient.publicProfile.profile.getProfileByCompany(alias, by)) as ProfilePage;
-
+  const profilePage = (await bixClient.publicProfile.profile
+    .getProfileByCompany(alias, by)
+    .catch((_) => null)) as ProfilePage;
   return {
     profilePage,
   };

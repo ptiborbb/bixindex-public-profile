@@ -8,6 +8,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import React, { FC } from 'react';
 import { useTranslate } from '../../translate.context';
+import { convertLinkToAbsolute } from '../../utils/link-to-absolute';
 import { Chip } from '../chip/chip';
 import { CompanyDetailItem } from '../company-detail-item/company-detail-item';
 import { ContactItem } from '../contact-item/contact-item';
@@ -54,20 +55,23 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
           <div className={classes.companyName}>{profile.name}</div>
           <CompanyDetailItem
             icon={<SupervisorAccountIcon />}
-            label={'Létszám'}
-            value={`${profile.details.employees.value} fő`}
+            label={t('COMPANY_FRAME.EMPLOYEE_NUMBER')}
+            value={`${profile.details.employees.value} ${t('COMPANY_FRAME.PEOPLE')}`}
             change={profile.details.employees.change}
+            modalTitle={t('COMPANY_FRAME.EMPLOYEE_MODAL_TITLE')}
           />
           <CompanyDetailItem
             icon={<AutorenewIcon />}
-            label={'Éves forgalom'}
+            label={t('COMPANY_FRAME.YEARLY_INCOME')}
             value={`${profile.details.yearlyIncome.value.toLocaleString()} HUF`}
-            change={profile.details.yearlyIncome.change}
+            change={profile.details.yearlyIncome.change.toLowerCase()}
+            modalTitle={t('COMPANY_FRAME.INCOME_MODAL_TITLE')}
+            modalChartData={profile.details.revenueHistory}
           />
           {profile?.details?.taxNumber && (
             <CompanyDetailItem
               icon={<AssignmentIcon />}
-              label={'Adószám'}
+              label={t('COMPANY_FRAME.TAX_NUMBER')}
               value={`${profile.details.taxNumber.substring(0, 8)}-${profile.details.taxNumber.substring(
                 8,
                 9,
@@ -75,42 +79,30 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             />
           )}
 
-          <CompanyDetailItem icon={<PlaceIcon />} label={'Cím'} value={profile.details.address} />
+          <CompanyDetailItem icon={<PlaceIcon />} label={t('COMPANY_FRAME.ADDRESS')} value={profile.details.address} />
           <CompanyDetailItem
             icon={<SettingsIcon />}
-            label={'Főprofil'}
+            label={t('COMPANY_FRAME.MAIN_PROFILE')}
             value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
           />
-          <a
-            href={`${profile.website.startsWith('http') ? '' : '//'}${profile.website}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <CompanyDetailItem icon={<LanguageIcon />} label={'Honlap'} value={profile.website} />
+          <a href={convertLinkToAbsolute(profile.website)} target="_blank" rel="noreferrer">
+            <CompanyDetailItem icon={<LanguageIcon />} label={t('COMPANY_FRAME.WEBSITE')} value={profile.website} />
           </a>
-          <CompanyDetailItem icon={<AssignmentIndIcon />} label={'Kapcsolódó profilok'} value={''} />
+          <CompanyDetailItem icon={<AssignmentIndIcon />} label={t('COMPANY_FRAME.RELATED_PROFILES')} value={''} />
           {/* TODO: kapcsolódó profilok listáját bekötni */}
           <div>
             {profile.fb && (
-              <a href={`${profile.fb.startsWith('http') ? '' : '//'}${profile.fb}`} target="_blank" rel="noreferrer">
+              <a href={convertLinkToAbsolute(profile.fb)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'facebook'} />
               </a>
             )}
             {profile.insta && (
-              <a
-                href={`${profile.insta.startsWith('http') ? '' : '//'}${profile.insta}`}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={convertLinkToAbsolute(profile.insta)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'insta'} />
               </a>
             )}
             {profile.linkedin && (
-              <a
-                href={`${profile.linkedin.startsWith('http') ? '' : '//'}${profile.linkedin}`}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={convertLinkToAbsolute(profile.linkedin)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'linkedin'} />
               </a>
             )}
@@ -118,7 +110,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
 
           <div className={classes.separator}></div>
 
-          <div className={classes.blockLabel}>Termékek és szolgáltatások</div>
+          <div className={classes.blockLabel}>{t('COMPANY_FRAME.PRODUCTS_SERVICES')}</div>
 
           <div className={classes.chipBlock}>
             {productsAndServices.map((product, i) => (
@@ -128,7 +120,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
 
           <div className={classes.separator}></div>
 
-          <div className={classes.blockLabel}>Kapcsolattartó</div>
+          <div className={classes.blockLabel}>{t('COMPANY_FRAME.CONTACT')}</div>
 
           {profile.contacts.map((contact, i) => (
             <ContactItem
