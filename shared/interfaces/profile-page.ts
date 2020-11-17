@@ -1,4 +1,4 @@
-import { ECompanyTypes } from '@codingsans/bixindex-common';
+import { ECompanyTypes, IUser } from '@codingsans/bixindex-common';
 
 export interface RatingItem {
   name: string;
@@ -10,9 +10,8 @@ export interface RatingItem {
   negative?: string;
   summary?: string;
   reply: {
-    replierUser: string;
+    user: Pick<IUser, "id" | "image" | "name">;
     replyText: string;
-    image: string;
   }
 }
 
