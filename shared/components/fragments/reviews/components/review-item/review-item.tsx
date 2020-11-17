@@ -71,7 +71,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
         {rating.negative}
       </div>
-      {rating.reply && rating.reply.replierUser && (
+      {rating?.reply?.user?.name && (
         <>
           <span className="d-flex align-items-center mb-2">
             <QuestionAnswer />
@@ -79,9 +79,9 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
           </span>
           <Divider />
           <div className="d-flex mt-2">
-            <Avatar src={rating.reply.image} />
+            <Avatar src={rating.reply.user.image} />
             <div className="d-flex flex-column ml-2">
-              <span className="font-weight-bold mt-1 mb-4">{rating.reply.replierUser}</span>
+              <span className="font-weight-bold mt-1 mb-4">{rating.reply.user.name}</span>
               <span>{rating.reply.replyText}</span>
             </div>
           </div>
