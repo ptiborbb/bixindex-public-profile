@@ -2,7 +2,7 @@ import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/prof
 import { Button, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import GradeIcon from '@material-ui/icons/Grade';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import quoteMarkBg from '../../../public/images/quote-mark-bg.png';
 import { useTranslate } from '../../translate.context';
 import classes from './profile-list-item.module.scss';
@@ -13,14 +13,26 @@ interface ProfileListItemProps {
 
 export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
   const { t } = useTranslate();
+
+  const profileUrl = useMemo(() => {
+    if (profile.profile.isMainProfile) {
+      return `/bix-profil/${profile.company.companyAlias}`;
+    } else {
+      return `/bix-profil/${profile.profile.id}?by=ID`;
+    }
+  }, [profile]);
+
+  const reviewUrl = useMemo(() => {
+    if (profile.profile.isMainProfile) {
+      return `/bix-profil/${profile.company.companyAlias}/ertekeles/${profile.defaultFormID}`;
+    } else {
+      return `/bix-profil/${profile.profile.id}/ertekeles/${profile.defaultFormID}?by=ID`;
+    }
+  }, [profile]);
+
   return (
     <div className={classes.profileListItem}>
-      <a
-        href={`/bix-profil/${profile.company.companyAlias}`}
-        target="_blank"
-        rel="noreferrer"
-        className={classes.leftCorner}
-      >
+      <a href={profileUrl} target="_blank" rel="noreferrer" className={classes.leftCorner}>
         <div className={classes.header}>
           <div className={classes.logo}>
             <img alt={profile.profile.name} src={profile.profile.logo || `https://via.placeholder.com/70`} />
@@ -100,17 +112,12 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
       </a>
       <div className={classes.rightCorner}>
         <div className={classes.writeReview}>
-          <a
-            href={`/bix-profil/${profile.company.companyAlias}/ertekeles/${profile.defaultFormID}`}
-            target="_blank"
-            rel="noreferrer"
-            className={classes.profileListItem}
-          >
+          <a href={reviewUrl} target="_blank" rel="noreferrer" className={classes.profileListItem}>
             <Button endIcon={<Icon>edit</Icon>}>{t('COMPANY_SEARCH.WRITE_REVIEW')}</Button>
           </a>
         </div>
         <div className={classes.goBixProfil}>
-          <a href={`/bix-profil/${profile.company.companyAlias}`} target="_blank" rel="noreferrer">
+          <a href={profileUrl} target="_blank" rel="noreferrer">
             <Button variant="text" color="default" endIcon={<Icon>person</Icon>}>
               {t('COMPANY_SEARCH.BIX_PROFILE')}
             </Button>

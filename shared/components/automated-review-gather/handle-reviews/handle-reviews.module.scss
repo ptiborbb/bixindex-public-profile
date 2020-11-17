@@ -1,0 +1,19 @@
+.handleReviews {
+  padding: 40px 0;
+  background-color: #ffffff;
+
+  .popularAdvantages {
+    & > div {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .handleReviews .popularAdvantages > div > span {
+    width: 65%;
+  }
+  .handleReviews .popularAdvantages > div {
+    justify-content: center !important;
+  }
+}
