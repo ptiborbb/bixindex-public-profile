@@ -9,6 +9,11 @@ export interface RatingItem {
   positive?: string;
   negative?: string;
   summary?: string;
+  reply: {
+    replierUser: string;
+    replyText: string;
+    image: string;
+  }
 }
 
 export interface ProfilePage {
