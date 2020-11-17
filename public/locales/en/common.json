@@ -734,5 +734,8 @@
     "NEGATIVE": "Opposer",
     "POSITIVE": "Recommender",
     "NO_NPS": "Did not provide"
+  },
+  "REVIEW_ITEM": {
+    "REPLY": "Reply"
   }
 }
