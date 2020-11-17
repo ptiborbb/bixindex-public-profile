@@ -6,18 +6,17 @@ import { FC, useState } from 'react';
 import * as Yup from 'yup';
 import classes from './company-search.module.scss';
 
-interface CompanySearchProps {}
+interface ISearchTextFormValues {
+  text: string;
+}
 
-export const CompanySearch: FC<CompanySearchProps> = () => {
+export const CompanySearch: FC = () => {
   const router = useRouter();
   const searchValidationSchema = Yup.object({
     text: Yup.string().required(''),
   });
   const [error] = useState({ isError: false, message: '' });
 
-  interface ISearchTextFormValues {
-    text: string;
-  }
   return (
     <Formik
       initialValues={{
@@ -42,15 +41,6 @@ export const CompanySearch: FC<CompanySearchProps> = () => {
             </Button>
           </div>
         </div>
-        <meta
-          name="description"
-          content="Céginformációk, vélemények. Keress a teljes magyar cégadatbázisban, olvass és írj véleményeket szolgáltatókról, gyártókról, kereskedőkről!"
-        />
-        <meta property="og:title" content="Cégkereső - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
-        <meta
-          property="og:description"
-          content="Találd meg a következő partnered tevékenységi köre, és a vele kapcsolatos üzleti tapasztalatok alapján!"
-        />
       </Form>
     </Formik>
   );
