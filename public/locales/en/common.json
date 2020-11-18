@@ -432,7 +432,7 @@
     "WRITE_REVIEW": "Write review",
     "BIX_PROFILE": "BIX Profile",
     "MAIN_TITLE": "We value your opinion! Seach any domestic company and share your experiences",
-    "SUB_TITLE": "Write reviews about 5 different comapny every week until 10. December, and ",
+    "SUB_TITLE": "Write reviews about 5 different company every week until 10. December, and ",
     "WIN": "win"
   },
   "TOAST": {
@@ -733,7 +733,7 @@
     "PASSIVE": "Passive",
     "NEGATIVE": "Opposer",
     "POSITIVE": "Recommender",
-    "NO_NPS": "Did not provide"
+    "NO_NPS": "-"
   },
   "REVIEW_ITEM": {
     "REPLY": "Reply"
