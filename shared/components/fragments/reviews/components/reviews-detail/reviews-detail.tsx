@@ -37,7 +37,10 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
       </div>
       {opened && (
         <div className={classes.reviewsDetailContent}>
-          <ReviewStats {...stats} />
+          <ReviewStats
+            npsRates={stats.npsRates}
+            index={{ score: stats.index.score, ratingCount, ratings: ratingCountsByValue }}
+          />
         </div>
       )}
 

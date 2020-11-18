@@ -14,9 +14,9 @@ export interface ReviewStatsProps {
   index: {
     score: number;
     ratingCount: number;
-    ratings: Ratings;
+    ratings: number[];
   };
-  indexDetails: {
+  indexDetails?: {
     label: string;
     index: {
       score: number;
@@ -25,7 +25,6 @@ export interface ReviewStatsProps {
     };
   }[];
 
-  tags: string[];
   npsRates: [number, number, number, number, number, number, number, number, number, number];
 }
 
@@ -35,9 +34,9 @@ export const ReviewStats: FC<ReviewStatsProps> = ({ index, indexDetails, npsRate
       <ReviewStat label={'Bizalmi index'} index={index} radius={80} />
 
       <NpsStat npsRates={npsRates} />
-      {indexDetails.map((indexDetail, i) => (
+      {/* {indexDetails.map((indexDetail, i) => (
         <ReviewStat key={i} label={indexDetail.label} index={indexDetail.index} radius={80} />
-      ))}
+      ))} */}
     </div>
   );
 };

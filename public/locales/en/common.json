@@ -737,5 +737,11 @@
   },
   "REVIEW_ITEM": {
     "REPLY": "Reply"
+  },
+  "REVIEW_STAT": {
+    "OUTSTANDING": "Outstading",
+    "GOOD": "Good",
+    "AVERAGE": "Average",
+    "BAD": "Bad"
   }
 }

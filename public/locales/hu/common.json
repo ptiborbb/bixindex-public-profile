@@ -735,5 +735,11 @@
   },
   "REVIEW_ITEM": {
     "REPLY": "Válasz"
+  },
+  "REVIEW_STAT": {
+    "OUTSTANDING": "Kiemelkedő",
+    "GOOD": "Jó",
+    "AVERAGE": "Átlagos",
+    "BAD": "Rossz"
   }
 }
