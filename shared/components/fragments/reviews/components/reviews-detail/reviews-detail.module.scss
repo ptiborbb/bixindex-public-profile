@@ -15,6 +15,16 @@
     cursor: pointer;
   }
 
+  .reviewsDetailContent {
+    .statsFooter {
+      display: flex;
+      justify-content: center;
+      border: 1px solid #d8d8d8;
+      background-color: #fafafa;
+      padding: 2rem;
+    }
+  }
+
   .filterTitle {
     font-size: 20px;
     line-height: 24px;

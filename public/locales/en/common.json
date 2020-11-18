@@ -743,5 +743,8 @@
     "GOOD": "Good",
     "AVERAGE": "Average",
     "BAD": "Bad"
+  },
+  "REVIEW_DETAILS": {
+    "HIDE_SUMMARY": "HIDE SUMMARY"
   }
 }

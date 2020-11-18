@@ -741,5 +741,8 @@
     "GOOD": "Jó",
     "AVERAGE": "Átlagos",
     "BAD": "Rossz"
+  },
+  "REVIEW_DETAILS": {
+    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE"
   }
 }

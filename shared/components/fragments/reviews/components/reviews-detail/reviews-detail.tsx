@@ -1,8 +1,10 @@
 import { IProduct, IService } from '@codingsans/bixindex-common';
+import { Button } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
+import { useTranslate } from '../../../../../translate.context';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import { ReviewItem } from '../review-item/review-item';
 import { ReviewStats, ReviewStatsProps } from '../review-stats/review-stats';
@@ -30,6 +32,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   ratingCountsByValue,
 }) => {
   const [opened, setOpened] = useState(false);
+  const { t } = useTranslate();
   return (
     <div className={classes.reviewsDetail}>
       <div className={classes.reviewsDetailTitle} onClick={() => setOpened(!opened)}>
@@ -41,6 +44,9 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             npsRates={stats.npsRates}
             index={{ score: stats.index.score, ratingCount, ratings: ratingCountsByValue }}
           />
+          <div className={classes.statsFooter}>
+            <Button onClick={() => setOpened(false)}>{t('REVIEW_DETAILS.HIDE_SUMMARY')}</Button>
+          </div>
         </div>
       )}
 
