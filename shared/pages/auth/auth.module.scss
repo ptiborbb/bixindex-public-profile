@@ -6,6 +6,17 @@
   flex-grow: 1;
   min-height: 100vh;
 
+  @mixin container($margin-y: 0) {
+    width: 100%;
+    max-width: 1170px;
+    margin: $margin-y auto;
+    padding: 0 20px;
+  }
+
+  .container {
+    @include container;
+  }
+
   .headerBlock {
     background-image: $bix-bg-gradient;
 

@@ -1,8 +1,14 @@
 @import '../../../styles/variables.scss';
 
-.container {
+@mixin container($margin-y: 0) {
+  width: 100%;
   max-width: 1170px;
-  margin: 0 auto;
+  margin: $margin-y auto;
+  padding: 0 20px;
+}
+
+.container {
+  @include container;
 }
 
 .headerBlock {

@@ -149,7 +149,7 @@ export const Auth: FunctionComponent = () => {
   return (
     <section className={classes.pageWrapper}>
       <div className={classes.headerBlock}>
-        <div className="container">
+        <div className={classes.container}>
           <Header logoPath={logo} />
         </div>
         <div className={classes.divider}></div>
