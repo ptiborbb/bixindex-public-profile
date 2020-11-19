@@ -746,5 +746,10 @@
   },
   "REVIEW_DETAILS": {
     "HIDE_SUMMARY": "HIDE SUMMARY"
+  },
+  "REVIEW_STATS": {
+    "WRITE_REVIEW": "Write review",
+    "DONT_BE_AFRAID": "If you have experience with this company, don't be afraid to share it with others!",
+    "LAST_REVIEW_DATE": "Last review date"
   }
 }

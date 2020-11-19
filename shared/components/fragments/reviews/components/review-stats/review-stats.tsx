@@ -4,6 +4,7 @@ import format from 'date-fns/format';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
+import { useTranslate } from '../../../../../translate.context';
 import { NpsStat } from './nps-stat/nps-stat';
 import { ReviewStat } from './review-stat/review-stat';
 import classes from './review-stats.module.scss';
@@ -45,28 +46,28 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
 }) => {
   const router = useRouter();
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-
+  const { t } = useTranslate();
   return (
     <div className={classes.reviewStats}>
       <ReviewStat label={'Bizalmi index'} index={index} radius={80} />
       <div className={classes.writeReview}>
         <div className={classes.writeReviewHeader}>
-          <Edit /> Értékelés írása
+          <Edit /> {t('REVIEW_STATS.WRITE_REVIEW')}
         </div>
         <div className="d-flex justify-content-between px-5 py-5 align-items-center">
-          <span>Ha korábban már volt üzleti kapcsolatod a céggel, akkor ne félj értékelni!</span>
+          <span>{t('REVIEW_STATS.DONT_BE_AFRAID')}</span>
           <Link
             href={{ pathname: '/bix-profil/[companyAlias]/ertekeles/[companyFormID]', query: { by: by as string } }}
             as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
             passHref
           >
             <a type="button" className={classes.companyWriteReview}>
-              Értékelés írása <Edit className={classes.reviewIcon} />
+              {t('REVIEW_STATS.WRITE_REVIEW')} <Edit className={classes.reviewIcon} />
             </a>
           </Link>
         </div>
         <div className="d-flex justify-content-end pr-5">
-          Legutóbbi értékelés dátuma:{' '}
+          {t('REVIEW_STATS.LAST_REVIEW_DATE')}:
           {lastRating ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}
         </div>
       </div>
