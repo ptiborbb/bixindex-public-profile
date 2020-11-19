@@ -42,6 +42,8 @@ export const Reviews: FC<ReviewsProps> = ({
         ratings={ratings.items}
         ratingCount={ratings.count}
         ratingCountsByValue={ratings.countsByValue}
+        companyAlias={companyAlias}
+        companyFormID={companyFormID}
       />
     </div>
   );

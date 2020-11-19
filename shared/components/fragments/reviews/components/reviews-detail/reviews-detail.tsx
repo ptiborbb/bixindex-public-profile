@@ -19,6 +19,8 @@ interface ReviewsDetailProps {
   ratings: RatingItem[];
   ratingCount: number;
   ratingCountsByValue: number[];
+  companyAlias: string;
+  companyFormID: string;
 }
 
 export const ReviewsDetail: FC<ReviewsDetailProps> = ({
@@ -30,6 +32,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   ratings,
   ratingCount,
   ratingCountsByValue,
+  companyAlias,
+  companyFormID,
 }) => {
   const [opened, setOpened] = useState(false);
   const { t } = useTranslate();
@@ -43,6 +47,9 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
           <ReviewStats
             npsRates={stats.npsRates}
             index={{ score: stats.index.score, ratingCount, ratings: ratingCountsByValue }}
+            lastReview={ratings[0]?.date || '-'}
+            companyAlias={companyAlias}
+            companyFormID={companyFormID}
           />
           <div className={classes.statsFooter}>
             <Button onClick={() => setOpened(false)}>{t('REVIEW_DETAILS.HIDE_SUMMARY')}</Button>

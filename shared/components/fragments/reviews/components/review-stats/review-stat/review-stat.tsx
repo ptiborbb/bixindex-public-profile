@@ -5,7 +5,6 @@ import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfie
 import React, { FC, useMemo } from 'react';
 import { useTranslate } from '../../../../../../translate.context';
 import { ReviewRate } from '../review-rate/review-rate';
-import { Ratings } from '../review-stats';
 import classes from './review-stat.module.scss';
 
 export interface ReviewStatProps {
@@ -13,7 +12,7 @@ export interface ReviewStatProps {
   index: {
     score: number;
     ratingCount: number;
-    ratings: Ratings;
+    ratings: number[];
   };
   radius: number;
 }
