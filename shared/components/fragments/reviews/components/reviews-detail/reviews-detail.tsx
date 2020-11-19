@@ -1,4 +1,4 @@
-import { IProduct, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRating, IService } from '@codingsans/bixindex-common';
 import { Button } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import React, { FC, useState } from 'react';
@@ -21,6 +21,7 @@ interface ReviewsDetailProps {
   ratingCountsByValue: number[];
   companyAlias: string;
   companyFormID: string;
+  lastRating: IRating;
 }
 
 export const ReviewsDetail: FC<ReviewsDetailProps> = ({
@@ -34,6 +35,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   ratingCountsByValue,
   companyAlias,
   companyFormID,
+  lastRating,
 }) => {
   const [opened, setOpened] = useState(false);
   const { t } = useTranslate();
@@ -47,9 +49,9 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
           <ReviewStats
             npsRates={stats.npsRates}
             index={{ score: stats.index.score, ratingCount, ratings: ratingCountsByValue }}
-            lastReview={ratings[0]?.date || '-'}
             companyAlias={companyAlias}
             companyFormID={companyFormID}
+            lastRating={lastRating}
           />
           <div className={classes.statsFooter}>
             <Button onClick={() => setOpened(false)}>{t('REVIEW_DETAILS.HIDE_SUMMARY')}</Button>

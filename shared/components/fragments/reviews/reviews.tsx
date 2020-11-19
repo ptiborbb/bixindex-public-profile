@@ -1,3 +1,4 @@
+import { IRating } from '@codingsans/bixindex-common';
 import { FC } from 'react';
 import { RatingItem } from '../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../interfaces/review-filter';
@@ -18,6 +19,7 @@ interface ReviewsProps {
   npsRates: number[];
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
+  lastRating: IRating;
 }
 // TODO missing typings
 
@@ -29,6 +31,7 @@ export const Reviews: FC<ReviewsProps> = ({
   ratings,
   filter,
   filterChanged,
+  lastRating,
 }) => {
   return (
     <div className={classes.reviews}>
@@ -44,6 +47,7 @@ export const Reviews: FC<ReviewsProps> = ({
         ratingCountsByValue={ratings.countsByValue}
         companyAlias={companyAlias}
         companyFormID={companyFormID}
+        lastRating={lastRating}
       />
     </div>
   );

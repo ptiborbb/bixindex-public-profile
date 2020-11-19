@@ -1,3 +1,4 @@
+import { IRating } from '@codingsans/bixindex-common';
 import { Edit } from '@material-ui/icons';
 import format from 'date-fns/format';
 import Link from 'next/link';
@@ -28,19 +29,19 @@ export interface ReviewStatsProps {
       ratings: Ratings;
     };
   }[];
-  lastReview: string;
   npsRates: [number, number, number, number, number, number, number, number, number, number];
   companyAlias: string;
   companyFormID: string;
+  lastRating: IRating;
 }
 
 export const ReviewStats: FC<ReviewStatsProps> = ({
   index,
   indexDetails,
   npsRates,
-  lastReview,
   companyAlias,
   companyFormID,
+  lastRating,
 }) => {
   const router = useRouter();
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
@@ -65,7 +66,8 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
           </Link>
         </div>
         <div className="d-flex justify-content-end pr-5">
-          Legutóbbi értékelés dátuma: {format(new Date(lastReview), 'yyyy.MM.dd. HH:mm')}
+          Legutóbbi értékelés dátuma:{' '}
+          {lastRating ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}
         </div>
       </div>
       <NpsStat npsRates={npsRates} />
