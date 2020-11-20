@@ -157,6 +157,8 @@ export const Auth: FunctionComponent = () => {
       <meta name="description" content="Jelentkezz be a BIX ügyfélkapujába!" />
       <meta property="og:title" content="Bejelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
       <meta property="og:description" content="Jelentkezz be a BIX ügyfélkapujába!" />
+      <meta name="viewport" content="width=800" />
+
       <div className={`container ${classes.pageContent}`}>
         <h1 className={classes.pageTitle}>{t('AUTH.PAGE_TITLE')}</h1>
         <Grid container justify="center" spacing={3}>
