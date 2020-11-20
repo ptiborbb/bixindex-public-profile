@@ -182,6 +182,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
             npsRates={profilePage.npsRates}
             filter={filter}
             filterChanged={setFilter}
+            lastRating={profilePage.lastRating}
           />
         );
       case 'awards':
@@ -200,6 +201,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
             npsRates={profilePage.npsRates}
             filter={filter}
             filterChanged={setFilter}
+            lastRating={profilePage.lastRating}
           />
         );
     }

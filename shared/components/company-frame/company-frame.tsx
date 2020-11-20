@@ -52,7 +52,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
 
         <div className={classes.detailsTitle}>Cégadatok</div>
         <div className={classes.detailsBlock}>
-          <div className={classes.companyName}>{profile.name}</div>
+          <div className={classes.companyName}>{profile.companyName}</div>
           <CompanyDetailItem
             icon={<SupervisorAccountIcon />}
             label={t('COMPANY_FRAME.EMPLOYEE_NUMBER')}

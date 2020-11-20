@@ -1,6 +1,10 @@
-import { FC, useMemo } from 'react';
+import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import React, { FC, useMemo } from 'react';
+import { useTranslate } from '../../../../../../translate.context';
 import { ReviewRate } from '../review-rate/review-rate';
-import { Ratings } from '../review-stats';
 import classes from './review-stat.module.scss';
 
 export interface ReviewStatProps {
@@ -8,12 +12,13 @@ export interface ReviewStatProps {
   index: {
     score: number;
     ratingCount: number;
-    ratings: Ratings;
+    ratings: number[];
   };
   radius: number;
 }
 
 export const ReviewStat: FC<ReviewStatProps> = ({ label, index, radius = 80 }) => {
+  const { t } = useTranslate();
   const circumference = useMemo(() => radius * 2 * Math.PI, []);
   const percent = useMemo(() => index.score * 10, [index.score]);
   const d = useMemo(() => (radius + 2) * 2, [radius]);
@@ -26,7 +31,7 @@ export const ReviewStat: FC<ReviewStatProps> = ({ label, index, radius = 80 }) =
       <div className={classes.reviewLeft}>
         <div className={classes.label}>{label}</div>
         <div className={classes.gauge}>
-          <div className={classes.score}>{index.score}</div>
+          <div className={classes.score}>{index.score.toFixed(2)}</div>
           <svg className={classes.progressRing} width={d} height={d}>
             <circle
               className={classes.progressRingCircle}
@@ -44,10 +49,30 @@ export const ReviewStat: FC<ReviewStatProps> = ({ label, index, radius = 80 }) =
         <div className={classes.ratingCount}>Értékelések száma: {index.ratingCount}</div>
       </div>
       <div className={classes.reviewRight}>
-        <ReviewRate ratingCount={index.ratingCount} rating={index.ratings.excellent} />
-        <ReviewRate ratingCount={index.ratingCount} rating={index.ratings.good} />
-        <ReviewRate ratingCount={index.ratingCount} rating={index.ratings.mediocre} />
-        <ReviewRate ratingCount={index.ratingCount} rating={index.ratings.bad} />
+        <ReviewRate
+          ratingCount={index.ratingCount}
+          rating={index.ratings[4]}
+          emoji={<SentimentVerySatisfiedIcon />}
+          label={t('REVIEW_STAT.OUTSTANDING')}
+        />
+        <ReviewRate
+          ratingCount={index.ratingCount}
+          rating={index.ratings[3]}
+          emoji={<SentimentSatisfiedIcon />}
+          label={t('REVIEW_STAT.GOOD')}
+        />
+        <ReviewRate
+          ratingCount={index.ratingCount}
+          rating={index.ratings[2]}
+          emoji={<SentimentDissatisfiedIcon />}
+          label={t('REVIEW_STAT.AVERAGE')}
+        />
+        <ReviewRate
+          ratingCount={index.ratingCount}
+          rating={index.ratings[1]}
+          emoji={<SentimentVeryDissatisfiedIcon />}
+          label={t('REVIEW_STAT.BAD')}
+        />
       </div>
     </div>
   );

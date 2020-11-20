@@ -1,8 +1,10 @@
-import { IProduct, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRating, IService } from '@codingsans/bixindex-common';
+import { Button } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
+import { useTranslate } from '../../../../../translate.context';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import { ReviewItem } from '../review-item/review-item';
 import { ReviewStats, ReviewStatsProps } from '../review-stats/review-stats';
@@ -17,6 +19,9 @@ interface ReviewsDetailProps {
   ratings: RatingItem[];
   ratingCount: number;
   ratingCountsByValue: number[];
+  companyAlias: string;
+  companyFormID: string;
+  lastRating: IRating;
 }
 
 export const ReviewsDetail: FC<ReviewsDetailProps> = ({
@@ -28,8 +33,12 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   ratings,
   ratingCount,
   ratingCountsByValue,
+  companyAlias,
+  companyFormID,
+  lastRating,
 }) => {
   const [opened, setOpened] = useState(false);
+  const { t } = useTranslate();
   return (
     <div className={classes.reviewsDetail}>
       <div className={classes.reviewsDetailTitle} onClick={() => setOpened(!opened)}>
@@ -37,7 +46,16 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
       </div>
       {opened && (
         <div className={classes.reviewsDetailContent}>
-          <ReviewStats {...stats} />
+          <ReviewStats
+            npsRates={stats.npsRates}
+            index={{ score: stats.index.score, ratingCount, ratings: ratingCountsByValue }}
+            companyAlias={companyAlias}
+            companyFormID={companyFormID}
+            lastRating={lastRating}
+          />
+          <div className={classes.statsFooter}>
+            <Button onClick={() => setOpened(false)}>{t('REVIEW_DETAILS.HIDE_SUMMARY')}</Button>
+          </div>
         </div>
       )}
 

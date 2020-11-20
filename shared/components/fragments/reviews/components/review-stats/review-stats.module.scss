@@ -1,4 +1,26 @@
 @import '../../../../../../styles/variables.scss';
 
 .reviewStats {
+  .writeReview {
+    .writeReviewHeader {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid $grey;
+      padding-left: 2rem;
+    }
+  }
+  .companyWriteReview {
+    background: #f15c5c;
+    border-radius: 3px;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: 0;
+    flex-shrink: 0;
+    margin-left: 3rem;
+    .reviewIcon {
+      margin-left: 0.5rem;
+    }
+  }
 }

@@ -735,5 +735,19 @@
   },
   "REVIEW_ITEM": {
     "REPLY": "Válasz"
+  },
+  "REVIEW_STAT": {
+    "OUTSTANDING": "Kiemelkedő",
+    "GOOD": "Jó",
+    "AVERAGE": "Átlagos",
+    "BAD": "Rossz"
+  },
+  "REVIEW_DETAILS": {
+    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE"
+  },
+  "REVIEW_STATS": {
+    "WRITE_REVIEW": "Értékelés írása",
+    "DONT_BE_AFRAID": "Ha korábban már volt üzleti kapcsolatod a céggel, akkor ne félj értékelni!",
+    "LAST_REVIEW_DATE": "Legutóbbi értékelés dátuma"
   }
 }
