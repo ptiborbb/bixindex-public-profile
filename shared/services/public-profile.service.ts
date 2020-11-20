@@ -1,11 +1,9 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
-import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
 import {
   getProfiles,
   getProfilesFail,
-  getProfilesPartial,
   getProfilesSuccess,
   resetProfileList,
 } from '../pages/profile-list/store/actions';
@@ -38,30 +36,19 @@ export const publicProfileServiceFactory = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>, // TODO missing typings
 ): IPublicProfileService => {
-  let searchProfilesByNameMutex: string | null = null;
   return {
     searchProfilesByName: async (page: number, rowsPerPage: number, searchText: string) => {
       const sessionId = Math.random().toString(36).substr(2, 9);
-      searchProfilesByNameMutex = sessionId;
       dispatch(getProfiles({ page, rowsPerPage, sessionId, searchText }));
 
       try {
-        for (let i = 0; i < rowsPerPage; i++) {
-          if (searchProfilesByNameMutex !== sessionId) {
-            break;
-          }
-          const profileList = await bixClient.publicProfile.profile.searchProfilesByName({
-            filter: searchText,
-            page: (page - 1) * rowsPerPage + i + 1,
-            pageSize: 1,
-            sort: '',
-          });
-          dispatch(getProfilesPartial({ ...(profileList as { items: IProfileSummary[]; count: number }), sessionId }));
-          if (!profileList.items.length) {
-            break;
-          }
-        }
-        dispatch(getProfilesSuccess({ sessionId }));
+        const { items, count } = await bixClient.publicProfile.profile.searchProfilesByName({
+          filter: searchText,
+          page: page,
+          pageSize: rowsPerPage,
+          sort: '',
+        });
+        dispatch(getProfilesSuccess({ items, count, sessionId }));
       } catch (error) {
         dispatch(getProfilesFail({ error, sessionId }));
       }

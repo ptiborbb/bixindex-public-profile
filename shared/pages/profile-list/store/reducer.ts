@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getProfiles, getProfilesFail, getProfilesPartial, getProfilesSuccess, resetProfileList } from './actions';
+import { getProfiles, getProfilesFail, getProfilesSuccess, resetProfileList } from './actions';
 import { initialProfileListState } from './state';
 export const profileListReducer = createReducer(initialProfileListState, (builder) => {
   builder
@@ -14,14 +14,10 @@ export const profileListReducer = createReducer(initialProfileListState, (builde
         state.searchText = action.payload.searchText;
       }
     })
-    .addCase(getProfilesPartial, (state, action) => {
+    .addCase(getProfilesSuccess, (state, action) => {
       if (action.payload.sessionId === state.sessionId) {
         state.profiles = [...(state.profiles || []), ...action.payload.items];
         state.count = action.payload.count;
-      }
-    })
-    .addCase(getProfilesSuccess, (state, action) => {
-      if (action.payload.sessionId === state.sessionId) {
         state.loading = false;
         state.sessionId = null;
       }

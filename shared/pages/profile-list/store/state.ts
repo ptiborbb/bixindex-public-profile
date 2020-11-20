@@ -13,7 +13,7 @@ export interface IProfileListState {
 export const initialProfileListState: IProfileListState = {
   profiles: null,
   page: 1,
-  rowsPerPage: 1,
+  rowsPerPage: 50,
   count: null,
   loading: false,
   searchText: null,
