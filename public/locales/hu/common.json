@@ -436,7 +436,7 @@
     "WRITE_REVIEW": "Értékelés írása",
     "BIX_PROFILE": "BIX Profil",
     "MAIN_TITLE": "Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!",
-    "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten november 20-ig, és ",
+    "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten december 10-ig, és ",
     "WIN": "nyerj"
   },
   "TOAST": {
@@ -731,6 +731,23 @@
     "NEGATIVE": "Ellenző",
     "PASSIVE": "Passzív",
     "POSITIVE": "Pozitív",
-    "NO_NPS": "Nem adott"
+    "NO_NPS": "-"
+  },
+  "REVIEW_ITEM": {
+    "REPLY": "Válasz"
+  },
+  "REVIEW_STAT": {
+    "OUTSTANDING": "Kiemelkedő",
+    "GOOD": "Jó",
+    "AVERAGE": "Átlagos",
+    "BAD": "Rossz"
+  },
+  "REVIEW_DETAILS": {
+    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE"
+  },
+  "REVIEW_STATS": {
+    "WRITE_REVIEW": "Értékelés írása",
+    "DONT_BE_AFRAID": "Ha korábban már volt üzleti kapcsolatod a céggel, akkor ne félj értékelni!",
+    "LAST_REVIEW_DATE": "Legutóbbi értékelés dátuma"
   }
 }

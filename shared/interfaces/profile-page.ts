@@ -1,4 +1,4 @@
-import { ECompanyTypes } from '@codingsans/bixindex-common';
+import { ECompanyTypes, IRating, IUser } from '@codingsans/bixindex-common';
 
 export interface RatingItem {
   name: string;
@@ -9,6 +9,10 @@ export interface RatingItem {
   positive?: string;
   negative?: string;
   summary?: string;
+  reply: {
+    user: Pick<IUser, "id" | "image" | "name">;
+    replyText: string;
+  }
 }
 
 export interface ProfilePage {
@@ -95,4 +99,5 @@ export interface ProfilePage {
     ];
   };
   npsRates: number[];
+  lastRating: IRating;
 }

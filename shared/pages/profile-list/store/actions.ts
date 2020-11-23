@@ -12,10 +12,9 @@ export enum EProfileListActionTypes {
 export const getProfiles = createAction<{ page: number; rowsPerPage: number; searchText: string; sessionId: string }>(
   EProfileListActionTypes.GET_PROFILE_LIST,
 );
-export const getProfilesPartial = createAction<{ items: IProfileSummary[]; count: number; sessionId: string }>(
-  EProfileListActionTypes.GET_PROFILE_LIST_PARTIAL,
+export const getProfilesSuccess = createAction<{ items: IProfileSummary[]; count: number; sessionId: string }>(
+  EProfileListActionTypes.GET_PROFILE_LIST_SUCCESS,
 );
-export const getProfilesSuccess = createAction<{ sessionId: string }>(EProfileListActionTypes.GET_PROFILE_LIST_SUCCESS);
 export const getProfilesFail = createAction<{ error: unknown; sessionId: string }>(
   EProfileListActionTypes.GET_PROFILE_LIST_FAIL,
 );
