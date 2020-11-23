@@ -731,7 +731,7 @@
     "NEGATIVE": "Ellenző",
     "PASSIVE": "Passzív",
     "POSITIVE": "Pozitív",
-    "NO_NPS": "Nem adott"
+    "NO_NPS": "-"
   },
   "REVIEW_ITEM": {
     "REPLY": "Válasz"
