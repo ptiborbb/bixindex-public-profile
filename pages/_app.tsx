@@ -13,11 +13,12 @@ import { Integrations } from '@sentry/tracing';
 import { AxiosError, AxiosResponse } from 'axios';
 import App, { AppProps } from 'next/app';
 import { SnackbarProvider } from 'notistack';
-import { useMemo, useReducer } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import CookieConsent from 'react-cookie-consent';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
+import { DialogServiceProvider } from '../shared/dialog.context';
 import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 import { ratingServiceFactory } from '../shared/services/rating.service';
@@ -115,7 +116,9 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
           <ContextDevTool context={AppContext} id="bixPublicProfile" displayName="Bix Public Profile" />
           <TranslateContext.Provider value={{ i18n, t }}>
             <SnackbarProvider maxSnack={10} anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-              <Component {...pageProps} />
+              <DialogServiceProvider>
+                <Component {...pageProps} />
+              </DialogServiceProvider>
               <CookieConsent
                 buttonText={t('COMMON.ACCEPT_COOKIES')}
                 ButtonComponent={Button}

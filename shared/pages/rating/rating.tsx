@@ -11,29 +11,34 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
-import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import { Info, LiveHelp, ThumbDown, ThumbUp } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import * as Yup from 'yup';
+import badIcon from '../../../public/images/smiley/bad.png';
+import disappointedIcon from '../../../public/images/smiley/disappointed.png';
+import excellentIcon from '../../../public/images/smiley/excellent.png';
+import extraIcon from '../../../public/images/smiley/extra.png';
+import goodIcon from '../../../public/images/smiley/good.png';
+import mediocreIcon from '../../../public/images/smiley/mediocre.png';
 import { useApp } from '../../app.context';
+import { DialogType } from '../../components/bix-dialog/bix-dialog';
 import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
+import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
 import { useTranslate } from '../../translate.context';
 import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
+  const dialog = useDialog();
   const { t, i18n } = useTranslate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
@@ -170,10 +175,12 @@ export const Rating: FC = () => {
             negative: values.negative,
             reference: values.reference,
             visibility: values.visibility,
-            answers: values.answers.map((answer) => ({
-              questionID: answer.id,
-              value: parseFloat(answer.value),
-            })),
+            answers: values.answers
+              .filter((answer) => answer.value !== 'NO_EXPERIENCE')
+              .map((answer) => ({
+                questionID: answer.id,
+                value: parseFloat(answer.value),
+              })),
           };
           await ratingService.submitReview(parsedRating);
         }
@@ -239,22 +246,71 @@ export const Rating: FC = () => {
     },
   ];
 
+  const [negativeDialogShown, setNegativeDialogShown] = useState(false);
+  const [positiveDialogShown, setPositiveDialogShown] = useState(false);
+
   const smileys = [
     {
-      value: '5',
-      icon: <SentimentVeryDissatisfiedIcon />,
+      value: '2.1',
+      icon: <img src={disappointedIcon} className={classes.emoji} />,
+      clickHandler: async () => {
+        !negativeDialogShown &&
+          (await dialog({
+            variant: DialogType.ALERT,
+            text: (
+              <span>
+                Törekedj az építő kritikára! Értékelj következetesen ezzel
+                <span className="font-weight-bold"> segítve a cégeket,</span> hogy tanulhassanak a legnagyobb hibáikból.
+              </span>
+            ),
+            headerColor: '#C60203',
+            submitButtonLabel: 'Értettem',
+            title: (
+              <span className="text-white d-flex align-items-center">
+                <LiveHelp className="mr-2" /> Ez biztos?
+              </span>
+            ),
+          }).then(() => setNegativeDialogShown(true)));
+      },
     },
     {
-      value: '6.8',
-      icon: <SentimentDissatisfiedIcon />,
+      value: '4.9',
+      icon: <img src={badIcon} className={classes.emoji} />,
     },
     {
-      value: '8.3',
-      icon: <SentimentSatisfiedIcon />,
+      value: '6.6',
+      icon: <img src={mediocreIcon} className={classes.emoji} />,
+    },
+    {
+      value: '8.1',
+      icon: <img src={goodIcon} className={classes.emoji} />,
+    },
+    {
+      value: '9.1',
+      icon: <img src={excellentIcon} className={classes.emoji} />,
     },
     {
       value: '10',
-      icon: <SentimentVerySatisfiedIcon />,
+      icon: <img src={extraIcon} className={classes.emoji} />,
+      clickHandler: async () => {
+        !positiveDialogShown &&
+          (await dialog({
+            variant: DialogType.ALERT,
+            text: (
+              <span>
+                Felelősségteljesen értékelj, mert ha mindent tökéletesre értékelsz elveszed a cégektől a fejlődés
+                lehetőségét és megtéveszted a leendő partnereket!
+              </span>
+            ),
+            headerColor: '#01953F',
+            submitButtonLabel: 'Értettem',
+            title: (
+              <span className="text-white d-flex align-items-center">
+                <LiveHelp className="mr-2" /> Ez biztos?
+              </span>
+            ),
+          }).then(() => setPositiveDialogShown(true)));
+      },
     },
   ];
 
@@ -353,11 +409,33 @@ export const Rating: FC = () => {
                                 {question.text}
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
+                                    <FormControlLabel
+                                      value={'NO_EXPERIENCE'}
+                                      label=""
+                                      control={
+                                        <Radio
+                                          disableRipple
+                                          color="default"
+                                          style={{ borderRadius: '8px' }}
+                                          checkedIcon={
+                                            <span className={`${classes.noExperienceButton} ${classes.checked}`}>
+                                              {t('RATING.NO_EXPERIENCE')}
+                                            </span>
+                                          }
+                                          icon={
+                                            <span className={`${classes.noExperienceButton} ${classes.unchecked}`}>
+                                              {t('RATING.NO_EXPERIENCE')}
+                                            </span>
+                                          }
+                                        />
+                                      }
+                                    />
                                     {smileys.map((option) => (
                                       <FormControlLabel
                                         key={option.value}
                                         value={option.value}
                                         label=""
+                                        onClick={option.clickHandler}
                                         control={<SmileyRadio smiley={option.icon} />}
                                       />
                                     ))}

@@ -476,7 +476,8 @@
     "POLICy_REQUIRED": "Please accept our privacy policy!",
     "PRIVACY_POLICY": "I have read, understood and accept our privacy policy.",
     "INVALID_FORM": "You didn't fill a required field. Please check the form again",
-    "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating."
+    "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating.",
+    "NO_EXPERIENCE": "No experience"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",
