@@ -2,6 +2,7 @@ import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/prof
 import { Button, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import GradeIcon from '@material-ui/icons/Grade';
+import { shuffle } from 'lodash';
 import React, { FC, useMemo } from 'react';
 import quoteMarkBg from '../../../public/images/quote-mark-bg.png';
 import { useTranslate } from '../../translate.context';
@@ -29,6 +30,11 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
       return `/bix-profil/${profile.profile.id}/ertekeles/${profile.defaultFormID}?by=ID`;
     }
   }, [profile]);
+
+  const productsAndServices = useMemo(() => {
+    const joinedList = [...profile.services, ...profile.products];
+    return shuffle(joinedList).slice(0, 4);
+  }, [profile.products, profile.services]);
 
   return (
     <div className={classes.profileListItem}>
@@ -82,14 +88,9 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           </div>
           <div className={classes.products}>
             <div className={classes.productsTitle}>{t('COMPANY_SEARCH.PRODUCTS')}</div>
-            {profile.products.slice(0, 2).map((product) => (
-              <div key={product.id} className={classes.product}>
-                {product.name}
-              </div>
-            ))}
-            {profile.services.slice(0, 2).map((service) => (
-              <div key={service.id} className={classes.product}>
-                {service.name}
+            {productsAndServices.map((productOrService) => (
+              <div key={productOrService.id} className={classes.product}>
+                {productOrService.name}
               </div>
             ))}
           </div>

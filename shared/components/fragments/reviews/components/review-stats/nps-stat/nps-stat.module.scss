@@ -52,15 +52,18 @@
   .npsLine {
     display: flex;
     padding: 1rem 0;
+    margin: 0 1rem;
 
     .npsItem {
       text-align: center;
       flex-grow: 1;
       flex-basis: 0;
+      margin: 0 1px;
 
       .box {
         margin-top: 0.5rem;
         padding: 0.5rem 0;
+        color: white;
       }
     }
   }

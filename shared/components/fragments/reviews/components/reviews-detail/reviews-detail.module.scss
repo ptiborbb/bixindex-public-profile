@@ -12,7 +12,17 @@
     align-items: center;
     color: white;
     padding: 0 2rem;
-    display: none;
+    cursor: pointer;
+  }
+
+  .reviewsDetailContent {
+    .statsFooter {
+      display: flex;
+      justify-content: center;
+      border: 1px solid #d8d8d8;
+      background-color: #fafafa;
+      padding: 2rem;
+    }
   }
 
   .filterTitle {
