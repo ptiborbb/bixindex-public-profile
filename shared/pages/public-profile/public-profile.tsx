@@ -17,6 +17,7 @@ import { Products } from '../../components/fragments/products/products';
 import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
 import { PageNotFound } from '../../components/page-not-found/page-not-found';
+import { useConfig } from '../../config.context';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
 import { Rating } from '../rating/rating';
@@ -46,10 +47,6 @@ const useRatingStructuralData = (profilePage: ProfilePage | null): ReactNode => 
               },
               review: {
                 '@type': 'Review',
-                // itemReviewed: {
-                //   '@type': 'Thing',
-                //   name: 'Service',
-                // },
                 author: { '@type': 'Person', name: profilePage.ratings.items[0].name },
                 datePublished: profilePage.ratings.items[0].date,
                 reviewBody: profilePage.ratings.items[0].summary,
@@ -60,10 +57,8 @@ const useRatingStructuralData = (profilePage: ProfilePage | null): ReactNode => 
         url: profilePage.profile.website,
         address: {
           '@type': 'PostalAddress',
-          // addressCountry: profilePage.profile.details.address,
           streetAddress: profilePage.profile.details.address,
         },
-        // description
       },
     [profilePage],
   );
@@ -86,12 +81,13 @@ type OgMetaProperties = 'og:url' | 'og:type' | 'og:title' | 'og:image' | 'og:des
 type IOgMetaData = [OgMetaProperties, string];
 
 const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
+  const {publicProfileUrl} = useConfig()
   const { asPath, route } = useRouter();
   return useMemo(
     () =>
       profilePage && route === '/bix-profil/[companyAlias]/ertekeles/[companyFormID]'
         ? [
-            ['og:url', process.env.NEXT_PUBLIC_PROFILE_URL ? `${process.env.NEXT_PUBLIC_PROFILE_URL}${asPath}` : ''],
+            ['og:url', publicProfileUrl ? `${publicProfileUrl}${asPath}` : ''],
             ['og:type', 'website'],
             ['og:title', `Jelölt vagyok a Legjobb Ügyfélélmény díjra!`],
             [
@@ -101,7 +97,7 @@ const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
             ['og:image', ogProfileBg],
           ]
         : [
-            ['og:url', process.env.NEXT_PUBLIC_PROFILE_URL ? `${process.env.NEXT_PUBLIC_PROFILE_URL}${asPath}` : ''],
+            ['og:url', publicProfileUrl ? `${publicProfileUrl}${asPath}` : ''],
             ['og:type', 'website'],
             ['og:title', `${profilePage?.profile?.name}: Vélemények, értékelések, céginformációk`],
             [
@@ -270,14 +266,14 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 };
 
 PublicProfile.getInitialProps = async (ctx) => {
-  if (!(process && process.env && process.env.NEXT_PUBLIC_BACKEND_URL) || !ctx.req) {
+  const { backendUrl } = useConfig()
+  if (!(process && process.env && backendUrl) || !ctx.req) {
     return {
       profilePage: null,
     };
   }
-  const bixApiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const bixClient = createBixindexClient({
-    baseURL: bixApiUrl,
+    baseURL: backendUrl,
     responseInterceptors: [],
   });
   const alias = ctx.query.companyAlias as string;

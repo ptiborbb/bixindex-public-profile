@@ -18,6 +18,7 @@ import { ContextDevTool } from 'react-context-devtool';
 import CookieConsent from 'react-cookie-consent';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
+import { useConfig } from '../shared/config.context';
 import { DialogServiceProvider } from '../shared/dialog.context';
 import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
@@ -28,10 +29,11 @@ import { appReducer, initialAppState } from '../store/state';
 import '../styles/globals.scss';
 
 const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element => {
-  if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  const config = useConfig();
+  if (config.sentry.dsn) {
     Sentry.init({
-      enabled: process.env.NEXT_PUBLIC_NODE_ENV === EDevelopmentEnvironments.PROD,
-      dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+      enabled: config.nodeEnv === EDevelopmentEnvironments.PROD,
+      dsn: config.sentry.dsn,
       tracesSampleRate: 1.0,
       integrations: [new Integrations.BrowserTracing()],
     });

@@ -13,6 +13,7 @@ import { useApp } from '../../app.context';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { ProfileListItem } from '../../components/profile-list-item/profile-list-item';
+import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
 import classes from './profile-list.module.scss';
 
@@ -21,6 +22,7 @@ interface ISearchTextFormValues {
 }
 
 export const ProfileList: FC = () => {
+  const { bestUserExperience } = useConfig();
   const { t } = useTranslate();
   const {
     publicProfileService,
@@ -62,10 +64,7 @@ export const ProfileList: FC = () => {
               </Typography>
               <Typography variant="h3" align="center" className={classes.subTitle}>
                 {t('COMPANY_SEARCH.SUB_TITLE')}
-                <a
-                  style={{ textDecoration: 'underline' }}
-                  href={`${process.env.NEXT_PUBLIC_BEST_USER_EXPERIENCE}/nevezd-a-kedvenc-ceged/`}
-                >
+                <a style={{ textDecoration: 'underline' }} href={`${bestUserExperience}/nevezd-a-kedvenc-ceged/`}>
                   {t('COMPANY_SEARCH.WIN')}
                 </a>
                 !

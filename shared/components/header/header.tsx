@@ -5,6 +5,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
 import { FC, MouseEvent, useCallback, useState } from 'react';
 import { useApp } from '../../app.context';
+import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
 import { FunctionsDropdown } from './functions-dropdown/functions-dropdown';
 import classes from './header.module.scss';
@@ -14,6 +15,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ logoPath }) => {
+  const { blogUrl, customerPortalUrl } = useConfig();
   const { t } = useTranslate();
   const {
     state: {
@@ -51,7 +53,7 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
           <Link href="/">
             <div className={classes.link}>{t('HEADER.HOME')}</div>
           </Link>
-          <a href={process.env.NEXT_PUBLIC_BLOG_URL} target="_blank" rel="noreferrer">
+          <a href={blogUrl} target="_blank" rel="noreferrer">
             <span className={classes.link}>{t('HEADER.BLOG')}</span>
           </a>
           <Link href="/cegkereso">
@@ -89,7 +91,7 @@ export const Header: FC<HeaderProps> = ({ logoPath }) => {
         </div>
       </div>
       <div className={classes.cta}>
-        <a target="_blank" rel="noreferrer" href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}`}>
+        <a target="_blank" rel="noreferrer" href={customerPortalUrl}>
           <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
         </a>
       </div>
