@@ -14,6 +14,7 @@ export interface IDialogOptions {
   submitButtonLabel?: string;
   closeButtonLabel?: string;
   headerColor?: string;
+  buttonClasses?: string;
 }
 
 interface IDialogProps extends IDialogOptions {
@@ -32,6 +33,7 @@ export const BixDialog: FC<IDialogProps> = ({
   onSubmit,
   onClose,
   headerColor,
+  buttonClasses,
 }) => {
   const { t } = useTranslate();
 
@@ -50,7 +52,7 @@ export const BixDialog: FC<IDialogProps> = ({
           </Button>
         )}
 
-        <Button onClick={onSubmit} color="primary">
+        <Button onClick={onSubmit} color="primary" className={buttonClasses}>
           {submitButtonLabel || t('DIALOG.BUTTON_OK')}
         </Button>
       </DialogActions>

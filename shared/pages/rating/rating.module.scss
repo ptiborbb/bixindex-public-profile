@@ -20,6 +20,37 @@
   height: 35px;
 }
 
+.dialogConfirmButton {
+  background-color: #2cbe55 !important;
+  width: 132px !important;
+  height: 40px;
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+}
+.tipDivider {
+  position: relative;
+  top: 33px;
+}
+
+.announcementIcon,
+.toolTip {
+  color: #01953f;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.announcementWrapper {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
 .noExperienceButton {
   text-transform: uppercase !important;
   width: 188px;

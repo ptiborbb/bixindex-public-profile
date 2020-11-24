@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Checkbox,
+  Divider,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -11,7 +12,7 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Info, LiveHelp, ThumbDown, ThumbUp } from '@material-ui/icons';
+import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
@@ -263,6 +264,7 @@ export const Rating: FC = () => {
                 <span className="font-weight-bold"> segítve a cégeket,</span> hogy tanulhassanak a legnagyobb hibáikból.
               </span>
             ),
+            buttonClasses: classes.dialogConfirmButton,
             headerColor: '#C60203',
             submitButtonLabel: 'Értettem',
             title: (
@@ -297,11 +299,29 @@ export const Rating: FC = () => {
           (await dialog({
             variant: DialogType.ALERT,
             text: (
-              <span>
-                Felelősségteljesen értékelj, mert ha mindent tökéletesre értékelsz elveszed a cégektől a fejlődés
-                lehetőségét és megtéveszted a leendő partnereket!
-              </span>
+              <>
+                <span className="mb-2">
+                  <span className="font-weight-bold">Felelősségteljesen értékelj,</span> mert ha mindent tökéletesre
+                  értékelsz elveszed a cégektől a fejlődés lehetőségét és
+                  <span className="font-weight-bold"> megtéveszted</span> a leendő partnereket!
+                </span>
+                <Divider className={classes.tipDivider} />
+                <span className="d-flex mt-2">
+                  <span className={`border bg-white ${classes.announcementWrapper}`}>
+                    <Announcement className={classes.announcementIcon} />
+                  </span>
+                  <span className={classes.toolTip}>TIPP</span>
+                </span>
+                <div className="d-flex mt-2 align-items-center">
+                  <img src={extraIcon} className={classes.emoji} />
+                  <span className="ml-3">
+                    Az <span className="font-weight-bold">EXTRA-t</span> csak akkor válaszd, ha úgy gondolod, hogy
+                    <span className="font-weight-bold"> VILÁGSZÍNVONALÚ</span> teljesítményre találtál!
+                  </span>
+                </div>
+              </>
             ),
+            buttonClasses: classes.dialogConfirmButton,
             headerColor: '#01953F',
             submitButtonLabel: 'Értettem',
             title: (
@@ -309,7 +329,7 @@ export const Rating: FC = () => {
                 <LiveHelp className="mr-2" /> Ez biztos?
               </span>
             ),
-          }).then(() => setPositiveDialogShown(true)));
+          }).then(() => setPositiveDialogShown(false)));
       },
     },
   ];
