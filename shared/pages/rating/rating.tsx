@@ -174,6 +174,7 @@ export const Rating: FC = () => {
             summary: values.comment,
             positive: values.positive,
             negative: values.negative,
+            ratedProductOrService: values.ratedProductOrService,
             reference: values.reference,
             visibility: values.visibility,
             answers: values.answers
@@ -216,6 +217,7 @@ export const Rating: FC = () => {
       positive: '',
       negative: '',
       comment: '',
+      ratedProductOrService: '',
       reference: '',
       auth: {
         loginOrRegister: ELoginOrRegister.REGISTER,
@@ -524,8 +526,34 @@ export const Rating: FC = () => {
                       variant="outlined"
                     />
                   </Grid>
+                  {profilePage?.productsAndServices.length > 0 && (
+                    <>
+                      <Divider className={classes.verticalSpacing} />
+                      <Grid item xs={12}>
+                        <Typography className={classes.summary}>{t('RATING.WHICH_PRODUCT')}</Typography>
+                        <Grid container spacing={4}>
+                          <Grid item xs={6}>
+                            <Field
+                              component={TextField}
+                              select
+                              name="ratedProductOrService"
+                              fullWidth
+                              variant="outlined"
+                            >
+                              {profilePage.productsAndServices.map((item) => (
+                                <MenuItem key={item.id} value={item.id}>
+                                  {item.name}
+                                </MenuItem>
+                              ))}
+                            </Field>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </>
+                  )}
+
                   <Grid item xs={12}>
-                    <hr className={classes.verticalSpacing} />
+                    <Divider className={classes.verticalSpacing} />
                   </Grid>
                   {user ? (
                     <>

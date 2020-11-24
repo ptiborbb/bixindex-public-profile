@@ -482,6 +482,7 @@
     "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét",
     "VISIBILITY_INFO": "Itt választhatod ki az értékelésed anonimitásának beállításait.",
     "NO_EXPERIENCE": "Nincs tapasztalatom",
+    "WHICH_PRODUCT": "Kérjük mondja el, a gyártó mely termékeivel/termékcsoportjával szerzett tapasztalatot?",
     "CONFIRM_DIALOG": {
       "ARE_YOU_SURE": "Ez biztos?",
       "I_UNDERSTAND": "Értettem",

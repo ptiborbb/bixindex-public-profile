@@ -478,6 +478,7 @@
     "INVALID_FORM": "You didn't fill a required field. Please check the form again",
     "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating.",
     "NO_EXPERIENCE": "No experience",
+    "WHICH_PRODUCT": "Please tell, which product or service did you have an experience with?",
     "CONFIRM_DIALOG": {
       "ARE_YOU_SURE": "Are you sure?",
       "I_UNDERSTAND": "I understand",
