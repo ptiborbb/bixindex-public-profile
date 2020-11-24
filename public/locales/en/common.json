@@ -41,7 +41,8 @@
     "PAGE_NOT_FOUND": "Page not found",
     "FORM_VALIDATION": {
       "MAX_LENGTH": "Please don't use more characters than {{number}}"
-    }
+    },
+    "GOOGLE_ERROR": "An error occurred during google auth. Please check if cookies are allowed, or use a different authentication method."
   },
   "COMPANIES": {
     "TITLE": "Companies",

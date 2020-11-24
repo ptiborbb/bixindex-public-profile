@@ -42,7 +42,8 @@
     "PAGE_NOT_FOUND": "Az oldal nem található",
     "FORM_VALIDATION": {
       "MAX_LENGTH": "Maximum {{number}} karakter használható."
-    }
+    },
+    "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy."
   },
   "COMPANIES": {
     "TITLE": "Cégek",
