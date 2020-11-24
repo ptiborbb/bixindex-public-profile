@@ -34,6 +34,7 @@ import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
 import { mockForm } from '../../data/mockForm';
 import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
+import { EReviewValues } from '../../enums/review-values';
 import { useTranslate } from '../../translate.context';
 import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
@@ -178,7 +179,7 @@ export const Rating: FC = () => {
             reference: values.reference,
             visibility: values.visibility,
             answers: values.answers
-              .filter((answer) => answer.value !== 'NO_EXPERIENCE')
+              .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
               .map((answer) => ({
                 questionID: answer.id,
                 value: parseFloat(answer.value),
@@ -254,7 +255,7 @@ export const Rating: FC = () => {
 
   const smileys = [
     {
-      value: '2.1',
+      value: EReviewValues.DISAPPOINTED,
       icon: <img src={disappointedIcon} className={classes.emoji} />,
       clickHandler: async () => {
         !negativeDialogShown &&
@@ -279,23 +280,23 @@ export const Rating: FC = () => {
       },
     },
     {
-      value: '4.9',
+      value: EReviewValues.BAD,
       icon: <img src={badIcon} className={classes.emoji} />,
     },
     {
-      value: '6.6',
+      value: EReviewValues.MEDIOCRE,
       icon: <img src={mediocreIcon} className={classes.emoji} />,
     },
     {
-      value: '8.1',
+      value: EReviewValues.GOOD,
       icon: <img src={goodIcon} className={classes.emoji} />,
     },
     {
-      value: '9.1',
+      value: EReviewValues.EXCELLENT,
       icon: <img src={excellentIcon} className={classes.emoji} />,
     },
     {
-      value: '10',
+      value: EReviewValues.EXTRA,
       icon: <img src={extraIcon} className={classes.emoji} />,
       clickHandler: async () => {
         !positiveDialogShown &&
@@ -437,7 +438,7 @@ export const Rating: FC = () => {
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
                                     <FormControlLabel
-                                      value={'NO_EXPERIENCE'}
+                                      value={EReviewValues.NO_EXPERIENCE}
                                       label=""
                                       control={
                                         <Radio
