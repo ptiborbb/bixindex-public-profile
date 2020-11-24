@@ -1022,10 +1022,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codingsans/bixindex-common@1.3.123":
-  version "1.3.123"
-  resolved "https://registry.yarnpkg.com/@codingsans/bixindex-common/-/bixindex-common-1.3.123.tgz#4de3f58aab58a49a3f4ecefee3b0dbecd175ae50"
-  integrity sha512-Qp3RbVsBNbglYdnlW3omRdjT5BdB/aUn5F4MUcJx+gdz6Ut6368uxjkzsa4C3ezKFr2iWtdFvm91jYewwGkz3w==
+"@codingsans/bixindex-common@1.3.125":
+  version "1.3.125"
+  resolved "https://registry.yarnpkg.com/@codingsans/bixindex-common/-/bixindex-common-1.3.125.tgz#414eaa99853080a532d284df44975ef0ed5e2882"
+  integrity sha512-uaoovWSxwYd3pb1sNjnV34BkUlL6MPr0ISgT+sU/KlF5uXyWNdfxEDZRs+ZiW/t2TMf23JDI4MqDEmARuplfzQ==
   dependencies:
     axios "^0.19.2"
     lodash "^4.17.20"
