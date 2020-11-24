@@ -260,16 +260,17 @@ export const Rating: FC = () => {
             variant: DialogType.ALERT,
             text: (
               <span>
-                Törekedj az építő kritikára! Értékelj következetesen ezzel
-                <span className="font-weight-bold"> segítve a cégeket,</span> hogy tanulhassanak a legnagyobb hibáikból.
+                {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_1')}
+                <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_2')}</span>
+                {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_3')}
               </span>
             ),
             buttonClasses: classes.dialogConfirmButton,
             headerColor: '#C60203',
-            submitButtonLabel: 'Értettem',
+            submitButtonLabel: t('RATING.CONFIRM_DIALOG.I_UNDERSTAND'),
             title: (
               <span className="text-white d-flex align-items-center">
-                <LiveHelp className="mr-2" /> Ez biztos?
+                <LiveHelp className="mr-2" /> {t('RATING.CONFIRM_DIALOG.ARE_YOU_SURE')}
               </span>
             ),
           }).then(() => setNegativeDialogShown(true)));
@@ -301,35 +302,39 @@ export const Rating: FC = () => {
             text: (
               <>
                 <span className="mb-2">
-                  <span className="font-weight-bold">Felelősségteljesen értékelj,</span> mert ha mindent tökéletesre
-                  értékelsz elveszed a cégektől a fejlődés lehetőségét és
-                  <span className="font-weight-bold"> megtéveszted</span> a leendő partnereket!
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_1')}</span>
+                  {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_2')}
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_3')}</span>
+                  {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_4')}
                 </span>
                 <Divider className={classes.tipDivider} />
                 <span className="d-flex mt-2">
                   <span className={`border bg-white ${classes.announcementWrapper}`}>
                     <Announcement className={classes.announcementIcon} />
                   </span>
-                  <span className={classes.toolTip}>TIPP</span>
+                  <span className={classes.toolTip}>{t('RATING.CONFIRM_DIALOG.HINT')}</span>
                 </span>
                 <div className="d-flex mt-2 align-items-center">
                   <img src={extraIcon} className={classes.emoji} />
                   <span className="ml-3">
-                    Az <span className="font-weight-bold">EXTRA-t</span> csak akkor válaszd, ha úgy gondolod, hogy
-                    <span className="font-weight-bold"> VILÁGSZÍNVONALÚ</span> teljesítményre találtál!
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_5')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_6')}</span>
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_7')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_8')}</span>
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_9')}
                   </span>
                 </div>
               </>
             ),
             buttonClasses: classes.dialogConfirmButton,
             headerColor: '#01953F',
-            submitButtonLabel: 'Értettem',
+            submitButtonLabel: t('RATING.CONFIRM_DIALOG.I_UNDERSTAND'),
             title: (
               <span className="text-white d-flex align-items-center">
-                <LiveHelp className="mr-2" /> Ez biztos?
+                <LiveHelp className="mr-2" /> {t('RATING.CONFIRM_DIALOG.ARE_YOU_SURE')}
               </span>
             ),
-          }).then(() => setPositiveDialogShown(false)));
+          }).then(() => setPositiveDialogShown(true)));
       },
     },
   ];

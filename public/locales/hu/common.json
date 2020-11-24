@@ -481,7 +481,24 @@
     "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom.",
     "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét",
     "VISIBILITY_INFO": "Itt választhatod ki az értékelésed anonimitásának beállításait.",
-    "NO_EXPERIENCE": "Nincs tapasztalatom"
+    "NO_EXPERIENCE": "Nincs tapasztalatom",
+    "CONFIRM_DIALOG": {
+      "ARE_YOU_SURE": "Ez biztos?",
+      "I_UNDERSTAND": "Értettem",
+      "NEGATIVE_TEXT_1": "Törekedj az építő kritikára! Értékelj következetesen ezzel ",
+      "NEGATIVE_TEXT_2": "segítve a cégeket, ",
+      "NEGATIVE_TEXT_3": "hogy tanulhassanak a legnagyobb hibáikból.",
+      "POSITIVE_TEXT_1": "Felelősségteljesen értékelj, ",
+      "POSITIVE_TEXT_2": "mert ha mindent tökéletesre értékelsz elveszed a cégektől a fejlődés lehetőségét és ",
+      "POSITIVE_TEXT_3": "megtéveszted ",
+      "POSITIVE_TEXT_4": "a leendő partnereket! ",
+      "POSITIVE_TEXT_5": "Az ",
+      "POSITIVE_TEXT_6": "EXTRA-t ",
+      "POSITIVE_TEXT_7": "csak akkor válaszd, ha úgy gondolod, hogy ",
+      "POSITIVE_TEXT_8": "VILÁGSZÍNVONALÚ ",
+      "POSITIVE_TEXT_9": "teljesítményre találtál!",
+      "HINT": "TIPP"
+    }
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Gyártó",

@@ -477,7 +477,24 @@
     "PRIVACY_POLICY": "I have read, understood and accept our privacy policy.",
     "INVALID_FORM": "You didn't fill a required field. Please check the form again",
     "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating.",
-    "NO_EXPERIENCE": "No experience"
+    "NO_EXPERIENCE": "No experience",
+    "CONFIRM_DIALOG": {
+      "ARE_YOU_SURE": "Are you sure?",
+      "I_UNDERSTAND": "I understand",
+      "NEGATIVE_TEXT_1": "Strive for constructive criticism! Evaluate consistently, so you can ",
+      "NEGATIVE_TEXT_2": "help companies, ",
+      "NEGATIVE_TEXT_3": "learn from their biggest mistakes. ",
+      "POSITIVE_TEXT_1": "Write reviews responsibly, ",
+      "POSITIVE_TEXT_2": "because if you rate everything perfectly, you take away the opportunity for development and you ",
+      "POSITIVE_TEXT_3": "deceive ",
+      "POSITIVE_TEXT_4": "future partners! ",
+      "POSITIVE_TEXT_5": "The ",
+      "POSITIVE_TEXT_6": "EXTRA ",
+      "POSITIVE_TEXT_7": "should only be chosen, when you think you found ",
+      "POSITIVE_TEXT_8": "WORLD-CLASS PERFORMANCE",
+      "POSITIVE_TEXT_9": "!",
+      "HINT": "HINT"
+    }
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",
