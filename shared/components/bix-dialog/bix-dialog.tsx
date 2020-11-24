@@ -38,7 +38,13 @@ export const BixDialog: FC<IDialogProps> = ({
   const { t } = useTranslate();
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="dialog-title"
+      aria-describedby="dialog-description"
+      disableBackdropClick
+    >
       <DialogTitle id="dialog-title" style={{ backgroundColor: headerColor }}>
         {title}
       </DialogTitle>
