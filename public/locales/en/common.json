@@ -522,7 +522,8 @@
     "TELECOMMUNICATION": "Telekommunikáció",
     "CLOTHING": "Textilipar- Ruhaipar",
     "CHEMICAL": "Vegyipar",
-    "TOURISM": "Vendéglátás, Idegenforgalom"
+    "TOURISM": "Vendéglátás, Idegenforgalom",
+    "BUSINESS_SERVICE": "Üzleti szolgáltatás"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
