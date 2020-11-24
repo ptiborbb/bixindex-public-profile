@@ -100,7 +100,9 @@ export const Rating: FC = () => {
             ),
             positive: Yup.string().required(t('COMMON.REQUIRED')),
             negative: Yup.string().required(t('COMMON.REQUIRED')),
-            comment: Yup.string().required(t('COMMON.REQUIRED')),
+            comment: Yup.string()
+              .required(t('COMMON.REQUIRED'))
+              .test('len', t('COMMON.FORM_VALIDATION.MAX_LENGTH', { number: 150 }), (val) => val?.length <= 150),
             auth: authValidation,
             visibility: Yup.string().required(t('COMMON.REQUIRED')),
           })
@@ -420,7 +422,7 @@ export const Rating: FC = () => {
                       name="comment"
                       fullWidth
                       multiline
-                      rows={2}
+                      rows={3}
                       variant="outlined"
                     />
                   </Grid>

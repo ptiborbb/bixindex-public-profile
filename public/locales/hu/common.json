@@ -39,7 +39,10 @@
     },
     "COOKIE_CONSENT": "Ez a weboldal sütiket használ, a kényelmesebb böngészés érdekében.",
     "ACCEPT_COOKIES": "Elfogadom",
-    "PAGE_NOT_FOUND": "Az oldal nem található"
+    "PAGE_NOT_FOUND": "Az oldal nem található",
+    "FORM_VALIDATION": {
+      "MAX_LENGTH": "Maximum {{number}} karakter használható."
+    }
   },
   "COMPANIES": {
     "TITLE": "Cégek",

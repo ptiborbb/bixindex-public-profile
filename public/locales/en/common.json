@@ -38,7 +38,10 @@
     },
     "COOKIE_CONSENT": "This website uses cookies to enhance the user experience.",
     "ACCEPT_COOKIES": "I understand",
-    "PAGE_NOT_FOUND": "Page not found"
+    "PAGE_NOT_FOUND": "Page not found",
+    "FORM_VALIDATION": {
+      "MAX_LENGTH": "Please don't use more characters than {{number}}"
+    }
   },
   "COMPANIES": {
     "TITLE": "Companies",
