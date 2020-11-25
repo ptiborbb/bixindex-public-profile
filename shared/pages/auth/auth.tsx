@@ -15,6 +15,7 @@ import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
+import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
 
@@ -40,13 +41,11 @@ const useInputLabelStyle = makeStyles({
   },
 });
 
-export const fbAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
-export const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-
 export const Auth: FunctionComponent = () => {
+  const { fbAppId, googleClientId, customerPortalUrl } = useConfig();
   const { t } = useTranslate();
   const router = useRouter();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { authService } = useApp();
   const companyFormID = useMemo(() => get('query.companyFormID', router), [router]);
@@ -418,7 +417,7 @@ export const Auth: FunctionComponent = () => {
                         <FormHelperText>{loginError.message}</FormHelperText>
                       </FormControl>
                       <a
-                        href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}/forgot-password`}
+                        href={`${customerPortalUrl}/forgot-password`}
                         target="_blank"
                         rel="noreferrer"
                         className={classes.forgotPassword}
