@@ -78,7 +78,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           <div className={classes.quote} style={{ backgroundImage: `url(${quoteMarkBg})` }}>
             {profile.goodRating && (
               <>
-                <p>{profile.goodRating?.positive}</p>
+                <p>{profile.goodRating?.summary}</p>
                 <Typography variant="caption" className={classes.reviewWriter}>
                   {'- '}
                   {profile.goodRating?.userName}

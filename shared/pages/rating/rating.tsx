@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Checkbox,
+  Divider,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -11,31 +12,38 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
-import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import * as Yup from 'yup';
+import badIcon from '../../../public/images/smiley/bad.png';
+import disappointedIcon from '../../../public/images/smiley/disappointed.png';
+import excellentIcon from '../../../public/images/smiley/excellent.png';
+import extraIcon from '../../../public/images/smiley/extra.png';
+import goodIcon from '../../../public/images/smiley/good.png';
+import mediocreIcon from '../../../public/images/smiley/mediocre.png';
 import { useApp } from '../../app.context';
+import { DialogType } from '../../components/bix-dialog/bix-dialog';
 import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
+import { useConfig } from '../../config.context';
 import { mockForm } from '../../data/mockForm';
+import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
+import { EReviewValues } from '../../enums/review-values';
 import { useTranslate } from '../../translate.context';
-import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
+  const dialog = useDialog();
+  const { fbAppId, googleClientId } = useConfig();
   const { t, i18n } = useTranslate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
@@ -99,7 +107,9 @@ export const Rating: FC = () => {
             ),
             positive: Yup.string().required(t('COMMON.REQUIRED')),
             negative: Yup.string().required(t('COMMON.REQUIRED')),
-            comment: Yup.string().required(t('COMMON.REQUIRED')),
+            comment: Yup.string()
+              .required(t('COMMON.REQUIRED'))
+              .test('len', t('COMMON.FORM_VALIDATION.MAX_LENGTH', { number: 150 }), (val) => val?.length <= 150),
             auth: authValidation,
             visibility: Yup.string().required(t('COMMON.REQUIRED')),
           })
@@ -168,12 +178,15 @@ export const Rating: FC = () => {
             summary: values.comment,
             positive: values.positive,
             negative: values.negative,
+            ratedProductOrService: values.ratedProductOrService,
             reference: values.reference,
             visibility: values.visibility,
-            answers: values.answers.map((answer) => ({
-              questionID: answer.id,
-              value: parseFloat(answer.value),
-            })),
+            answers: values.answers
+              .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
+              .map((answer) => ({
+                questionID: answer.id,
+                value: parseFloat(answer.value),
+              })),
           };
           await ratingService.submitReview(parsedRating);
         }
@@ -208,6 +221,7 @@ export const Rating: FC = () => {
       positive: '',
       negative: '',
       comment: '',
+      ratedProductOrService: '',
       reference: '',
       auth: {
         loginOrRegister: ELoginOrRegister.REGISTER,
@@ -239,22 +253,95 @@ export const Rating: FC = () => {
     },
   ];
 
+  const [negativeDialogShown, setNegativeDialogShown] = useState(false);
+  const [positiveDialogShown, setPositiveDialogShown] = useState(false);
+
   const smileys = [
     {
-      value: '5',
-      icon: <SentimentVeryDissatisfiedIcon />,
+      value: EReviewValues.DISAPPOINTED,
+      icon: <img src={disappointedIcon} className={classes.emoji} />,
+      clickHandler: async () => {
+        !negativeDialogShown &&
+          (await dialog({
+            variant: DialogType.ALERT,
+            text: (
+              <span>
+                {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_1')}
+                <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_2')}</span>
+                {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_3')}
+              </span>
+            ),
+            buttonClasses: classes.dialogConfirmButton,
+            headerColor: '#C60203',
+            submitButtonLabel: t('RATING.CONFIRM_DIALOG.I_UNDERSTAND'),
+            title: (
+              <span className="text-white d-flex align-items-center">
+                <LiveHelp className="mr-2" /> {t('RATING.CONFIRM_DIALOG.ARE_YOU_SURE')}
+              </span>
+            ),
+          }).then(() => setNegativeDialogShown(true)));
+      },
     },
     {
-      value: '6.8',
-      icon: <SentimentDissatisfiedIcon />,
+      value: EReviewValues.BAD,
+      icon: <img src={badIcon} className={classes.emoji} />,
     },
     {
-      value: '8.3',
-      icon: <SentimentSatisfiedIcon />,
+      value: EReviewValues.MEDIOCRE,
+      icon: <img src={mediocreIcon} className={classes.emoji} />,
     },
     {
-      value: '10',
-      icon: <SentimentVerySatisfiedIcon />,
+      value: EReviewValues.GOOD,
+      icon: <img src={goodIcon} className={classes.emoji} />,
+    },
+    {
+      value: EReviewValues.EXCELLENT,
+      icon: <img src={excellentIcon} className={classes.emoji} />,
+    },
+    {
+      value: EReviewValues.EXTRA,
+      icon: <img src={extraIcon} className={classes.emoji} />,
+      clickHandler: async () => {
+        !positiveDialogShown &&
+          (await dialog({
+            variant: DialogType.ALERT,
+            text: (
+              <>
+                <span className="mb-2">
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_1')}</span>
+                  {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_2')}
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_3')}</span>
+                  {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_4')}
+                </span>
+                <Divider className={classes.tipDivider} />
+                <span className="d-flex mt-2">
+                  <span className={`border bg-white ${classes.announcementWrapper}`}>
+                    <Announcement className={classes.announcementIcon} />
+                  </span>
+                  <span className={classes.toolTip}>{t('RATING.CONFIRM_DIALOG.HINT')}</span>
+                </span>
+                <div className="d-flex mt-2 align-items-center">
+                  <img src={extraIcon} className={classes.emoji} />
+                  <span className="ml-3">
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_5')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_6')}</span>
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_7')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_8')}</span>
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_9')}
+                  </span>
+                </div>
+              </>
+            ),
+            buttonClasses: classes.dialogConfirmButton,
+            headerColor: '#01953F',
+            submitButtonLabel: t('RATING.CONFIRM_DIALOG.I_UNDERSTAND'),
+            title: (
+              <span className="text-white d-flex align-items-center">
+                <LiveHelp className="mr-2" /> {t('RATING.CONFIRM_DIALOG.ARE_YOU_SURE')}
+              </span>
+            ),
+          }).then(() => setPositiveDialogShown(true)));
+      },
     },
   ];
 
@@ -353,11 +440,33 @@ export const Rating: FC = () => {
                                 {question.text}
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
+                                    <FormControlLabel
+                                      value={EReviewValues.NO_EXPERIENCE}
+                                      label=""
+                                      control={
+                                        <Radio
+                                          disableRipple
+                                          color="default"
+                                          style={{ borderRadius: '8px' }}
+                                          checkedIcon={
+                                            <span className={`${classes.noExperienceButton} ${classes.checked}`}>
+                                              {t('RATING.NO_EXPERIENCE')}
+                                            </span>
+                                          }
+                                          icon={
+                                            <span className={`${classes.noExperienceButton} ${classes.unchecked}`}>
+                                              {t('RATING.NO_EXPERIENCE')}
+                                            </span>
+                                          }
+                                        />
+                                      }
+                                    />
                                     {smileys.map((option) => (
                                       <FormControlLabel
                                         key={option.value}
                                         value={option.value}
                                         label=""
+                                        onClick={option.clickHandler}
                                         control={<SmileyRadio smiley={option.icon} />}
                                       />
                                     ))}
@@ -417,12 +526,38 @@ export const Rating: FC = () => {
                       name="comment"
                       fullWidth
                       multiline
-                      rows={2}
+                      rows={3}
                       variant="outlined"
                     />
                   </Grid>
+                  {profilePage?.productsAndServices.length > 0 && (
+                    <>
+                      <Divider className={classes.verticalSpacing} />
+                      <Grid item xs={12}>
+                        <Typography className={classes.summary}>{t('RATING.WHICH_PRODUCT')}</Typography>
+                        <Grid container spacing={4}>
+                          <Grid item xs={6}>
+                            <Field
+                              component={TextField}
+                              select
+                              name="ratedProductOrService"
+                              fullWidth
+                              variant="outlined"
+                            >
+                              {profilePage.productsAndServices.map((item) => (
+                                <MenuItem key={item.id} value={item.id}>
+                                  {item.name}
+                                </MenuItem>
+                              ))}
+                            </Field>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </>
+                  )}
+
                   <Grid item xs={12}>
-                    <hr className={classes.verticalSpacing} />
+                    <Divider className={classes.verticalSpacing} />
                   </Grid>
                   {user ? (
                     <>

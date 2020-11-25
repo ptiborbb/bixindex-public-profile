@@ -38,7 +38,10 @@
     },
     "COOKIE_CONSENT": "This website uses cookies to enhance the user experience.",
     "ACCEPT_COOKIES": "I understand",
-    "PAGE_NOT_FOUND": "Page not found"
+    "PAGE_NOT_FOUND": "Page not found",
+    "FORM_VALIDATION": {
+      "MAX_LENGTH": "Please don't use more characters than {{number}}"
+    }
   },
   "COMPANIES": {
     "TITLE": "Companies",
@@ -432,7 +435,7 @@
     "WRITE_REVIEW": "Write review",
     "BIX_PROFILE": "BIX Profile",
     "MAIN_TITLE": "We value your opinion! Seach any domestic company and share your experiences",
-    "SUB_TITLE": "Write reviews about 5 different company every week until 10. December, and ",
+    "SUB_TITLE": "Write reviews about 5 different company every week until 10. January, and ",
     "WIN": "win"
   },
   "TOAST": {
@@ -476,7 +479,26 @@
     "POLICy_REQUIRED": "Please accept our privacy policy!",
     "PRIVACY_POLICY": "I have read, understood and accept our privacy policy.",
     "INVALID_FORM": "You didn't fill a required field. Please check the form again",
-    "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating."
+    "VISIBILITY_INFO": "Here you can select the anonymity settings for your rating.",
+    "NO_EXPERIENCE": "No experience",
+    "WHICH_PRODUCT": "Please tell, which product or service did you have an experience with?",
+    "CONFIRM_DIALOG": {
+      "ARE_YOU_SURE": "Are you sure?",
+      "I_UNDERSTAND": "I understand",
+      "NEGATIVE_TEXT_1": "Strive for constructive criticism! Evaluate consistently, so you can ",
+      "NEGATIVE_TEXT_2": "help companies, ",
+      "NEGATIVE_TEXT_3": "learn from their biggest mistakes. ",
+      "POSITIVE_TEXT_1": "Write reviews responsibly, ",
+      "POSITIVE_TEXT_2": "because if you rate everything perfectly, you take away the opportunity for development and you ",
+      "POSITIVE_TEXT_3": "deceive ",
+      "POSITIVE_TEXT_4": "future partners! ",
+      "POSITIVE_TEXT_5": "The ",
+      "POSITIVE_TEXT_6": "EXTRA ",
+      "POSITIVE_TEXT_7": "should only be chosen, when you think you found ",
+      "POSITIVE_TEXT_8": "WORLD-CLASS PERFORMANCE",
+      "POSITIVE_TEXT_9": "!",
+      "HINT": "HINT"
+    }
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",
@@ -518,7 +540,8 @@
     "TELECOMMUNICATION": "Telekommunikáció",
     "CLOTHING": "Textilipar- Ruhaipar",
     "CHEMICAL": "Vegyipar",
-    "TOURISM": "Vendéglátás, Idegenforgalom"
+    "TOURISM": "Vendéglátás, Idegenforgalom",
+    "BUSINESS_SERVICE": "Üzleti szolgáltatás"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
