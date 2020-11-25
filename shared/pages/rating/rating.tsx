@@ -31,18 +31,19 @@ import { useApp } from '../../app.context';
 import { DialogType } from '../../components/bix-dialog/bix-dialog';
 import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
+import { useConfig } from '../../config.context';
 import { mockForm } from '../../data/mockForm';
 import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
 import { EReviewValues } from '../../enums/review-values';
 import { useTranslate } from '../../translate.context';
-import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
   const dialog = useDialog();
+  const { fbAppId, googleClientId } = useConfig();
   const { t, i18n } = useTranslate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
