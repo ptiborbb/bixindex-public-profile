@@ -445,7 +445,8 @@
   "TOAST": {
     "ERROR": {
       "UNAUTHORIZED": "Sikertelen azonosítás",
-      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt",
+      "VALIDATION_ERROR": "Érvényesítési hiba történt"
     }
   },
   "RATING": {
