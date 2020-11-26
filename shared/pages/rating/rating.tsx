@@ -134,8 +134,8 @@ export const Rating: FC = () => {
     [authService],
   );
 
-  const failResponseGoogle = (reason): unknown => {
-    return enqueueSnackbar(reason.details, { variant: 'error' });
+  const failResponseGoogle = (_): unknown => {
+    return enqueueSnackbar(t('COMMON.GOOGLE_ERROR'), { variant: 'error' });
   };
 
   useEffect(() => {
@@ -191,8 +191,9 @@ export const Rating: FC = () => {
           await ratingService.submitReview(parsedRating);
         }
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
-      } catch (err) {
-        enqueueSnackbar(t(`TOAST.ERROR.${err.response.data.errorCode}`), { variant: 'error' });
+      } catch (error) {
+        const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+        enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
         setSubmitting(false);
       }
     },
