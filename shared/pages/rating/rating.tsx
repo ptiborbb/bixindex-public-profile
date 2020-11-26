@@ -13,6 +13,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp } from '@material-ui/icons';
+import { AxiosError } from 'axios';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
@@ -191,8 +192,9 @@ export const Rating: FC = () => {
           await ratingService.submitReview(parsedRating);
         }
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
-      } catch (err) {
-        enqueueSnackbar(t(`TOAST.ERROR.${err.response.data.errorCode}`), { variant: 'error' });
+      } catch (error: AxiosError) {
+        const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+        enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
         setSubmitting(false);
       }
     },

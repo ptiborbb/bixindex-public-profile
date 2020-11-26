@@ -41,6 +41,14 @@
     "PAGE_NOT_FOUND": "Page not found",
     "FORM_VALIDATION": {
       "MAX_LENGTH": "Please don't use more characters than {{number}}"
+    },
+    "ERROR": {
+      "DEFAULT_FORM_CANNOT_BE_INVISIBLE": "Cannot set your default form to invisible",
+      "ROLE_ALREADY_EXISTS": "Role in company already exists",
+      "INADEQUATE_PRIVILEGE": "Inadequate privilege",
+      "ALREADY_OWNER_OF_COMPANY": "You are already an owner of this company",
+      "CANNOT_DELETE_YOURSELF": "You cannot delete yourself",
+      "USER_ALREADY_EXISTS": "This user already exists"
     }
   },
   "COMPANIES": {

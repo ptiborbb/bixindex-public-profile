@@ -42,6 +42,15 @@
     "PAGE_NOT_FOUND": "Az oldal nem található",
     "FORM_VALIDATION": {
       "MAX_LENGTH": "Maximum {{number}} karakter használható."
+    },
+    "ERROR": {
+      "DEFAULT_FORM_CANNOT_BE_INVISIBLE": "Az alapértelmezett kérdőív nem lehet láthatatlan",
+      "ROLE_ALREADY_EXISTS": "A szerep már létezik",
+      "INADEQUATE_PRIVILEGE": "Nem megfelelő jogosultság",
+      "ALREADY_OWNER_OF_COMPANY": "Már tulajdonosa vagy a cégnek",
+      "CANNOT_DELETE_YOURSELF": "Nem törölheted saját magad",
+      "USER_ALREADY_EXISTS": "A felhasználó már létezik",
+      "UNKOWN_ERROR": "Ismeretlen hiba történt"
     }
   },
   "COMPANIES": {
