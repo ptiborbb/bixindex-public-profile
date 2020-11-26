@@ -43,7 +43,16 @@
     "FORM_VALIDATION": {
       "MAX_LENGTH": "Maximum {{number}} karakter használható."
     },
-    "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy."
+    "ERROR": {
+      "DEFAULT_FORM_CANNOT_BE_INVISIBLE": "Az alapértelmezett kérdőív nem lehet láthatatlan",
+      "ROLE_ALREADY_EXISTS": "A szerep már létezik",
+      "INADEQUATE_PRIVILEGE": "Nem megfelelő jogosultság",
+      "ALREADY_OWNER_OF_COMPANY": "Már tulajdonosa vagy a cégnek",
+      "CANNOT_DELETE_YOURSELF": "Nem törölheted saját magad",
+      "USER_ALREADY_EXISTS": "A felhasználó már létezik",
+      "UNKOWN_ERROR": "Ismeretlen hiba történt",
+      "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy."
+    }
   },
   "COMPANIES": {
     "TITLE": "Cégek",
@@ -446,7 +455,8 @@
   "TOAST": {
     "ERROR": {
       "UNAUTHORIZED": "Sikertelen azonosítás",
-      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt",
+      "VALIDATION_ERROR": "Érvényesítési hiba történt"
     }
   },
   "RATING": {

@@ -2,6 +2,7 @@ import { Button, FormControl, FormHelperText, Grid, InputAdornment, makeStyles, 
 import LockIcon from '@material-ui/icons/Lock';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
+import { AxiosError } from 'axios';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { get } from 'lodash/fp';
@@ -69,8 +70,9 @@ export const Auth: FunctionComponent = () => {
       return authService
         .register(name, email, password)
         .then(() => setRegisterError({ isError: false, message: '' }))
-        .catch((error) => {
-          setRegisterError({ isError: true, message: t('AUTH.ALREADY_EXISTS') });
+        .catch((error: AxiosError) => {
+          const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+          setRegisterError({ isError: true, message: t(`COMMON.ERROR.${errorDetail}`) });
           throw error;
         });
     },
