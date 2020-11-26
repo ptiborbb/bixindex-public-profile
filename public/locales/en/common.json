@@ -48,7 +48,8 @@
       "INADEQUATE_PRIVILEGE": "Inadequate privilege",
       "ALREADY_OWNER_OF_COMPANY": "You are already an owner of this company",
       "CANNOT_DELETE_YOURSELF": "You cannot delete yourself",
-      "USER_ALREADY_EXISTS": "This user already exists"
+      "USER_ALREADY_EXISTS": "This user already exists",
+      "GOOGLE_ERROR": "An error occurred during google auth. Please check if cookies are allowed, or use a different authentication method."
     }
   },
   "COMPANIES": {

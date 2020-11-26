@@ -134,8 +134,8 @@ export const Rating: FC = () => {
     [authService],
   );
 
-  const failResponseGoogle = (reason): unknown => {
-    return enqueueSnackbar(reason.details, { variant: 'error' });
+  const failResponseGoogle = (_): unknown => {
+    return enqueueSnackbar(t('COMMON.GOOGLE_ERROR'), { variant: 'error' });
   };
 
   useEffect(() => {
