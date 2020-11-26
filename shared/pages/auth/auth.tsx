@@ -113,7 +113,7 @@ export const Auth: FunctionComponent = () => {
   );
 
   const failResponseGoogle = (reason): unknown => {
-    return enqueueSnackbar(reason.details, { variant: 'error' });
+    return enqueueSnackbar(t('COMMON.GOOGLE_ERROR'), { variant: 'error' });
   };
 
   const [loginError, setLoginError] = useState({ isError: false, message: '' });
