@@ -12,7 +12,7 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp } from '@material-ui/icons';
+import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
@@ -302,22 +302,27 @@ export const Rating: FC = () => {
             ),
           }).then(() => setNegativeDialogShown(true)));
       },
+      label: t('RATING.DISAPPOINTED'),
     },
     {
       value: EReviewValues.BAD,
       icon: <img src={badIcon} className={classes.emoji} />,
+      label: t('RATING.BAD'),
     },
     {
       value: EReviewValues.MEDIOCRE,
       icon: <img src={mediocreIcon} className={classes.emoji} />,
+      label: t('RATING.MEDIOCRE'),
     },
     {
       value: EReviewValues.GOOD,
       icon: <img src={goodIcon} className={classes.emoji} />,
+      label: t('RATING.GOOD'),
     },
     {
       value: EReviewValues.EXCELLENT,
       icon: <img src={excellentIcon} className={classes.emoji} />,
+      label: t('RATING.EXCELLENT'),
     },
     {
       value: EReviewValues.EXTRA,
@@ -365,6 +370,7 @@ export const Rating: FC = () => {
             ),
           }).then(() => setPositiveDialogShown(true)));
       },
+      label: t('RATING.EXTRA'),
     },
   ];
 
@@ -453,6 +459,17 @@ export const Rating: FC = () => {
                         <hr className={classes.verticalSpacing} />
                       </Grid>
                       <Grid item xs={12}>
+                        <div className={`d-flex ${classes.perfectReviewWarning} mb-3`}>
+                          <div className={`${classes.triangleWrapper}`}>
+                            <WarningRounded className={classes.triangle} />
+                          </div>
+                          <div className={`d-flex flex-column justify-content-around p-3`}>
+                            <span className={classes.title}>{t('RATING.NO_PERFECT_RATING')}</span>
+                            <span className={classes.text}>{t('RATING.EVERYONE_WANTS_YOUR_EXPERIENCE')}</span>
+                          </div>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
                         <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                       </Grid>
                       <FieldArray name="answers">
@@ -464,8 +481,10 @@ export const Rating: FC = () => {
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
                                     <FormControlLabel
+                                      className="m-0 mt-4"
                                       value={EReviewValues.NO_EXPERIENCE}
-                                      label=""
+                                      label="  "
+                                      labelPlacement="top"
                                       control={
                                         <Radio
                                           disableRipple
@@ -486,9 +505,11 @@ export const Rating: FC = () => {
                                     />
                                     {smileys.map((option) => (
                                       <FormControlLabel
+                                        className="m-0"
                                         key={option.value}
                                         value={option.value}
-                                        label=""
+                                        label={option.label}
+                                        labelPlacement="top"
                                         onClick={option.clickHandler}
                                         control={<SmileyRadio smiley={option.icon} />}
                                       />
@@ -553,7 +574,7 @@ export const Rating: FC = () => {
                       variant="outlined"
                     />
                   </Grid>
-                  {profilePage?.productsAndServices.length > 0 && (
+                  {!nps && profilePage?.productsAndServices.length > 0 && (
                     <>
                       <Divider className={classes.verticalSpacing} />
                       <Grid item xs={12}>

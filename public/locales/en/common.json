@@ -511,7 +511,15 @@
       "POSITIVE_TEXT_8": "WORLD-CLASS PERFORMANCE",
       "POSITIVE_TEXT_9": "!",
       "HINT": "HINT"
-    }
+    },
+    "NO_PERFECT_RATING": "Nobody believes to a perfect rating!",
+    "EVERYONE_WANTS_YOUR_EXPERIENCE": "Everyone's interested in your real experience!",
+    "DISAPPOINTED": "Disappinted",
+    "BAD": "Bad",
+    "MEDIOCRE": "Mediocre",
+    "GOOD": "Good",
+    "EXCELLENT": "Excellent",
+    "EXTRA": "Extra"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",

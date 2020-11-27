@@ -516,7 +516,15 @@
       "POSITIVE_TEXT_8": "VILÁGSZÍNVONALÚ ",
       "POSITIVE_TEXT_9": "teljesítményre találtál!",
       "HINT": "TIPP"
-    }
+    },
+    "NO_PERFECT_RATING": "A tökéletes értékelésnek senki sem hisz!",
+    "EVERYONE_WANTS_YOUR_EXPERIENCE": "A valódi tapasztalatodra mindenki kíváncsi!",
+    "DISAPPOINTED": "Csalódás",
+    "BAD": "Rossz",
+    "MEDIOCRE": "Semleges",
+    "GOOD": "Jó",
+    "EXCELLENT": "Kiemelkedő",
+    "EXTRA": "Extra"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Gyártó",
