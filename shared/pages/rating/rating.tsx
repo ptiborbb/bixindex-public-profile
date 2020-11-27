@@ -164,10 +164,11 @@ export const Rating: FC = () => {
         }
         if (nps) {
           const parsedRating = {
-            companyID: profilePage.profile.id,
+            companyID: profilePage.profile.companyID,
             rating: values.nps,
             visibility: values.visibility,
             comment: values.comment,
+            userID: user.id,
           };
           await ratingService.submitNps(parsedRating);
         } else {
@@ -266,11 +267,30 @@ export const Rating: FC = () => {
           (await dialog({
             variant: DialogType.ALERT,
             text: (
-              <span>
-                {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_1')}
-                <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_2')}</span>
-                {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_3')}
-              </span>
+              <>
+                <span>
+                  {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_1')}
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_2')}</span>
+                  {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_3')}
+                </span>
+                <Divider className={classes.tipDivider} />
+                <span className="d-flex mt-2">
+                  <span className={`border bg-white ${classes.announcementWrapper} `}>
+                    <Announcement className={`${classes.announcementIcon} ${classes.redAnnouncement}`} />
+                  </span>
+                  <span className={`${classes.toolTip} ${classes.redAnnouncement}`}>
+                    {t('RATING.CONFIRM_DIALOG.HINT')}
+                  </span>
+                </span>
+                <div className="d-flex mt-2 align-items-center">
+                  <img src={disappointedIcon} className={classes.emoji} />
+                  <span className="ml-3">
+                    {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_4')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_5')}</span>
+                    {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_6')}
+                  </span>
+                </div>
+              </>
             ),
             buttonClasses: classes.dialogConfirmButton,
             headerColor: '#C60203',
@@ -317,9 +337,11 @@ export const Rating: FC = () => {
                 <Divider className={classes.tipDivider} />
                 <span className="d-flex mt-2">
                   <span className={`border bg-white ${classes.announcementWrapper}`}>
-                    <Announcement className={classes.announcementIcon} />
+                    <Announcement className={`${classes.announcementIcon} ${classes.greenAnnouncement}`} />
                   </span>
-                  <span className={classes.toolTip}>{t('RATING.CONFIRM_DIALOG.HINT')}</span>
+                  <span className={`${classes.toolTip} ${classes.greenAnnouncement}`}>
+                    {t('RATING.CONFIRM_DIALOG.HINT')}
+                  </span>
                 </span>
                 <div className="d-flex mt-2 align-items-center">
                   <img src={extraIcon} className={classes.emoji} />

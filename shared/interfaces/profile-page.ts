@@ -18,6 +18,7 @@ export interface RatingItem {
 export interface ProfilePage {
   profile: {
     id: string;
+    companyID: string;
     defaultFormID?: string;
     fb?: string;
     insta?: string;

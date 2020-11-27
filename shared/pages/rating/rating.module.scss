@@ -34,7 +34,13 @@
 
 .announcementIcon,
 .toolTip {
-  color: #01953f;
+  &.greenAnnouncement {
+    color: #01953f;
+  }
+  &.redAnnouncement {
+    color: #c60203;
+  }
+
   font-weight: bold;
   font-size: 20px;
   line-height: 24px;
@@ -63,13 +69,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #d3d3d3 !important;
   &.checked {
-    background-color: #f63c3c !important;
-    color: #d3d3d3 !important;
+    color: #f63c3c !important;
   }
   &.unchecked {
-    background-color: #d3d3d3 !important;
-    color: #f63c3c !important;
+    color: #9a9a9a !important;
   }
 }
 
