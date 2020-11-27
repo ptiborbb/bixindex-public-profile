@@ -135,7 +135,7 @@ export const Rating: FC = () => {
   );
 
   const failResponseGoogle = (_): unknown => {
-    return enqueueSnackbar(t('COMMON.GOOGLE_ERROR'), { variant: 'error' });
+    return enqueueSnackbar(t('COMMON.ERROR.GOOGLE_ERROR'), { variant: 'error' });
   };
 
   useEffect(() => {
@@ -797,7 +797,6 @@ export const Rating: FC = () => {
                     <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">
                       <MenuItem value="VISIBLE">{t('RATING.PUBLIC')}</MenuItem>
                       <MenuItem value="HIDDEN">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
-                      <MenuItem value="ANONYM">{t('RATING.PRIVATE')}</MenuItem>
                     </Field>
                   </Grid>
                   <Grid item xs={12}>
