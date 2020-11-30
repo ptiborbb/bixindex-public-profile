@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Checkbox,
+  Divider,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -11,31 +12,38 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Info, ThumbDown, ThumbUp } from '@material-ui/icons';
-import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import * as Yup from 'yup';
+import badIcon from '../../../public/images/smiley/bad.png';
+import disappointedIcon from '../../../public/images/smiley/disappointed.png';
+import excellentIcon from '../../../public/images/smiley/excellent.png';
+import extraIcon from '../../../public/images/smiley/extra.png';
+import goodIcon from '../../../public/images/smiley/good.png';
+import mediocreIcon from '../../../public/images/smiley/mediocre.png';
 import { useApp } from '../../app.context';
+import { DialogType } from '../../components/bix-dialog/bix-dialog';
 import { CustomSlider } from '../../components/slider/slider';
 import { SmileyRadio } from '../../components/smiley-radio/smiley-radio';
+import { useConfig } from '../../config.context';
 import { mockForm } from '../../data/mockForm';
+import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
+import { EReviewValues } from '../../enums/review-values';
 import { useTranslate } from '../../translate.context';
-import { fbAppId, googleClientId } from '../auth/auth';
 import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
+  const dialog = useDialog();
+  const { fbAppId, googleClientId } = useConfig();
   const { t, i18n } = useTranslate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
@@ -99,7 +107,9 @@ export const Rating: FC = () => {
             ),
             positive: Yup.string().required(t('COMMON.REQUIRED')),
             negative: Yup.string().required(t('COMMON.REQUIRED')),
-            comment: Yup.string().required(t('COMMON.REQUIRED')),
+            comment: Yup.string()
+              .required(t('COMMON.REQUIRED'))
+              .test('len', t('COMMON.FORM_VALIDATION.MAX_LENGTH', { number: 150 }), (val) => val?.length <= 150),
             auth: authValidation,
             visibility: Yup.string().required(t('COMMON.REQUIRED')),
           })
@@ -124,8 +134,8 @@ export const Rating: FC = () => {
     [authService],
   );
 
-  const failResponseGoogle = (reason): unknown => {
-    return enqueueSnackbar(reason.details, { variant: 'error' });
+  const failResponseGoogle = (_): unknown => {
+    return enqueueSnackbar(t('COMMON.ERROR.GOOGLE_ERROR'), { variant: 'error' });
   };
 
   useEffect(() => {
@@ -154,10 +164,11 @@ export const Rating: FC = () => {
         }
         if (nps) {
           const parsedRating = {
-            companyID: profilePage.profile.id,
+            companyID: profilePage.profile.companyID,
             rating: values.nps,
             visibility: values.visibility,
             comment: values.comment,
+            userID: user.id,
           };
           await ratingService.submitNps(parsedRating);
         } else {
@@ -168,18 +179,22 @@ export const Rating: FC = () => {
             summary: values.comment,
             positive: values.positive,
             negative: values.negative,
+            ratedProductOrService: values.ratedProductOrService,
             reference: values.reference,
             visibility: values.visibility,
-            answers: values.answers.map((answer) => ({
-              questionID: answer.id,
-              value: parseFloat(answer.value),
-            })),
+            answers: values.answers
+              .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
+              .map((answer) => ({
+                questionID: answer.id,
+                value: parseFloat(answer.value),
+              })),
           };
           await ratingService.submitReview(parsedRating);
         }
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
-      } catch (err) {
-        enqueueSnackbar(t(`TOAST.ERROR.${err.response.data.errorCode}`), { variant: 'error' });
+      } catch (error) {
+        const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+        enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
         setSubmitting(false);
       }
     },
@@ -208,6 +223,7 @@ export const Rating: FC = () => {
       positive: '',
       negative: '',
       comment: '',
+      ratedProductOrService: '',
       reference: '',
       auth: {
         loginOrRegister: ELoginOrRegister.REGISTER,
@@ -239,22 +255,122 @@ export const Rating: FC = () => {
     },
   ];
 
+  const [negativeDialogShown, setNegativeDialogShown] = useState(false);
+  const [positiveDialogShown, setPositiveDialogShown] = useState(false);
+
   const smileys = [
     {
-      value: '5',
-      icon: <SentimentVeryDissatisfiedIcon />,
+      value: EReviewValues.DISAPPOINTED,
+      icon: <img src={disappointedIcon} className={classes.emoji} />,
+      clickHandler: async () => {
+        !negativeDialogShown &&
+          (await dialog({
+            variant: DialogType.ALERT,
+            text: (
+              <>
+                <span>
+                  {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_1')}
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_2')}</span>
+                  {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_3')}
+                </span>
+                <Divider className={classes.tipDivider} />
+                <span className="d-flex mt-2">
+                  <span className={`border bg-white ${classes.announcementWrapper} `}>
+                    <Announcement className={`${classes.announcementIcon} ${classes.redAnnouncement}`} />
+                  </span>
+                  <span className={`${classes.toolTip} ${classes.redAnnouncement}`}>
+                    {t('RATING.CONFIRM_DIALOG.HINT')}
+                  </span>
+                </span>
+                <div className="d-flex mt-2 align-items-center">
+                  <img src={disappointedIcon} className={classes.emoji} />
+                  <span className="ml-3">
+                    {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_4')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_5')}</span>
+                    {t('RATING.CONFIRM_DIALOG.NEGATIVE_TEXT_6')}
+                  </span>
+                </div>
+              </>
+            ),
+            buttonClasses: classes.dialogConfirmButton,
+            headerColor: '#C60203',
+            submitButtonLabel: t('RATING.CONFIRM_DIALOG.I_UNDERSTAND'),
+            title: (
+              <span className="text-white d-flex align-items-center">
+                <LiveHelp className="mr-2" /> {t('RATING.CONFIRM_DIALOG.ARE_YOU_SURE')}
+              </span>
+            ),
+          }).then(() => setNegativeDialogShown(true)));
+      },
+      label: t('RATING.DISAPPOINTED'),
     },
     {
-      value: '6.8',
-      icon: <SentimentDissatisfiedIcon />,
+      value: EReviewValues.BAD,
+      icon: <img src={badIcon} className={classes.emoji} />,
+      label: t('RATING.BAD'),
     },
     {
-      value: '8.3',
-      icon: <SentimentSatisfiedIcon />,
+      value: EReviewValues.MEDIOCRE,
+      icon: <img src={mediocreIcon} className={classes.emoji} />,
+      label: t('RATING.MEDIOCRE'),
     },
     {
-      value: '10',
-      icon: <SentimentVerySatisfiedIcon />,
+      value: EReviewValues.GOOD,
+      icon: <img src={goodIcon} className={classes.emoji} />,
+      label: t('RATING.GOOD'),
+    },
+    {
+      value: EReviewValues.EXCELLENT,
+      icon: <img src={excellentIcon} className={classes.emoji} />,
+      label: t('RATING.EXCELLENT'),
+    },
+    {
+      value: EReviewValues.EXTRA,
+      icon: <img src={extraIcon} className={classes.emoji} />,
+      clickHandler: async () => {
+        !positiveDialogShown &&
+          (await dialog({
+            variant: DialogType.ALERT,
+            text: (
+              <>
+                <span className="mb-2">
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_1')}</span>
+                  {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_2')}
+                  <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_3')}</span>
+                  {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_4')}
+                </span>
+                <Divider className={classes.tipDivider} />
+                <span className="d-flex mt-2">
+                  <span className={`border bg-white ${classes.announcementWrapper}`}>
+                    <Announcement className={`${classes.announcementIcon} ${classes.greenAnnouncement}`} />
+                  </span>
+                  <span className={`${classes.toolTip} ${classes.greenAnnouncement}`}>
+                    {t('RATING.CONFIRM_DIALOG.HINT')}
+                  </span>
+                </span>
+                <div className="d-flex mt-2 align-items-center">
+                  <img src={extraIcon} className={classes.emoji} />
+                  <span className="ml-3">
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_5')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_6')}</span>
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_7')}
+                    <span className="font-weight-bold">{t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_8')}</span>
+                    {t('RATING.CONFIRM_DIALOG.POSITIVE_TEXT_9')}
+                  </span>
+                </div>
+              </>
+            ),
+            buttonClasses: classes.dialogConfirmButton,
+            headerColor: '#01953F',
+            submitButtonLabel: t('RATING.CONFIRM_DIALOG.I_UNDERSTAND'),
+            title: (
+              <span className="text-white d-flex align-items-center">
+                <LiveHelp className="mr-2" /> {t('RATING.CONFIRM_DIALOG.ARE_YOU_SURE')}
+              </span>
+            ),
+          }).then(() => setPositiveDialogShown(true)));
+      },
+      label: t('RATING.EXTRA'),
     },
   ];
 
@@ -343,6 +459,17 @@ export const Rating: FC = () => {
                         <hr className={classes.verticalSpacing} />
                       </Grid>
                       <Grid item xs={12}>
+                        <div className={`d-flex ${classes.perfectReviewWarning} mb-3`}>
+                          <div className={`${classes.triangleWrapper}`}>
+                            <WarningRounded className={classes.triangle} />
+                          </div>
+                          <div className={`d-flex flex-column justify-content-around p-3`}>
+                            <span className={classes.title}>{t('RATING.NO_PERFECT_RATING')}</span>
+                            <span className={classes.text}>{t('RATING.EVERYONE_WANTS_YOUR_EXPERIENCE')}</span>
+                          </div>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
                         <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                       </Grid>
                       <FieldArray name="answers">
@@ -353,11 +480,37 @@ export const Rating: FC = () => {
                                 {question.text}
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
+                                    <FormControlLabel
+                                      className="m-0 mt-4"
+                                      value={EReviewValues.NO_EXPERIENCE}
+                                      label="  "
+                                      labelPlacement="top"
+                                      control={
+                                        <Radio
+                                          disableRipple
+                                          color="default"
+                                          style={{ borderRadius: '8px' }}
+                                          checkedIcon={
+                                            <span className={`${classes.noExperienceButton} ${classes.checked}`}>
+                                              {t('RATING.NO_EXPERIENCE')}
+                                            </span>
+                                          }
+                                          icon={
+                                            <span className={`${classes.noExperienceButton} ${classes.unchecked}`}>
+                                              {t('RATING.NO_EXPERIENCE')}
+                                            </span>
+                                          }
+                                        />
+                                      }
+                                    />
                                     {smileys.map((option) => (
                                       <FormControlLabel
+                                        className="m-0"
                                         key={option.value}
                                         value={option.value}
-                                        label=""
+                                        label={option.label}
+                                        labelPlacement="top"
+                                        onClick={option.clickHandler}
                                         control={<SmileyRadio smiley={option.icon} />}
                                       />
                                     ))}
@@ -417,12 +570,38 @@ export const Rating: FC = () => {
                       name="comment"
                       fullWidth
                       multiline
-                      rows={2}
+                      rows={3}
                       variant="outlined"
                     />
                   </Grid>
+                  {!nps && profilePage?.productsAndServices.length > 0 && (
+                    <>
+                      <Divider className={classes.verticalSpacing} />
+                      <Grid item xs={12}>
+                        <Typography className={classes.summary}>{t('RATING.WHICH_PRODUCT')}</Typography>
+                        <Grid container spacing={4}>
+                          <Grid item xs={6}>
+                            <Field
+                              component={TextField}
+                              select
+                              name="ratedProductOrService"
+                              fullWidth
+                              variant="outlined"
+                            >
+                              {profilePage.productsAndServices.map((item) => (
+                                <MenuItem key={item.id} value={item.id}>
+                                  {item.name}
+                                </MenuItem>
+                              ))}
+                            </Field>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </>
+                  )}
+
                   <Grid item xs={12}>
-                    <hr className={classes.verticalSpacing} />
+                    <Divider className={classes.verticalSpacing} />
                   </Grid>
                   {user ? (
                     <>
@@ -661,7 +840,6 @@ export const Rating: FC = () => {
                     <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">
                       <MenuItem value="VISIBLE">{t('RATING.PUBLIC')}</MenuItem>
                       <MenuItem value="HIDDEN">{t('RATING.ONLY_FOR_COMPANY')}</MenuItem>
-                      <MenuItem value="ANONYM">{t('RATING.PRIVATE')}</MenuItem>
                     </Field>
                   </Grid>
                   <Grid item xs={12}>

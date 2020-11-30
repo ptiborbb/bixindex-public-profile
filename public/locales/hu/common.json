@@ -39,7 +39,20 @@
     },
     "COOKIE_CONSENT": "Ez a weboldal sütiket használ, a kényelmesebb böngészés érdekében.",
     "ACCEPT_COOKIES": "Elfogadom",
-    "PAGE_NOT_FOUND": "Az oldal nem található"
+    "PAGE_NOT_FOUND": "Az oldal nem található",
+    "FORM_VALIDATION": {
+      "MAX_LENGTH": "Maximum {{number}} karakter használható."
+    },
+    "ERROR": {
+      "DEFAULT_FORM_CANNOT_BE_INVISIBLE": "Az alapértelmezett kérdőív nem lehet láthatatlan",
+      "ROLE_ALREADY_EXISTS": "A szerep már létezik",
+      "INADEQUATE_PRIVILEGE": "Nem megfelelő jogosultság",
+      "ALREADY_OWNER_OF_COMPANY": "Már tulajdonosa vagy a cégnek",
+      "CANNOT_DELETE_YOURSELF": "Nem törölheted saját magad",
+      "USER_ALREADY_EXISTS": "A felhasználó már létezik",
+      "UNKOWN_ERROR": "Ismeretlen hiba történt",
+      "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy."
+    }
   },
   "COMPANIES": {
     "TITLE": "Cégek",
@@ -217,7 +230,7 @@
     "HEAD_BOX": {
       "MAIN_1": "Hoztál már rossz döntést egy termék, szolgáltatás, vagy együttműködés kapcsán? Mi igen.",
       "MAIN_2": "Írj értékeléseket. Olvass értékeléseket. Találj új partnereket.",
-      "MAIN_3": "Mutasd meg az ügyfeleid véleményén keresztül, hogy Te vagy a legjobb, és vedd át a Legjobb Ügyfélélmény Díjat az ország legszínvonalasabb üzleti eseményén 2020. november 27-én, a Corinthia Hotelben! ",
+      "MAIN_3": "Mutasd meg az ügyfeleid véleményén keresztül, hogy Te vagy a legjobb, és vedd át a Legjobb Ügyfélélmény Díjat az ország legszínvonalasabb üzleti eseményén 2021. február 26-án, a Corinthia Hotelben! ",
       "CTA_1": "Regisztrálok!",
       "CTA_2": "Legjobb Ügyfélélmény Díj"
     },
@@ -436,13 +449,14 @@
     "WRITE_REVIEW": "Értékelés írása",
     "BIX_PROFILE": "BIX Profil",
     "MAIN_TITLE": "Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!",
-    "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten december 10-ig, és ",
+    "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten január 10-ig, és ",
     "WIN": "nyerj"
   },
   "TOAST": {
     "ERROR": {
       "UNAUTHORIZED": "Sikertelen azonosítás",
-      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt"
+      "INTERNAL_SERVER_ERROR": "Ismeretlen hiba történt",
+      "VALIDATION_ERROR": "Érvényesítési hiba történt"
     }
   },
   "RATING": {
@@ -480,7 +494,37 @@
     "POLICy_REQUIRED": "Kérünk, fogadd el az adatkezelésre vonatkozó tájékoztatónkat!",
     "PRIVACY_POLICY": "Az adatkezelésre vonatkozó tájékoztatónkat elolvastam, megértettem és elfogadom.",
     "INVALID_FORM": "Nem töltöttél ki egy kötelezően kitöltendő mezőt. kérlek ellenőrizd le az űrlap kitöltöttségét",
-    "VISIBILITY_INFO": "Itt választhatod ki az értékelésed anonimitásának beállításait."
+    "VISIBILITY_INFO": "Itt választhatod ki az értékelésed anonimitásának beállításait.",
+    "NO_EXPERIENCE": "Nincs tapasztalatom",
+    "WHICH_PRODUCT": "Kérjük mondja el, a gyártó mely termékeivel/termékcsoportjával szerzett tapasztalatot?",
+    "CONFIRM_DIALOG": {
+      "ARE_YOU_SURE": "Ez biztos?",
+      "I_UNDERSTAND": "Értettem",
+      "NEGATIVE_TEXT_1": "Törekedj az építő kritikára! Értékelj következetesen ezzel ",
+      "NEGATIVE_TEXT_2": "segítve a cégeket, ",
+      "NEGATIVE_TEXT_3": "hogy tanulhassanak a legnagyobb hibáikból.",
+      "NEGATIVE_TEXT_4": "Ha csalódtál, mindenképpen ",
+      "NEGATIVE_TEXT_5": "vedd fel a kapcsolatot ",
+      "NEGATIVE_TEXT_6": "a céggel is!",
+      "POSITIVE_TEXT_1": "Felelősségteljesen értékelj, ",
+      "POSITIVE_TEXT_2": "mert ha mindent tökéletesre értékelsz elveszed a cégektől a fejlődés lehetőségét és ",
+      "POSITIVE_TEXT_3": "megtéveszted ",
+      "POSITIVE_TEXT_4": "a leendő partnereket! ",
+      "POSITIVE_TEXT_5": "Az ",
+      "POSITIVE_TEXT_6": "EXTRA-t ",
+      "POSITIVE_TEXT_7": "csak akkor válaszd, ha úgy gondolod, hogy ",
+      "POSITIVE_TEXT_8": "VILÁGSZÍNVONALÚ ",
+      "POSITIVE_TEXT_9": "teljesítményre találtál!",
+      "HINT": "TIPP"
+    },
+    "NO_PERFECT_RATING": "A tökéletes értékelésnek senki sem hisz!",
+    "EVERYONE_WANTS_YOUR_EXPERIENCE": "A valódi tapasztalatodra mindenki kíváncsi!",
+    "DISAPPOINTED": "Csalódás",
+    "BAD": "Rossz",
+    "MEDIOCRE": "Semleges",
+    "GOOD": "Jó",
+    "EXCELLENT": "Kiemelkedő",
+    "EXTRA": "Extra"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Gyártó",
@@ -522,7 +566,8 @@
     "TELECOMMUNICATION": "Telekommunikáció",
     "CLOTHING": "Textilipar- Ruhaipar",
     "CHEMICAL": "Vegyipar",
-    "TOURISM": "Vendéglátás, Idegenforgalom"
+    "TOURISM": "Vendéglátás, Idegenforgalom",
+    "BUSINESS_SERVICE": "Üzleti szolgáltatás"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
@@ -730,7 +775,7 @@
   "NPS_TEXT": {
     "NEGATIVE": "Ellenző",
     "PASSIVE": "Passzív",
-    "POSITIVE": "Pozitív",
+    "POSITIVE": "Ajánló",
     "NO_NPS": "-"
   },
   "REVIEW_ITEM": {

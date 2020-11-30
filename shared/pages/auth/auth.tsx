@@ -2,6 +2,7 @@ import { Button, FormControl, FormHelperText, Grid, InputAdornment, makeStyles, 
 import LockIcon from '@material-ui/icons/Lock';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
+import { AxiosError } from 'axios';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { get } from 'lodash/fp';
@@ -15,6 +16,7 @@ import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
+import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
 
@@ -40,13 +42,11 @@ const useInputLabelStyle = makeStyles({
   },
 });
 
-export const fbAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
-export const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-
 export const Auth: FunctionComponent = () => {
+  const { fbAppId, googleClientId, customerPortalUrl } = useConfig();
   const { t } = useTranslate();
   const router = useRouter();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { authService } = useApp();
   const companyFormID = useMemo(() => get('query.companyFormID', router), [router]);
@@ -70,8 +70,9 @@ export const Auth: FunctionComponent = () => {
       return authService
         .register(name, email, password)
         .then(() => setRegisterError({ isError: false, message: '' }))
-        .catch((error) => {
-          setRegisterError({ isError: true, message: t('AUTH.ALREADY_EXISTS') });
+        .catch((error: AxiosError) => {
+          const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+          setRegisterError({ isError: true, message: t(`COMMON.ERROR.${errorDetail}`) });
           throw error;
         });
     },
@@ -114,7 +115,7 @@ export const Auth: FunctionComponent = () => {
   );
 
   const failResponseGoogle = (reason): unknown => {
-    return enqueueSnackbar(reason.details, { variant: 'error' });
+    return enqueueSnackbar(t('COMMON.ERROR.GOOGLE_ERROR'), { variant: 'error' });
   };
 
   const [loginError, setLoginError] = useState({ isError: false, message: '' });
@@ -418,7 +419,7 @@ export const Auth: FunctionComponent = () => {
                         <FormHelperText>{loginError.message}</FormHelperText>
                       </FormControl>
                       <a
-                        href={`${process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL}/forgot-password`}
+                        href={`${customerPortalUrl}/forgot-password`}
                         target="_blank"
                         rel="noreferrer"
                         className={classes.forgotPassword}

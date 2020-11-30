@@ -14,6 +14,99 @@
     justify-content: flex-end;
   }
 }
+.perfectReviewWarning {
+  border: 1px solid #f63c3c;
+  border-radius: 6px;
+  width: 100%;
+  min-height: 90px;
+  .triangleWrapper {
+    width: 90px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f63c3c;
+    color: white;
+    .triangle {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .title {
+    color: #f73c3c;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: bold;
+  }
+  .text {
+    color: #656565;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.emoji {
+  width: 35px;
+  height: 35px;
+}
+
+.dialogConfirmButton {
+  background-color: #2cbe55 !important;
+  width: 150px !important;
+  height: 40px;
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+}
+.tipDivider {
+  position: relative;
+  top: 33px;
+}
+
+.announcementIcon,
+.toolTip {
+  &.greenAnnouncement {
+    color: #01953f;
+  }
+  &.redAnnouncement {
+    color: #c60203;
+  }
+
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.announcementWrapper {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.noExperienceButton {
+  text-transform: uppercase !important;
+  width: 188px;
+  height: 40px;
+  opacity: 0.98;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d3d3d3 !important;
+  &.checked {
+    color: #f63c3c !important;
+  }
+  &.unchecked {
+    color: #9a9a9a !important;
+  }
+}
 
 .container {
   max-width: 1170px;
