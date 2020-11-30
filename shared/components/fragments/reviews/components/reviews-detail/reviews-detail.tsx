@@ -53,7 +53,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   return (
     <div className={classes.reviewsDetail}>
       <div className={classes.reviewsDetailTitle} onClick={() => setOpened(!opened)}>
-        Részletes adatok {opened ? <ExpandLess /> : <ExpandMore />}
+        {t('REVIEW_DETAILS.DETAILED_DATA')} {opened ? <ExpandLess /> : <ExpandMore />}
       </div>
       {opened && (
         <div className={classes.reviewsDetailContent}>
@@ -71,7 +71,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
       )}
 
       <div className={classes.filterTitle}>
-        <Tune className="mr-2" /> Szűrők
+        <Tune className="mr-2" /> {t('REVIEW_DETAILS.FILTERS')}
       </div>
 
       <div className={classes.filterBlock}>
@@ -91,7 +91,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         </div>
         <div className="w-100 ml-4 d-flex flex-column justify-content-between">
           <FormControl className={'w-100'} variant="outlined">
-            <InputLabel id="ratedReviewLabel">Értékelt termék/szolgáltatás</InputLabel>
+            <InputLabel id="ratedReviewLabel">{t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}</InputLabel>
             <Select
               labelId="ratedReviewLabel"
               value={filter.productOrServiceID}
@@ -99,10 +99,10 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
                 filterChanged({ ...filter, productOrServiceID: event.target.value as string, pageNumber: 1 });
               }}
               fullWidth
-              label="Értékelt termék/szolgáltatás"
+              label={t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>{t('REVIEW_DETAILS.NONE')}</em>
               </MenuItem>
               {productsAndServices.map((item) => (
                 <MenuItem key={item.id} value={item.id}>
@@ -112,7 +112,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             </Select>
           </FormControl>
           <FormControl className={'w-100'} variant="outlined">
-            <InputLabel id="demo-simple-select-label">Érkezés dátuma</InputLabel>
+            <InputLabel id="demo-simple-select-label">{t('REVIEW_DETAILS.ARRIVAL_DATE')}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               value={filter.date}
@@ -123,12 +123,20 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               label="Érkezés dátuma"
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>{t('REVIEW_DETAILS.NONE')}</em>
               </MenuItem>
-              <MenuItem value={subMonths(startOfToday(), 1).toJSON()}>1 hónap</MenuItem>
-              <MenuItem value={subMonths(startOfToday(), 3).toJSON()}>3 hónap</MenuItem>
-              <MenuItem value={subMonths(startOfToday(), 6).toJSON()}>6 hónap</MenuItem>
-              <MenuItem value={subMonths(startOfToday(), 12).toJSON()}>1 év</MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 1).toJSON()}>
+                {t('REVIEW_DETAILS.X_MONTH', { amount: 1 })}
+              </MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 3).toJSON()}>
+                {t('REVIEW_DETAILS.X_MONTH', { amount: 3 })}
+              </MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 6).toJSON()}>
+                {t('REVIEW_DETAILS.X_MONTH', { amount: 6 })}
+              </MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 12).toJSON()}>
+                {t('REVIEW_DETAILS.X_MONTH', { amount: 12 })}
+              </MenuItem>
             </Select>
           </FormControl>
           <TextField
@@ -146,7 +154,9 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         {ratings && ratings.map((rating, i) => <ReviewItem key={i} rating={rating} />)}
 
         <div className={`${classes.pager}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}>
-          <div className={classes.pageNumber}>{filter.pageNumber}. oldal</div>
+          <div className={classes.pageNumber}>
+            {filter.pageNumber}. {t('REVIEW_DETAILS.PAGE')}
+          </div>
           <div
             onClick={() => {
               filterChanged({ ...filter, pageNumber: filter.pageNumber - 1 });

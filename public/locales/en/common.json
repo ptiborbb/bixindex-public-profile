@@ -789,7 +789,14 @@
     "BAD": "Bad"
   },
   "REVIEW_DETAILS": {
-    "HIDE_SUMMARY": "HIDE SUMMARY"
+    "HIDE_SUMMARY": "HIDE SUMMARY",
+    "DETAILED_DATA": "Detailed information",
+    "FILTERS": "Filters",
+    "REVIEW_PRODUCT_SERVICE": "Reviewed product / service",
+    "ARRIVAL_DATE": "Arrival date",
+    "NONE": "None",
+    "PAGE": "Page",
+    "X_MONTH": "{{amount}} months"
   },
   "REVIEW_STATS": {
     "WRITE_REVIEW": "Write review",

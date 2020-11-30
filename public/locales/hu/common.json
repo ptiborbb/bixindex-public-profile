@@ -788,7 +788,14 @@
     "BAD": "Rossz"
   },
   "REVIEW_DETAILS": {
-    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE"
+    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE",
+    "DETAILED_DATA": "Részletes adatok",
+    "FILTERS": "Szűrők",
+    "REVIEW_PRODUCT_SERVICE": "Értékelt termék / szolgáltatás",
+    "ARRIVAL_DATE": "Érkezés dátuma",
+    "NONE": "Mind",
+    "X_MONTH": "{{amount}} hónap",
+    "PAGE": "Oldal"
   },
   "REVIEW_STATS": {
     "WRITE_REVIEW": "Értékelés írása",
