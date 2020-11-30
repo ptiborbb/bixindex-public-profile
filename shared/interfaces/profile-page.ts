@@ -6,6 +6,8 @@ export interface RatingItem {
   value: number;
   date: string;
   nps?: number;
+  productID: string;
+  serviceID: string;
   positive?: string;
   negative?: string;
   summary?: string;

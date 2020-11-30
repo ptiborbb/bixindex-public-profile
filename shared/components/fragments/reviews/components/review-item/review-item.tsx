@@ -1,6 +1,7 @@
+import { IProduct, IService } from '@codingsans/bixindex-common';
 import { Avatar, Divider, Fab } from '@material-ui/core';
 import { QuestionAnswer, Share, ThumbDown, ThumbUp } from '@material-ui/icons';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
@@ -12,10 +13,17 @@ import classes from './review-item.module.scss';
 
 interface ReviewItemProps {
   rating: RatingItem;
+  productsAndServices: (IProduct & IService)[];
 }
 
-export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
+export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices }) => {
   const { t } = useTranslate();
+
+  const ratedProductOrService = useMemo(
+    () => productsAndServices.find((item) => item.id === (rating?.productID || rating?.serviceID)),
+    [rating],
+  );
+
   return (
     <div className={classes.reviewCard}>
       <div className={classes.reviewerInfo}>
@@ -71,6 +79,14 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
         {rating.negative}
       </div>
+
+      {ratedProductOrService && (
+        <>
+          {' '}
+          <div className={classes.ratedProductTitle}>{t('REVIEW_ITEM.RATED_PRODUCT')}</div>
+          <div className={classes.ratedProduct}>{ratedProductOrService.name}</div>
+        </>
+      )}
       {rating?.reply?.user?.name && (
         <>
           <span className="d-flex align-items-center mb-2">

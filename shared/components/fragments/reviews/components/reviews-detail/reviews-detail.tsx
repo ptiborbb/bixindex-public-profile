@@ -151,7 +151,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
       <div className={`${ratingCount > 0 ? '' : ` ${classes.hidden}`}`}>
         <div className={`${classes.separator}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}></div>
 
-        {ratings && ratings.map((rating, i) => <ReviewItem key={i} rating={rating} />)}
+        {ratings &&
+          ratings.map((rating, i) => <ReviewItem key={i} rating={rating} productsAndServices={productsAndServices} />)}
 
         <div className={`${classes.pager}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}>
           <div className={classes.pageNumber}>

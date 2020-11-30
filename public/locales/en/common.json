@@ -780,7 +780,8 @@
     "NO_NPS": "-"
   },
   "REVIEW_ITEM": {
-    "REPLY": "Reply"
+    "REPLY": "Reply",
+    "RATED_PRODUCT": "Rated product"
   },
   "REVIEW_STAT": {
     "OUTSTANDING": "Outstanding",
