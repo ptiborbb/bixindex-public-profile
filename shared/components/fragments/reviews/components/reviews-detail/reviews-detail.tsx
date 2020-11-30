@@ -1,7 +1,9 @@
 import { IProduct, IRating, IService } from '@codingsans/bixindex-common';
-import { Button } from '@material-ui/core';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
-import React, { FC, useState } from 'react';
+import { startOfToday, subMonths } from 'date-fns';
+import { debounce } from 'lodash';
+import React, { FC, useCallback, useState } from 'react';
 import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { useTranslate } from '../../../../../translate.context';
@@ -13,8 +15,7 @@ import classes from './reviews-detail.module.scss';
 interface ReviewsDetailProps {
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
-  products: IProduct[];
-  services: IService[];
+  productsAndServices: (IProduct & IService)[];
   stats: ReviewStatsProps;
   ratings: RatingItem[];
   ratingCount: number;
@@ -27,8 +28,7 @@ interface ReviewsDetailProps {
 export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   filter,
   filterChanged,
-  products,
-  services,
+  productsAndServices,
   stats,
   ratings,
   ratingCount,
@@ -39,6 +39,17 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
 }) => {
   const [opened, setOpened] = useState(false);
   const { t } = useTranslate();
+
+  const changeNameFilter = debounce(
+    useCallback(
+      (value) => {
+        filterChanged({ ...filter, name: value, pageNumber: 1 });
+      },
+      [filter],
+    ),
+    500,
+  );
+
   return (
     <div className={classes.reviewsDetail}>
       <div className={classes.reviewsDetailTitle} onClick={() => setOpened(!opened)}>
@@ -60,7 +71,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
       )}
 
       <div className={classes.filterTitle}>
-        <Tune /> Szűrők
+        <Tune className="mr-2" /> Szűrők
       </div>
 
       <div className={classes.filterBlock}>
@@ -72,11 +83,60 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
                 onClick={() => {
                   filterChanged({ ...filter, stars: filter.stars === i + 1 ? undefined : i + 1, pageNumber: 1 });
                 }}
-                className={filter.stars === i + 1 ? classes.selectedFilter : ''}
+                className={filter.stars === i + 1 ? classes.selectedFilter : classes.starLine}
               >
                 <StarCounter stars={+i} count={count} />
               </div>
             ))}
+        </div>
+        <div className="w-100 ml-4 d-flex flex-column justify-content-between">
+          <FormControl className={'w-100'} variant="outlined">
+            <InputLabel id="ratedReviewLabel">Értékelt termék/szolgáltatás</InputLabel>
+            <Select
+              labelId="ratedReviewLabel"
+              value={filter.productOrServiceID}
+              onChange={(event) => {
+                filterChanged({ ...filter, productOrServiceID: event.target.value as string, pageNumber: 1 });
+              }}
+              fullWidth
+              label="Értékelt termék/szolgáltatás"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {productsAndServices.map((item) => (
+                <MenuItem key={item.id} value={item.id}>
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl className={'w-100'} variant="outlined">
+            <InputLabel id="demo-simple-select-label">Érkezés dátuma</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              value={filter.date}
+              onChange={(event) => {
+                filterChanged({ ...filter, date: event.target.value as string, pageNumber: 1 });
+              }}
+              fullWidth
+              label="Érkezés dátuma"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 1).toJSON()}>1 hónap</MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 3).toJSON()}>3 hónap</MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 6).toJSON()}>6 hónap</MenuItem>
+              <MenuItem value={subMonths(startOfToday(), 12).toJSON()}>1 év</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            label="Értékelő neve"
+            variant="outlined"
+            fullWidth
+            onChange={(event) => changeNameFilter(event.target.value)}
+          />
         </div>
       </div>
 

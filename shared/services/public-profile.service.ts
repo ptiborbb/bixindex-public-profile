@@ -25,6 +25,9 @@ export interface IPublicProfileService {
     limit: number,
     skip: number,
     stars?: number,
+    productOrServiceID?: string,
+    date?: string,
+    name?: string,
   ): void;
   searchProfilesByName(page: number, rowsPerPage: number, searchText: string): void;
   resetProfiles(): void;
@@ -67,10 +70,10 @@ export const publicProfileServiceFactory = (
     resetProfiles: () => {
       dispatch(resetProfileList());
     },
-    getRatingsByProfile: (id, by, limit, skip, stars) => {
+    getRatingsByProfile: (id, by, limit, skip, stars, productOrServiceID, date, name) => {
       dispatch(getRatingsForProfile());
       bixClient.publicProfile.profile
-        .getRatingsByProfile(id, by, limit, skip, stars)
+        .getRatingsByProfile(id, by, limit, skip, stars, productOrServiceID, date, name)
         .then((ratings) => dispatch(getRatingsForProfileSuccess({ ratings })))
         .catch((error) => dispatch(getRatingsForProfileFail({ error })));
       // .catch(() => dispatch(getPublicProfileSuccess({ profilePage: mockData() as ProfilePage })));

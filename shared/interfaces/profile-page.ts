@@ -1,4 +1,4 @@
-import { ECompanyTypes, IRating, IUser } from '@codingsans/bixindex-common';
+import { ECompanyTypes, IProduct, IRating, IService, IUser } from '@codingsans/bixindex-common';
 
 export interface RatingItem {
   name: string;
@@ -63,15 +63,7 @@ export interface ProfilePage {
     content: string;
     link?: string;
   }[];
-  productsAndServices: {
-    id: string;
-    description: string;
-    name: string;
-    mainCategory: string;
-    subCategory: string;
-    pricing: string;
-    speciality: string;
-  }[];
+  productsAndServices: (IProduct & IService)[];
   ratings: {
     items: RatingItem[];
     count: number;
