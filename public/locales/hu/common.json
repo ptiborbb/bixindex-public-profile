@@ -795,7 +795,8 @@
     "ARRIVAL_DATE": "Érkezés dátuma",
     "NONE": "Mind",
     "X_MONTH": "{{amount}} hónap",
-    "PAGE": "Oldal"
+    "PAGE": "Oldal",
+    "REVIEWER_NAME": "Értékelő neve"
   },
   "REVIEW_STATS": {
     "WRITE_REVIEW": "Értékelés írása",

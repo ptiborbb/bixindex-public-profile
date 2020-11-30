@@ -120,7 +120,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
                 filterChanged({ ...filter, date: event.target.value as string, pageNumber: 1 });
               }}
               fullWidth
-              label="Érkezés dátuma"
+              label={t('REVIEW_DETAILS.ARRIVAL_DATE')}
             >
               <MenuItem value="">
                 <em>{t('REVIEW_DETAILS.NONE')}</em>
@@ -140,7 +140,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             </Select>
           </FormControl>
           <TextField
-            label="Értékelő neve"
+            label={t('REVIEW_DETAILS.REVIEWER_NAME')}
             variant="outlined"
             fullWidth
             onChange={(event) => changeNameFilter(event.target.value)}

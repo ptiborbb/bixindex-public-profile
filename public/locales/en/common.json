@@ -796,7 +796,8 @@
     "ARRIVAL_DATE": "Arrival date",
     "NONE": "None",
     "PAGE": "Page",
-    "X_MONTH": "{{amount}} months"
+    "X_MONTH": "{{amount}} months",
+    "REVIEWER_NAME": "Reviewer name"
   },
   "REVIEW_STATS": {
     "WRITE_REVIEW": "Write review",
