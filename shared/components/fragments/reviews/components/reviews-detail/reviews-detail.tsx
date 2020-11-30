@@ -1,10 +1,9 @@
-import { IProduct, IRating, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
 import { debounce } from 'lodash';
 import React, { FC, useCallback, useState } from 'react';
-import { RatingItem } from '../../../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { useTranslate } from '../../../../../translate.context';
 import { StarCounter } from '../../../../star-counter/star-counter';
@@ -17,7 +16,7 @@ interface ReviewsDetailProps {
   filterChanged: (filters: ReviewFilter) => void;
   productsAndServices: (IProduct & IService)[];
   stats: ReviewStatsProps;
-  ratings: RatingItem[];
+  ratings: IRatingItem[];
   ratingCount: number;
   ratingCountsByValue: number[];
   companyAlias: string;

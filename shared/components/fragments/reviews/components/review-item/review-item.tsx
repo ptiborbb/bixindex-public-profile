@@ -1,18 +1,17 @@
-import { IProduct, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { Avatar, Divider, Fab } from '@material-ui/core';
 import { QuestionAnswer, Share, ThumbDown, ThumbUp } from '@material-ui/icons';
 import React, { FC, useMemo } from 'react';
 import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
-import { RatingItem } from '../../../../../interfaces/profile-page';
 import { useTranslate } from '../../../../../translate.context';
 import { NpsText } from '../../../../nps-text/nps-text';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import classes from './review-item.module.scss';
 
 interface ReviewItemProps {
-  rating: RatingItem;
+  rating: IRatingItem;
   productsAndServices: (IProduct & IService)[];
 }
 

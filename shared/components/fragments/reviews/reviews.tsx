@@ -1,6 +1,5 @@
-import { IProduct, IRating, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { FC } from 'react';
-import { RatingItem } from '../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../interfaces/review-filter';
 import { ReviewsDetail } from './components/reviews-detail/reviews-detail';
 import { ReviewsHeader } from './components/reviews-header/reviews-header';
@@ -10,7 +9,7 @@ interface ReviewsProps {
   companyAlias: string;
   companyFormID: string;
   ratings: {
-    items: RatingItem[];
+    items: IRatingItem[];
     count: number;
     countsByValue: number[];
   };
