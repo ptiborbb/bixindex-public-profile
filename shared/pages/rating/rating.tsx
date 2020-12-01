@@ -851,7 +851,10 @@ export const Rating: FC = () => {
                       variant="contained"
                       color="primary"
                       onClick={() => {
-                        isValid ? submitForm() : enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
+                        if (!isValid) {
+                          enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
+                        }
+                        submitForm();
                       }}
                       disabled={isSubmitting}
                     >
