@@ -6,6 +6,7 @@ import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
 import { useTranslate } from '../../../../../translate.context';
+import { calculateStarValue } from '../../../../../utils/calculate-star-value';
 import { NpsText } from '../../../../nps-text/nps-text';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import classes from './review-item.module.scss';
@@ -35,8 +36,8 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices })
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>
-            {rating.value && <StarCounter stars={Math.ceil(rating.value / 2) - 1} />}
-            <span className={classes.rating}>{Math.round(rating.value * 10) / 10 || 'NPS'}</span>
+            {rating.value && <StarCounter stars={calculateStarValue(rating.value)} />}
+            <span className={classes.rating}>{rating?.value?.toFixed(1) || 'NPS'}</span>
           </div>
           <div className={classes.date}>Ellenőrzés dátuma: {rating.date.split('T')[0]}</div>
           <div className={classes.share}>
