@@ -70,13 +70,13 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices })
         property="og:description"
         content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
       />
-      {rating.negative && (
+      {rating.positive && (
         <div className={classes.goodReview}>
           <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
           {rating.positive}
         </div>
       )}
-      {rating.positive && (
+      {rating.negative && (
         <div className={classes.badReview}>
           <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
           {rating.negative}

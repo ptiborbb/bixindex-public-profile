@@ -92,7 +92,12 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               <div
                 key={i}
                 onClick={() => {
-                  filterChanged({ ...filter, stars: filter.stars === i + 1 ? undefined : i + 1, pageNumber: 1 });
+                  filterChanged({
+                    ...filter,
+                    stars: filter.stars === i + 1 ? undefined : i + 1,
+                    pageNumber: 1,
+                    isNPS: filter.stars === i + 1 ? EReviewFilterType.ALL : EReviewFilterType.BIX,
+                  });
                 }}
                 className={filter.stars === i + 1 ? classes.selectedFilter : classes.starLine}
               >
@@ -107,7 +112,12 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               labelId="ratedReviewLabel"
               value={filter.productOrServiceID}
               onChange={(event) => {
-                filterChanged({ ...filter, productOrServiceID: event.target.value as string, pageNumber: 1 });
+                filterChanged({
+                  ...filter,
+                  productOrServiceID: event.target.value as string,
+                  pageNumber: 1,
+                  isNPS: event.target.value ? EReviewFilterType.BIX : EReviewFilterType.ALL,
+                });
               }}
               fullWidth
               label={t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
@@ -167,9 +177,24 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
                 filterChanged({ ...filter, isNPS: event.target.value as EReviewFilterType, pageNumber: 1 });
               }}
             >
-              <FormControlLabel value={EReviewFilterType.ALL} control={<Radio />} label={t('REVIEW_DETAIL.ALL')} />
-              <FormControlLabel value={EReviewFilterType.BIX} control={<Radio />} label={t('REVIEW_DETAIL.BIX')} />
-              <FormControlLabel value={EReviewFilterType.NPS} control={<Radio />} label={t('REVIEW_DETAIL.NPS')} />
+              <FormControlLabel
+                value={EReviewFilterType.ALL}
+                control={<Radio />}
+                label={t('REVIEW_DETAIL.ALL')}
+                disabled={!!filter.stars || !!filter.productOrServiceID}
+              />
+              <FormControlLabel
+                value={EReviewFilterType.BIX}
+                control={<Radio />}
+                label={t('REVIEW_DETAIL.BIX')}
+                disabled={!!filter.stars || !!filter.productOrServiceID}
+              />
+              <FormControlLabel
+                value={EReviewFilterType.NPS}
+                control={<Radio />}
+                label={t('REVIEW_DETAIL.NPS')}
+                disabled={!!filter.stars || !!filter.productOrServiceID}
+              />
             </RadioGroup>
           </FormControl>
         </div>
