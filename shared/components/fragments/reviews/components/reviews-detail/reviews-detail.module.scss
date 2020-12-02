@@ -30,13 +30,28 @@
     line-height: 24px;
     color: $dark;
     padding: 2rem 2rem 0;
+    display: flex;
+    align-items: center;
   }
 
   .filterBlock {
     display: flex;
-    justify-content: space-between;
     padding: 2rem;
-    cursor: pointer;
+
+    @mixin stars {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      &:hover {
+        background-color: #56aaa690;
+      }
+    }
+
+    .starLine {
+      @include stars();
+    }
 
     .filterInputs {
       display: flex;
@@ -44,6 +59,7 @@
     }
 
     .selectedFilter {
+      @include stars();
       background-color: lightgrey;
     }
   }

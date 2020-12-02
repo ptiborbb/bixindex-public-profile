@@ -779,7 +779,8 @@
     "NO_NPS": "-"
   },
   "REVIEW_ITEM": {
-    "REPLY": "Válasz"
+    "REPLY": "Válasz",
+    "RATED_PRODUCT": "Értékelt termék"
   },
   "REVIEW_STAT": {
     "OUTSTANDING": "Kiemelkedő",
@@ -788,11 +789,25 @@
     "BAD": "Rossz"
   },
   "REVIEW_DETAILS": {
-    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE"
+    "HIDE_SUMMARY": "ÖSSZEGZÉS ELREJTÉSE",
+    "DETAILED_DATA": "Részletes adatok",
+    "FILTERS": "Szűrők",
+    "REVIEW_PRODUCT_SERVICE": "Értékelt termék / szolgáltatás",
+    "ARRIVAL_DATE": "Érkezés dátuma",
+    "NONE": "Mind",
+    "X_MONTH": "{{amount}} hónap",
+    "PAGE": "Oldal",
+    "REVIEWER_NAME": "Értékelő neve",
+    "REVIEW_TYPE": "Értékelés típusa"
   },
   "REVIEW_STATS": {
     "WRITE_REVIEW": "Értékelés írása",
     "DONT_BE_AFRAID": "Ha korábban már volt üzleti kapcsolatod a céggel, akkor ne félj értékelni!",
     "LAST_REVIEW_DATE": "Legutóbbi értékelés dátuma"
+  },
+  "REVIEW_DETAIL": {
+    "ALL": "Összes",
+    "BIX": "BIX",
+    "NPS": "NPS"
   }
 }
