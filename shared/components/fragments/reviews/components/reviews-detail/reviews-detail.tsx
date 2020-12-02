@@ -48,7 +48,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   companyFormID,
   lastRating,
 }) => {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(true);
   const { t } = useTranslate();
 
   const changeNameFilter = debounce(
