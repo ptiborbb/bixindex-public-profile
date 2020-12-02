@@ -49,7 +49,7 @@ export interface ProfilePage {
     content: string;
     link?: string;
   }[];
-  productsAndServices: (IProduct & IService)[];
+  productsAndServices: (IProduct | IService)[];
   ratings: {
     items: IRatingItem[];
     count: number;

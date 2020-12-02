@@ -13,7 +13,7 @@ import classes from './review-item.module.scss';
 
 interface ReviewItemProps {
   rating: IRatingItem;
-  productsAndServices: (IProduct & IService)[];
+  productsAndServices: (IProduct | IService)[];
 }
 
 export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices }) => {

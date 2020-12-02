@@ -19,7 +19,7 @@ interface ReviewsProps {
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
   lastRating: IRating;
-  productsAndServices: (IProduct & IService)[];
+  productsAndServices: (IProduct | IService)[];
 }
 // TODO missing typings
 

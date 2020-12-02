@@ -26,7 +26,7 @@ import classes from './reviews-detail.module.scss';
 interface ReviewsDetailProps {
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
-  productsAndServices: (IProduct & IService)[];
+  productsAndServices: (IProduct | IService)[];
   stats: ReviewStatsProps;
   ratings: IRatingItem[];
   ratingCount: number;
