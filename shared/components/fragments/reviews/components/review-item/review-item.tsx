@@ -35,8 +35,8 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices })
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>
-            <StarCounter stars={Math.ceil(rating.value / 2) - 1} />{' '}
-            <span className={classes.rating}>{Math.round(rating.value * 10) / 10}</span>
+            {rating.value && <StarCounter stars={Math.ceil(rating.value / 2) - 1} />}
+            <span className={classes.rating}>{Math.round(rating.value * 10) / 10 || 'NPS'}</span>
           </div>
           <div className={classes.date}>Ellenőrzés dátuma: {rating.date.split('T')[0]}</div>
           <div className={classes.share}>
@@ -70,18 +70,20 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices })
         property="og:description"
         content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
       />
-      <div className={classes.goodReview}>
-        <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
-        {rating.positive}
-      </div>
-      <div className={classes.badReview}>
-        <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
-        {rating.negative}
-      </div>
-
+      {rating.negative && (
+        <div className={classes.goodReview}>
+          <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
+          {rating.positive}
+        </div>
+      )}
+      {rating.positive && (
+        <div className={classes.badReview}>
+          <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
+          {rating.negative}
+        </div>
+      )}
       {ratedProductOrService && (
         <>
-          {' '}
           <div className={classes.ratedProductTitle}>{t('REVIEW_ITEM.RATED_PRODUCT')}</div>
           <div className={classes.ratedProduct}>{ratedProductOrService.name}</div>
         </>

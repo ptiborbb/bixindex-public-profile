@@ -798,11 +798,17 @@
     "NONE": "None",
     "PAGE": "Page",
     "X_MONTH": "{{amount}} months",
-    "REVIEWER_NAME": "Reviewer name"
+    "REVIEWER_NAME": "Reviewer name",
+    "REVIEW_TYPE": "Review type"
   },
   "REVIEW_STATS": {
     "WRITE_REVIEW": "Write review",
     "DONT_BE_AFRAID": "If you have experience with this company, don't be afraid to share it with others!",
     "LAST_REVIEW_DATE": "Last review date"
+  },
+  "REVIEW_DETAIL": {
+    "ALL": "All",
+    "BIX": "BIX",
+    "NPS": "NPS"
   }
 }

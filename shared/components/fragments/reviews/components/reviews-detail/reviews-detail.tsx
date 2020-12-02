@@ -1,9 +1,21 @@
 import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+} from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
 import { debounce } from 'lodash';
 import React, { FC, useCallback, useState } from 'react';
+import { EReviewFilterType } from '../../../../../enums/review-filter-type';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { useTranslate } from '../../../../../translate.context';
 import { StarCounter } from '../../../../star-counter/star-counter';
@@ -88,7 +100,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               </div>
             ))}
         </div>
-        <div className="w-100 ml-4 d-flex flex-column justify-content-between">
+        <div className="w-50 mx-4 d-flex flex-column justify-content-between">
           <FormControl className={'w-100'} variant="outlined">
             <InputLabel id="ratedReviewLabel">{t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}</InputLabel>
             <Select
@@ -144,6 +156,22 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             fullWidth
             onChange={(event) => changeNameFilter(event.target.value)}
           />
+        </div>
+        <div>
+          <FormControl>
+            <FormLabel>{t('REVIEW_DETAILS.REVIEW_TYPE')}</FormLabel>
+            <RadioGroup
+              name="isNPS"
+              value={filter.isNPS}
+              onChange={(event) => {
+                filterChanged({ ...filter, isNPS: event.target.value as EReviewFilterType, pageNumber: 1 });
+              }}
+            >
+              <FormControlLabel value={EReviewFilterType.ALL} control={<Radio />} label={t('REVIEW_DETAIL.ALL')} />
+              <FormControlLabel value={EReviewFilterType.BIX} control={<Radio />} label={t('REVIEW_DETAIL.BIX')} />
+              <FormControlLabel value={EReviewFilterType.NPS} control={<Radio />} label={t('REVIEW_DETAIL.NPS')} />
+            </RadioGroup>
+          </FormControl>
         </div>
       </div>
 

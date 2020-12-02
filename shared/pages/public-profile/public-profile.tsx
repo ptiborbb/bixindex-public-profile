@@ -18,6 +18,7 @@ import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
 import { PageNotFound } from '../../components/page-not-found/page-not-found';
 import { useConfig } from '../../config.context';
+import { EReviewFilterType } from '../../enums/review-filter-type';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
 import { Rating } from '../rating/rating';
@@ -150,6 +151,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     stars: undefined,
     date: '',
     pageNumber: 1,
+    isNPS: EReviewFilterType.ALL,
   });
 
   const firstUpdate = useRef(true);
@@ -167,6 +169,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
       filter.productOrServiceID,
       filter.date,
       filter.name,
+      filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
     );
   }, [publicProfileService, filter]);
 
