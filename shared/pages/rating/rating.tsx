@@ -491,7 +491,7 @@ export const Rating: FC = () => {
                           </div>
                         </div>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} className="position-relative">
                         <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                       </Grid>
                       <FieldArray name="answers">
@@ -499,7 +499,7 @@ export const Rating: FC = () => {
                           <>
                             {companyForm.questions.map((question, index) => (
                               <Grid item xs={12} key={question.id}>
-                                {question.text}
+                                <span className="position-absolute">{question.text}</span>
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
                                     <FormControlLabel
