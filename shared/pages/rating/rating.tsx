@@ -594,6 +594,7 @@ export const Rating: FC = () => {
                       multiline
                       rows={3}
                       variant="outlined"
+                      inputProps={{ maxLength: 150 }}
                     />
                   </Grid>
                   {!nps && profilePage?.productsAndServices.length > 0 && (
