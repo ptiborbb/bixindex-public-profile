@@ -52,7 +52,8 @@
       "USER_ALREADY_EXISTS": "A felhasználó már létezik",
       "UNKOWN_ERROR": "Ismeretlen hiba történt",
       "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy."
-    }
+    },
+    "OK": "Rendben"
   },
   "COMPANIES": {
     "TITLE": "Cégek",
@@ -524,7 +525,14 @@
     "MEDIOCRE": "Semleges",
     "GOOD": "Jó",
     "EXCELLENT": "Kiemelkedő",
-    "EXTRA": "Extra"
+    "EXTRA": "Extra",
+    "WE_GOT_YOUR_REVIEW": "Értékelésed megkaptuk!",
+    "THANK_YOU_RATING_RECEIVED": "Köszönjük értékelésedet, megkaptuk!",
+    "BIX_CHECKS_REVIEW": "Az értékelést a BIX munkatársai ellenőrzik, és néhány órán belül aktív lesz!",
+    "UNTIL": "Addig: ",
+    "WRITE_ANOTHER": "Készíts újabb értékelést",
+    "VERIFY_YOUR_PROFILE": "Hitelesítsd a profilod",
+    "BIX_TEAM": "Üdv: a BIX csapata!"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Gyártó",
