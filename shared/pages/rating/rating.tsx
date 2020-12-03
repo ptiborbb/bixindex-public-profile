@@ -41,7 +41,7 @@ import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
   const dialog = useDialog();
-  const { fbAppId, googleClientId } = useConfig();
+  const { fbAppId, googleClientId, customerPortalUrl } = useConfig();
   const { t, i18n } = useTranslate();
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
@@ -191,6 +191,28 @@ export const Rating: FC = () => {
           };
           await ratingService.submitReview(parsedRating);
         }
+        await dialog({
+          variant: DialogType.ALERT,
+          title: <Typography className="text-white font-weight-bold">{t('RATING.WE_GOT_YOUR_REVIEW')}</Typography>,
+          text: (
+            <>
+              <Typography>{t('RATING.THANK_YOU_RATING_RECEIVED')}</Typography>
+              <Typography>{t('RATING.BIX_CHECKS_REVIEW')}</Typography>
+              <Typography>{t('RATING.UNTIL')}</Typography>
+              <ul>
+                <li>{t('RATING.WRITE_ANOTHER')}</li>
+                <li>
+                  <a href={customerPortalUrl} target="blank" rel="noreferrer">
+                    {t('RATING.VERIFY_YOUR_PROFILE')}
+                  </a>
+                </li>
+              </ul>
+              <Typography>{t('RATING.BIX_TEAM')}</Typography>
+            </>
+          ),
+          submitButtonLabel: t('COMMON.OK'),
+          headerColor: '#56AAA6',
+        });
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
       } catch (error) {
         const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
