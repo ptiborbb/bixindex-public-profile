@@ -177,6 +177,7 @@ export const Auth: FunctionComponent = () => {
                 autoLoad={false}
                 fields="name,email,picture"
                 callback={(resp) => responseFacebook(resp, true)}
+                isMobile={false}
                 render={(renderProps) => (
                   <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
                     <span className={classes.iconPlaceholder}>
@@ -322,6 +323,7 @@ export const Auth: FunctionComponent = () => {
                 autoLoad={false}
                 fields="name,email,picture"
                 callback={(resp) => responseFacebook(resp, false)}
+                isMobile={false}
                 render={(renderProps) => (
                   <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
                     <span className={classes.iconPlaceholder}>
