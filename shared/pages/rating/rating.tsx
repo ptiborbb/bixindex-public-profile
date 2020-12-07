@@ -159,6 +159,7 @@ export const Rating: FC = () => {
               `${values.auth.firstname} ${values.auth.lastname}`,
               values.auth.email,
               values.auth.password,
+              values.auth.phone,
             );
           }
         }
