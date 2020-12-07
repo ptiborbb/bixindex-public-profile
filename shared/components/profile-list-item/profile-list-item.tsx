@@ -63,7 +63,7 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
               </div>
             </div>
             <div className={classes.profile}>
-              {t('COMPANY_SEARCH.MAIN_PROFILE')} {t(`MAIN_PROFILES.${profile?.company?.sector}`)}
+              {t('COMPANY_SEARCH.MAIN_PROFILE')} {t(`MAIN_PROFILES.${profile?.profile?.sector}`)}
             </div>
           </div>
           <div className={classes.indexes}>

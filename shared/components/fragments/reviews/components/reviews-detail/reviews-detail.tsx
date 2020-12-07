@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
-import { debounce } from 'lodash';
+import { debounce, sum } from 'lodash';
 import React, { FC, useCallback, useState } from 'react';
 import { EReviewFilterType } from '../../../../../enums/review-filter-type';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
@@ -70,7 +70,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <div className={classes.reviewsDetailContent}>
           <ReviewStats
             npsRates={stats.npsRates}
-            index={{ score: stats.index.score, ratingCount, ratings: ratingCountsByValue }}
+            index={{ score: stats.index.score, ratingCount: sum(ratingCountsByValue), ratings: ratingCountsByValue }}
             companyAlias={companyAlias}
             companyFormID={companyFormID}
             lastRating={lastRating}
