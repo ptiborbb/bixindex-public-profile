@@ -159,6 +159,7 @@ export const Rating: FC = () => {
               `${values.auth.firstname} ${values.auth.lastname}`,
               values.auth.email,
               values.auth.password,
+              `+${values.auth.phone}`,
             );
           }
         }
@@ -781,6 +782,7 @@ export const Rating: FC = () => {
                                   name="auth.phone"
                                   fullWidth
                                   variant="outlined"
+                                  placeholder="36301234567"
                                   InputProps={{
                                     startAdornment: <InputAdornment position="start">+</InputAdornment>,
                                     endAdornment: (

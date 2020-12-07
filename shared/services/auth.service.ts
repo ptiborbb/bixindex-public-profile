@@ -6,10 +6,10 @@ import {
   forgotPasswordSuccess,
   loginFail,
   loginSuccess,
+  registerSuccess,
   resetPassword,
   resetPasswordFail,
   resetPasswordSuccess,
-  registerSuccess,
 } from '../store/actions';
 // eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IAuthService {
@@ -17,7 +17,7 @@ export interface IAuthService {
   facebook: (accessToken: string) => Promise<void>;
   google: (tokenId: string) => Promise<void>;
   logout: () => Promise<void>;
-  register: (name: string, email: string, pasword: string) => Promise<void>;
+  register: (name: string, email: string, password: string, phone?: string) => Promise<void>;
   getMe: () => void;
   forgotPassword: (email: string) => void;
   changePassword: (token: string, password: string) => void;
@@ -60,9 +60,9 @@ export const authServiceFactory = (bixClient: IBixindexClient, dispatch: Dispatc
           dispatch(loginSuccess({ user: null }));
         });
     },
-    register: (name: string, email: string, password: string) => {
+    register: (name: string, email: string, password: string, phone?) => {
       return bixClient.auth
-        .register(name, email, password)
+        .register(name, email, password, phone)
         .then(() => bixClient.auth.me())
         .then((user) => {
           dispatch(registerSuccess({ user }));
