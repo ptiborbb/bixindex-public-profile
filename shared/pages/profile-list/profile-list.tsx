@@ -73,7 +73,7 @@ export const ProfileList: FC = () => {
           </Grid>
           <Formik
             initialValues={{
-              text: '',
+              text: searchText,
             }}
             validationSchema={Yup.object().shape({
               text: Yup.string().required(t('COMMON.REQUIRED')),
@@ -83,6 +83,7 @@ export const ProfileList: FC = () => {
               setSubmitting(false);
               resetForm();
             }}
+            enableReinitialize
           >
             <Form className={classes.companySearch} noValidate>
               <div className={classes.searchInputBlock}>
