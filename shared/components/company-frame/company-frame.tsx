@@ -106,6 +106,11 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
                 <SocialIcon type={'linkedin'} />
               </a>
             )}
+            {profile.tiktok && (
+              <a href={convertLinkToAbsolute(profile.tiktok)} target="_blank" rel="noreferrer">
+                <SocialIcon type={'tiktok'} />
+              </a>
+            )}
           </div>
 
           <div className={classes.separator}></div>

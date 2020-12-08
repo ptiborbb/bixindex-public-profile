@@ -2,10 +2,11 @@ import { FC, useMemo } from 'react';
 import facebook from '../../../public/social/Facebook.svg';
 import insta from '../../../public/social/Insta.svg';
 import linkedin from '../../../public/social/Linkedin.svg';
+import tiktok from '../../../public/social/tiktok.svg';
 import classes from './social-icon.module.scss';
 
 interface SocialIconProps {
-  type: 'facebook' | 'insta' | 'linkedin';
+  type: 'facebook' | 'insta' | 'linkedin' | 'tiktok';
   href?: string;
   marginRight?: string;
 }
@@ -19,6 +20,8 @@ export const SocialIcon: FC<SocialIconProps> = ({ type, href, marginRight = '1re
         return insta;
       case 'linkedin':
         return linkedin;
+      case 'tiktok':
+        return tiktok;
     }
   }, [type]);
 
