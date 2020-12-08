@@ -30,7 +30,7 @@ export interface ReviewStatsProps {
       ratings: Ratings;
     };
   }[];
-  npsRates: [number, number, number, number, number, number, number, number, number, number];
+  npsRates: [number, number, number, number, number, number, number, number, number, number, number];
   companyAlias: string;
   companyFormID: string;
   lastRating: IRating;
