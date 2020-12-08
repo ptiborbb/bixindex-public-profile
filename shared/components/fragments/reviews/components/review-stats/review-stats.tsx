@@ -52,7 +52,7 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
       <ReviewStat label={'Bizalmi index'} index={index} radius={80} />
       <div className={classes.writeReview}>
         <div className={classes.writeReviewHeader}>
-          <Edit /> {t('REVIEW_STATS.WRITE_REVIEW')}
+          <Edit className="mr-2" /> {t('REVIEW_STATS.WRITE_REVIEW')}
         </div>
         <div className="d-flex justify-content-between px-5 py-5 align-items-center">
           <span>{t('REVIEW_STATS.DONT_BE_AFRAID')}</span>
@@ -62,7 +62,7 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
             passHref
           >
             <a type="button" className={classes.companyWriteReview}>
-              {t('REVIEW_STATS.WRITE_REVIEW')} <Edit className={classes.reviewIcon} />
+              {t('COMPANY_SEARCH.WRITE_REVIEW')} <Edit className={classes.reviewIcon} />
             </a>
           </Link>
         </div>
