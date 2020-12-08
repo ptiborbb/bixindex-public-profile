@@ -64,6 +64,8 @@ export const Rating: FC = () => {
     authService.logout();
   }, [authService]);
 
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
   const authValidation = useMemo(
     () =>
@@ -78,7 +80,7 @@ export const Rating: FC = () => {
               then: Yup.string().required(t('COMMON.REQUIRED')),
             }),
             email: Yup.string().required(t('COMMON.REQUIRED')).email(),
-            phone: Yup.string(),
+            phone: Yup.string().matches(phoneRegExp, t('COMMON.PHONE_VALIDATION_ERROR')),
             company: Yup.string(),
             role: Yup.string(),
             password: Yup.string().required(t('COMMON.REQUIRED')),
@@ -749,6 +751,7 @@ export const Rating: FC = () => {
                                   component={TextField}
                                   label=""
                                   name="auth.lastname"
+                                  type="text"
                                   fullWidth
                                   variant="outlined"
                                 />
@@ -759,6 +762,7 @@ export const Rating: FC = () => {
                                   component={TextField}
                                   label=""
                                   name="auth.firstname"
+                                  type="text"
                                   fullWidth
                                   variant="outlined"
                                 />
@@ -780,6 +784,7 @@ export const Rating: FC = () => {
                                   component={TextField}
                                   label=""
                                   name="auth.phone"
+                                  type="tel"
                                   fullWidth
                                   variant="outlined"
                                   placeholder="36301234567"
