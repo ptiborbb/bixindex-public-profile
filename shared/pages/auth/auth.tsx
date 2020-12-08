@@ -239,6 +239,7 @@ export const Auth: FunctionComponent = () => {
                         <Field
                           id="name"
                           name="name"
+                          type="text"
                           label={t('AUTH.NAME')}
                           component={TextField}
                           fullWidth
@@ -256,6 +257,7 @@ export const Auth: FunctionComponent = () => {
                         <Field
                           id="email"
                           name="email"
+                          type="email"
                           label={t('AUTH.EMAIL')}
                           component={TextField}
                           fullWidth
@@ -385,6 +387,7 @@ export const Auth: FunctionComponent = () => {
                         <Field
                           id="email"
                           name="email"
+                          type="email"
                           label={t('AUTH.EMAIL')}
                           component={TextField}
                           fullWidth
