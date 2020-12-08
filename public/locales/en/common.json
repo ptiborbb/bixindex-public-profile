@@ -6,6 +6,7 @@
     "UNKOWN_ERROR": "An unknown error has occurred",
     "HISTORY_PLACEHOLDER": "Latest {{month}} month",
     "REQUIRED": "This field is required",
+    "PHONE_VALIDATION_ERROR": "Phone number is not valid",
     "TABLE": {
       "COLUMNS": {
         "ID": "ID",

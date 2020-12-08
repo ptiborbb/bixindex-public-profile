@@ -6,6 +6,7 @@
     "UNKOWN_ERROR": "Ismeretlen hiba történt",
     "HISTORY_PLACEHOLDER": "Elmúlt {{month}} hónap",
     "REQUIRED": "A mező kitöltése kötelező",
+    "PHONE_VALIDATION_ERROR": "Kérlek használj valós telefonszámot",
     "TABLE": {
       "COLUMNS": {
         "ID": "Azonosító",
