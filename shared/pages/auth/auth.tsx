@@ -250,6 +250,7 @@ export const Auth: FunctionComponent = () => {
                             className={classes.formInput}
                             InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                             InputProps={{
+                              autoComplete: 'name',
                               classes: inputFieldStyle,
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -268,6 +269,7 @@ export const Auth: FunctionComponent = () => {
                             className={classes.formInput}
                             InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                             InputProps={{
+                              autoComplete: 'email',
                               classes: inputFieldStyle,
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -286,6 +288,7 @@ export const Auth: FunctionComponent = () => {
                             className={classes.formInput}
                             InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                             InputProps={{
+                              autoComplete: 'new-password',
                               classes: inputFieldStyle,
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -401,6 +404,7 @@ export const Auth: FunctionComponent = () => {
                             className={classes.formInput}
                             InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                             InputProps={{
+                              autoComplete: 'email',
                               classes: inputFieldStyle,
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -420,6 +424,7 @@ export const Auth: FunctionComponent = () => {
                             className={classes.formInput}
                             InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                             InputProps={{
+                              autoComplete: 'current-password',
                               classes: inputFieldStyle,
                               startAdornment: (
                                 <InputAdornment position="start">

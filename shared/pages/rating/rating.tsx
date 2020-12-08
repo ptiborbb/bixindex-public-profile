@@ -754,6 +754,9 @@ export const Rating: FC = () => {
                                   type="text"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'family-name',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -765,6 +768,9 @@ export const Rating: FC = () => {
                                   type="text"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'given-name',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -776,6 +782,9 @@ export const Rating: FC = () => {
                                   type="email"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'email',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -789,6 +798,7 @@ export const Rating: FC = () => {
                                   variant="outlined"
                                   placeholder="36301234567"
                                   InputProps={{
+                                    autoComplete: 'tel',
                                     startAdornment: <InputAdornment position="start">+</InputAdornment>,
                                     endAdornment: (
                                       <Tooltip
@@ -811,6 +821,9 @@ export const Rating: FC = () => {
                                   fullWidth
                                   type="password"
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'new-password',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -822,6 +835,9 @@ export const Rating: FC = () => {
                                   fullWidth
                                   type="password"
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'new-password',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={12} className={classes.alignCenter}>
@@ -845,7 +861,16 @@ export const Rating: FC = () => {
                             <>
                               <Grid item xs={6}>
                                 <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
-                                <Field component={TextField} label="" name="auth.email" fullWidth variant="outlined" />
+                                <Field
+                                  component={TextField}
+                                  label=""
+                                  name="auth.email"
+                                  fullWidth
+                                  variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'email',
+                                  }}
+                                />
                               </Grid>
                               <Grid item xs={6}>
                                 <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
@@ -856,6 +881,9 @@ export const Rating: FC = () => {
                                   type="password"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'current-password',
+                                  }}
                                 />
                               </Grid>
                             </>
