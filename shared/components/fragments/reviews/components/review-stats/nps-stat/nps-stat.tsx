@@ -17,17 +17,17 @@ export const NpsStat: FC<NpsStatProps> = ({ npsRates }) => {
   const npsScore = useMemo(() => calculateNPS(npsRates as any), []);
   const colors = useMemo(
     () => [
-      '#B31919',
-      '#D5191F',
-      '#EC4224',
-      '#F1681F',
-      '#F68E19',
-      '#FEAD1D',
-      '#FDD605',
-      '#E6E7E9',
-      '#E6E7E9',
-      '#85C741',
-      '#45A73A',
+      { background: '#B31919', text: '#ffffff' },
+      { background: '#D5191F', text: '#ffffff' },
+      { background: '#EC4224', text: '#ffffff' },
+      { background: '#F1681F', text: '#ffffff' },
+      { background: '#F68E19', text: '#ffffff' },
+      { background: '#FEAD1D', text: '#ffffff' },
+      { background: '#FDD605', text: '#ffffff' },
+      { background: '#E6E7E9', text: '#8e8e8e' },
+      { background: '#E6E7E9', text: '#8e8e8e' },
+      { background: '#85C741', text: '#ffffff' },
+      { background: '#45A73A', text: '#ffffff' },
     ],
     [],
   );
@@ -56,7 +56,7 @@ export const NpsStat: FC<NpsStatProps> = ({ npsRates }) => {
         {npsRates.map((rate, i) => (
           <div key={i} className={classes.npsItem}>
             <div>{i}</div>
-            <div className={classes.box} style={{ backgroundColor: colors[i] }}>
+            <div className={classes.box} style={{ backgroundColor: colors[i].background, color: colors[i].text }}>
               {rate}
             </div>
           </div>
