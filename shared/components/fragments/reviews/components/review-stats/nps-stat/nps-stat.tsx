@@ -10,14 +10,14 @@ import { FC, useMemo } from 'react';
 import classes from './nps-stat.module.scss';
 
 export interface NpsStatProps {
-  npsRates: [number, number, number, number, number, number, number, number, number, number];
+  npsRates: [number, number, number, number, number, number, number, number, number, number, number];
 }
 
 export const NpsStat: FC<NpsStatProps> = ({ npsRates }) => {
   const npsScore = useMemo(() => calculateNPS(npsRates as any), []);
   const colors = useMemo(
     () => [
-      // '#B31919',
+      '#B31919',
       '#D5191F',
       '#EC4224',
       '#F1681F',
@@ -55,7 +55,7 @@ export const NpsStat: FC<NpsStatProps> = ({ npsRates }) => {
       <div className={classes.npsLine}>
         {npsRates.map((rate, i) => (
           <div key={i} className={classes.npsItem}>
-            <div>{i + 1}</div>
+            <div>{i}</div>
             <div className={classes.box} style={{ backgroundColor: colors[i] }}>
               {rate}
             </div>
