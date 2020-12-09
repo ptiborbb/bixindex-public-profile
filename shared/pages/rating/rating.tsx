@@ -533,7 +533,9 @@ export const Rating: FC = () => {
                                         className="m-0"
                                         key={option.value}
                                         value={option.value}
-                                        label={<span className={index !== 0 && 'invisible'}>{option.label}</span>}
+                                        label={
+                                          <span className={index !== 0 ? 'invisible' : undefined}>{option.label}</span>
+                                        }
                                         labelPlacement="top"
                                         onClick={option.clickHandler}
                                         control={<SmileyRadio smiley={option.icon} />}
