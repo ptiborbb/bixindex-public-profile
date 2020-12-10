@@ -1,8 +1,10 @@
+import { EReviewFilterType } from '../enums/review-filter-type';
+
 export interface ReviewFilter {
   stars: number;
-  productId: string;
-  productOrService: 'product' | 'service';
-  date: Date;
+  productOrServiceID: string;
+  date: string;
   name: string;
   pageNumber: number;
+  isNPS: EReviewFilterType;
 }

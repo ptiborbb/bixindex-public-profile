@@ -103,6 +103,7 @@
           &:hover {
             .shareOptions {
               display: flex;
+              align-items: center;
             }
           }
         }
@@ -144,5 +145,21 @@
       color: $dark;
       margin-bottom: 0.5rem;
     }
+  }
+  .ratedProductTitle {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #656565;
+    margin-bottom: 0.5rem;
+  }
+  .ratedProduct {
+    padding: 0.5rem 2rem;
+    background-color: #56aaa6;
+    border-radius: 2px;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: bold;
   }
 }

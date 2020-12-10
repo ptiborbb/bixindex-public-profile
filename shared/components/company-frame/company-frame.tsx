@@ -83,7 +83,7 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
           <CompanyDetailItem
             icon={<SettingsIcon />}
             label={t('COMPANY_FRAME.MAIN_PROFILE')}
-            value={t(`MAIN_PROFILES.${profile.details.mainProfile}`)}
+            value={t(`MAIN_CATEGORIES.${profile.companyIndustry}`)}
           />
           <a href={convertLinkToAbsolute(profile.website)} target="_blank" rel="noreferrer">
             <CompanyDetailItem icon={<LanguageIcon />} label={t('COMPANY_FRAME.WEBSITE')} value={profile.website} />
@@ -104,6 +104,11 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
             {profile.linkedin && (
               <a href={convertLinkToAbsolute(profile.linkedin)} target="_blank" rel="noreferrer">
                 <SocialIcon type={'linkedin'} />
+              </a>
+            )}
+            {profile.tiktok && (
+              <a href={convertLinkToAbsolute(profile.tiktok)} target="_blank" rel="noreferrer">
+                <SocialIcon type={'tiktok'} />
               </a>
             )}
           </div>

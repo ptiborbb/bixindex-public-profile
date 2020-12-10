@@ -6,6 +6,7 @@
     "UNKOWN_ERROR": "An unknown error has occurred",
     "HISTORY_PLACEHOLDER": "Latest {{month}} month",
     "REQUIRED": "This field is required",
+    "PHONE_VALIDATION_ERROR": "Phone number is not valid",
     "TABLE": {
       "COLUMNS": {
         "ID": "ID",
@@ -50,7 +51,8 @@
       "CANNOT_DELETE_YOURSELF": "You cannot delete yourself",
       "USER_ALREADY_EXISTS": "This user already exists",
       "GOOGLE_ERROR": "An error occurred during google auth. Please check if cookies are allowed, or use a different authentication method."
-    }
+    },
+    "OK": "OK"
   },
   "COMPANIES": {
     "TITLE": "Companies",
@@ -519,7 +521,14 @@
     "MEDIOCRE": "Mediocre",
     "GOOD": "Good",
     "EXCELLENT": "Excellent",
-    "EXTRA": "Extra"
+    "EXTRA": "Extra",
+    "WE_GOT_YOUR_REVIEW": "We have received your review!",
+    "THANK_YOU_RATING_RECEIVED": "You have successfully submitted your review!",
+    "BIX_CHECKS_REVIEW": "The review is being checked by our team, and will be active in a couple of hours.",
+    "UNTIL": "Meanwhile:",
+    "WRITE_ANOTHER": "Write another one!",
+    "VERIFY_YOUR_PROFILE": "Authenticate your profile",
+    "BIX_TEAM": "Thank you, the BIX team"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",
@@ -780,7 +789,8 @@
     "NO_NPS": "-"
   },
   "REVIEW_ITEM": {
-    "REPLY": "Reply"
+    "REPLY": "Reply",
+    "RATED_PRODUCT": "Rated product"
   },
   "REVIEW_STAT": {
     "OUTSTANDING": "Outstanding",
@@ -789,11 +799,25 @@
     "BAD": "Bad"
   },
   "REVIEW_DETAILS": {
-    "HIDE_SUMMARY": "HIDE SUMMARY"
+    "HIDE_SUMMARY": "HIDE SUMMARY",
+    "DETAILED_DATA": "Detailed information",
+    "FILTERS": "Filters",
+    "REVIEW_PRODUCT_SERVICE": "Reviewed product / service",
+    "ARRIVAL_DATE": "Arrival date",
+    "NONE": "None",
+    "PAGE": "Page",
+    "X_MONTH": "{{amount}} months",
+    "REVIEWER_NAME": "Reviewer name",
+    "REVIEW_TYPE": "Review type"
   },
   "REVIEW_STATS": {
-    "WRITE_REVIEW": "Write review",
+    "WRITE_REVIEW": "Review",
     "DONT_BE_AFRAID": "If you have experience with this company, don't be afraid to share it with others!",
     "LAST_REVIEW_DATE": "Last review date"
+  },
+  "REVIEW_DETAIL": {
+    "ALL": "All",
+    "BIX": "BIX",
+    "NPS": "NPS"
   }
 }

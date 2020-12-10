@@ -1,21 +1,29 @@
+import { IProduct, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { Avatar, Divider, Fab } from '@material-ui/core';
 import { QuestionAnswer, Share, ThumbDown, ThumbUp } from '@material-ui/icons';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
-import { RatingItem } from '../../../../../interfaces/profile-page';
 import { useTranslate } from '../../../../../translate.context';
+import { calculateStarValue } from '../../../../../utils/calculate-star-value';
 import { NpsText } from '../../../../nps-text/nps-text';
 import { StarCounter } from '../../../../star-counter/star-counter';
 import classes from './review-item.module.scss';
 
 interface ReviewItemProps {
-  rating: RatingItem;
+  rating: IRatingItem;
+  productsAndServices: (IProduct | IService)[];
 }
 
-export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
+export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices }) => {
   const { t } = useTranslate();
+
+  const ratedProductOrService = useMemo(
+    () => productsAndServices.find((item) => item.id === (rating?.productID || rating?.serviceID)),
+    [rating],
+  );
+
   return (
     <div className={classes.reviewCard}>
       <div className={classes.reviewerInfo}>
@@ -28,8 +36,8 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         </div>
         <div className={classes.details}>
           <div className={classes.ratingLine}>
-            <StarCounter stars={Math.ceil(rating.value / 2) - 1} />{' '}
-            <span className={classes.rating}>{Math.round(rating.value * 10) / 10}</span>
+            {rating.value && <StarCounter stars={calculateStarValue(rating.value)} />}
+            <span className={classes.rating}>{rating?.value?.toFixed(1) || 'NPS'}</span>
           </div>
           <div className={classes.date}>Ellenőrzés dátuma: {rating.date.split('T')[0]}</div>
           <div className={classes.share}>
@@ -63,14 +71,24 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating }) => {
         property="og:description"
         content="Mérd fel beszállítóid, megrendelőid, végfelhasználóid gazdasági helyzetét, és a COVID19 partnereidre gyakorolt üzleti hatásait a BIX - PSI segítségével!"
       />
-      <div className={classes.goodReview}>
-        <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
-        {rating.positive}
-      </div>
-      <div className={classes.badReview}>
-        <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
-        {rating.negative}
-      </div>
+      {rating.positive && (
+        <div className={classes.goodReview}>
+          <ThumbUp className={`${classes.thumbIcon} ${classes.thumbGreen}`} />
+          {rating.positive}
+        </div>
+      )}
+      {rating.negative && (
+        <div className={classes.badReview}>
+          <ThumbDown className={`${classes.thumbIcon} ${classes.thumbRed}`} />
+          {rating.negative}
+        </div>
+      )}
+      {ratedProductOrService && (
+        <>
+          <div className={classes.ratedProductTitle}>{t('REVIEW_ITEM.RATED_PRODUCT')}</div>
+          <div className={classes.ratedProduct}>{ratedProductOrService.name}</div>
+        </>
+      )}
       {rating?.reply?.user?.name && (
         <>
           <span className="d-flex align-items-center mb-2">

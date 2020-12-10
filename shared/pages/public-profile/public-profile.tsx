@@ -18,8 +18,10 @@ import { Reviews } from '../../components/fragments/reviews/reviews';
 import { Header } from '../../components/header/header';
 import { PageNotFound } from '../../components/page-not-found/page-not-found';
 import { useConfig } from '../../config.context';
+import { EReviewFilterType } from '../../enums/review-filter-type';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
+import { timeoutPromise } from '../../utils/timeout-promise';
 import { Rating } from '../rating/rating';
 import classes from './public-profile.module.scss';
 
@@ -81,7 +83,7 @@ type OgMetaProperties = 'og:url' | 'og:type' | 'og:title' | 'og:image' | 'og:des
 type IOgMetaData = [OgMetaProperties, string];
 
 const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
-  const {publicProfileUrl} = useConfig()
+  const { publicProfileUrl } = useConfig();
   const { asPath, route } = useRouter();
   return useMemo(
     () =>
@@ -146,11 +148,11 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
 
   const [filter, setFilter] = useState({
     name: '',
-    productId: undefined,
-    productOrService: undefined,
+    productOrServiceID: '',
     stars: undefined,
-    date: undefined,
+    date: '',
     pageNumber: 1,
+    isNPS: EReviewFilterType.ALL,
   });
 
   const firstUpdate = useRef(true);
@@ -159,7 +161,17 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
       firstUpdate.current = false;
       return;
     }
-    return publicProfileService.getRatingsByProfile(alias, by, 20, (filter.pageNumber - 1) * 20, filter.stars);
+    return publicProfileService.getRatingsByProfile(
+      alias,
+      by,
+      20,
+      (filter.pageNumber - 1) * 20,
+      filter.stars,
+      filter.productOrServiceID,
+      filter.date,
+      filter.name,
+      filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
+    );
   }, [publicProfileService, filter]);
 
   const contentSegment = useMemo(() => {
@@ -177,6 +189,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
             stats={profilePage.stats}
             npsRates={profilePage.npsRates}
             filter={filter}
+            productsAndServices={profilePage.productsAndServices}
             filterChanged={setFilter}
             lastRating={profilePage.lastRating}
           />
@@ -197,6 +210,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
             npsRates={profilePage.npsRates}
             filter={filter}
             filterChanged={setFilter}
+            productsAndServices={profilePage.productsAndServices}
             lastRating={profilePage.lastRating}
           />
         );
@@ -265,8 +279,10 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   );
 };
 
+const FIVE_SECONDS = 5000;
+
 PublicProfile.getInitialProps = async (ctx) => {
-  const { backendUrl } = useConfig()
+  const { backendUrl } = useConfig();
   if (!(process && process.env && backendUrl) || !ctx.req) {
     return {
       profilePage: null,
@@ -278,9 +294,12 @@ PublicProfile.getInitialProps = async (ctx) => {
   });
   const alias = ctx.query.companyAlias as string;
   const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  const profilePage = (await bixClient.publicProfile.profile
-    .getProfileByCompany(alias, by)
-    .catch((_) => null)) as ProfilePage;
+  const profilePage = await timeoutPromise<ProfilePage>(
+    bixClient.publicProfile.profile
+      .getProfileByCompany(alias, by)
+      .catch((_) => null) as Promise<ProfilePage | null>,
+    FIVE_SECONDS
+  );
   return {
     profilePage,
   };
