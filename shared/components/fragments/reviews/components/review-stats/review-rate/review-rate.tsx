@@ -9,7 +9,7 @@ export interface ReviewRateProps {
 }
 
 export const ReviewRate: FC<ReviewRateProps> = ({ ratingCount, rating, emoji, label }) => {
-  const ratio = useMemo(() => ((rating / ratingCount) * 100).toFixed(2), [rating, ratingCount]);
+  const ratio = useMemo(() => ((rating / (ratingCount || 1)) * 100).toFixed(2), [rating, ratingCount]);
   return (
     <div className={classes.reviewRate}>
       <div className={classes.ratio}>{ratio}%</div>

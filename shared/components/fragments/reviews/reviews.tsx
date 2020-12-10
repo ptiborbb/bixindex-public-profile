@@ -1,6 +1,5 @@
-import { IRating } from '@codingsans/bixindex-common';
+import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { FC } from 'react';
-import { RatingItem } from '../../../interfaces/profile-page';
 import { ReviewFilter } from '../../../interfaces/review-filter';
 import { ReviewsDetail } from './components/reviews-detail/reviews-detail';
 import { ReviewsHeader } from './components/reviews-header/reviews-header';
@@ -10,7 +9,7 @@ interface ReviewsProps {
   companyAlias: string;
   companyFormID: string;
   ratings: {
-    items: RatingItem[];
+    items: IRatingItem[];
     count: number;
     countsByValue: number[];
   };
@@ -20,6 +19,7 @@ interface ReviewsProps {
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
   lastRating: IRating;
+  productsAndServices: (IProduct | IService)[];
 }
 // TODO missing typings
 
@@ -32,6 +32,7 @@ export const Reviews: FC<ReviewsProps> = ({
   filter,
   filterChanged,
   lastRating,
+  productsAndServices,
 }) => {
   return (
     <div className={classes.reviews}>
@@ -39,8 +40,7 @@ export const Reviews: FC<ReviewsProps> = ({
       <ReviewsDetail
         filter={filter}
         filterChanged={filterChanged}
-        products={[]}
-        services={[]}
+        productsAndServices={productsAndServices}
         stats={{ ...stats, npsRates }}
         ratings={ratings.items}
         ratingCount={ratings.count}

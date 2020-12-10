@@ -76,8 +76,12 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 801px) {
   .companySidebar {
     display: none;
+  }
+  .companyContent {
+    width: 100% !important;
+    color: $dark;
   }
 }

@@ -1,19 +1,5 @@
-import { ECompanyTypes, IRating, IUser } from '@codingsans/bixindex-common';
+import { ECompanyTypes, IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
 
-export interface RatingItem {
-  name: string;
-  logo: string;
-  value: number;
-  date: string;
-  nps?: number;
-  positive?: string;
-  negative?: string;
-  summary?: string;
-  reply: {
-    user: Pick<IUser, "id" | "image" | "name">;
-    replyText: string;
-  }
-}
 
 export interface ProfilePage {
   profile: {
@@ -63,17 +49,9 @@ export interface ProfilePage {
     content: string;
     link?: string;
   }[];
-  productsAndServices: {
-    id: string;
-    description: string;
-    name: string;
-    mainCategory: string;
-    subCategory: string;
-    pricing: string;
-    speciality: string;
-  }[];
+  productsAndServices: (IProduct | IService)[];
   ratings: {
-    items: RatingItem[];
+    items: IRatingItem[];
     count: number;
     countsByValue: number[];
   };

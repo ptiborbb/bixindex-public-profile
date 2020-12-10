@@ -41,7 +41,7 @@ import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
   const dialog = useDialog();
-  const { fbAppId, googleClientId } = useConfig();
+  const { fbAppId, googleClientId, customerPortalUrl } = useConfig();
   const { t, i18n } = useTranslate();
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
@@ -64,6 +64,8 @@ export const Rating: FC = () => {
     authService.logout();
   }, [authService]);
 
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
   const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
   const authValidation = useMemo(
     () =>
@@ -78,7 +80,7 @@ export const Rating: FC = () => {
               then: Yup.string().required(t('COMMON.REQUIRED')),
             }),
             email: Yup.string().required(t('COMMON.REQUIRED')).email(),
-            phone: Yup.string(),
+            phone: Yup.string().matches(phoneRegExp, t('COMMON.PHONE_VALIDATION_ERROR')),
             company: Yup.string(),
             role: Yup.string(),
             password: Yup.string().required(t('COMMON.REQUIRED')),
@@ -159,6 +161,7 @@ export const Rating: FC = () => {
               `${values.auth.firstname} ${values.auth.lastname}`,
               values.auth.email,
               values.auth.password,
+              `+${values.auth.phone}`,
             );
           }
         }
@@ -191,6 +194,28 @@ export const Rating: FC = () => {
           };
           await ratingService.submitReview(parsedRating);
         }
+        await dialog({
+          variant: DialogType.ALERT,
+          title: <Typography className="text-white font-weight-bold">{t('RATING.WE_GOT_YOUR_REVIEW')}</Typography>,
+          text: (
+            <>
+              <Typography>{t('RATING.THANK_YOU_RATING_RECEIVED')}</Typography>
+              <Typography>{t('RATING.BIX_CHECKS_REVIEW')}</Typography>
+              <Typography>{t('RATING.UNTIL')}</Typography>
+              <ul>
+                <li>{t('RATING.WRITE_ANOTHER')}</li>
+                <li>
+                  <a href={customerPortalUrl} target="blank" rel="noreferrer">
+                    {t('RATING.VERIFY_YOUR_PROFILE')}
+                  </a>
+                </li>
+              </ul>
+              <Typography>{t('RATING.BIX_TEAM')}</Typography>
+            </>
+          ),
+          submitButtonLabel: t('COMMON.OK'),
+          headerColor: '#56AAA6',
+        });
         await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
       } catch (error) {
         const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
@@ -477,7 +502,7 @@ export const Rating: FC = () => {
                           <>
                             {companyForm.questions.map((question, index) => (
                               <Grid item xs={12} key={question.id}>
-                                {question.text}
+                                <span className="position-absolute">{question.text}</span>
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div>
                                     <FormControlLabel
@@ -508,7 +533,9 @@ export const Rating: FC = () => {
                                         className="m-0"
                                         key={option.value}
                                         value={option.value}
-                                        label={option.label}
+                                        label={
+                                          <span className={index !== 0 ? 'invisible' : undefined}>{option.label}</span>
+                                        }
                                         labelPlacement="top"
                                         onClick={option.clickHandler}
                                         control={<SmileyRadio smiley={option.icon} />}
@@ -572,6 +599,7 @@ export const Rating: FC = () => {
                       multiline
                       rows={3}
                       variant="outlined"
+                      inputProps={{ maxLength: 150 }}
                     />
                   </Grid>
                   {!nps && profilePage?.productsAndServices.length > 0 && (
@@ -725,8 +753,12 @@ export const Rating: FC = () => {
                                   component={TextField}
                                   label=""
                                   name="auth.lastname"
+                                  type="text"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'family-name',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -735,8 +767,12 @@ export const Rating: FC = () => {
                                   component={TextField}
                                   label=""
                                   name="auth.firstname"
+                                  type="text"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'given-name',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -748,6 +784,9 @@ export const Rating: FC = () => {
                                   type="email"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'email',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -756,9 +795,12 @@ export const Rating: FC = () => {
                                   component={TextField}
                                   label=""
                                   name="auth.phone"
+                                  type="tel"
                                   fullWidth
                                   variant="outlined"
+                                  placeholder="36301234567"
                                   InputProps={{
+                                    autoComplete: 'tel',
                                     startAdornment: <InputAdornment position="start">+</InputAdornment>,
                                     endAdornment: (
                                       <Tooltip
@@ -781,6 +823,9 @@ export const Rating: FC = () => {
                                   fullWidth
                                   type="password"
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'new-password',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={6}>
@@ -792,6 +837,9 @@ export const Rating: FC = () => {
                                   fullWidth
                                   type="password"
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'new-password',
+                                  }}
                                 />
                               </Grid>
                               <Grid item xs={12} className={classes.alignCenter}>
@@ -815,7 +863,16 @@ export const Rating: FC = () => {
                             <>
                               <Grid item xs={6}>
                                 <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
-                                <Field component={TextField} label="" name="auth.email" fullWidth variant="outlined" />
+                                <Field
+                                  component={TextField}
+                                  label=""
+                                  name="auth.email"
+                                  fullWidth
+                                  variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'email',
+                                  }}
+                                />
                               </Grid>
                               <Grid item xs={6}>
                                 <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
@@ -826,6 +883,9 @@ export const Rating: FC = () => {
                                   type="password"
                                   fullWidth
                                   variant="outlined"
+                                  inputProps={{
+                                    autoComplete: 'current-password',
+                                  }}
                                 />
                               </Grid>
                             </>
@@ -851,7 +911,10 @@ export const Rating: FC = () => {
                       variant="contained"
                       color="primary"
                       onClick={() => {
-                        isValid ? submitForm() : enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
+                        if (!isValid) {
+                          enqueueSnackbar(t('RATING.INVALID_FORM'), { variant: 'warning' });
+                        }
+                        submitForm();
                       }}
                       disabled={isSubmitting}
                     >

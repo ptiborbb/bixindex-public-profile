@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { get } from 'lodash/fp';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
@@ -148,310 +149,327 @@ export const Auth: FunctionComponent = () => {
   }
 
   return (
-    <section className={classes.pageWrapper}>
-      <div className={classes.headerBlock}>
-        <div className={classes.container}>
-          <Header logoPath={logo} />
+    <>
+      <Head>
+        <meta name="description" content="Jelentkezz be a BIX ügyfélkapujába!" />
+        <meta property="og:title" content="Bejelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
+        <meta property="og:description" content="Jelentkezz be a BIX ügyfélkapujába!" />
+        <meta name="viewport" content="width=800" />
+      </Head>
+      <section className={classes.pageWrapper}>
+        <div className={classes.headerBlock}>
+          <div className={classes.container}>
+            <Header logoPath={logo} />
+          </div>
+          <div className={classes.divider}></div>
         </div>
-        <div className={classes.divider}></div>
-      </div>
-      <meta name="description" content="Jelentkezz be a BIX ügyfélkapujába!" />
-      <meta property="og:title" content="Bejelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
-      <meta property="og:description" content="Jelentkezz be a BIX ügyfélkapujába!" />
-      <meta name="viewport" content="width=800" />
 
-      <div className={`container ${classes.pageContent}`}>
-        <h1 className={classes.pageTitle}>{t('AUTH.PAGE_TITLE')}</h1>
-        <Grid container justify="center" spacing={3}>
-          <Grid item xs md={5}>
-            <Paper className={classes.paper}>
-              <h2 className={classes.title}>
-                <span>{t('AUTH.NO_BIX_ACCOUNT_COLOR_PART')}</span> {t('AUTH.NO_BIX_ACCOUNT_PART_2')}
-              </h2>
-              <div className={classes.blockTitle}>
-                <span>{t('AUTH.CREATE')}</span>
-              </div>
+        <div className={`container ${classes.pageContent}`}>
+          <h1 className={classes.pageTitle}>{t('AUTH.PAGE_TITLE')}</h1>
+          <Grid container justify="center" spacing={3}>
+            <Grid item xs md={5}>
+              <Paper className={classes.paper}>
+                <h2 className={classes.title}>
+                  <span>{t('AUTH.NO_BIX_ACCOUNT_COLOR_PART')}</span> {t('AUTH.NO_BIX_ACCOUNT_PART_2')}
+                </h2>
+                <div className={classes.blockTitle}>
+                  <span>{t('AUTH.CREATE')}</span>
+                </div>
 
-              <FacebookLogin
-                appId={fbAppId}
-                autoLoad={false}
-                fields="name,email,picture"
-                callback={(resp) => responseFacebook(resp, true)}
-                render={(renderProps) => (
-                  <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
-                    <span className={classes.iconPlaceholder}>
-                      <img src="/social/facebook-white.svg" />
-                    </span>
-                    {t('AUTH.FB_BTN_TEXT')}
-                  </button>
-                )}
-              />
-
-              <GoogleLogin
-                clientId={googleClientId}
-                render={(renderProps) => (
-                  <button
-                    className={`${classes.socialButton} ${classes.google}`}
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                  >
-                    <span className={classes.iconPlaceholder}>
-                      <img src="/social/google-white.svg" />
-                    </span>
-                    Google fiókkal
-                  </button>
-                )}
-                onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, true)}
-                onFailure={failResponseGoogle}
-                cookiePolicy={'single_host_origin'}
-              />
-
-              <div
-                className={`${classes.blockTitle} ${showRegisterForm ? '' : classes.collapsed} ${classes.clickable}`}
-                onClick={() => setRegisterForm(!showRegisterForm)}
-              >
-                <span>{t('AUTH.IDENTIFICATION_WITH_EMAIL')}</span>
-              </div>
-              {showRegisterForm && (
-                <Formik
-                  initialValues={{
-                    name: '',
-                    email: '',
-                    password: '',
-                  }}
-                  validationSchema={registerValidationSchema}
-                  validateOnMount={true}
-                  onSubmit={(
-                    values: IRegisterFormValues,
-                    { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
-                  ) => {
-                    return register(values.name, values.email, values.password).then(() => {
-                      setSubmitting(false);
-                      resetForm();
-                      return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
-                    });
-                  }}
-                >
-                  {({ isValid, isSubmitting }) => (
-                    <Form className={classes.form} noValidate>
-                      <FormControl error={registerError.isError} fullWidth>
-                        <Field
-                          id="name"
-                          name="name"
-                          label={t('AUTH.NAME')}
-                          component={TextField}
-                          fullWidth
-                          className={classes.formInput}
-                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                          InputProps={{
-                            classes: inputFieldStyle,
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <PersonIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          id="email"
-                          name="email"
-                          label={t('AUTH.EMAIL')}
-                          component={TextField}
-                          fullWidth
-                          className={classes.formInput}
-                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                          InputProps={{
-                            classes: inputFieldStyle,
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <MailIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <Field
-                          id="password"
-                          type="password"
-                          name="password"
-                          label={t('AUTH.PASSWORD')}
-                          component={TextField}
-                          fullWidth
-                          className={classes.formInput}
-                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                          InputProps={{
-                            classes: inputFieldStyle,
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <LockIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <FormHelperText>{registerError.message}</FormHelperText>
-                      </FormControl>
-                      <div className={classes.button}>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          disabled={!isValid || isSubmitting}
-                        >
-                          {t('AUTH.REGISTER')}
-                        </Button>
-                        <meta name="description" content="Regisztrálj a BIX ügyfélkapujába!" />
-                        <meta property="og:title" content="Regisztráció - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
-                        <meta property="og:description" content="Regisztrálj be a BIX ügyfélkapujába!" />
-                      </div>
-                    </Form>
+                <FacebookLogin
+                  appId={fbAppId}
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  callback={(resp) => responseFacebook(resp, true)}
+                  isMobile={false}
+                  render={(renderProps) => (
+                    <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
+                      <span className={classes.iconPlaceholder}>
+                        <img src="/social/facebook-white.svg" />
+                      </span>
+                      {t('AUTH.FB_BTN_TEXT')}
+                    </button>
                   )}
-                </Formik>
-              )}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <Paper className={classes.paper}>
-              <h2 className={classes.title}>
-                <span>{t('AUTH.HAS_BIX_ACCOUNT_COLOR_PART')}</span> {t('AUTH.HAS_BIX_ACCOUNT_PART_2')}
-              </h2>
-              <div className={classes.blockTitle}>
-                <span>{t('AUTH.SOCIAL_LOGIN')}</span>
-              </div>
-              <FacebookLogin
-                appId={fbAppId}
-                autoLoad={false}
-                fields="name,email,picture"
-                callback={(resp) => responseFacebook(resp, false)}
-                render={(renderProps) => (
-                  <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
-                    <span className={classes.iconPlaceholder}>
-                      <img src="/social/facebook-white.svg" />
-                    </span>
-                    {t('AUTH.FB_BTN_TEXT')}
-                  </button>
-                )}
-              />
+                />
 
-              <GoogleLogin
-                clientId={googleClientId}
-                render={(renderProps) => (
-                  <button
-                    className={`${classes.socialButton} ${classes.google}`}
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                  >
-                    <span className={classes.iconPlaceholder}>
-                      <img src="/social/google-white.svg" />
-                    </span>
-                    {t('AUTH.GOOGLE_BTN_TEXT')}
-                  </button>
-                )}
-                onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, false)}
-                onFailure={failResponseGoogle}
-                cookiePolicy={'single_host_origin'}
-              />
-              <div
-                className={`${classes.blockTitle} ${showLoginForm ? '' : classes.collapsed} ${classes.clickable}`}
-                onClick={() => setLoginForm(!showLoginForm)}
-              >
-                <span>{t('AUTH.LOGIN_WITH_EMAIL')}</span>
-              </div>
-              {showLoginForm && (
-                <Formik
-                  initialValues={{
-                    email: '',
-                    password: '',
-                  }}
-                  validationSchema={loginValidationSchema}
-                  validateOnMount={true}
-                  onSubmit={(
-                    values: ILoginFormValues,
-                    { setSubmitting, resetForm }: FormikHelpers<ILoginFormValues>,
-                  ) => {
-                    return login(values.email, values.password).then(() => {
-                      setSubmitting(false);
-                      resetForm();
-                      return companyFormID
-                        ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
-                        : router.push('/');
-                    });
-                  }}
-                >
-                  {({ isValid, isSubmitting }) => (
-                    <Form className={classes.form} noValidate>
-                      <FormControl error={loginError.isError} fullWidth>
-                        <Field
-                          id="email"
-                          name="email"
-                          label={t('AUTH.EMAIL')}
-                          component={TextField}
-                          fullWidth
-                          className={classes.formInput}
-                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                          InputProps={{
-                            classes: inputFieldStyle,
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <MailIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-
-                        <Field
-                          id="password"
-                          type="password"
-                          name="password"
-                          label={t('AUTH.PASSWORD')}
-                          component={TextField}
-                          fullWidth
-                          className={classes.formInput}
-                          InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                          InputProps={{
-                            classes: inputFieldStyle,
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <LockIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <FormHelperText>{loginError.message}</FormHelperText>
-                      </FormControl>
-                      <a
-                        href={`${customerPortalUrl}/forgot-password`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={classes.forgotPassword}
-                      >
-                        {t('AUTH.FORGOT_PASSWORD')}
-                      </a>
-                      <meta name="description" content="Állítson be új jelszót a fiókjához!" />
-                      <meta
-                        property="og:title"
-                        content="Új jelszó beállítása - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
-                      />
-                      <meta property="og:description" content="Állítson be új jelszót a fiókjához!" />
-                      <div className={classes.button}>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          disabled={!isValid || isSubmitting}
-                        >
-                          {t('AUTH.LOGIN')}
-                        </Button>
-                      </div>
-                    </Form>
+                <GoogleLogin
+                  clientId={googleClientId}
+                  render={(renderProps) => (
+                    <button
+                      className={`${classes.socialButton} ${classes.google}`}
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      <span className={classes.iconPlaceholder}>
+                        <img src="/social/google-white.svg" />
+                      </span>
+                      Google fiókkal
+                    </button>
                   )}
-                </Formik>
-              )}
-            </Paper>
+                  onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, true)}
+                  onFailure={failResponseGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
+
+                <div
+                  className={`${classes.blockTitle} ${showRegisterForm ? '' : classes.collapsed} ${classes.clickable}`}
+                  onClick={() => setRegisterForm(!showRegisterForm)}
+                >
+                  <span>{t('AUTH.IDENTIFICATION_WITH_EMAIL')}</span>
+                </div>
+                {showRegisterForm && (
+                  <Formik
+                    initialValues={{
+                      name: '',
+                      email: '',
+                      password: '',
+                    }}
+                    validationSchema={registerValidationSchema}
+                    validateOnMount={true}
+                    onSubmit={(
+                      values: IRegisterFormValues,
+                      { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
+                    ) => {
+                      return register(values.name, values.email, values.password).then(() => {
+                        setSubmitting(false);
+                        resetForm();
+                        return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
+                      });
+                    }}
+                  >
+                    {({ isValid, isSubmitting }) => (
+                      <Form className={classes.form} noValidate>
+                        <FormControl error={registerError.isError} fullWidth>
+                          <Field
+                            id="name"
+                            name="name"
+                            type="text"
+                            label={t('AUTH.NAME')}
+                            component={TextField}
+                            fullWidth
+                            className={classes.formInput}
+                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                            InputProps={{
+                              autoComplete: 'name',
+                              classes: inputFieldStyle,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <PersonIcon />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            id="email"
+                            name="email"
+                            type="email"
+                            label={t('AUTH.EMAIL')}
+                            component={TextField}
+                            fullWidth
+                            className={classes.formInput}
+                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                            InputProps={{
+                              autoComplete: 'email',
+                              classes: inputFieldStyle,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MailIcon />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            id="password"
+                            type="password"
+                            name="password"
+                            label={t('AUTH.PASSWORD')}
+                            component={TextField}
+                            fullWidth
+                            className={classes.formInput}
+                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                            InputProps={{
+                              autoComplete: 'new-password',
+                              classes: inputFieldStyle,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <LockIcon />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <FormHelperText>{registerError.message}</FormHelperText>
+                        </FormControl>
+                        <div className={classes.button}>
+                          <Button
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            fullWidth
+                            disabled={!isValid || isSubmitting}
+                          >
+                            {t('AUTH.REGISTER')}
+                          </Button>
+                          <meta name="description" content="Regisztrálj a BIX ügyfélkapujába!" />
+                          <meta
+                            property="og:title"
+                            content="Regisztráció - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                          />
+                          <meta property="og:description" content="Regisztrálj be a BIX ügyfélkapujába!" />
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                )}
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <Paper className={classes.paper}>
+                <h2 className={classes.title}>
+                  <span>{t('AUTH.HAS_BIX_ACCOUNT_COLOR_PART')}</span> {t('AUTH.HAS_BIX_ACCOUNT_PART_2')}
+                </h2>
+                <div className={classes.blockTitle}>
+                  <span>{t('AUTH.SOCIAL_LOGIN')}</span>
+                </div>
+                <FacebookLogin
+                  appId={fbAppId}
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  callback={(resp) => responseFacebook(resp, false)}
+                  isMobile={false}
+                  render={(renderProps) => (
+                    <button className={`${classes.socialButton} ${classes.facebook}`} onClick={renderProps.onClick}>
+                      <span className={classes.iconPlaceholder}>
+                        <img src="/social/facebook-white.svg" />
+                      </span>
+                      {t('AUTH.FB_BTN_TEXT')}
+                    </button>
+                  )}
+                />
+
+                <GoogleLogin
+                  clientId={googleClientId}
+                  render={(renderProps) => (
+                    <button
+                      className={`${classes.socialButton} ${classes.google}`}
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      <span className={classes.iconPlaceholder}>
+                        <img src="/social/google-white.svg" />
+                      </span>
+                      {t('AUTH.GOOGLE_BTN_TEXT')}
+                    </button>
+                  )}
+                  onSuccess={(resp: GoogleLoginResponse) => responseGoogle(resp, false)}
+                  onFailure={failResponseGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
+                <div
+                  className={`${classes.blockTitle} ${showLoginForm ? '' : classes.collapsed} ${classes.clickable}`}
+                  onClick={() => setLoginForm(!showLoginForm)}
+                >
+                  <span>{t('AUTH.LOGIN_WITH_EMAIL')}</span>
+                </div>
+                {showLoginForm && (
+                  <Formik
+                    initialValues={{
+                      email: '',
+                      password: '',
+                    }}
+                    validationSchema={loginValidationSchema}
+                    validateOnMount={true}
+                    onSubmit={(
+                      values: ILoginFormValues,
+                      { setSubmitting, resetForm }: FormikHelpers<ILoginFormValues>,
+                    ) => {
+                      return login(values.email, values.password).then(() => {
+                        setSubmitting(false);
+                        resetForm();
+                        return companyFormID
+                          ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
+                          : router.push('/');
+                      });
+                    }}
+                  >
+                    {({ isValid, isSubmitting }) => (
+                      <Form className={classes.form} noValidate>
+                        <FormControl error={loginError.isError} fullWidth>
+                          <Field
+                            id="email"
+                            name="email"
+                            type="email"
+                            label={t('AUTH.EMAIL')}
+                            component={TextField}
+                            fullWidth
+                            className={classes.formInput}
+                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                            InputProps={{
+                              autoComplete: 'email',
+                              classes: inputFieldStyle,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MailIcon />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+
+                          <Field
+                            id="password"
+                            type="password"
+                            name="password"
+                            label={t('AUTH.PASSWORD')}
+                            component={TextField}
+                            fullWidth
+                            className={classes.formInput}
+                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                            InputProps={{
+                              autoComplete: 'current-password',
+                              classes: inputFieldStyle,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <LockIcon />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <FormHelperText>{loginError.message}</FormHelperText>
+                        </FormControl>
+                        <a
+                          href={`${customerPortalUrl}/forgot-password`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={classes.forgotPassword}
+                        >
+                          {t('AUTH.FORGOT_PASSWORD')}
+                        </a>
+                        <meta name="description" content="Állítson be új jelszót a fiókjához!" />
+                        <meta
+                          property="og:title"
+                          content="Új jelszó beállítása - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
+                        />
+                        <meta property="og:description" content="Állítson be új jelszót a fiókjához!" />
+                        <div className={classes.button}>
+                          <Button
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            fullWidth
+                            disabled={!isValid || isSubmitting}
+                          >
+                            {t('AUTH.LOGIN')}
+                          </Button>
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                )}
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-      <Footer logoPath={logo}></Footer>
-    </section>
+        </div>
+        <Footer logoPath={logo}></Footer>
+      </section>
+    </>
   );
 };
