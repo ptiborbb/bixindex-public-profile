@@ -216,7 +216,7 @@ export const Rating: FC = () => {
           submitButtonLabel: t('COMMON.OK'),
           headerColor: '#56AAA6',
         });
-        await router.push(`/bix-profil/[companyAlias]`, `/bix-profil/${alias}`);
+        await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}`);
       } catch (error) {
         const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
         enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
@@ -471,7 +471,7 @@ export const Rating: FC = () => {
                         />
                       </Grid>
                       <Grid item>
-                        <Typography variant="h6">{1}</Typography>
+                        <Typography variant="h6">{0}</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="h6">{10}</Typography>
