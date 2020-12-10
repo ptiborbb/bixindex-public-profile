@@ -8,6 +8,6 @@ export interface IPublicProfileState {
 
 export const initialPublicProfileState: IPublicProfileState = {
   profilePage: null,
-  loading: false,
+  loading: true,
   ratingsLoading: false,
 };
