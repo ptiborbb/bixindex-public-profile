@@ -21,6 +21,7 @@ import { useConfig } from '../../config.context';
 import { EReviewFilterType } from '../../enums/review-filter-type';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
+import { timeoutPromise } from '../../utils/timeout-promise';
 import { Rating } from '../rating/rating';
 import classes from './public-profile.module.scss';
 
@@ -278,6 +279,8 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   );
 };
 
+const FIVE_SECONDS = 5000;
+
 PublicProfile.getInitialProps = async (ctx) => {
   const { backendUrl } = useConfig();
   if (!(process && process.env && backendUrl) || !ctx.req) {
@@ -291,9 +294,12 @@ PublicProfile.getInitialProps = async (ctx) => {
   });
   const alias = ctx.query.companyAlias as string;
   const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  const profilePage = (await bixClient.publicProfile.profile
-    .getProfileByCompany(alias, by)
-    .catch((_) => null)) as ProfilePage;
+  const profilePage = await timeoutPromise<ProfilePage>(
+    bixClient.publicProfile.profile
+      .getProfileByCompany(alias, by)
+      .catch((_) => null) as Promise<ProfilePage | null>,
+    FIVE_SECONDS
+  );
   return {
     profilePage,
   };
