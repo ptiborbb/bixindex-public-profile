@@ -1,4 +1,5 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
+import { AxiosError } from 'axios';
 import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
 import {
@@ -15,6 +16,9 @@ import {
   getRatingsForProfileFail,
   getRatingsForProfileSuccess,
 } from '../pages/public-profile/store/actions';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isAxiosError = (error: any): error is AxiosError => error.isAxiosError;
 
 export interface IPublicProfileService {
   setPublicProfile(profilePage: ProfilePage): void;
@@ -40,8 +44,8 @@ export const publicProfileServiceFactory = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>, // TODO missing typings
 ): IPublicProfileService => {
-  return {
-    searchProfilesByName: async (page: number, rowsPerPage: number, searchText: string) => {
+  const service = {
+    searchProfilesByName: async (page: number, rowsPerPage: number, searchText: string, remainingRetries = 5) => {
       const sessionId = Math.random().toString(36).substr(2, 9);
       dispatch(getProfiles({ page, rowsPerPage, sessionId, searchText }));
 
@@ -54,6 +58,10 @@ export const publicProfileServiceFactory = (
         });
         dispatch(getProfilesSuccess({ items, count, sessionId }));
       } catch (error) {
+        console.error(error);
+        if (remainingRetries > 0 && error && isAxiosError(error) && error?.response?.status === 502) {
+          return service.searchProfilesByName(page, rowsPerPage, searchText, remainingRetries - 1);
+        }
         dispatch(getProfilesFail({ error, sessionId }));
       }
     },
@@ -80,4 +88,5 @@ export const publicProfileServiceFactory = (
       // .catch(() => dispatch(getPublicProfileSuccess({ profilePage: mockData() as ProfilePage })));
     },
   };
+  return service;
 };
