@@ -471,7 +471,7 @@ export const Rating: FC = () => {
                         />
                       </Grid>
                       <Grid item>
-                        <Typography variant="h6">{1}</Typography>
+                        <Typography variant="h6">{0}</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="h6">{10}</Typography>
