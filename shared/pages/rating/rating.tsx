@@ -48,6 +48,7 @@ export const Rating: FC = () => {
   const alias = router.query.companyAlias as string;
   const companyFormID = router.query.companyFormID as string;
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
+  const productOrServiceID = router.query.productOrServiceID as string;
 
   const {
     ratingService,
@@ -182,7 +183,7 @@ export const Rating: FC = () => {
             summary: values.comment,
             positive: values.positive,
             negative: values.negative,
-            ratedProductOrService: values.ratedProductOrService,
+            ratedProductOrService: values.ratedProductOrService || productOrServiceID,
             reference: values.reference,
             visibility: values.visibility,
             answers: values.answers
@@ -248,7 +249,7 @@ export const Rating: FC = () => {
       positive: '',
       negative: '',
       comment: '',
-      ratedProductOrService: '',
+      ratedProductOrService: productOrServiceID || '',
       reference: '',
       auth: {
         loginOrRegister: ELoginOrRegister.REGISTER,
@@ -615,6 +616,7 @@ export const Rating: FC = () => {
                               name="ratedProductOrService"
                               fullWidth
                               variant="outlined"
+                              disabled={!!productOrServiceID}
                             >
                               {profilePage.productsAndServices.map((item) => (
                                 <MenuItem key={item.id} value={item.id}>
