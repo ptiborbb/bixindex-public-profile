@@ -818,5 +818,8 @@
     "ALL": "Összes",
     "BIX": "BIX",
     "NPS": "NPS"
+  },
+  "PRODUCT": {
+    "DID_YOU_USE_THIS": "Igénybe vetted ezt a szolgáltatást?"
   }
 }

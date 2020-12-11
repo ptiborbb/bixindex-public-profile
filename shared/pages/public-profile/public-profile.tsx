@@ -198,7 +198,12 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
       case 'news':
         return <News articles={profilePage.articles} />;
       case 'products':
-        return <Products productsAndServices={profilePage.productsAndServices} />;
+        return (
+          <Products
+            productsAndServices={profilePage.productsAndServices}
+            companyFormID={profilePage.profile.defaultFormID}
+          />
+        );
       default:
         return (
           <Reviews
