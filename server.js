@@ -3,10 +3,12 @@ const express = require('express');
 const next = require('next');
 const { createServer } = require('https');
 const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config({ path: '.env.local' });
 
 const devProxy = {
   '/api': {
-    target: 'https://bixindex-backend-local.herokuapp.com/',
+    target: process.env.NEXT_PUBLIC_BACKEND_URL,
     pathRewrite: { '^/api': '' },
     changeOrigin: true,
   },
@@ -14,7 +16,7 @@ const devProxy = {
 
 const host = '0.0.0.0';
 const port = parseInt(process.env.PORT, 10) || 3002;
-const env = process.env.NODE_ENV;
+const env = process.env.NEXT_PUBLIC_NODE_ENV;
 const dev = env !== 'production';
 const app = next({
   dir: '.', // base directory where everything is, could move to src later

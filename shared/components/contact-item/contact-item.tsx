@@ -29,9 +29,6 @@ export const ContactItem: FC<ContactItemProps> = ({ image, name, email, phone })
             </>
           )}
         </div>
-        <meta name="description" content="Tudd meg kinek és miért érték a BIX!" />
-        <meta property="og:title" content="Mi az a BIX? - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
-        <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
         <div className={classes.phone}>
           {phone && (
             <>
