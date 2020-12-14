@@ -1,7 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .product {
-  padding: 3rem;
+  padding: 3rem 3rem 0;
 
   .details {
     display: flex;
@@ -71,6 +71,33 @@
     .attachment {
       width: 240px !important;
       height: 130px !important;
+    }
+  }
+}
+.serviceReview {
+  margin-top: 1rem;
+  background-color: #fafafa;
+  padding: 3rem;
+  .question {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #656565;
+  }
+  .companyWriteReview {
+    background: #f15c5c;
+    border-radius: 3px;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: 0;
+    flex-shrink: 0;
+    margin-left: 3rem;
+    .reviewIcon {
+      margin-left: 0.5rem;
     }
   }
 }
