@@ -577,14 +577,15 @@
     "CLOTHING": "Textilipar- Ruhaipar",
     "CHEMICAL": "Vegyipar",
     "TOURISM": "Vendéglátás, Idegenforgalom",
-    "BUSINESS_SERVICE": "Üzleti szolgáltatás"
+    "BUSINESS_SERVICES": "Üzleti szolgáltatás",
+    "UNKNOWN": "Unknown"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
     "DIGITAL_SERVICES": "Digitális szolgáltatások",
     "RESIDENIAL_SERVICES": "Lakossági szolgáltatások",
     "PREMIUM_SERVICES": "Prémium szolgáltatások",
-    "BUSINESS_SERVICES": "Vállalati szolgáltatások",
+    "BUSINESS_SERVICES": "Üzleti szolgáltatások",
     "LIFE_INSURANCE": "Életbiztosítás",
     "VEHICLE_INSURANCE": "Gépjármű biztosítás",
     "HOME_INSURANCE": "Lakásbiztosítás",

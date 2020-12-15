@@ -572,7 +572,8 @@
     "CLOTHING": "Textilipar- Ruhaipar",
     "CHEMICAL": "Vegyipar",
     "TOURISM": "Vendéglátás, Idegenforgalom",
-    "BUSINESS_SERVICE": "Üzleti szolgáltatás"
+    "BUSINESS_SERVICES": "Üzleti szolgáltatás",
+    "UNKNOWN": "Unknown"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
