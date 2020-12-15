@@ -618,6 +618,9 @@ export const Rating: FC = () => {
                               variant="outlined"
                               disabled={!!productOrServiceID}
                             >
+                              <MenuItem value="">
+                                <em>{t('RATING.GENERAL_REVIEW')}</em>
+                              </MenuItem>
                               {profilePage.productsAndServices.map((item) => (
                                 <MenuItem key={item.id} value={item.id}>
                                   {item.name}
