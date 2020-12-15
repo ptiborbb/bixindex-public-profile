@@ -578,7 +578,7 @@
     "CHEMICAL": "Vegyipar",
     "TOURISM": "Vendéglátás, Idegenforgalom",
     "BUSINESS_SERVICES": "Üzleti szolgáltatás",
-    "UNKNOWN": "Unknown"
+    "UNKNOWN": "Ismeretlen"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
