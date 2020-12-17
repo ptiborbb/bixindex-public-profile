@@ -528,7 +528,8 @@
     "UNTIL": "Meanwhile:",
     "WRITE_ANOTHER": "Write another one!",
     "VERIFY_YOUR_PROFILE": "Authenticate your profile",
-    "BIX_TEAM": "Thank you, the BIX team"
+    "BIX_TEAM": "Thank you, the BIX team",
+    "GENERAL_REVIEW": "General review"
   },
   "MAIN_PROFILES": {
     "PRODUCER": "Producer",
@@ -571,7 +572,8 @@
     "CLOTHING": "Textilipar- Ruhaipar",
     "CHEMICAL": "Vegyipar",
     "TOURISM": "Vendéglátás, Idegenforgalom",
-    "BUSINESS_SERVICE": "Üzleti szolgáltatás"
+    "BUSINESS_SERVICES": "Üzleti szolgáltatás",
+    "UNKNOWN": "Unknown"
   },
   "SUBCATEGORIES": {
     "INSURANCE": "Biztosítás",
