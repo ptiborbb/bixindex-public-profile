@@ -495,7 +495,7 @@ export const Rating: FC = () => {
                           </div>
                         </div>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} className="mb-3">
                         <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                       </Grid>
                       <FieldArray name="answers">
