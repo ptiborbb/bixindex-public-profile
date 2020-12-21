@@ -25,8 +25,8 @@ export const ReviewsHeader: FC<ReviewsHeaderProps> = ({ companyAlias, companyFor
       </div>
       <div className={classes.reviewsActions}>
         <Link
-          href={{ pathname: '/bix-profil/[companyAlias]/ertekeles/[companyFormID]', query: { by: by as string } }}
-          as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
+          href={`/bix-profil/[companyAlias]/ertekeles/[companyFormID]?by=${by}`}
+          as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}?by=${by}`}
           passHref
         >
           <a type="button" className={classes.companyWriteReview}>

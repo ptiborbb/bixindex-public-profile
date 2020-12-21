@@ -57,8 +57,8 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
         <div className="d-flex justify-content-between px-5 py-5 align-items-center">
           <span>{t('REVIEW_STATS.DONT_BE_AFRAID')}</span>
           <Link
-            href={{ pathname: '/bix-profil/[companyAlias]/ertekeles/[companyFormID]', query: { by: by as string } }}
-            as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`}
+            href={`/bix-profil/[companyAlias]/ertekeles/[companyFormID]?by=${by}`}
+            as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}?by=${by}`}
             passHref
           >
             <a type="button" className={classes.companyWriteReview}>
