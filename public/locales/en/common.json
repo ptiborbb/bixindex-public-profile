@@ -50,7 +50,8 @@
       "ALREADY_OWNER_OF_COMPANY": "You are already an owner of this company",
       "CANNOT_DELETE_YOURSELF": "You cannot delete yourself",
       "USER_ALREADY_EXISTS": "This user already exists",
-      "GOOGLE_ERROR": "An error occurred during google auth. Please check if cookies are allowed, or use a different authentication method."
+      "GOOGLE_ERROR": "An error occurred during google auth. Please check if cookies are allowed, or use a different authentication method.",
+      "UNAUTHORIZED": "Invalid email address or password."
     },
     "OK": "OK"
   },
@@ -573,6 +574,7 @@
     "CHEMICAL": "Vegyipar",
     "TOURISM": "Vendéglátás, Idegenforgalom",
     "BUSINESS_SERVICES": "Üzleti szolgáltatás",
+    "BUSINESS_SERVICE": "Üzleti szolgáltatás",
     "UNKNOWN": "Unknown"
   },
   "SUBCATEGORIES": {
@@ -782,7 +784,10 @@
     "WEBSITE": "Website",
     "RELATED_PROFILES": "Related profiles",
     "PRODUCTS_SERVICES": "Products and services",
-    "CONTACT": "Contact"
+    "CONTACT": "Contact",
+    "TRUST_INDEX": "Trust index",
+    "COMPANY_DETAILS": "Company details",
+    "REVIEW_COUNT_SUM": "{{count}} REVIEWS ALTOGETHER"
   },
   "NPS_TEXT": {
     "PASSIVE": "Passive",
