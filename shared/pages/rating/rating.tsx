@@ -1,3 +1,4 @@
+import { EHttpStatus } from '@codingsans/bixindex-common';
 import {
   Avatar,
   Button,
@@ -219,8 +220,12 @@ export const Rating: FC = () => {
         });
         await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}`);
       } catch (error) {
-        const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
-        enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
+        if (error?.response.status === EHttpStatus.UNAUTHORIZED) {
+          enqueueSnackbar(t(`COMMON.ERROR.UNAUTHORIZED`), { variant: 'error' });
+        } else {
+          const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+          enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
+        }
         setSubmitting(false);
       }
     },
