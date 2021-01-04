@@ -231,7 +231,11 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     <div>
       <Head>
         <meta name="viewport" content="width=800" />
-        <title>{t('COMMON.PAGE_TITLE')}</title>
+        <title>{`${profilePage?.profile?.name}: Vélemények, értékelések, céginformációk`}</title>
+        <meta
+          name="description"
+          content={`Ezen az oldalon ${profilePage?.ratings?.count} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`}
+        />
         {ratingStructuralData}
         {ogMetaElements}
       </Head>
@@ -300,10 +304,8 @@ PublicProfile.getInitialProps = async (ctx) => {
   const alias = ctx.query.companyAlias as string;
   const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const profilePage = await timeoutPromise<ProfilePage>(
-    bixClient.publicProfile.profile
-      .getProfileByCompany(alias, by)
-      .catch((_) => null) as Promise<ProfilePage | null>,
-    FIVE_SECONDS
+    bixClient.publicProfile.profile.getProfileByCompany(alias, by).catch((_) => null) as Promise<ProfilePage | null>,
+    FIVE_SECONDS,
   );
   return {
     profilePage,
