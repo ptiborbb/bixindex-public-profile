@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
-import { RadioGroup, TextField } from 'formik-material-ui';
+import { RadioGroup, Select, TextField } from 'formik-material-ui';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -611,12 +611,13 @@ export const Rating: FC = () => {
                         <Grid container spacing={4}>
                           <Grid item xs={6}>
                             <Field
-                              component={TextField}
+                              component={Select}
                               select
                               name="ratedProductOrService"
                               fullWidth
                               variant="outlined"
                               disabled={!!productOrServiceID}
+                              displayEmpty
                             >
                               <MenuItem value="">
                                 <em>{t('RATING.GENERAL_REVIEW')}</em>

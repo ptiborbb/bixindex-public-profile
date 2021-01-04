@@ -107,7 +107,9 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         </div>
         <div className="w-50 mx-4 d-flex flex-column justify-content-between">
           <FormControl className={'w-100'} variant="outlined">
-            <InputLabel id="ratedReviewLabel">{t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}</InputLabel>
+            <InputLabel shrink id="ratedReviewLabel" className={classes.shrinkLabel}>
+              {t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
+            </InputLabel>
             <Select
               labelId="ratedReviewLabel"
               value={filter.productOrServiceID}
@@ -120,6 +122,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
                 });
               }}
               fullWidth
+              displayEmpty
               label={t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
             >
               <MenuItem value="">
@@ -133,14 +136,17 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             </Select>
           </FormControl>
           <FormControl className={'w-100'} variant="outlined">
-            <InputLabel id="demo-simple-select-label">{t('REVIEW_DETAILS.ARRIVAL_DATE')}</InputLabel>
+            <InputLabel shrink id="arrival-date-select" className={classes.shrinkLabel}>
+              {t('REVIEW_DETAILS.ARRIVAL_DATE')}
+            </InputLabel>
             <Select
-              labelId="demo-simple-select-label"
+              labelId="arrival-date-select"
               value={filter.date}
               onChange={(event) => {
                 filterChanged({ ...filter, date: event.target.value as string, pageNumber: 1 });
               }}
               fullWidth
+              displayEmpty
               label={t('REVIEW_DETAILS.ARRIVAL_DATE')}
             >
               <MenuItem value="">
