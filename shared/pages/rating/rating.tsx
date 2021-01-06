@@ -51,7 +51,7 @@ export const Rating: FC = () => {
   const companyFormID = router.query.companyFormID as string;
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const productOrServiceID = router.query.productOrServiceID as string;
-  const partnerID = useMemo(() => get(router, 'query.partnerID', ''), [router]);
+  const partnerID = useMemo(() => get(router, 'query.partnerID', undefined), [router]);
 
   const {
     ratingService,
