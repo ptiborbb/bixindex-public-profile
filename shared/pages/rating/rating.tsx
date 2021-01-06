@@ -51,9 +51,7 @@ export const Rating: FC = () => {
   const companyFormID = router.query.companyFormID as string;
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const productOrServiceID = router.query.productOrServiceID as string;
-  const schedulationToken = useMemo(() => get(router, 'query.schedulationToken', ''), [router]);
-
-  console.log(schedulationToken);
+  const partnerID = useMemo(() => get(router, 'query.partnerID', ''), [router]);
 
   const {
     ratingService,
@@ -191,7 +189,7 @@ export const Rating: FC = () => {
             ratedProductOrService: values.ratedProductOrService || productOrServiceID,
             reference: values.reference,
             visibility: values.visibility,
-            schedulationToken,
+            partnerID,
             answers: values.answers
               .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
               .map((answer) => ({
