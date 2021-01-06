@@ -16,6 +16,7 @@ import {
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, Select, TextField } from 'formik-material-ui';
+import { get } from 'lodash';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -50,6 +51,7 @@ export const Rating: FC = () => {
   const companyFormID = router.query.companyFormID as string;
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const productOrServiceID = router.query.productOrServiceID as string;
+  const partnerID = useMemo(() => get(router, 'query.partnerID', undefined), [router]);
 
   const {
     ratingService,
@@ -187,6 +189,7 @@ export const Rating: FC = () => {
             ratedProductOrService: values.ratedProductOrService || productOrServiceID,
             reference: values.reference,
             visibility: values.visibility,
+            partnerID,
             answers: values.answers
               .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
               .map((answer) => ({
