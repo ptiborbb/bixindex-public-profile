@@ -32,6 +32,7 @@ export const profileListReducer = createReducer(initialProfileListState, (builde
     .addCase(resetProfileList, (state) => {
       state.profiles = initialProfileListState.profiles;
       state.loading = initialProfileListState.loading;
+      state.count = initialProfileListState.count;
     })
     .addDefaultCase((state) => state);
 });
