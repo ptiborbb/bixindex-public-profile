@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  padding: 0.7em 16px;
+  justify-content: space-between;
+}
+
+@mixin greyBold($weight: 600) {
+  font-size: 14px !important;
+  color: #656565;
+  font-weight: $weight;
+}
+
+.company {
+  h5 {
+    margin: 0;
+    padding-bottom: 0.2em;
+    @include greyBold(700);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  color: #bf9855;
+  margin-right: 0.1rem;
+}
+.score {
+  @include greyBold();
+}
+
+.divider {
+  background: rgba(0, 0, 0, 0.4);
+  height: 0.5px;
+}

@@ -4,7 +4,9 @@ import React, { FC } from 'react';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
+import { FeaturedCategoryGrid } from './featured-category-grid';
 import { useProfileList } from './hooks/use-profile-list';
+import { getMockResponse } from './mock-fetch';
 import { ProfileListResults } from './profile-list-results';
 import { ProfileListSearch } from './profile-list-search';
 import classes from './profile-list.module.scss';
@@ -12,7 +14,7 @@ import classes from './profile-list.module.scss';
 export const ProfileList: FC = () => {
   const { t } = useTranslate();
   const { searchText, resultsProps } = useProfileList();
-
+  const categories = getMockResponse();
   return (
     <>
       <Head>
@@ -29,10 +31,16 @@ export const ProfileList: FC = () => {
         </SearchContainer>
         <Divider />
       </Paper>
+      {searchText ? (
+        <ResultsContainer>
+          <ProfileListResults {...resultsProps} />
+        </ResultsContainer>
+      ) : (
+        <Container>
+          <FeaturedCategoryGrid categories={categories} />
+        </Container>
+      )}
 
-      <ResultsContainer>
-        <ProfileListResults {...resultsProps} />
-      </ResultsContainer>
       <Footer />
     </>
   );
