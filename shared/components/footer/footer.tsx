@@ -4,14 +4,15 @@ import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
 import { FC } from 'react';
+import logo from '../../../public/bix_logo.svg';
 import { useTranslate } from '../../translate.context';
 import classes from './footer.module.scss';
 
 export interface FooterProps {
-  logoPath: string;
+  logoPath?: string;
 }
 
-export const Footer: FC<FooterProps> = ({ logoPath }) => {
+export const Footer: FC<FooterProps> = ({ logoPath = logo }) => {
   const { t } = useTranslate();
   return (
     <footer className={classes.footer}>

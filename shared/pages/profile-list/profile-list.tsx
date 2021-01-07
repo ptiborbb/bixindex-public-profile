@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import Infinite from 'react-infinite';
 import * as Yup from 'yup';
-import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
@@ -53,7 +52,7 @@ export const ProfileList: FC = () => {
       </Head>
       <div className={classes.headerBlock}>
         <div className={classes.container}>
-          <Header logoPath={logo} />
+          <Header />
         </div>
         <div className={classes.divider}></div>
         <div className={classes.headerBlockInner}>
@@ -145,13 +144,13 @@ export const ProfileList: FC = () => {
           useWindowAsScrollContainer={true}
           infiniteLoadBeginEdgeOffset={page * rowsPerPage >= count ? null : 200}
         >
-          {profiles?.map((profile, i) => (
-            <ProfileListItem key={i} profile={profile} />
+          {profiles?.map((profile) => (
+            <ProfileListItem key={profile.profile.id} profile={profile} />
           ))}
         </Infinite>
       </div>
 
-      <Footer logoPath={logo}></Footer>
+      <Footer />
     </>
   );
 };

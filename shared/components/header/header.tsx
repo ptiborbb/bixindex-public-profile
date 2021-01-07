@@ -4,6 +4,7 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
 import { FC, MouseEvent, useCallback, useState } from 'react';
+import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
@@ -11,10 +12,10 @@ import { FunctionsDropdown } from './functions-dropdown/functions-dropdown';
 import classes from './header.module.scss';
 
 interface HeaderProps {
-  logoPath: string;
+  logoPath?: string;
 }
 
-export const Header: FC<HeaderProps> = ({ logoPath }) => {
+export const Header: FC<HeaderProps> = ({ logoPath = logo }) => {
   const { blogUrl, customerPortalUrl } = useConfig();
   const { t } = useTranslate();
   const {
