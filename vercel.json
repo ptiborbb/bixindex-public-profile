@@ -1,3 +1,14 @@
 {
-  "rewrites": [{ "source": "/api/:path*", "destination": "https://bixindex-backend.herokuapp.com/:path*" }]
+  "rewrites": [{ "source": "/api/:path*", "destination": "https://bixindex-backend.herokuapp.com/:path*" }],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=60, stale-while-revalidate"
+        }
+      ]
+    }
+  ]
 }
