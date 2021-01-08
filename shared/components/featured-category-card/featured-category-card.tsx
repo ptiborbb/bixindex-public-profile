@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CardHeader, Collapse, IconButton, makeStyles } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
+import Link from 'next/link';
 import React, { FC, useState } from 'react';
 import { EntryCard } from './entry-card';
 import classes from './featured-category-card.module.scss';
@@ -11,6 +12,7 @@ interface FeaturedCategoryCardProps {
   companies: {
     companyId: string;
     companyName: string;
+    companyAlias: string;
     profileName: string;
     bixValue: number;
     ratingCount: number;
@@ -41,9 +43,13 @@ export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({ category, 
             <EntryCard {...company} key={company.companyId} />
           ))}
           <ButtonBox>
-            <Button variant="outlined" className={mainHighlight ? classes.mainButton : classes.notMainButton}>
-              {'textii'}
-            </Button>
+            <Link href={`/cegkereso?category=${category}`} passHref>
+              <a>
+                <Button variant="outlined" className={mainHighlight ? classes.mainButton : classes.notMainButton}>
+                  {'textii'}
+                </Button>
+              </a>
+            </Link>
           </ButtonBox>
         </CardContent>
       </Collapse>

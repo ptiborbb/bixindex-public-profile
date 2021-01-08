@@ -1,19 +1,25 @@
 import { Grade } from '@material-ui/icons';
+import Link from 'next/link';
 import { FC } from 'react';
 import classes from './entry-card.module.scss';
 
 interface EntryCardProps {
   companyName: string;
+  companyAlias: string;
   profileName: string;
   bixValue: number;
   ratingCount: number;
 }
 
-export const EntryCard: FC<EntryCardProps> = ({ bixValue, ratingCount, companyName, profileName }) => {
+export const EntryCard: FC<EntryCardProps> = ({ bixValue, ratingCount, companyName, companyAlias, profileName }) => {
   return (
     <>
       <Container>
-        <CompanyInfo profileName={profileName} companyName={companyName} />
+        <Link href={`/bix-profil/[companyAlias]?by=ALIAS`} as={`/bix-profil/${companyAlias}?by=ALIAS`} passHref>
+          <a>
+            <CompanyInfo profileName={profileName} companyName={companyName} />
+          </a>
+        </Link>
         <RatingInfo score={bixValue} count={ratingCount} />
       </Container>
       <Divider />
