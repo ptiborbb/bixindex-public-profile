@@ -2,6 +2,7 @@ import { Button, Card, CardContent, CardHeader, Collapse, IconButton, makeStyles
 import { ExpandMore } from '@material-ui/icons';
 import Link from 'next/link';
 import React, { FC, useState } from 'react';
+import { useTranslate } from '../../translate.context';
 import { EntryCard } from './entry-card';
 import classes from './featured-category-card.module.scss';
 
@@ -22,6 +23,7 @@ interface FeaturedCategoryCardProps {
 export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({ category, count, companies, mainHighlight }) => {
   const styles = useStyles();
   const [open, setOpen] = useState(mainHighlight);
+  const { t } = useTranslate();
   return (
     <Card elevation={2} className={classes.cardBody}>
       <CardHeader
@@ -46,7 +48,7 @@ export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({ category, 
             <Link href={`/cegkereso?category=${category}`} passHref>
               <a>
                 <Button variant="outlined" className={mainHighlight ? classes.mainButton : classes.notMainButton}>
-                  {'textii'}
+                  {`${t('COMPANY_SEARCH.FEATURED.OPEN_ALL')}`}
                 </Button>
               </a>
             </Link>

@@ -41,7 +41,7 @@ const searchProfiles = ({
 const getFeaturedCategories = ({
   onHomePage,
   publicProfileService,
-}: Pick<UseProfileListEffectsInputs, 'publicProfileService' | 'onHomePage'>) => {
+}: Pick<UseProfileListEffectsInputs, 'publicProfileService' | 'onHomePage'>): void => {
   useEffect(() => {
     if (onHomePage) {
       publicProfileService.getFeaturedCategories();
