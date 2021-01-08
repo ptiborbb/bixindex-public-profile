@@ -1,8 +1,10 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 import { useCallback, useMemo } from 'react';
 import { useApp } from '../../../app.context';
+import { useTranslate } from '../../../translate.context';
 import { FeaturedCategoryWithCompanies } from '../mock-fetch';
 import { useProfileListEffects } from './effects';
+import { translateAndSortCategories } from './translate-and-sort-categories';
 import { useCategoryText } from './use-category-text';
 import { useSearchText } from './use-search-text';
 import { getOnInfiniteLoad } from './utils/get-on-infinite-load';
@@ -22,7 +24,7 @@ interface UseUpdateProfileListReturn {
     profiles: IProfileSummary[];
   };
   featuredProps: {
-    categories: FeaturedCategoryWithCompanies[];
+    categories: (FeaturedCategoryWithCompanies & { originalCategory: string })[];
   };
 }
 
@@ -34,6 +36,7 @@ export const useProfileList = (): UseUpdateProfileListReturn => {
     publicProfileService,
     state: { profileList },
   } = useApp();
+  const { t } = useTranslate();
   const { loading, count, profiles, featuredCategories } = profileList;
   const searchText = useSearchText();
   const categoryText = useCategoryText();
@@ -45,6 +48,7 @@ export const useProfileList = (): UseUpdateProfileListReturn => {
     publicProfileService,
     searchText,
   ]);
+  const categories = useMemo(() => translateAndSortCategories(featuredCategories, t), [featuredCategories, t]);
 
   return {
     searchText,
@@ -59,7 +63,7 @@ export const useProfileList = (): UseUpdateProfileListReturn => {
       onInfiniteLoad,
     },
     featuredProps: {
-      categories: featuredCategories,
+      categories,
     },
   };
 };

@@ -8,6 +8,7 @@ import classes from './featured-category-card.module.scss';
 
 interface FeaturedCategoryCardProps {
   category: string;
+  originalCategory: string;
   count: number;
   mainHighlight: boolean;
   companies: {
@@ -20,7 +21,13 @@ interface FeaturedCategoryCardProps {
   }[];
 }
 
-export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({ category, count, companies, mainHighlight }) => {
+export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({
+  category,
+  originalCategory,
+  count,
+  companies,
+  mainHighlight,
+}) => {
   const styles = useStyles();
   const [open, setOpen] = useState(mainHighlight);
   const { t } = useTranslate();
@@ -45,7 +52,7 @@ export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({ category, 
             <EntryCard {...company} key={company.companyId} />
           ))}
           <ButtonBox>
-            <Link href={`/cegkereso?category=${category}`} passHref>
+            <Link href={`/cegkereso?category=${originalCategory}`} passHref>
               <a>
                 <Button variant="outlined" className={mainHighlight ? classes.mainButton : classes.notMainButton}>
                   {`${t('COMPANY_SEARCH.FEATURED.OPEN_ALL')}`}

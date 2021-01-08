@@ -5,7 +5,7 @@ import { FeaturedCategoryWithCompanies } from './mock-fetch';
 
 // TODO: change import after common has been merged
 interface FeaturedCategoryGridProps {
-  categories: FeaturedCategoryWithCompanies[];
+  categories: (FeaturedCategoryWithCompanies & { originalCategory: string })[];
 }
 
 export const FeaturedCategoryGrid: FC<FeaturedCategoryGridProps> = ({ categories }) => {

@@ -35,7 +35,7 @@ const searchProfiles = ({
     if (categoryText) {
       publicProfileService.searchProfilesByCategory(1, rowsPerPage, categoryText);
     }
-  }, [publicProfileService, searchText]);
+  }, [publicProfileService, searchText, categoryText]);
 };
 
 const getFeaturedCategories = ({
