@@ -1,7 +1,11 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
 import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
+import { getMockFeaturedCategories } from '../pages/profile-list/mock-fetch';
 import {
+  getFeaturedCategories,
+  getFeaturedCategoriesFail,
+  getFeaturedCategoriesSuccess,
   getProfiles,
   getProfilesFail,
   getProfilesSuccess,
@@ -17,6 +21,7 @@ import {
 } from '../pages/public-profile/store/actions';
 import { retryOnAxiosTimeout } from '../utils/retry-on-axios-timeout';
 
+// TODO: change imports after common has been merged
 export interface IPublicProfileService {
   setPublicProfile(profilePage: ProfilePage): void;
   getPublicProfileByIDOrAlias(identifier: string, IDOrAlias: 'ID' | 'ALIAS'): void;
@@ -32,7 +37,9 @@ export interface IPublicProfileService {
     isNPS?: boolean,
   ): void;
   searchProfilesByName(page: number, rowsPerPage: number, searchText: string): void;
+  searchProfilesByCategory(page: number, rowsPerPage: number, category: string): void;
   resetProfiles(): void;
+  getFeaturedCategories(): void;
 }
 
 const ONE_SECOND = 1000;
@@ -42,16 +49,37 @@ export const publicProfileServiceFactory = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>, // TODO missing typings
 ): IPublicProfileService => {
-  const service = {
+  return {
     searchProfilesByName: async (page: number, rowsPerPage: number, searchText: string) => {
       const sessionId = Math.random().toString(36).substr(2, 9);
-      dispatch(getProfiles({ page, rowsPerPage, sessionId, searchText }));
+      dispatch(getProfiles({ page, rowsPerPage, sessionId, searchText, by: 'NAME' }));
 
       try {
         const { items, count } = await retryOnAxiosTimeout(
           () =>
             bixClient.publicProfile.profile.searchProfilesByName({
               filter: searchText,
+              page: page,
+              pageSize: rowsPerPage,
+              sort: '',
+            }),
+          { retryAmount: 5, retryWaitMs: ONE_SECOND },
+        );
+        dispatch(getProfilesSuccess({ items, count, sessionId }));
+      } catch (error) {
+        console.error(error);
+        dispatch(getProfilesFail({ error, sessionId }));
+      }
+    },
+    searchProfilesByCategory: async (page: number, rowsPerPage: number, category: string) => {
+      const sessionId = Math.random().toString(36).substr(2, 9);
+      dispatch(getProfiles({ page, rowsPerPage, sessionId, category, by: 'CATEGORY' }));
+      // TODO: change searchProfilesByName call after common has been merged!
+      try {
+        const { items, count } = await retryOnAxiosTimeout(
+          () =>
+            bixClient.publicProfile.profile.searchProfilesByName({
+              filter: category,
               page: page,
               pageSize: rowsPerPage,
               sort: '',
@@ -93,6 +121,15 @@ export const publicProfileServiceFactory = (
         });
       // .catch(() => dispatch(getPublicProfileSuccess({ profilePage: mockData() as ProfilePage })));
     },
+    getFeaturedCategories: () => {
+      dispatch(getFeaturedCategories());
+      getMockFeaturedCategories()
+        .then((data) => {
+          dispatch(getFeaturedCategoriesSuccess(data));
+        })
+        .catch((_) => {
+          dispatch(getFeaturedCategoriesFail());
+        });
+    },
   };
-  return service;
 };
