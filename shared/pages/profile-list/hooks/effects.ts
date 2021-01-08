@@ -4,6 +4,8 @@ import { IProfileListState } from '../store/state';
 
 interface UseProfileListEffectsInputs {
   searchText: string;
+  categoryText: string;
+  onHomePage: boolean;
   publicProfileService: IPublicProfileService;
   profileList: IProfileListState;
 }
@@ -12,24 +14,44 @@ export const useProfileListEffects = ({
   profileList,
   publicProfileService,
   searchText,
+  categoryText,
+  onHomePage,
 }: UseProfileListEffectsInputs): void => {
-  searchProfiles({ profileList, searchText, publicProfileService });
-  resetProfiles({ publicProfileService });
+  searchProfiles({ profileList, searchText, publicProfileService, categoryText });
+  getFeaturedCategories({ publicProfileService, onHomePage });
+  resetProfilesOnNavigation({ publicProfileService });
 };
 
 const searchProfiles = ({
   searchText,
+  categoryText,
   publicProfileService,
   profileList: { rowsPerPage },
-}: Pick<UseProfileListEffectsInputs, 'searchText' | 'publicProfileService' | 'profileList'>): void => {
+}: Pick<UseProfileListEffectsInputs, 'searchText' | 'publicProfileService' | 'profileList' | 'categoryText'>): void => {
   useEffect(() => {
     if (searchText) {
       publicProfileService.searchProfilesByName(1, rowsPerPage, searchText);
     }
+    if (categoryText) {
+      publicProfileService.searchProfilesByCategory(1, rowsPerPage, categoryText);
+    }
   }, [publicProfileService, searchText]);
 };
 
-const resetProfiles = ({ publicProfileService }: Pick<UseProfileListEffectsInputs, 'publicProfileService'>): void => {
+const getFeaturedCategories = ({
+  onHomePage,
+  publicProfileService,
+}: Pick<UseProfileListEffectsInputs, 'publicProfileService' | 'onHomePage'>) => {
+  useEffect(() => {
+    if (onHomePage) {
+      publicProfileService.getFeaturedCategories();
+    }
+  }, [publicProfileService, onHomePage]);
+};
+
+const resetProfilesOnNavigation = ({
+  publicProfileService,
+}: Pick<UseProfileListEffectsInputs, 'publicProfileService'>): void => {
   useEffect(
     () => () => {
       publicProfileService.resetProfiles();

@@ -1,13 +1,17 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useApp } from '../../../app.context';
+import { FeaturedCategoryWithCompanies } from '../mock-fetch';
 import { useProfileListEffects } from './effects';
+import { useCategoryText } from './use-category-text';
 import { useSearchText } from './use-search-text';
 import { getOnInfiniteLoad } from './utils/get-on-infinite-load';
 import { calculateContainerHeight, calculateLoadOffset } from './utils/infinite-load-dimensions';
 
+// TODO: change import after common has been merged
 interface UseUpdateProfileListReturn {
   searchText: string;
+  onHomePage: boolean;
   resultsProps: {
     onInfiniteLoad: () => void;
     loadOffset: number;
@@ -17,19 +21,24 @@ interface UseUpdateProfileListReturn {
     loading: boolean;
     profiles: IProfileSummary[];
   };
+  featuredProps: {
+    categories: FeaturedCategoryWithCompanies[];
+  };
 }
 
 const INFINITE_LOAD_TRIGGER_DISTANCE = 200;
 const INFINITE_LOAD_ELEMENT_HEIGHT = 360;
 
-export const useProfileList = (searchCategory?: string): UseUpdateProfileListReturn => {
+export const useProfileList = (): UseUpdateProfileListReturn => {
   const {
     publicProfileService,
     state: { profileList },
   } = useApp();
-  const { loading, count, profiles } = profileList;
+  const { loading, count, profiles, featuredCategories } = profileList;
   const searchText = useSearchText();
-  useProfileListEffects({ searchText, profileList, publicProfileService });
+  const categoryText = useCategoryText();
+  const onHomePage = useMemo(() => !searchText && !categoryText, [searchText, categoryText]);
+  useProfileListEffects({ searchText, categoryText, profileList, publicProfileService, onHomePage });
   const onInfiniteLoad = useCallback(getOnInfiniteLoad(profileList, publicProfileService, searchText), [
     profileList.page,
     profileList.rowsPerPage,
@@ -39,6 +48,7 @@ export const useProfileList = (searchCategory?: string): UseUpdateProfileListRet
 
   return {
     searchText,
+    onHomePage,
     resultsProps: {
       loadOffset: calculateLoadOffset(profileList, INFINITE_LOAD_TRIGGER_DISTANCE),
       containerHeight: calculateContainerHeight(profileList, INFINITE_LOAD_ELEMENT_HEIGHT),
@@ -47,6 +57,9 @@ export const useProfileList = (searchCategory?: string): UseUpdateProfileListRet
       loading,
       profiles,
       onInfiniteLoad,
+    },
+    featuredProps: {
+      categories: featuredCategories,
     },
   };
 };

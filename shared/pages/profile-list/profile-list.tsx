@@ -7,19 +7,13 @@ import { Header } from '../../components/header/header';
 import { useTranslate } from '../../translate.context';
 import { FeaturedCategoryGrid } from './featured-category-grid';
 import { useProfileList } from './hooks/use-profile-list';
-import { getMockResponse } from './mock-fetch';
 import { ProfileListResults } from './profile-list-results';
 import { ProfileListSearch } from './profile-list-search';
 import classes from './profile-list.module.scss';
 
-interface ProfileListProps {
-  category?: string;
-}
-
-const ProfileList: NextPage<ProfileListProps> = ({ category }) => {
+export const ProfileList: NextPage = () => {
   const { t } = useTranslate();
-  const { searchText, resultsProps } = useProfileList(category);
-  const categories = getMockResponse();
+  const { searchText, onHomePage, resultsProps, featuredProps } = useProfileList();
   return (
     <>
       <Head>
@@ -36,14 +30,14 @@ const ProfileList: NextPage<ProfileListProps> = ({ category }) => {
         </SearchContainer>
         <Divider />
       </Paper>
-      {searchText ? (
+      {onHomePage ? (
+        <Container>
+          <FeaturedCategoryGrid {...featuredProps} />
+        </Container>
+      ) : (
         <ResultsContainer>
           <ProfileListResults {...resultsProps} />
         </ResultsContainer>
-      ) : (
-        <Container>
-          <FeaturedCategoryGrid categories={categories} />
-        </Container>
       )}
 
       <Footer />
@@ -55,10 +49,3 @@ const Divider: FC = () => <div className={classes.divider}></div>;
 const Container: FC = ({ children }) => <div className={classes.container}> {children} </div>;
 const SearchContainer: FC = ({ children }) => <div className={classes.headerBlockInner}> {children} </div>;
 const ResultsContainer: FC = ({ children }) => <div className={classes.resultsContainer}> {children} </div>;
-
-ProfileList.getInitialProps = ({ query }): ProfileListProps => {
-  const category = Array.isArray(query?.category) ? query?.category[0] : query?.category;
-  return { category };
-};
-
-export { ProfileList };

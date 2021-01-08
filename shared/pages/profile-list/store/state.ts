@@ -9,7 +9,6 @@ export interface IProfileListState {
   count: number | null;
   loading: boolean;
   searchText: string | null;
-  category: string | null;
   sessionId: string | null;
   featuredCategories: FeaturedCategoryWithCompanies[];
 }
@@ -21,7 +20,6 @@ export const initialProfileListState: IProfileListState = {
   count: null,
   loading: false,
   searchText: null,
-  category: null,
   sessionId: null,
   featuredCategories: [],
 };
