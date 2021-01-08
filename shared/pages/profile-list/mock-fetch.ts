@@ -25,40 +25,6 @@ export const getMockFeaturedCategories = (): Promise<{ highlightedCategories: Fe
 export const getMockResponse = (): FeaturedCategoryWithCompanies[] =>
   Array.from({ length: faker.random.number({ min: 7, max: 15 }) }, categoryFactory);
 
-export const mockCards: FeaturedCategoryWithCompanies[] = [
-  {
-    category: 'yoo',
-    count: 1,
-    mainHighlight: true,
-    companies: [
-      {
-        companyId: `${Math.random()}`,
-        companyName: 'Test company nam 1',
-        companyAlias: 'Test company alias 1',
-        profileId: `${Math.random()}`,
-        profileName: 'Test profile name 1',
-        bixValue: 9.2,
-        ratingCount: 71,
-      },
-      {
-        companyId: `${Math.random()}`,
-        companyName: 'Test company nam 2',
-        companyAlias: 'Test company alias 2',
-        profileId: `${Math.random()}`,
-        profileName: 'Test profile name 2',
-        bixValue: 9.2,
-        ratingCount: 71,
-      },
-    ],
-  },
-  {
-    category: 'yo2',
-    count: 0,
-    mainHighlight: false,
-    companies: [],
-  },
-];
-
 const companySummaryFactory = (): FeaturedCategoryCompanySummary => ({
   companyId: faker.random.uuid(),
   companyName: faker.company.companyName(),

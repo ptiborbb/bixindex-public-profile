@@ -1,10 +1,10 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
-import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useApp } from '../../../app.context';
-import { IPublicProfileService } from '../../../services/public-profile.service';
-import { IProfileListState } from '../store/state';
 import { useProfileListEffects } from './effects';
+import { useSearchText } from './use-search-text';
+import { getOnInfiniteLoad } from './utils/get-on-infinite-load';
+import { calculateContainerHeight, calculateLoadOffset } from './utils/infinite-load-dimensions';
 
 interface UseUpdateProfileListReturn {
   searchText: string;
@@ -22,7 +22,7 @@ interface UseUpdateProfileListReturn {
 const INFINITE_LOAD_TRIGGER_DISTANCE = 200;
 const INFINITE_LOAD_ELEMENT_HEIGHT = 360;
 
-export const useProfileList = (): UseUpdateProfileListReturn => {
+export const useProfileList = (searchCategory?: string): UseUpdateProfileListReturn => {
   const {
     publicProfileService,
     state: { profileList },
@@ -40,8 +40,8 @@ export const useProfileList = (): UseUpdateProfileListReturn => {
   return {
     searchText,
     resultsProps: {
-      loadOffset: calculateLoadOffset(profileList),
-      containerHeight: calculateContainerHeight(profileList),
+      loadOffset: calculateLoadOffset(profileList, INFINITE_LOAD_TRIGGER_DISTANCE),
+      containerHeight: calculateContainerHeight(profileList, INFINITE_LOAD_ELEMENT_HEIGHT),
       elementHeight: INFINITE_LOAD_ELEMENT_HEIGHT,
       totalResultCount: count,
       loading,
@@ -49,20 +49,4 @@ export const useProfileList = (): UseUpdateProfileListReturn => {
       onInfiniteLoad,
     },
   };
-};
-
-const useSearchText = (): string => (useRouter().query.searchText as string) || '';
-const calculateLoadOffset = ({ page, rowsPerPage, count }: IProfileListState): number =>
-  page * rowsPerPage >= count ? null : INFINITE_LOAD_TRIGGER_DISTANCE;
-const calculateContainerHeight = ({ profiles }: IProfileListState): number =>
-  Math.max(INFINITE_LOAD_ELEMENT_HEIGHT * 2, (profiles?.length + 1) * INFINITE_LOAD_ELEMENT_HEIGHT);
-
-const getOnInfiniteLoad = (
-  { page, rowsPerPage }: IProfileListState,
-  publicProfileService: IPublicProfileService,
-  searchText: string,
-) => (): void => {
-  if (searchText) {
-    publicProfileService.searchProfilesByName(page + 1, rowsPerPage, searchText);
-  }
 };

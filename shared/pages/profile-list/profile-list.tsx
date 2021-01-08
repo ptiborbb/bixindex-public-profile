@@ -1,4 +1,5 @@
 import { Paper } from '@material-ui/core';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import React, { FC } from 'react';
 import { Footer } from '../../components/footer/footer';
@@ -11,9 +12,13 @@ import { ProfileListResults } from './profile-list-results';
 import { ProfileListSearch } from './profile-list-search';
 import classes from './profile-list.module.scss';
 
-export const ProfileList: FC = () => {
+interface ProfileListProps {
+  category?: string;
+}
+
+const ProfileList: NextPage<ProfileListProps> = ({ category }) => {
   const { t } = useTranslate();
-  const { searchText, resultsProps } = useProfileList();
+  const { searchText, resultsProps } = useProfileList(category);
   const categories = getMockResponse();
   return (
     <>
@@ -50,3 +55,10 @@ const Divider: FC = () => <div className={classes.divider}></div>;
 const Container: FC = ({ children }) => <div className={classes.container}> {children} </div>;
 const SearchContainer: FC = ({ children }) => <div className={classes.headerBlockInner}> {children} </div>;
 const ResultsContainer: FC = ({ children }) => <div className={classes.resultsContainer}> {children} </div>;
+
+ProfileList.getInitialProps = ({ query }): ProfileListProps => {
+  const category = Array.isArray(query?.category) ? query?.category[0] : query?.category;
+  return { category };
+};
+
+export { ProfileList };

@@ -10,20 +10,22 @@
   font-weight: $weight;
 }
 
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .company {
   h5 {
+    @include greyBold(700);
+    @include ellipsis();
     margin: 0;
     padding-bottom: 0.2em;
-    @include greyBold(700);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   p {
+    @include ellipsis();
     margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 

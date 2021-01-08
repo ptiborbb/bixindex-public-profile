@@ -9,6 +9,7 @@ interface FeaturedCategoryGridProps {
 }
 
 export const FeaturedCategoryGrid: FC<FeaturedCategoryGridProps> = ({ categories }) => {
+  // TODO: should be made to a presentational component
   const { mainHighlight, notMainHighlight } = useMemo(
     () => ({
       mainHighlight: categories.filter((c) => c.mainHighlight),
@@ -20,8 +21,8 @@ export const FeaturedCategoryGrid: FC<FeaturedCategoryGridProps> = ({ categories
     <GridHolder>
       <Grid container spacing={3} justify="center">
         {mainHighlight &&
-          mainHighlight.map((category, i) => (
-            <Grid item xs={12} sm={6} md={4} key={i}>
+          mainHighlight.map((category) => (
+            <Grid item xs={12} md={4} key={Math.random()}>
               <FeaturedCategoryCard {...category} />
             </Grid>
           ))}
@@ -29,8 +30,8 @@ export const FeaturedCategoryGrid: FC<FeaturedCategoryGridProps> = ({ categories
       <Gutter />
       <Grid container spacing={3} justify="center">
         {notMainHighlight &&
-          notMainHighlight.map((category, i) => (
-            <Grid item xs={12} sm={6} md={4} key={i}>
+          notMainHighlight.map((category) => (
+            <Grid item xs={12} md={4} key={Math.random()}>
               <FeaturedCategoryCard {...category} />
             </Grid>
           ))}
