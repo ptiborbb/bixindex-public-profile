@@ -14,7 +14,9 @@ import {
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
 import { debounce, sum } from 'lodash';
+import { useRouter } from 'next/router';
 import React, { FC, useCallback, useState } from 'react';
+import { useConfig } from '../../../../../config.context';
 import { EReviewFilterType } from '../../../../../enums/review-filter-type';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { useTranslate } from '../../../../../translate.context';
@@ -50,6 +52,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
 }) => {
   const [opened, setOpened] = useState(true);
   const { t } = useTranslate();
+  const config = useConfig();
+  const router = useRouter();
 
   const changeNameFilter = debounce(
     useCallback(
@@ -210,7 +214,14 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <div className={`${classes.separator}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}></div>
 
         {ratings &&
-          ratings.map((rating, i) => <ReviewItem key={i} rating={rating} productsAndServices={productsAndServices} />)}
+          ratings.map((rating, i) => (
+            <ReviewItem
+              key={i}
+              rating={rating}
+              productsAndServices={productsAndServices}
+              url={`${config.publicProfileUrl}${router.asPath}`}
+            />
+          ))}
 
         <div className={`${classes.pager}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}>
           <div className={classes.pageNumber}>

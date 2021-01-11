@@ -2,6 +2,7 @@ import { IProduct, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { Avatar, Divider, Fab } from '@material-ui/core';
 import { QuestionAnswer, Share, ThumbDown, ThumbUp } from '@material-ui/icons';
 import React, { FC, useMemo } from 'react';
+import { FacebookShareButton, LinkedinShareButton } from 'react-share';
 import verifiedUser from '../../../../../../public/images/verified_user.png';
 import fbIcon from '../../../../../../public/social/f_icon.svg';
 import inIcon from '../../../../../../public/social/in_icon.svg';
@@ -14,9 +15,10 @@ import classes from './review-item.module.scss';
 interface ReviewItemProps {
   rating: IRatingItem;
   productsAndServices: (IProduct | IService)[];
+  url: string;
 }
 
-export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices }) => {
+export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices, url }) => {
   const { t } = useTranslate();
 
   const ratedProductOrService = useMemo(
@@ -44,11 +46,15 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices })
             <div className={classes.shareBlock}>
               <div className={classes.shareOptions}>
                 <div className={classes.shareFb}>
-                  <img alt="facebook" src={fbIcon} />
+                  <FacebookShareButton url={url} className={classes.socialButton}>
+                    <img alt="facebook" src={fbIcon} className={classes.socialImage} />
+                  </FacebookShareButton>
                 </div>
                 <div className={classes.shareSeparator}></div>
                 <div className={classes.shareIn}>
-                  <img alt="linkedin" src={inIcon} />
+                  <LinkedinShareButton url={url} className={classes.socialButton}>
+                    <img alt="linkedin" src={inIcon} className={classes.socialImage} />
+                  </LinkedinShareButton>
                 </div>
               </div>
               <Fab className={classes.shareButton} size="small" aria-label="share">
