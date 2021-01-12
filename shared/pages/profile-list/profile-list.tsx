@@ -49,7 +49,6 @@ export const ProfileList: FC = () => {
     <>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
-        <meta name="viewport" content="width=800" />
       </Head>
       <div className={classes.headerBlock}>
         <div className={classes.container}>
