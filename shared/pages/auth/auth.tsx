@@ -161,7 +161,6 @@ export const Auth: FunctionComponent = () => {
         <meta name="description" content="Jelentkezz be a BIX ügyfélkapujába!" />
         <meta property="og:title" content="Bejelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
         <meta property="og:description" content="Jelentkezz be a BIX ügyfélkapujába!" />
-        <meta name="viewport" content="width=800" />
       </Head>
       <section className={classes.pageWrapper}>
         <div className={classes.headerBlock}>
