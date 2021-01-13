@@ -18,7 +18,6 @@ export const ProfileList: NextPage = () => {
     <>
       <Head>
         <title>{t('COMMON.PAGE_TITLE')}</title>
-        <meta name="viewport" content="width=800" />
       </Head>
       <Paper elevation={0} className={classes.headerBlock} square>
         <Container>

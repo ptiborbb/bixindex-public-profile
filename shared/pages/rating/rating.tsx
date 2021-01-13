@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   FormHelperText,
   Grid,
+  Hidden,
   InputAdornment,
   MenuItem,
   Radio,
@@ -507,15 +508,16 @@ export const Rating: FC = () => {
                         <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                       </Grid>
                       <FieldArray name="answers">
-                        {() => (
+                        {({ form: { values } }) => (
                           <>
                             {companyForm.questions.map((question, index) => (
                               <Grid item xs={12} key={question.id}>
                                 <span className="position-absolute">{question.text}</span>
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
-                                  <div>
+                                  <div className="row mx-0 justify-content-center d-flex">
+                                    {console.log(values)}
                                     <FormControlLabel
-                                      className="m-0 mt-4"
+                                      className="m-0 mt-4 mt-xl-0 col-12 col-lg-4"
                                       value={EReviewValues.NO_EXPERIENCE}
                                       label="  "
                                       labelPlacement="top"
@@ -524,6 +526,7 @@ export const Rating: FC = () => {
                                           disableRipple
                                           color="default"
                                           style={{ borderRadius: '8px' }}
+                                          className="col-12"
                                           checkedIcon={
                                             <span className={`${classes.noExperienceButton} ${classes.checked}`}>
                                               {t('RATING.NO_EXPERIENCE')}
@@ -543,7 +546,22 @@ export const Rating: FC = () => {
                                         key={option.value}
                                         value={option.value}
                                         label={
-                                          <span className={index !== 0 ? 'invisible' : undefined}>{option.label}</span>
+                                          <>
+                                            <Hidden lgUp>
+                                              <span
+                                                className={
+                                                  option.value !== values?.answers[index]?.value ? 'd-none' : undefined
+                                                }
+                                              >
+                                                {option.label}
+                                              </span>
+                                            </Hidden>
+                                            <Hidden mdDown>
+                                              <span className={index !== 0 ? 'invisible' : undefined}>
+                                                {option.label}
+                                              </span>
+                                            </Hidden>
+                                          </>
                                         }
                                         labelPlacement="top"
                                         onClick={option.clickHandler}
@@ -617,7 +635,7 @@ export const Rating: FC = () => {
                       <Grid item xs={12}>
                         <Typography className={classes.summary}>{t('RATING.WHICH_PRODUCT')}</Typography>
                         <Grid container spacing={4}>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} lg={6}>
                             <Field
                               component={Select}
                               select
@@ -761,7 +779,7 @@ export const Rating: FC = () => {
                           </Grid>
                           {values.auth.loginOrRegister === ELoginOrRegister.REGISTER ? (
                             <>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.LASTNAME')}</Typography>
                                 <Field
                                   component={TextField}
@@ -775,7 +793,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.FIRSTNAME')}</Typography>
                                 <Field
                                   component={TextField}
@@ -789,7 +807,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
                                 <Field
                                   component={TextField}
@@ -803,7 +821,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.PHONE')}</Typography>
                                 <Field
                                   component={TextField}
@@ -828,7 +846,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
                                 <Field
                                   component={TextField}
@@ -842,7 +860,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.CONFIRM_PASSWORD')}</Typography>
                                 <Field
                                   component={TextField}
@@ -908,7 +926,7 @@ export const Rating: FC = () => {
                       </Grid>
                     </>
                   )}
-                  <Grid item xs={6}>
+                  <Grid item xs={12} lg={6}>
                     <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
                     <Typography variant="caption">{t('RATING.VISIBILITY_INFO')}</Typography>
                     <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">

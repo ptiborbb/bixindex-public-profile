@@ -27,8 +27,8 @@ export const ReviewStat: FC<ReviewStatProps> = ({ label, index, radius = 80 }) =
   const offset = useMemo(() => circumference - (percent / 100) * circumference, [circumference, percent]);
 
   return (
-    <div className={classes.reviewStat}>
-      <div className={classes.reviewLeft}>
+    <div className={`${classes.reviewStat} row mx-0`}>
+      <div className={`${classes.reviewLeft} col-12 col-lg-6`}>
         <div className={classes.label}>{label}</div>
         <div className={classes.gauge}>
           <div className={classes.score}>{index.score.toFixed(2)}</div>
@@ -48,7 +48,7 @@ export const ReviewStat: FC<ReviewStatProps> = ({ label, index, radius = 80 }) =
         </div>
         <div className={classes.ratingCount}>Értékelések száma: {index.ratingCount}</div>
       </div>
-      <div className={classes.reviewRight}>
+      <div className={`${classes.reviewRight} col-12 col-lg-6 align-items-center align-items-lg-end`}>
         <ReviewRate
           ratingCount={index.ratingCount}
           rating={index.ratings[4]}

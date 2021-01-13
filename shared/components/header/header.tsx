@@ -1,15 +1,17 @@
-import { Popover } from '@material-ui/core';
+import { Drawer, Hidden, IconButton, List } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import MenuIcon from '@material-ui/icons/Menu';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
-import { FC, MouseEvent, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
-import { FunctionsDropdown } from './functions-dropdown/functions-dropdown';
+import Functions from './functions/functions';
 import classes from './header.module.scss';
+import LinkItem from './LinkItem/LinkItem';
 
 interface HeaderProps {
   logoPath?: string;
@@ -29,68 +31,24 @@ export const Header: FC<HeaderProps> = ({ logoPath = logo }) => {
     authService.logout();
   }, [authService]);
 
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (): void => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  return (
-    <header className={classes.header}>
-      <Link href="/">
-        <div className={classes.logo}>
-          <img alt="bix-logo" src={logoPath} />
-        </div>
-      </Link>
-      <div className={classes.links}>
-        <div className={classes.headerButtons}>
-          <Link href="/">
-            <div className={classes.link}>{t('HEADER.HOME')}</div>
-          </Link>
-          <a href={blogUrl} target="_blank" rel="noreferrer">
-            <span className={classes.link}>{t('HEADER.BLOG')}</span>
-          </a>
-          <Link href="/cegkereso">
-            <span className={classes.link}>{t('HEADER.COMPANY_SEARCH')}</span>
-          </Link>
-          <span className={classes.link} onMouseEnter={handleClick}>
-            {t('HEADER.FUNCTIONS')}
-          </span>
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-          >
-            <FunctionsDropdown />
-          </Popover>
-        </div>
-        <div className={classes.icons}>
-          <div className={classes.link}>
-            <PhoneIcon />
-          </div>
-          <Link href="https://legjobbugyfelelmeny.hu">
-            <div className={classes.link}>
-              <EmojiEventsIcon />
-            </div>
-          </Link>
-        </div>
-      </div>
+  const links = (
+    <>
+      <LinkItem title={t('HEADER.HOME')} route={'/'} />
+      <LinkItem title={t('HEADER.BLOG')} route={blogUrl} onNewTab />
+      <LinkItem title={t('HEADER.COMPANY_SEARCH')} route={'/cegkereso'} />
+      <Functions />
+    </>
+  );
+  const icons = (
+    <>
+      <LinkItem title={<PhoneIcon />} route={'/'} />
+      <LinkItem title={<EmojiEventsIcon />} route={'https://legjobbugyfelelmeny.hu'} />
+    </>
+  );
+  const buttons = (
+    <>
       <div className={classes.cta}>
         <a target="_blank" rel="noreferrer" href={customerPortalUrl}>
           <Button className={classes.ctaButton}>{t('HEADER.CUSTOMER_PORTAL')}</Button>
@@ -110,6 +68,52 @@ export const Header: FC<HeaderProps> = ({ logoPath = logo }) => {
           </Link>
         )}
       </div>
+    </>
+  );
+
+  return (
+    <header className={classes.header}>
+      <Link href="/">
+        <div className={classes.logo}>
+          <img alt="bix-logo" src={logoPath} />
+        </div>
+      </Link>
+      <Hidden mdDown>
+        <div className={classes.links}>
+          <div className={classes.headerButtons}>{links}</div>
+          <div className={classes.icons}>{icons}</div>
+        </div>
+        {buttons}
+      </Hidden>
+      <Hidden lgUp>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          className={classes.menuButton}
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <MenuIcon fontSize="large" />
+        </IconButton>
+        <Drawer
+          variant="temporary"
+          anchor="right"
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true,
+          }}
+        >
+          <List>
+            {links}
+            {icons}
+            {buttons}
+          </List>
+        </Drawer>
+      </Hidden>
     </header>
   );
 };

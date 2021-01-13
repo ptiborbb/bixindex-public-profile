@@ -1,5 +1,5 @@
 import { ECompanyTypes } from '@codingsans/bixindex-common';
-import { Tooltip } from '@material-ui/core';
+import { Hidden, Tooltip } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import WidgetsIcon from '@material-ui/icons/Widgets';
@@ -66,23 +66,26 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
             Értékelés írása <EditIcon className={classes.reviewIcon} />
           </a>
         </Link>
+
         <div className={classes.companyHeaderLinks}>
-          <div onClick={() => activate('reviews')}>
-            <a className={`${classes.companyHeaderLink} ${activeTab === 'reviews' ? classes.active : ''}`}>
-              Értékelések
-            </a>
-          </div>
-          <div onClick={() => activate('awards')}>
-            <a className={`${classes.companyHeaderLink} ${activeTab === 'awards' ? classes.active : ''}`}>Díjak</a>
-          </div>
-          <div onClick={() => activate('news')}>
-            <a className={`${classes.companyHeaderLink} ${activeTab === 'news' ? classes.active : ''}`}>Hírek</a>
-          </div>
-          <div onClick={() => activate('products')}>
-            <a className={`${classes.companyHeaderLink} ${activeTab === 'products' ? classes.active : ''}`}>
-              Termékek/szolgáltatások
-            </a>
-          </div>
+          <Hidden mdDown>
+            <div onClick={() => activate('reviews')}>
+              <a className={`${classes.companyHeaderLink} ${activeTab === 'reviews' ? classes.active : ''}`}>
+                Értékelések
+              </a>
+            </div>
+            <div onClick={() => activate('awards')}>
+              <a className={`${classes.companyHeaderLink} ${activeTab === 'awards' ? classes.active : ''}`}>Díjak</a>
+            </div>
+            <div onClick={() => activate('news')}>
+              <a className={`${classes.companyHeaderLink} ${activeTab === 'news' ? classes.active : ''}`}>Hírek</a>
+            </div>
+            <div onClick={() => activate('products')}>
+              <a className={`${classes.companyHeaderLink} ${activeTab === 'products' ? classes.active : ''}`}>
+                Termékek/szolgáltatások
+              </a>
+            </div>
+          </Hidden>
         </div>
       </div>
     </div>
