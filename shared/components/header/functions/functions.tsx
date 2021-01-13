@@ -20,7 +20,6 @@ const Functions: FC<IFunctionsProps> = () => {
     setAnchorEl(null);
   };
   const [collapseOpen, setCollapseOpen] = useState(false);
-  const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
   return (
@@ -31,7 +30,7 @@ const Functions: FC<IFunctionsProps> = () => {
         </span>
         <Popover
           id={id}
-          open={open}
+          open={!!anchorEl}
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
