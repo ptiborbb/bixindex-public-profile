@@ -1,7 +1,6 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
 import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
-import { getMockFeaturedCategories } from '../pages/profile-list/mock-fetch';
 import {
   getFeaturedCategories,
   getFeaturedCategoriesFail,
@@ -21,7 +20,6 @@ import {
 } from '../pages/public-profile/store/actions';
 import { retryOnAxiosTimeout } from '../utils/retry-on-axios-timeout';
 
-// TODO: change imports after common has been merged
 export interface IPublicProfileService {
   setPublicProfile(profilePage: ProfilePage): void;
   getPublicProfileByIDOrAlias(identifier: string, IDOrAlias: 'ID' | 'ALIAS'): void;
@@ -74,15 +72,13 @@ export const publicProfileServiceFactory = (
     searchProfilesByCategory: async (page: number, rowsPerPage: number, category: string) => {
       const sessionId = Math.random().toString(36).substr(2, 9);
       dispatch(getProfiles({ page, rowsPerPage, sessionId, category, by: 'CATEGORY' }));
-      // TODO: change searchProfilesByName call after common has been merged!
       try {
         const { items, count } = await retryOnAxiosTimeout(
           () =>
-            bixClient.publicProfile.profile.searchProfilesByName({
-              filter: category,
+            bixClient.publicProfile.profile.searchProfilesByCategory({
               page: page,
               pageSize: rowsPerPage,
-              sort: '',
+              category,
             }),
           { retryAmount: 5, retryWaitMs: ONE_SECOND },
         );
@@ -123,7 +119,8 @@ export const publicProfileServiceFactory = (
     },
     getFeaturedCategories: () => {
       dispatch(getFeaturedCategories());
-      getMockFeaturedCategories()
+      bixClient.publicProfile.featured
+        .getHighlighetdCategories()
         .then((data) => {
           dispatch(getFeaturedCategoriesSuccess(data));
         })

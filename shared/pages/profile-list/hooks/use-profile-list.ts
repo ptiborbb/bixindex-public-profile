@@ -1,8 +1,8 @@
+import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 import { useCallback, useMemo } from 'react';
 import { useApp } from '../../../app.context';
 import { useTranslate } from '../../../translate.context';
-import { FeaturedCategoryWithCompanies } from '../mock-fetch';
 import { useProfileListEffects } from './effects';
 import { translateAndSortCategories } from './translate-and-sort-categories';
 import { useCategoryText } from './use-category-text';
@@ -10,7 +10,6 @@ import { useSearchText } from './use-search-text';
 import { getOnInfiniteLoad } from './utils/get-on-infinite-load';
 import { calculateContainerHeight, calculateLoadOffset } from './utils/infinite-load-dimensions';
 
-// TODO: change import after common has been merged
 interface UseUpdateProfileListReturn {
   searchText: string;
   onHomePage: boolean;
@@ -24,7 +23,7 @@ interface UseUpdateProfileListReturn {
     profiles: IProfileSummary[];
   };
   featuredProps: {
-    categories: (FeaturedCategoryWithCompanies & { originalCategory: string })[];
+    categories: (IHighlightedCategoryWithCompany & { originalCategory: string })[];
   };
 }
 

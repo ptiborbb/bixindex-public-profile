@@ -1,7 +1,6 @@
+import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
-import { FeaturedCategoryWithCompanies } from '../mock-fetch';
 
-// TODO: change imports when common has been merged
 export interface IProfileListState {
   profiles: IProfileSummary[] | null;
   page: number;
@@ -10,7 +9,7 @@ export interface IProfileListState {
   loading: boolean;
   searchText: string | null;
   sessionId: string | null;
-  featuredCategories: FeaturedCategoryWithCompanies[];
+  featuredCategories: IHighlightedCategoryWithCompany[];
 }
 
 export const initialProfileListState: IProfileListState = {

@@ -1,5 +1,5 @@
 import { TFunction } from 'next-i18next';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { FC, useCallback } from 'react';
 import { useTranslate } from '../../translate.context';
 import classes from './search-examples.module.scss';
@@ -14,22 +14,18 @@ export const SearchExamples: FC<SearchExamplesProps> = ({
   mapper: _mapper = defaultMapper,
 }) => {
   const { t } = useTranslate();
-  const router = useRouter();
   // should be changed once this component is actually in use
   const mapper = useCallback(getMapper(_mapper, t), [t, _mapper]);
   return (
     <div className={classes.searchExamples}>
       <b>{t('COMPANY_SEARCH.QUICK_SEARCH.LABEL')}</b>
       {examples.map((example, i) => (
-        <span
-          key={example as string}
-          onClick={async () => {
-            await router.push('/cegkereso/[searchText]', `/cegkereso/${mapper(example)}`);
-          }}
-        >
-          {mapper(example)}
-          {i < examples.length && `, `}
-        </span>
+        <Link key={example as string} href={`/cegkereso/${mapper(example)}`}>
+          <a>
+            {mapper(example)}
+            {i < examples.length && `, `}
+          </a>
+        </Link>
       ))}
     </div>
   );

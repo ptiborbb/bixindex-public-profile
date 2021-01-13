@@ -1,11 +1,10 @@
+import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { TFunction } from 'next-i18next';
-import { FeaturedCategoryWithCompanies } from '../mock-fetch';
 
-// TODO: change import after common has been merged
 export const translateAndSortCategories = (
-  categoryList: FeaturedCategoryWithCompanies[],
+  categoryList: IHighlightedCategoryWithCompany[],
   translate: TFunction,
-): (FeaturedCategoryWithCompanies & { originalCategory: string })[] => {
+): (IHighlightedCategoryWithCompany & { originalCategory: string })[] => {
   const extendedList = categoryList.map((c) => ({ ...c, originalCategory: c.category }));
   const sortedList = sortCategories(extendedList);
   const translatedList = translateCategories(sortedList, translate);

@@ -1,11 +1,10 @@
+import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { Grid } from '@material-ui/core';
 import { FC, useMemo } from 'react';
 import { FeaturedCategoryCard } from '../../components/featured-category-card/featured-category-card';
-import { FeaturedCategoryWithCompanies } from './mock-fetch';
 
-// TODO: change import after common has been merged
 interface FeaturedCategoryGridProps {
-  categories: (FeaturedCategoryWithCompanies & { originalCategory: string })[];
+  categories: (IHighlightedCategoryWithCompany & { originalCategory: string })[];
 }
 
 export const FeaturedCategoryGrid: FC<FeaturedCategoryGridProps> = ({ categories }) => {

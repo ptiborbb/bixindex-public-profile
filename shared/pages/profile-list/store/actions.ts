@@ -1,8 +1,6 @@
+import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 import { createAction } from '@reduxjs/toolkit';
-import { FeaturedCategoryWithCompanies } from '../mock-fetch';
-
-// TODO: change imprts after common has been merged
 
 export enum EProfileListActionTypes {
   GET_PROFILE_LIST = '[App] GET_PROFILE_LIST',
@@ -35,7 +33,7 @@ export const resetProfileList = createAction(EProfileListActionTypes.RESET_PROFI
 
 export const getFeaturedCategories = createAction(EProfileListActionTypes.GET_FEATURED_CATEGORIES);
 
-export const getFeaturedCategoriesSuccess = createAction<{ highlightedCategories: FeaturedCategoryWithCompanies[] }>(
+export const getFeaturedCategoriesSuccess = createAction<{ highlightedCategories: IHighlightedCategoryWithCompany[] }>(
   EProfileListActionTypes.GET_FEATURED_CATEGORIES_SUCCESS,
 );
 
