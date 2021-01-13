@@ -89,8 +89,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <Tune className="mr-2" /> {t('REVIEW_DETAILS.FILTERS')}
       </div>
 
-      <div className={classes.filterBlock}>
-        <div>
+      <div className={`${classes.filterBlock} row`}>
+        <div className="col-12 col-lg-3 d-flex flex-column align-items-lg-center">
           {ratingCountsByValue &&
             ratingCountsByValue.map((count, i) => (
               <div
@@ -109,8 +109,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               </div>
             ))}
         </div>
-        <div className="w-50 mx-4 d-flex flex-column justify-content-between">
-          <FormControl className={'w-100'} variant="outlined">
+        <div className="col-12 col-lg-6 d-flex flex-column justify-content-between">
+          <FormControl className={'w-100 mt-3 mt-lg-0'} variant="outlined">
             <InputLabel shrink id="ratedReviewLabel" className={classes.shrinkLabel}>
               {t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
             </InputLabel>
@@ -139,7 +139,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl className={'w-100'} variant="outlined">
+          <FormControl className={'w-100 my-3 my-lg-0'} variant="outlined">
             <InputLabel shrink id="arrival-date-select" className={classes.shrinkLabel}>
               {t('REVIEW_DETAILS.ARRIVAL_DATE')}
             </InputLabel>
@@ -175,9 +175,10 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             variant="outlined"
             fullWidth
             onChange={(event) => changeNameFilter(event.target.value)}
+            className="mb-3 mb-lg-0"
           />
         </div>
-        <div>
+        <div className="col-12 col-lg-3">
           <FormControl>
             <FormLabel>{t('REVIEW_DETAILS.REVIEW_TYPE')}</FormLabel>
             <RadioGroup
