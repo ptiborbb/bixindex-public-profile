@@ -453,7 +453,10 @@
     "BIX_PROFILE": "BIX Profil",
     "MAIN_TITLE": "Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!",
     "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten január 10-ig, és ",
-    "WIN": "nyerj"
+    "WIN": "nyerj",
+    "FEATURED": {
+      "OPEN_ALL": "Összes találat"
+    }
   },
   "TOAST": {
     "ERROR": {
