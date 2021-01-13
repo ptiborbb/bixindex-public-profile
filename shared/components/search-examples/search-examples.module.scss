@@ -1,0 +1,11 @@
+.searchExamples {
+  display: flex;
+  gap: 0.1rem;
+  span {
+    cursor: pointer;
+    display: inline;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}

@@ -11,25 +11,15 @@
   @include container;
 }
 
-.listWrapper {
-  @include container(100px);
-
-  h3 {
-    font-size: 1.6em;
-    line-height: 1.4em;
-    margin-bottom: 30px;
-    font-weight: 300;
-  }
+.resultsHeader {
+  font-size: 1.6em;
+  line-height: 1.4em;
+  margin-bottom: 30px;
+  font-weight: 300;
 }
-.searchExamples {
-  display: none;
-  span {
-    cursor: pointer;
 
-    &:hover {
-      opacity: 0.75;
-    }
-  }
+.resultsContainer {
+  @include container(100px);
 }
 
 .companySearch {
@@ -70,7 +60,7 @@
 
 .headerBlock {
   background-image: $bix-bg-gradient;
-  min-height: 83vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   font-size: 14px;

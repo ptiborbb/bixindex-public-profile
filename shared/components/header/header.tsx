@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Link from 'next/link';
 import React, { FC, useCallback, useState } from 'react';
+import logo from '../../../public/bix_logo.svg';
 import { useApp } from '../../app.context';
 import { useConfig } from '../../config.context';
 import { useTranslate } from '../../translate.context';
@@ -13,10 +14,10 @@ import classes from './header.module.scss';
 import LinkItem from './LinkItem/LinkItem';
 
 interface HeaderProps {
-  logoPath: string;
+  logoPath?: string;
 }
 
-export const Header: FC<HeaderProps> = ({ logoPath }) => {
+export const Header: FC<HeaderProps> = ({ logoPath = logo }) => {
   const { blogUrl, customerPortalUrl } = useConfig();
   const { t } = useTranslate();
   const {
