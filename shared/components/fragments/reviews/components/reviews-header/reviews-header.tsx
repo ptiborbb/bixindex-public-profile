@@ -1,3 +1,4 @@
+import { Hidden } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,17 +24,19 @@ export const ReviewsHeader: FC<ReviewsHeaderProps> = ({ companyAlias, companyFor
         <ReviewRatio value={Math.round(stats.index.score * 10) / 10} />
         <div className={classes.reviewsCount}>{stats.index.ratingCount} értékelés alapján</div>
       </div>
-      <div className={classes.reviewsActions}>
-        <Link
-          href={`/bix-profil/[companyAlias]/ertekeles/[companyFormID]?by=${by}`}
-          as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}?by=${by}`}
-          passHref
-        >
-          <a type="button" className={classes.companyWriteReview}>
-            Értékelés írása <EditIcon className={classes.reviewIcon} />
-          </a>
-        </Link>
-      </div>
+      <Hidden mdDown>
+        <div className={classes.reviewsActions}>
+          <Link
+            href={`/bix-profil/[companyAlias]/ertekeles/[companyFormID]?by=${by}`}
+            as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}?by=${by}`}
+            passHref
+          >
+            <a type="button" className={classes.companyWriteReview}>
+              Értékelés írása <EditIcon className={classes.reviewIcon} />
+            </a>
+          </Link>
+        </div>
+      </Hidden>
     </div>
   );
 };

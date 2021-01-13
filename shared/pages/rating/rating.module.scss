@@ -2,6 +2,9 @@
 
 .root {
   padding: 60px;
+  @media screen and(max-width:1280px) {
+    padding: 25px;
+  }
   & .companyName {
     color: $teal;
     font-weight: bold;
@@ -105,6 +108,9 @@
   }
   &.unchecked {
     color: #9a9a9a !important;
+  }
+  @media screen and(max-width: 1280px) {
+    width: 100% !important;
   }
 }
 

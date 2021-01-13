@@ -28,7 +28,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices, u
 
   return (
     <div className={classes.reviewCard}>
-      <div className={classes.reviewerInfo}>
+      <div className={`${classes.reviewerInfo} row mx-0`}>
         <Avatar src={rating.logo || verifiedUser} className={classes.avatar} />
         <div className={classes.reviewer}>
           <div className={classes.name}>{rating.name || 'ELLENŐRZÖTT REFERENCIA'}</div>
@@ -36,6 +36,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices, u
             <div>{rating.summary}</div>
           </div>
         </div>
+
         <div className={classes.details}>
           <div className={classes.ratingLine}>
             {rating.value && <StarCounter stars={calculateStarValue(rating.value)} />}
