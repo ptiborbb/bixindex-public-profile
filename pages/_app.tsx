@@ -12,10 +12,12 @@ import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import { AxiosError, AxiosResponse } from 'axios';
 import App, { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
-import React, { useMemo, useReducer } from 'react';
+import React, { useEffect, useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import CookieConsent from 'react-cookie-consent';
+import ReactGA from 'react-ga';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
 import { useConfig } from '../shared/config.context';
@@ -30,6 +32,8 @@ import '../styles/globals.scss';
 
 const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element => {
   const config = useConfig();
+  const router = useRouter();
+
   if (config.sentry.dsn) {
     Sentry.init({
       enabled: config.nodeEnv === EDevelopmentEnvironments.PROD,
@@ -65,6 +69,15 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
   const authService = useMemo(() => authServiceFactory(bixClient, dispatch), [bixClient]);
   const publicProfileService = useMemo(() => publicProfileServiceFactory(bixClient, dispatch), [bixClient]);
   const ratingService = useMemo(() => ratingServiceFactory(bixClient, dispatch), [bixClient]);
+
+  useEffect(() => {
+    ReactGA.initialize(config.analyticsId, { debug: false });
+  }, [config]);
+
+  useEffect(() => {
+    ReactGA.set({ page: router.asPath });
+    ReactGA.pageview(router.asPath);
+  }, [router]);
 
   const theme = createMuiTheme({
     props: {

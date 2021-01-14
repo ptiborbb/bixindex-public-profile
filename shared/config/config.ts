@@ -11,6 +11,7 @@ export interface IConfig {
   bestUserExperience: string;
   publicProfileUrl: string;
   backendUrl: string;
+  analyticsId: string;
 }
 
 export const config = loadedConfig as IConfig;
