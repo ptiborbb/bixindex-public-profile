@@ -93,7 +93,7 @@ export const ReviewItem: FC<ReviewItemProps> = ({ rating, productsAndServices, u
       {ratedProductOrService && (
         <>
           <div className={classes.ratedProductTitle}>{t('REVIEW_ITEM.RATED_PRODUCT')}</div>
-          <div className={classes.ratedProduct}>{ratedProductOrService.name}</div>
+          <div className={`${classes.ratedProduct} mb-2`}>{ratedProductOrService.name}</div>
         </>
       )}
       {rating?.reply?.user?.name && (
