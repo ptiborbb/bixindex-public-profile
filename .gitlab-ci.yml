@@ -3,6 +3,8 @@ stages:
 
 build:
   image: node:12.18.3
+  variables:
+    NEXT_PUBLIC_BACKEND_URL: https://bixindex-backend-local.herokuapp.com/
   cache:
     key:
       files:
