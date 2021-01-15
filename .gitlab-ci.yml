@@ -1,11 +1,28 @@
-image: tiangolo/docker-with-compose
-
 stages:
   - build
 
 build:
+  image: node:12.18.3
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      # No need for the yarn cache
+      # - .yarn-cache
+      - node_modules/
+  before_script:
+    - |
+      # Utils
+      function section() {
+        local section_name=$1
+        local header=$2
+        shift 2
+        echo -e "section_start:$(date +%s):${section_name}\r\e[0K${header}"
+        "$@"
+        echo -e "section_end:$(date +%s):${section_name}\r\e[0K"
+      }
+    - section yarn_install "Yarn Install" yarn install --frozen-lockfile
   stage: build
   script:
-    - echo "Trying to build"
-    - apk add --update nodejs yarn && yarn install
     - yarn build
