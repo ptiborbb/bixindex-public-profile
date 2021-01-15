@@ -29,6 +29,7 @@ const searchProfiles = ({
   profileList: { rowsPerPage },
 }: Pick<UseProfileListEffectsInputs, 'searchText' | 'publicProfileService' | 'profileList' | 'categoryText'>): void => {
   useEffect(() => {
+    publicProfileService.resetProfiles();
     if (searchText && !categoryText) {
       publicProfileService.searchProfilesByName(1, rowsPerPage, searchText);
     }
