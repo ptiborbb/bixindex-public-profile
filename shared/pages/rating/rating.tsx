@@ -1,3 +1,4 @@
+import { EHttpStatus } from '@codingsans/bixindex-common';
 import {
   Avatar,
   Button,
@@ -6,6 +7,7 @@ import {
   FormControlLabel,
   FormHelperText,
   Grid,
+  Hidden,
   InputAdornment,
   MenuItem,
   Radio,
@@ -14,7 +16,8 @@ import {
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
-import { RadioGroup, TextField } from 'formik-material-ui';
+import { RadioGroup, Select, TextField } from 'formik-material-ui';
+import { get } from 'lodash';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -49,6 +52,7 @@ export const Rating: FC = () => {
   const companyFormID = router.query.companyFormID as string;
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const productOrServiceID = router.query.productOrServiceID as string;
+  const partnerID = useMemo(() => get(router, 'query.partnerID', undefined), [router]);
 
   const {
     ratingService,
@@ -186,6 +190,7 @@ export const Rating: FC = () => {
             ratedProductOrService: values.ratedProductOrService || productOrServiceID,
             reference: values.reference,
             visibility: values.visibility,
+            partnerID,
             answers: values.answers
               .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
               .map((answer) => ({
@@ -219,8 +224,12 @@ export const Rating: FC = () => {
         });
         await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}`);
       } catch (error) {
-        const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
-        enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
+        if (error?.response.status === EHttpStatus.UNAUTHORIZED) {
+          enqueueSnackbar(t(`COMMON.ERROR.UNAUTHORIZED`), { variant: 'error' });
+        } else {
+          const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
+          enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
+        }
         setSubmitting(false);
       }
     },
@@ -499,15 +508,16 @@ export const Rating: FC = () => {
                         <Typography variant="h6">{t('RATING.WHAT_DO_YOU_THINK')}</Typography>
                       </Grid>
                       <FieldArray name="answers">
-                        {() => (
+                        {({ form: { values } }) => (
                           <>
                             {companyForm.questions.map((question, index) => (
                               <Grid item xs={12} key={question.id}>
                                 <span className="position-absolute">{question.text}</span>
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
-                                  <div>
+                                  <div className="row mx-0 justify-content-center d-flex">
+                                    {console.log(values)}
                                     <FormControlLabel
-                                      className="m-0 mt-4"
+                                      className="m-0 mt-4 mt-xl-0 col-12 col-lg-4"
                                       value={EReviewValues.NO_EXPERIENCE}
                                       label="  "
                                       labelPlacement="top"
@@ -516,6 +526,7 @@ export const Rating: FC = () => {
                                           disableRipple
                                           color="default"
                                           style={{ borderRadius: '8px' }}
+                                          className="col-12"
                                           checkedIcon={
                                             <span className={`${classes.noExperienceButton} ${classes.checked}`}>
                                               {t('RATING.NO_EXPERIENCE')}
@@ -535,7 +546,22 @@ export const Rating: FC = () => {
                                         key={option.value}
                                         value={option.value}
                                         label={
-                                          <span className={index !== 0 ? 'invisible' : undefined}>{option.label}</span>
+                                          <>
+                                            <Hidden lgUp>
+                                              <span
+                                                className={
+                                                  option.value !== values?.answers[index]?.value ? 'd-none' : undefined
+                                                }
+                                              >
+                                                {option.label}
+                                              </span>
+                                            </Hidden>
+                                            <Hidden mdDown>
+                                              <span className={index !== 0 ? 'invisible' : undefined}>
+                                                {option.label}
+                                              </span>
+                                            </Hidden>
+                                          </>
                                         }
                                         labelPlacement="top"
                                         onClick={option.clickHandler}
@@ -609,14 +635,15 @@ export const Rating: FC = () => {
                       <Grid item xs={12}>
                         <Typography className={classes.summary}>{t('RATING.WHICH_PRODUCT')}</Typography>
                         <Grid container spacing={4}>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} lg={6}>
                             <Field
-                              component={TextField}
+                              component={Select}
                               select
                               name="ratedProductOrService"
                               fullWidth
                               variant="outlined"
                               disabled={!!productOrServiceID}
+                              displayEmpty
                             >
                               <MenuItem value="">
                                 <em>{t('RATING.GENERAL_REVIEW')}</em>
@@ -752,7 +779,7 @@ export const Rating: FC = () => {
                           </Grid>
                           {values.auth.loginOrRegister === ELoginOrRegister.REGISTER ? (
                             <>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.LASTNAME')}</Typography>
                                 <Field
                                   component={TextField}
@@ -766,7 +793,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.FIRSTNAME')}</Typography>
                                 <Field
                                   component={TextField}
@@ -780,7 +807,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.EMAIL')}</Typography>
                                 <Field
                                   component={TextField}
@@ -794,7 +821,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.PHONE')}</Typography>
                                 <Field
                                   component={TextField}
@@ -819,7 +846,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
                                 <Field
                                   component={TextField}
@@ -833,7 +860,7 @@ export const Rating: FC = () => {
                                   }}
                                 />
                               </Grid>
-                              <Grid item xs={6}>
+                              <Grid item xs={12} lg={6}>
                                 <Typography className={classes.summary}>{t('RATING.CONFIRM_PASSWORD')}</Typography>
                                 <Field
                                   component={TextField}
@@ -899,7 +926,7 @@ export const Rating: FC = () => {
                       </Grid>
                     </>
                   )}
-                  <Grid item xs={6}>
+                  <Grid item xs={12} lg={6}>
                     <Typography className={classes.summary}>{t('RATING.VISIBILITY')}</Typography>
                     <Typography variant="caption">{t('RATING.VISIBILITY_INFO')}</Typography>
                     <Field component={TextField} label="" name="visibility" select fullWidth variant="outlined">

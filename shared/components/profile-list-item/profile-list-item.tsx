@@ -46,21 +46,21 @@ export const ProfileListItem: FC<ProfileListItemProps> = ({ profile }) => {
           <div className={classes.title}>
             <div className={classes.name}>
               <h3>{profile.profile.name}</h3>
-              <div className={classes.starHolder}>
-                {Array(5)
-                  .fill(0)
-                  .map((_, i) => {
-                    return (
-                      <GradeIcon
-                        key={i}
-                        fontSize="small"
-                        className={`${classes.ratingStar}${
-                          Math.round(profile.ratings.score / 2) > i ? ` ${classes.ratingStarActive}` : ''
-                        }`}
-                      />
-                    );
-                  })}
-              </div>
+            </div>
+            <div className={classes.starHolder}>
+              {Array(5)
+                .fill(0)
+                .map((_, i) => {
+                  return (
+                    <GradeIcon
+                      key={i}
+                      fontSize="small"
+                      className={`${classes.ratingStar}${
+                        Math.round(profile.ratings.score / 2) > i ? ` ${classes.ratingStarActive}` : ''
+                      }`}
+                    />
+                  );
+                })}
             </div>
             <div className={classes.profile}>
               {t('COMPANY_SEARCH.MAIN_PROFILE')} {t(`MAIN_PROFILES.${profile?.profile?.sector}`)}

@@ -71,8 +71,8 @@ export const Product: FC<ProductProps> = ({
         )}
       </div>
       <>
-        <div className={`d-flex justify-content-between align-items-center ${classes.serviceReview}`}>
-          <span className={classes.question}>{t('PRODUCT.DID_YOU_USE_THIS')}</span>
+        <div className={`d-flex justify-content-between align-items-center flex-wrap ${classes.serviceReview}`}>
+          <span className={`${classes.question} mb-3 mb-lg-0`}>{t('PRODUCT.DID_YOU_USE_THIS')}</span>
           <Link
             href={{
               pathname: '/bix-profil/[companyAlias]/ertekeles/[companyFormID]',

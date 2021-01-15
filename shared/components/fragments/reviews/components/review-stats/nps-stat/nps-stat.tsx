@@ -63,20 +63,20 @@ export const NpsStat: FC<NpsStatProps> = ({ npsRates }) => {
         ))}
       </div>
 
-      <div className={classes.npsByRate}>
-        <div>
+      <div className={`${classes.npsByRate} row`}>
+        <div className="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start mt-3 mt-lg-0 ">
           <SentimentVeryDissatisfied /> Ellenzők:{' '}
           <b>
             {npsScore.worstSum} ({npsScore.percents.worst}%)
           </b>
         </div>
-        <div>
+        <div className="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start mt-3 mt-lg-0 ">
           <SentimentSatisfied /> Passzívak:{' '}
           <b>
             {npsScore.neutralSum} ({npsScore.percents.neutral}%)
           </b>
         </div>
-        <div>
+        <div className="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start mt-3 mt-lg-0 ">
           <SentimentVerySatisfied /> Ajánlók:{' '}
           <b>
             {npsScore.bestSum} ({npsScore.percents.best}%)

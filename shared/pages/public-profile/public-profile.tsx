@@ -1,5 +1,6 @@
 import { createBixindexClient } from '@codingsans/bixindex-common';
-import { CircularProgress } from '@material-ui/core';
+import { BottomNavigation, BottomNavigationAction, CircularProgress, Hidden } from '@material-ui/core';
+import { Announcement, BusinessCenter, DoneAll, ThumbUp } from '@material-ui/icons';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -230,8 +231,11 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
   return (
     <div>
       <Head>
-        <meta name="viewport" content="width=800" />
-        <title>{t('COMMON.PAGE_TITLE')}</title>
+        <title>{`${profilePage?.profile?.name}: Vélemények, értékelések, céginformációk`}</title>
+        <meta
+          name="description"
+          content={`Ezen az oldalon ${profilePage?.ratings?.count} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`}
+        />
         {ratingStructuralData}
         {ogMetaElements}
       </Head>
@@ -270,6 +274,40 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
               </CompanyFrame>
             </div>
           </div>
+          <Hidden lgUp>
+            <BottomNavigation
+              className={classes.bottomNav}
+              value={activeFragment}
+              onChange={async (changeEvent, newValue) =>
+                await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}#${newValue}`)
+              }
+            >
+              <BottomNavigationAction
+                classes={{ selected: classes.selected }}
+                label="Értékelések"
+                value="reviews"
+                icon={<ThumbUp />}
+              />
+              <BottomNavigationAction
+                classes={{ selected: classes.selected }}
+                label="Díjak"
+                value="awards"
+                icon={<DoneAll />}
+              />
+              <BottomNavigationAction
+                classes={{ selected: classes.selected }}
+                label="Hírek"
+                value="news"
+                icon={<Announcement />}
+              />
+              <BottomNavigationAction
+                classes={{ selected: classes.selected }}
+                label="Termékek"
+                value="products"
+                icon={<BusinessCenter />}
+              />
+            </BottomNavigation>
+          </Hidden>
         </>
       ) : (
         <>
@@ -300,10 +338,8 @@ PublicProfile.getInitialProps = async (ctx) => {
   const alias = ctx.query.companyAlias as string;
   const by = (ctx.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const profilePage = await timeoutPromise<ProfilePage>(
-    bixClient.publicProfile.profile
-      .getProfileByCompany(alias, by)
-      .catch((_) => null) as Promise<ProfilePage | null>,
-    FIVE_SECONDS
+    bixClient.publicProfile.profile.getProfileByCompany(alias, by).catch((_) => null) as Promise<ProfilePage | null>,
+    FIVE_SECONDS,
   );
   return {
     profilePage,

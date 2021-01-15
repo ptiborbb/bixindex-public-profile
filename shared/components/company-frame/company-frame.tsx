@@ -45,12 +45,14 @@ export const CompanyFrame: FC<CompanyFrameProps> = ({ children, profile, product
                 );
               })}
           </div>
-          <div className={classes.captionText}>Bizalmi index</div>
+          <div className={classes.captionText}>{t('COMPANY_FRAME.TRUST_INDEX')}</div>
           <div className={classes.ratingCounter}>{(stats.index.score as number)?.toFixed(2)}</div>
-          <div className={classes.captionText}>ÖSSZESEN {stats.index.ratingCount} DB ÉRTÉKELÉS</div>
+          <div className={classes.captionText}>
+            {t('COMPANY_FRAME.REVIEW_COUNT_SUM', { count: stats.index.ratingCount })}
+          </div>
         </div>
 
-        <div className={classes.detailsTitle}>Cégadatok</div>
+        <div className={classes.detailsTitle}>{t('COMPANY_FRAME.COMPANY_DETAILS')}</div>
         <div className={classes.detailsBlock}>
           <div className={classes.companyName}>{profile.companyName}</div>
           <CompanyDetailItem

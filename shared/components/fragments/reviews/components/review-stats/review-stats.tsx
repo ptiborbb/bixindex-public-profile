@@ -54,21 +54,23 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
         <div className={classes.writeReviewHeader}>
           <Edit className="mr-2" /> {t('REVIEW_STATS.WRITE_REVIEW')}
         </div>
-        <div className="d-flex justify-content-between px-5 py-5 align-items-center">
-          <span>{t('REVIEW_STATS.DONT_BE_AFRAID')}</span>
-          <Link
-            href={`/bix-profil/[companyAlias]/ertekeles/[companyFormID]?by=${by}`}
-            as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}?by=${by}`}
-            passHref
-          >
-            <a type="button" className={classes.companyWriteReview}>
-              {t('COMPANY_SEARCH.WRITE_REVIEW')} <Edit className={classes.reviewIcon} />
-            </a>
-          </Link>
+        <div className="row d-flex flex-wrap justify-content-between px-5 py-5 align-items-center">
+          <span className="col-12 col-lg-6 text-center text-lg-left">{t('REVIEW_STATS.DONT_BE_AFRAID')}</span>
+          <div className="col-12 col-lg-4 justify-content-center mt-3 mt-lg-0">
+            <Link
+              href={`/bix-profil/[companyAlias]/ertekeles/[companyFormID]?by=${by}`}
+              as={`/bix-profil/${companyAlias}/ertekeles/${companyFormID}?by=${by}`}
+              passHref
+            >
+              <a type="button" className={classes.companyWriteReview}>
+                {t('COMPANY_SEARCH.WRITE_REVIEW')} <Edit className={classes.reviewIcon} />
+              </a>
+            </Link>
+          </div>
         </div>
-        <div className="d-flex justify-content-end pr-5">
-          {t('REVIEW_STATS.LAST_REVIEW_DATE')}:
-          {lastRating ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}
+        <div className="d-flex justify-content-end pr-5 flex-wrap mb-3 mb-lg-0">
+          <span>{t('REVIEW_STATS.LAST_REVIEW_DATE')}: </span>
+          <span>{lastRating ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}</span>
         </div>
       </div>
       <NpsStat npsRates={npsRates} />

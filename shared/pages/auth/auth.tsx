@@ -48,16 +48,20 @@ export const Auth: FunctionComponent = () => {
   const { t } = useTranslate();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-
   const { authService } = useApp();
   const companyFormID = useMemo(() => get('query.companyFormID', router), [router]);
   const companyAlias = useMemo(() => get('query.companyAlias', router), [router]);
 
   const login = useCallback(
     (email: string, password: string) => {
+      setLoginError({ isError: false, message: '' });
       return authService
         .login(email, password)
-        .then(() => setLoginError({ isError: false, message: '' }))
+        .then(() => {
+          return companyFormID
+            ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
+            : router.push('/');
+        })
         .catch((error) => {
           setLoginError({ isError: true, message: t('AUTH.INVALID_EMAIL_OR_PASSWORD') });
           throw error;
@@ -70,7 +74,10 @@ export const Auth: FunctionComponent = () => {
     (name: string, email: string, password: string) => {
       return authService
         .register(name, email, password)
-        .then(() => setRegisterError({ isError: false, message: '' }))
+        .then(() => {
+          setRegisterError({ isError: false, message: '' });
+          return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
+        })
         .catch((error: AxiosError) => {
           const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
           setRegisterError({ isError: true, message: t(`COMMON.ERROR.${errorDetail}`) });
@@ -154,7 +161,6 @@ export const Auth: FunctionComponent = () => {
         <meta name="description" content="Jelentkezz be a BIX ügyfélkapujába!" />
         <meta property="og:title" content="Bejelentkezés - BIX - Cégek, akikkel nyugodtan dolgozhatsz" />
         <meta property="og:description" content="Jelentkezz be a BIX ügyfélkapujába!" />
-        <meta name="viewport" content="width=800" />
       </Head>
       <section className={classes.pageWrapper}>
         <div className={classes.headerBlock}>
@@ -230,10 +236,9 @@ export const Auth: FunctionComponent = () => {
                       values: IRegisterFormValues,
                       { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
                     ) => {
-                      return register(values.name, values.email, values.password).then(() => {
+                      return register(values.name, values.email, values.password).catch(() => {
                         setSubmitting(false);
                         resetForm();
-                        return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
                       });
                     }}
                   >
@@ -382,12 +387,9 @@ export const Auth: FunctionComponent = () => {
                       values: ILoginFormValues,
                       { setSubmitting, resetForm }: FormikHelpers<ILoginFormValues>,
                     ) => {
-                      return login(values.email, values.password).then(() => {
+                      return login(values.email, values.password).catch(() => {
                         setSubmitting(false);
                         resetForm();
-                        return companyFormID
-                          ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
-                          : router.push('/');
                       });
                     }}
                   >
