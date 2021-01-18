@@ -1,72 +1,86 @@
-import { Button, Grid, Typography } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { useRouter } from 'next/router';
-import React, { FC } from 'react';
-import * as Yup from 'yup';
-import { useConfig } from '../../config.context';
+import { IAPIResponse } from '@codingsans/bixindex-common';
+import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
+import { Paper } from '@material-ui/core';
+import { NextPage } from 'next';
+import Head from 'next/head';
+import React from 'react';
+import { Footer } from '../../components/footer/footer';
+import { Header } from '../../components/header/header';
+import { ProfileSearchTypes } from '../../enums/profile-search-types';
 import { useTranslate } from '../../translate.context';
+import { ssrBixClient } from '../../utils/ssr-bix-client';
+import { Container, Divider, ResultsContainer, SearchContainer } from './components/elements';
+import { ProfileListSearchResults } from './components/profile-list-search-results';
+import { ProfileListSearchbar } from './components/profile-list-searchbar';
+import { useProfileListSearch } from './hooks/use-profile-list-search';
+import { searchProfiles } from './hooks/utils/search-profiles';
 import classes from './profile-list.module.scss';
 
-interface ProfileListHeaderProps {
-  searchText: string;
+interface ProfileListSearchProps {
+  profiles: IProfileSummary[] | null;
+  count: number | null;
 }
 
-export const ProfileListSearch: FC<ProfileListHeaderProps> = ({ searchText }) => {
-  const { bestUserExperience } = useConfig();
+const ProfileListSearch: NextPage<ProfileListSearchProps> = ({ profiles, count }) => {
   const { t } = useTranslate();
-  const router = useRouter();
+  const { searchText, resultsProps } = useProfileListSearch(profiles, count);
   return (
     <>
-      <Grid container spacing={3}>
-        <Grid item sm={12}>
-          <Typography variant="h3" align="center" className={classes.mainTitle}>
-            {t('COMPANY_SEARCH.MAIN_TITLE')}
-          </Typography>
-          <Typography variant="h3" align="center" className={classes.subTitle}>
-            {t('COMPANY_SEARCH.SUB_TITLE')}
-            <a style={{ textDecoration: 'underline' }} href={`${bestUserExperience}/nevezd-a-kedvenc-ceged/`}>
-              {t('COMPANY_SEARCH.WIN')}
-            </a>
-            !
-          </Typography>
-        </Grid>
-      </Grid>
-      <Formik
-        initialValues={{
-          text: searchText,
-        }}
-        validationSchema={Yup.object().shape({
-          text: Yup.string().required(t('COMMON.REQUIRED')),
-        })}
-        onSubmit={(values, { setSubmitting, resetForm }: FormikHelpers<{ text: string }>) => {
-          router.push('/cegkereso/[searchText]', `/cegkereso/${values.text}`);
-          setSubmitting(false);
-          resetForm();
-        }}
-        enableReinitialize
-      >
-        <Form className={classes.companySearch} noValidate>
-          <div className={classes.searchInputBlock}>
-            <Field
-              id="text"
-              name="text"
-              component={TextField}
-              className={classes.searchInput}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <Button type="submit" size="small" className={classes.searchButton}>
-                    <SearchIcon fontSize="large" />
-                  </Button>
-                ),
-              }}
-            />
-          </div>
-          {/* <SearchExamples /> */}
-        </Form>
-      </Formik>
+      <Head>
+        <title>{t('COMMON.PAGE_TITLE')}</title>
+      </Head>
+      <Paper elevation={0} className={classes.headerBlock} square>
+        <Container>
+          <Header />
+        </Container>
+        <Divider />
+        <SearchContainer>
+          <ProfileListSearchbar searchText={searchText} />
+        </SearchContainer>
+        <Divider />
+      </Paper>
+      <ResultsContainer>
+        <ProfileListSearchResults {...resultsProps} />
+      </ResultsContainer>
+      <Footer />
     </>
   );
 };
+
+ProfileListSearch.getInitialProps = async (ctx) =>
+  await ssrBixClient<ProfileListSearchProps>(
+    ctx,
+    async (ctx, bixClient) => {
+      const by = (ctx.query.by || null) as ProfileSearchTypes | null;
+      const searchText = (ctx.query.searchText || '') as string;
+      const { count, items: profiles } = (await searchProfiles({
+        by,
+        searchProfilesByName: () =>
+          bixClient.publicProfile.profile.searchProfilesByName({
+            filter: searchText,
+            page: 1,
+            pageSize: 50,
+            sort: '',
+          }),
+        searchProfilesByCategory: () =>
+          bixClient.publicProfile.profile.searchProfilesByCategory({
+            category: searchText,
+            page: 1,
+            pageSize: 50,
+          }),
+      })) as IAPIResponse<IProfileSummary>;
+      return {
+        profiles,
+        count,
+      };
+    },
+    {
+      fallback: {
+        profiles: null,
+        count: null,
+      },
+      timeoutMs: 8000,
+    },
+  );
+
+export { ProfileListSearch };

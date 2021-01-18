@@ -1,7 +1,8 @@
 import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { Grid } from '@material-ui/core';
-import { FC, useMemo } from 'react';
-import { FeaturedCategoryCard } from '../../components/featured-category-card/featured-category-card';
+import React, { FC, useMemo } from 'react';
+import { FeaturedCategoryCard } from '../../../components/featured-category-card/featured-category-card';
+import { GridHolder, Gutter } from './elements';
 
 interface FeaturedCategoryGridProps {
   categories: (IHighlightedCategoryWithCompany & { originalCategory: string })[];
@@ -38,6 +39,3 @@ export const FeaturedCategoryGrid: FC<FeaturedCategoryGridProps> = ({ categories
     </GridHolder>
   );
 };
-
-const GridHolder: FC = ({ children }) => <div style={{ padding: '32px 0' }}> {children} </div>;
-const Gutter: FC = () => <div style={{ padding: '1.3rem 0' }}></div>;

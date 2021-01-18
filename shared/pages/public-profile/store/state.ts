@@ -1,7 +1,7 @@
 import { ProfilePage } from '../../../interfaces/profile-page';
 
 export interface IPublicProfileState {
-  profilePage: ProfilePage;
+  profilePage: ProfilePage | null;
   loading: boolean;
   ratingsLoading: boolean;
 }
