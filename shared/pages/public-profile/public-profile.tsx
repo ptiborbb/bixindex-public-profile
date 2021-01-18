@@ -1,5 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, CircularProgress, Hidden } from '@material-ui/core';
-import { Announcement, BusinessCenter, DoneAll, ThumbUp } from '@material-ui/icons';
+import { CircularProgress, Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -14,7 +13,9 @@ import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
 import { ssrBixClient } from '../../utils/ssr-bix-client';
 import { Rating } from '../rating/rating';
+import { BottomNavigationBar } from './components/bottom-navigation-bar';
 import { ContentSegment } from './components/content-segments';
+import { Container, Divider, HeaderBackground } from './components/elements';
 import { useOgMetaElements } from './hooks/use-og-metadata';
 import { usePublicProfile } from './hooks/use-public-profile';
 import { useRatingStructuralData } from './hooks/use-rating-structural-data';
@@ -49,15 +50,15 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
       </Head>
       {profilePage ? (
         <>
-          <div className={classes.headerBlock}>
-            <div className={classes.container}>
+          <HeaderBackground>
+            <Container>
               <Header logoPath={logo} />
-            </div>
-            <div className={classes.divider}></div>
-            <div className={classes.container}>
+            </Container>
+            <Divider />
+            <Container>
               <CompanySearch />
-            </div>
-            <div className={classes.container}>
+            </Container>
+            <Container>
               <CompanyHeader
                 companyAlias={alias}
                 companyFormID={profilePage.profile.defaultFormID}
@@ -65,17 +66,17 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                 logoPath={profilePage.profile.logo}
                 companyType={profilePage.profile.type}
                 activeTab={activeSegment}
-                activate={async (fragment) => {
+                activate={async (segment) => {
                   await router.push(
                     `/bix-profil/[companyAlias]?by=${by}`,
-                    `/bix-profil/${alias}?by=${by}#segment=${fragment}`,
+                    `/bix-profil/${alias}?by=${by}#segment=${segment}`,
                   );
                 }}
               />
-            </div>
-          </div>
+            </Container>
+          </HeaderBackground>
           <div className={classes.frameFix}>
-            <div className={classes.container}>
+            <Container>
               <CompanyFrame
                 profile={profilePage.profile}
                 stats={profilePage.stats}
@@ -92,44 +93,10 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                   />
                 )}
               </CompanyFrame>
-            </div>
+            </Container>
           </div>
           <Hidden lgUp>
-            <BottomNavigation
-              className={classes.bottomNav}
-              value={activeSegment}
-              onChange={async (_, newValue) =>
-                await router.push(
-                  `/bix-profil/[companyAlias]?by=${by}`,
-                  `/bix-profil/${alias}?by=${by}#segment=${newValue}`,
-                )
-              }
-            >
-              <BottomNavigationAction
-                classes={{ selected: classes.selected }}
-                label="Értékelések"
-                value="reviews"
-                icon={<ThumbUp />}
-              />
-              <BottomNavigationAction
-                classes={{ selected: classes.selected }}
-                label="Díjak"
-                value="awards"
-                icon={<DoneAll />}
-              />
-              <BottomNavigationAction
-                classes={{ selected: classes.selected }}
-                label="Hírek"
-                value="news"
-                icon={<Announcement />}
-              />
-              <BottomNavigationAction
-                classes={{ selected: classes.selected }}
-                label="Termékek"
-                value="products"
-                icon={<BusinessCenter />}
-              />
-            </BottomNavigation>
+            <BottomNavigationBar activeSegment={activeSegment} companyIdentity={{ alias, by }} />
           </Hidden>
         </>
       ) : (
