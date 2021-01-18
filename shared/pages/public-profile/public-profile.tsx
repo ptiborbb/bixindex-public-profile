@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 import logo from '../../../public/bix_logo.svg';
-import { useApp } from '../../app.context';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
 import { CompanySearch } from '../../components/company-search/company-search';
@@ -14,14 +13,10 @@ import { PageNotFound } from '../../components/page-not-found/page-not-found';
 import { ProfilePage } from '../../interfaces/profile-page';
 import { useTranslate } from '../../translate.context';
 import { ssrBixClient } from '../../utils/ssr-bix-client';
-import { useCompanyIdentity } from '../../utils/use-company-identity';
 import { Rating } from '../rating/rating';
 import { ContentSegment } from './components/content-segments';
-import { usePublicProfileEffects } from './hooks/public-profile-effects';
-import { ContentSegmentTypes, useContentSegment } from './hooks/use-content-segment';
-import { useFilter } from './hooks/use-filter';
 import { useOgMetaElements } from './hooks/use-og-metadata';
-import { useProfilePage } from './hooks/use-profile-page';
+import { usePublicProfile } from './hooks/use-public-profile';
 import { useRatingStructuralData } from './hooks/use-rating-structural-data';
 import classes from './public-profile.module.scss';
 
@@ -30,12 +25,13 @@ type PublicProfileProps = { profilePage?: ProfilePage };
 export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrProfilePage }) => {
   const { t } = useTranslate();
   const router = useRouter();
-  const { publicProfileService } = useApp();
-  const { alias, by } = useCompanyIdentity();
-  const { activeSegment } = useContentSegment(ContentSegmentTypes.REVIEWS);
-  const { loading, profilePage } = useProfilePage(ssrProfilePage);
-  const { filter, setFilter } = useFilter();
-  usePublicProfileEffects({ ssrProfilePage, publicProfileService, filter, companyIdentity: { alias, by } });
+  const {
+    activeSegment,
+    companyIdentity: { alias, by },
+    filter,
+    loading,
+    profilePage,
+  } = usePublicProfile(ssrProfilePage);
 
   const ratingStructuralData = useRatingStructuralData(profilePage);
   const ogMetaElements = useOgMetaElements(profilePage);
@@ -91,7 +87,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                   <ContentSegment
                     activeSegment={activeSegment}
                     alias={alias}
-                    filter={{ filter, setFilter }}
+                    filter={filter}
                     profilePage={profilePage}
                   />
                 )}
@@ -102,7 +98,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
             <BottomNavigation
               className={classes.bottomNav}
               value={activeSegment}
-              onChange={async (changeEvent, newValue) =>
+              onChange={async (_, newValue) =>
                 await router.push(
                   `/bix-profil/[companyAlias]?by=${by}`,
                   `/bix-profil/${alias}?by=${by}#segment=${newValue}`,
