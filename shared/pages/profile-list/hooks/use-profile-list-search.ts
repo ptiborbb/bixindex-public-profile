@@ -1,5 +1,5 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useApp } from '../../../app.context';
 import { ProfileSearchTypes } from '../../../enums/profile-search-types';
 import { useProfileListSearchEffects } from './use-profile-list-search-effects';
@@ -39,11 +39,17 @@ export const useProfileListSearch = (
   );
   useProfileListSearchEffects({ searchText, by, profileList, publicProfileService, ssrProfiles });
 
+  const loadOffset = useMemo(() => calculateLoadOffset(profileList, INFINITE_LOAD_TRIGGER_DISTANCE), [profileList]);
+
+  const containerHeight = useMemo(() => calculateContainerHeight(profileList, INFINITE_LOAD_ELEMENT_HEIGHT), [
+    profileList,
+  ]);
+
   return {
     searchText: by === ProfileSearchTypes.NAME ? searchText : '',
     resultsProps: {
-      loadOffset: (calculateLoadOffset(profileList, INFINITE_LOAD_TRIGGER_DISTANCE) as unknown) as number,
-      containerHeight: calculateContainerHeight(profileList, INFINITE_LOAD_ELEMENT_HEIGHT),
+      loadOffset,
+      containerHeight,
       elementHeight: INFINITE_LOAD_ELEMENT_HEIGHT,
       totalResultCount: ssrCount ?? count,
       loading,
