@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import qs from 'qs';
 import { useEffect, useState } from 'react';
 
 export enum ContentSegmentTypes {
@@ -28,7 +29,8 @@ export const useContentSegment = (fallbackSegment: ContentSegmentTypes): UseCont
 };
 
 const getSegmentFromPath = (): ContentSegmentTypes | null => {
-  const segment = useRouter().asPath.split('#')[1];
+  const localPath = useRouter().asPath.split('#')[1];
+  const segment = qs.parse(localPath)?.segment as string | undefined;
   return segment && checkSegment(segment) ? (segment as ContentSegmentTypes) : null;
 };
 

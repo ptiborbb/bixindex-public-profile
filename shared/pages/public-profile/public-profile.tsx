@@ -70,7 +70,10 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                 companyType={profilePage.profile.type}
                 activeTab={activeSegment}
                 activate={async (fragment) => {
-                  await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}#${fragment}`);
+                  await router.push(
+                    `/bix-profil/[companyAlias]?by=${by}`,
+                    `/bix-profil/${alias}?by=${by}#segment=${fragment}`,
+                  );
                 }}
               />
             </div>
@@ -100,7 +103,10 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
               className={classes.bottomNav}
               value={activeSegment}
               onChange={async (changeEvent, newValue) =>
-                await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}#${newValue}`)
+                await router.push(
+                  `/bix-profil/[companyAlias]?by=${by}`,
+                  `/bix-profil/${alias}?by=${by}#segment=${newValue}`,
+                )
               }
             >
               <BottomNavigationAction
