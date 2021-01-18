@@ -7,7 +7,7 @@ const SSR_TIMEOUT = 5000;
 
 export const ssrBixClient = async <T extends unknown>(
   ctx: NextPageContext,
-  fetch: (ctx: NextPageContext, bixclient: IBixindexClient) => Promise<T>,
+  fetcher: (ctx: NextPageContext, bixclient: IBixindexClient) => Promise<T>,
   config: { fallback: T; interceptors?: IReponseInterceptor[]; timeoutMs?: number },
 ): Promise<T> => {
   const { backendUrl } = useConfig();
@@ -20,7 +20,7 @@ export const ssrBixClient = async <T extends unknown>(
   });
 
   try {
-    return await timeoutPromise(fetch(ctx, bixClient), config?.timeoutMs ?? SSR_TIMEOUT, config.fallback);
+    return await timeoutPromise(fetcher(ctx, bixClient), config?.timeoutMs ?? SSR_TIMEOUT, config.fallback);
   } catch (error) {
     return config.fallback;
   }
