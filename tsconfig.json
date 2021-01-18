@@ -14,7 +14,6 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true
 
-    /* I Wanted to turn them on as the ought to be, but there were houndreds of errors */
     /* Strict Type-Checking Options */
     /* "strict": true,
     "noImplicitAny": true,
