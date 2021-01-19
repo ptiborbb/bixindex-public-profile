@@ -1,17 +1,16 @@
 import { createBixindexClient, IBixindexClient, IReponseInterceptor } from '@codingsans/bixindex-common';
-import { NextPageContext } from 'next';
 import { useConfig } from '../config.context';
 import { timeoutPromise } from './timeout-promise';
 
 const SSR_TIMEOUT = 5000;
 
-export const ssrBixClient = async <T extends unknown>(
-  ctx: NextPageContext,
-  fetcher: (ctx: NextPageContext, bixclient: IBixindexClient) => Promise<T>,
+export const ssrBixClient = async <T extends unknown, K extends unknown>(
+  ctx: K,
+  fetcher: (ctx: K, bixclient: IBixindexClient) => Promise<T>,
   config: { fallback: T; interceptors?: IReponseInterceptor[]; timeoutMs?: number },
 ): Promise<T> => {
   const { backendUrl } = useConfig();
-  if (!(process && process.env && backendUrl) || !ctx.req) {
+  if (!(process && process.env && backendUrl)) {
     return config.fallback;
   }
   const bixClient = createBixindexClient({
