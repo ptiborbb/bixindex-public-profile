@@ -48,7 +48,6 @@ export const getStaticProps: GetStaticProps<ProfileListHomeProps> = async (ctx) 
     ctx,
     async (_, bixClient) => {
       const { highlightedCategories } = await bixClient.publicProfile.featured.getHighlighetdCategories();
-      console.log(highlightedCategories);
       return {
         highlightedCategories,
       };
