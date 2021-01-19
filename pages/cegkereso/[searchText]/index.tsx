@@ -1,4 +1,3 @@
-import { createNoAuthRouteComponent } from '../../../shared/utils/no-auth-route';
-import { ProfileList } from '../../../shared/pages/profile-list/profile-list';
+import { ProfileListSearch } from '../../../shared/pages/profile-list/profile-list-search';
 
-export default createNoAuthRouteComponent(ProfileList);
+export default ProfileListSearch;

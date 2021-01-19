@@ -2,6 +2,7 @@ import { Button, Card, CardContent, CardHeader, Collapse, IconButton, makeStyles
 import { ExpandMore } from '@material-ui/icons';
 import Link from 'next/link';
 import React, { FC, useState } from 'react';
+import { ProfileSearchTypes } from '../../enums/profile-search-types';
 import { useTranslate } from '../../translate.context';
 import { EntryCard } from './entry-card';
 import classes from './featured-category-card.module.scss';
@@ -52,7 +53,11 @@ export const FeaturedCategoryCard: FC<FeaturedCategoryCardProps> = ({
             <EntryCard {...company} key={company.companyId} />
           ))}
           <ButtonBox>
-            <Link href={`/cegkereso?category=${originalCategory}`} passHref>
+            <Link
+              href={`/cegkereso/[searchText]?by=${ProfileSearchTypes.CATEGORY}`}
+              as={`/cegkereso/${originalCategory}?by=${ProfileSearchTypes.CATEGORY}`}
+              passHref
+            >
               <a>
                 <Button variant="outlined" className={mainHighlight ? classes.mainButton : classes.notMainButton}>
                   {`${t('COMPANY_SEARCH.FEATURED.OPEN_ALL')}`}

@@ -5,8 +5,9 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import WorkIcon from '@material-ui/icons/Work';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FC } from 'react';
+import { ContentSegmentTypes } from '../../pages/public-profile/hooks/use-content-segment';
+import { useCompanyIdentity } from '../../utils/use-company-identity';
 import classes from './company-header.module.scss';
 
 interface CompanyHeaderProps {
@@ -28,8 +29,7 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
   activeTab,
   activate,
 }) => {
-  const router = useRouter();
-  const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
+  const { by } = useCompanyIdentity();
 
   return (
     <div className={classes.companyHeader}>
@@ -69,19 +69,39 @@ export const CompanyHeader: FC<CompanyHeaderProps> = ({
 
         <div className={classes.companyHeaderLinks}>
           <Hidden mdDown>
-            <div onClick={() => activate('reviews')}>
-              <a className={`${classes.companyHeaderLink} ${activeTab === 'reviews' ? classes.active : ''}`}>
+            <div onClick={() => activate(ContentSegmentTypes.REVIEWS)}>
+              <a
+                className={`${classes.companyHeaderLink} ${
+                  activeTab === ContentSegmentTypes.REVIEWS ? classes.active : ''
+                }`}
+              >
                 Értékelések
               </a>
             </div>
-            <div onClick={() => activate('awards')}>
-              <a className={`${classes.companyHeaderLink} ${activeTab === 'awards' ? classes.active : ''}`}>Díjak</a>
+            <div onClick={() => activate(ContentSegmentTypes.AWARDS)}>
+              <a
+                className={`${classes.companyHeaderLink} ${
+                  activeTab === ContentSegmentTypes.AWARDS ? classes.active : ''
+                }`}
+              >
+                Díjak
+              </a>
             </div>
-            <div onClick={() => activate('news')}>
-              <a className={`${classes.companyHeaderLink} ${activeTab === 'news' ? classes.active : ''}`}>Hírek</a>
+            <div onClick={() => activate(ContentSegmentTypes.NEWS)}>
+              <a
+                className={`${classes.companyHeaderLink} ${
+                  activeTab === ContentSegmentTypes.NEWS ? classes.active : ''
+                }`}
+              >
+                Hírek
+              </a>
             </div>
-            <div onClick={() => activate('products')}>
-              <a className={`${classes.companyHeaderLink} ${activeTab === 'products' ? classes.active : ''}`}>
+            <div onClick={() => activate(ContentSegmentTypes.PRODUCTS)}>
+              <a
+                className={`${classes.companyHeaderLink} ${
+                  activeTab === ContentSegmentTypes.PRODUCTS ? classes.active : ''
+                }`}
+              >
                 Termékek/szolgáltatások
               </a>
             </div>

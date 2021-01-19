@@ -3,21 +3,21 @@ import { Skeleton } from '@material-ui/lab';
 import { TFunction } from 'next-i18next';
 import React, { FC } from 'react';
 import Infinite from 'react-infinite';
-import { ProfileListItem } from '../../components/profile-list-item/profile-list-item';
-import { useTranslate } from '../../translate.context';
-import classes from './profile-list.module.scss';
+import { ProfileListItem } from '../../../components/profile-list-item/profile-list-item';
+import { useTranslate } from '../../../translate.context';
+import classes from '../profile-list.module.scss';
 
-interface ProfileListListProps {
-  totalResultCount: number;
+interface ProfileListSearchResultsProps {
+  totalResultCount: number | null;
   elementHeight: number;
-  containerHeight: number;
+  containerHeight: number | undefined;
   loading: boolean;
   onInfiniteLoad: () => void;
   loadOffset: number;
-  profiles: IProfileSummary[];
+  profiles: IProfileSummary[] | null;
 }
 
-export const ProfileListResults: FC<ProfileListListProps> = ({
+export const ProfileListSearchResults: FC<ProfileListSearchResultsProps> = ({
   containerHeight,
   elementHeight,
   loadOffset,
@@ -40,9 +40,7 @@ export const ProfileListResults: FC<ProfileListListProps> = ({
         useWindowAsScrollContainer={true}
         infiniteLoadBeginEdgeOffset={loadOffset}
       >
-        {profiles?.map((profile) => (
-          <ProfileListItem key={profile.profile.id} profile={profile} />
-        ))}
+        {profiles && profiles?.map((profile) => <ProfileListItem key={profile.profile.id} profile={profile} />)}
       </Infinite>
     </ResultsWithHeader>
   );
