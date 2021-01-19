@@ -48,7 +48,7 @@ const ProfileListSearch: NextPage<ProfileListSearchProps> = ({ profiles, count }
 };
 
 ProfileListSearch.getInitialProps = async (ctx) =>
-  await ssrBixClient<ProfileListSearchProps>(
+  await ssrBixClient(
     ctx,
     async (ctx, bixClient) => {
       const by = (ctx.query.by || null) as ProfileSearchTypes | null;

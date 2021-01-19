@@ -1,6 +1,6 @@
 import { IHighlightedCategoryWithCompany } from '@codingsans/bixindex-common/lib/interfaces/highlighted-category';
 import { Paper } from '@material-ui/core';
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 import { Footer } from '../../components/footer/footer';
@@ -43,8 +43,8 @@ export const ProfileListHome: NextPage<ProfileListHomeProps> = ({ highlightedCat
   );
 };
 
-ProfileListHome.getInitialProps = async (ctx) =>
-  await ssrBixClient<ProfileListHomeProps>(
+export const getStaticProps: GetStaticProps<ProfileListHomeProps> = async (ctx) => ({
+  props: await ssrBixClient(
     ctx,
     async (_, bixClient) => {
       const { highlightedCategories } = await bixClient.publicProfile.featured.getHighlighetdCategories();
@@ -55,4 +55,6 @@ ProfileListHome.getInitialProps = async (ctx) =>
     {
       fallback: { highlightedCategories: null },
     },
-  );
+  ),
+  revalidate: 60,
+});
