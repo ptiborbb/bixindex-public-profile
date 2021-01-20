@@ -515,7 +515,6 @@ export const Rating: FC = () => {
                                 <span className="position-absolute">{question.text}</span>
                                 <Field component={RadioGroup} name={`answers.${index}.value`}>
                                   <div className="row mx-0 justify-content-center d-flex">
-                                    {console.log(values)}
                                     <FormControlLabel
                                       className="m-0 mt-4 mt-xl-0 col-12 col-lg-4"
                                       value={EReviewValues.NO_EXPERIENCE}
