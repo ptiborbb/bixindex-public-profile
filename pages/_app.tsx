@@ -11,7 +11,7 @@ import createPalette from '@material-ui/core/styles/createPalette';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import { AxiosError, AxiosResponse } from 'axios';
-import App, { AppProps } from 'next/app';
+import App, { AppContext as AppGetInitialPropsContext, AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
 import React, { useEffect, useMemo, useReducer } from 'react';
@@ -26,6 +26,7 @@ import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 import { ratingServiceFactory } from '../shared/services/rating.service';
 import { TranslateContext } from '../shared/translate.context';
+import { ssrUserIdentity } from '../shared/utils/ssr-helpers/ssr-user-identity';
 import { AppReducer } from '../store/reducer';
 import { appReducer, initialAppState } from '../store/state';
 import '../styles/globals.scss';
@@ -150,8 +151,15 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
   );
 };
 
-BixIndexPublicProfile.getInitialProps = async (appContext) => ({
-  ...(await App.getInitialProps(appContext)),
-});
-
+BixIndexPublicProfile.getInitialProps = async (appGetInitialPropsContext: AppGetInitialPropsContext) => {
+  const { ctx } = appGetInitialPropsContext;
+  const initialProps = await App.getInitialProps(appGetInitialPropsContext);
+  return {
+    ...initialProps,
+    pageProps: {
+      ...initialProps.pageProps,
+      user: await ssrUserIdentity(ctx),
+    },
+  };
+};
 export default appWithTranslation(BixIndexPublicProfile);
