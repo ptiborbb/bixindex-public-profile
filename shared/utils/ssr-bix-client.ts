@@ -9,12 +9,12 @@ export const ssrBixClient = async <T extends unknown, K extends unknown>(
   fetcher: (ctx: K, bixclient: IBixindexClient) => Promise<T>,
   config: { fallback: T; interceptors?: IReponseInterceptor[]; timeoutMs?: number },
 ): Promise<T> => {
-  const { backendUrl } = useConfig();
-  if (!(process && process.env && backendUrl)) {
+  const { publicProfileUrl } = useConfig();
+  if (!(process && process.env && publicProfileUrl)) {
     return config.fallback;
   }
   const bixClient = createBixindexClient({
-    baseURL: backendUrl,
+    baseURL: `${publicProfileUrl}/api`,
     responseInterceptors: config.interceptors,
   });
 
