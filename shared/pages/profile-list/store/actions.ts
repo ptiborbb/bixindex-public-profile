@@ -4,6 +4,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 export enum EProfileListActionTypes {
   GET_PROFILE_LIST = '[App] GET_PROFILE_LIST',
+  SET_PROFILE_LIST = '[APP] SET_PROFILE_LIST',
   GET_PROFILE_LIST_PARTIAL = '[App] GET_PROFILE_LIST_PARTIAL',
   GET_PROFILE_LIST_SUCCESS = '[App] GET_PROFILE_LIST_SUCCESS',
   GET_PROFILE_LIST_FAIL = '[App] GET_PROFILE_LIST_FAIL',
@@ -23,6 +24,9 @@ type GetProfilesInput<T = {}, By extends 'NAME' | 'CATEGORY' = 'NAME'> = T & {
 export const getProfiles = createAction<
   GetProfilesInput<{ searchText: string }, 'NAME'> | GetProfilesInput<{ category: string }, 'CATEGORY'>
 >(EProfileListActionTypes.GET_PROFILE_LIST);
+export const setProfiles = createAction<{ profiles: IProfileSummary[]; count: number; searchText: string }>(
+  EProfileListActionTypes.SET_PROFILE_LIST,
+);
 export const getProfilesSuccess = createAction<{ items: IProfileSummary[]; count: number; sessionId: string }>(
   EProfileListActionTypes.GET_PROFILE_LIST_SUCCESS,
 );

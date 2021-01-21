@@ -1,4 +1,5 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
+import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
 import { Dispatch } from 'react';
 import { ProfilePage } from '../interfaces/profile-page';
 import {
@@ -9,6 +10,7 @@ import {
   getProfilesFail,
   getProfilesSuccess,
   resetProfileList,
+  setProfiles,
 } from '../pages/profile-list/store/actions';
 import {
   getPublicProfile,
@@ -36,6 +38,7 @@ export interface IPublicProfileService {
   ): void;
   searchProfilesByName(page: number, rowsPerPage: number, searchText: string): void;
   searchProfilesByCategory(page: number, rowsPerPage: number, category: string): void;
+  setPublicProfiles(profiles: IProfileSummary[], count: number, searchText: string): void;
   resetProfiles(): void;
   getFeaturedCategories(): void;
 }
@@ -87,6 +90,9 @@ export const publicProfileServiceFactory = (
         console.error(error);
         dispatch(getProfilesFail({ error, sessionId }));
       }
+    },
+    setPublicProfiles: (profiles: IProfileSummary[], count: number, searchText: string) => {
+      dispatch(setProfiles({ profiles, count, searchText }));
     },
     setPublicProfile: (profilePage) => {
       dispatch(getPublicProfileSuccess({ profilePage }));

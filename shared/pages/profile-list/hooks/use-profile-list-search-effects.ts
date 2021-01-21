@@ -11,6 +11,7 @@ interface UseProfileListEffectsInputs {
   publicProfileService: IPublicProfileService;
   profileList: IProfileListState;
   ssrProfiles: IProfileSummary[] | null;
+  ssrCount: number | null;
 }
 
 export const useProfileListSearchEffects = ({
@@ -19,8 +20,10 @@ export const useProfileListSearchEffects = ({
   publicProfileService,
   searchText,
   ssrProfiles,
+  ssrCount,
 }: UseProfileListEffectsInputs): void => {
   searchProfilesIfSSRFails({ profileList, searchText, publicProfileService, ssrProfiles, by });
+  loadSSRProfilesIntoState({ publicProfileService, ssrCount, ssrProfiles, searchText });
   resetProfilesOnNavigation({ publicProfileService });
 };
 
@@ -43,6 +46,19 @@ const searchProfilesIfSSRFails = ({
       });
     }
   }, [publicProfileService, searchText, ssrProfiles, by]);
+};
+
+const loadSSRProfilesIntoState = ({
+  ssrCount,
+  searchText,
+  ssrProfiles,
+  publicProfileService,
+}: Pick<UseProfileListEffectsInputs, 'ssrCount' | 'ssrProfiles' | 'publicProfileService' | 'searchText'>): void => {
+  useEffect(() => {
+    if (ssrProfiles !== null && ssrCount !== null) {
+      publicProfileService.setPublicProfiles(ssrProfiles, ssrCount, searchText);
+    }
+  }, [ssrProfiles, ssrCount]);
 };
 
 const resetProfilesOnNavigation = ({
