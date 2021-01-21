@@ -1,4 +1,5 @@
 import { IProfileSummary } from '@codingsans/bixindex-common/lib/interfaces/profile-summary';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { Skeleton } from '@material-ui/lab';
 import { TFunction } from 'next-i18next';
 import React, { FC } from 'react';
@@ -34,7 +35,7 @@ export const ProfileListSearchResults: FC<ProfileListSearchResultsProps> = ({
         dataLength={profiles?.length ?? 0}
         hasMore={totalResultCount > (profiles?.length ?? 0)}
         next={onInfiniteLoad}
-        loader={<Skeleton style={{ marginTop: 30 }} height={elementHeight - 30} animation={'pulse'} variant={'rect'} />}
+        loader={<LinearProgress style={{ marginTop: 30 }} />}
       >
         {profiles && profiles?.map((profile) => <ProfileListItem key={profile.profile.id} profile={profile} />)}
       </InfiniteScroll>
