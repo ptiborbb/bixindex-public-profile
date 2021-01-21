@@ -7,6 +7,7 @@ import {
   getProfilesFail,
   getProfilesSuccess,
   resetProfileList,
+  setProfiles,
 } from './actions';
 import { initialProfileListState } from './state';
 
@@ -35,6 +36,15 @@ export const profileListReducer = createReducer(initialProfileListState, (builde
           state.searchText = action.payload.searchText;
         }
       }
+    })
+    .addCase(setProfiles, (state, action) => {
+      state.searchText = action.payload.searchText;
+      state.count = action.payload.count;
+      state.profiles = action.payload.profiles;
+      state.loading = false;
+      state.sessionId = null;
+      state.page = initialProfileListState.page;
+      state.rowsPerPage = initialProfileListState.rowsPerPage;
     })
     .addCase(getProfilesSuccess, (state, action) => {
       if (action.payload.sessionId === state.sessionId) {
