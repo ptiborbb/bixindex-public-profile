@@ -63,7 +63,6 @@ export const Landing: FunctionComponent = () => {
         <meta property="og:description" content="Automatizáld az ügyfélelégedettség mérést a cégedben!" />
         <meta property="og:image" content="https://cdn.bixindex.hu/images/bixindex-og.png" />
         <meta property="og:url" content="https://bixindex.hu/" />
-        <meta name="viewport" content="width=800" />
       </Head>
       <div className={classes.baseSize}>
         <div className={classes.headerBlock}>

@@ -1,69 +1,75 @@
-const convict = require("convict");
-const dotenv = require("dotenv");
+const convict = require('convict');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
 const config = convict({
   sentry: {
     dsn: {
-      doc: "Sentry config",
+      doc: 'Sentry config',
       format: String,
-      default: "",
-      env: "NEXT_PUBLIC_SENTRY_DSN"
+      default: '',
+      env: 'NEXT_PUBLIC_SENTRY_DSN',
     },
   },
   nodeEnv: {
-    doc: "The application environment",
-    format: "development" | "production" | "staging",
-    default: "development",
-    env: "NEXT_PUBLIC_NODE_ENV"
+    doc: 'The application environment',
+    format: 'development' | 'production' | 'staging',
+    default: 'development',
+    env: 'NEXT_PUBLIC_NODE_ENV',
   },
   blogUrl: {
-    doc: "Third party blog url",
+    doc: 'Third party blog url',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_BLOG_URL"
+    default: '',
+    env: 'NEXT_PUBLIC_BLOG_URL',
   },
   customerPortalUrl: {
-    doc: "The customer portal app url",
+    doc: 'The customer portal app url',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_CUSTOMER_PORTAL_URL"
+    default: '',
+    env: 'NEXT_PUBLIC_CUSTOMER_PORTAL_URL',
   },
   fbAppId: {
-    doc: "Facebook app id",
+    doc: 'Facebook app id',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_FB_APP_ID"
+    default: '',
+    env: 'NEXT_PUBLIC_FB_APP_ID',
   },
   googleClientId: {
-    doc: "Google client id",
+    doc: 'Google client id',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_GOOGLE_CLIENT_ID"
+    default: '',
+    env: 'NEXT_PUBLIC_GOOGLE_CLIENT_ID',
   },
   bestUserExperience: {
-    doc: "Promotion site url",
+    doc: 'Promotion site url',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_BEST_USER_EXPERIENCE"
+    default: '',
+    env: 'NEXT_PUBLIC_BEST_USER_EXPERIENCE',
   },
   publicProfileUrl: {
-    doc: "Public profile app url",
+    doc: 'Public profile app url',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_PROFILE_URL"
+    default: '',
+    env: 'NEXT_PUBLIC_PROFILE_URL',
   },
   backendUrl: {
-    doc: "Backend url",
+    doc: 'Backend url',
     format: String,
-    default: "",
-    env: "NEXT_PUBLIC_BACKEND_URL"
-  }
+    default: '',
+    env: 'NEXT_PUBLIC_BACKEND_URL',
+  },
+  analyticsId: {
+    doc: 'Google analytics property ID',
+    format: String,
+    default: '',
+    env: 'NEXT_PUBLIC_GOOGLE_ANALYTICS_ID',
+  },
 });
 
-config.validate({ allowed: "strict" });
+config.validate({ allowed: 'strict' });
 
 module.exports = () => {
-  return { code: "module.exports = " + JSON.stringify(config.getProperties()) };
+  return { code: 'module.exports = ' + JSON.stringify(config.getProperties()) };
 };

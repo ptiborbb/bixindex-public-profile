@@ -11,11 +11,13 @@ import createPalette from '@material-ui/core/styles/createPalette';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import { AxiosError, AxiosResponse } from 'axios';
-import App, { AppProps } from 'next/app';
+import App, { AppContext as AppGetInitialPropsContext, AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
-import React, { useMemo, useReducer } from 'react';
+import React, { useEffect, useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import CookieConsent from 'react-cookie-consent';
+import ReactGA from 'react-ga';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
 import { useConfig } from '../shared/config.context';
@@ -24,12 +26,15 @@ import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 import { ratingServiceFactory } from '../shared/services/rating.service';
 import { TranslateContext } from '../shared/translate.context';
+import { ssrUserIdentity } from '../shared/utils/ssr-helpers/ssr-user-identity';
 import { AppReducer } from '../store/reducer';
 import { appReducer, initialAppState } from '../store/state';
 import '../styles/globals.scss';
 
 const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element => {
   const config = useConfig();
+  const router = useRouter();
+
   if (config.sentry.dsn) {
     Sentry.init({
       enabled: config.nodeEnv === EDevelopmentEnvironments.PROD,
@@ -65,6 +70,15 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
   const authService = useMemo(() => authServiceFactory(bixClient, dispatch), [bixClient]);
   const publicProfileService = useMemo(() => publicProfileServiceFactory(bixClient, dispatch), [bixClient]);
   const ratingService = useMemo(() => ratingServiceFactory(bixClient, dispatch), [bixClient]);
+
+  useEffect(() => {
+    ReactGA.initialize(config.analyticsId, { debug: false });
+  }, [config]);
+
+  useEffect(() => {
+    ReactGA.set({ page: router.asPath });
+    ReactGA.pageview(router.asPath);
+  }, [router]);
 
   const theme = createMuiTheme({
     props: {
@@ -137,8 +151,15 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
   );
 };
 
-BixIndexPublicProfile.getInitialProps = async (appContext) => ({
-  ...(await App.getInitialProps(appContext)),
-});
-
+BixIndexPublicProfile.getInitialProps = async (appGetInitialPropsContext: AppGetInitialPropsContext) => {
+  const { ctx } = appGetInitialPropsContext;
+  const initialProps = await App.getInitialProps(appGetInitialPropsContext);
+  return {
+    ...initialProps,
+    pageProps: {
+      ...initialProps.pageProps,
+      user: await ssrUserIdentity(ctx),
+    },
+  };
+};
 export default appWithTranslation(BixIndexPublicProfile);

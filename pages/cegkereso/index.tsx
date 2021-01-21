@@ -1,4 +1,5 @@
-import { createNoAuthRouteComponent } from '../../shared/utils/no-auth-route';
-import { ProfileList } from '../../shared/pages/profile-list/profile-list';
+import { ProfileListHome } from '../../shared/pages/profile-list/profile-list-home';
 
-export default createNoAuthRouteComponent(ProfileList);
+export default ProfileListHome;
+
+export { getStaticProps } from '../../shared/pages/profile-list/profile-list-home';

@@ -1,4 +1,7 @@
-import { waitPromise } from './wait-promise';
+import { returnAfter } from './wait-promise';
 
-export const timeoutPromise = <T extends unknown>(promise: Promise<T>, timeoutMs: number): Promise<T | null> =>
-  Promise.race([promise as unknown, waitPromise(timeoutMs) as unknown]) as Promise<T | null>;
+export const timeoutPromise = async <T extends unknown, K extends any>(
+  promise: Promise<T>,
+  timeoutMs: number,
+  fallbackValue: K = null,
+): Promise<T | K> => await Promise.race([promise, returnAfter(timeoutMs, fallbackValue)]);

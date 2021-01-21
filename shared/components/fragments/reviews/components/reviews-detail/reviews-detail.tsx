@@ -14,7 +14,9 @@ import {
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
 import { debounce, sum } from 'lodash';
+import { useRouter } from 'next/router';
 import React, { FC, useCallback, useState } from 'react';
+import { useConfig } from '../../../../../config.context';
 import { EReviewFilterType } from '../../../../../enums/review-filter-type';
 import { ReviewFilter } from '../../../../../interfaces/review-filter';
 import { useTranslate } from '../../../../../translate.context';
@@ -50,6 +52,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
 }) => {
   const [opened, setOpened] = useState(true);
   const { t } = useTranslate();
+  const config = useConfig();
+  const router = useRouter();
 
   const changeNameFilter = debounce(
     useCallback(
@@ -85,8 +89,8 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <Tune className="mr-2" /> {t('REVIEW_DETAILS.FILTERS')}
       </div>
 
-      <div className={classes.filterBlock}>
-        <div>
+      <div className={`${classes.filterBlock} row`}>
+        <div className="col-12 col-lg-3 d-flex flex-column align-items-lg-center">
           {ratingCountsByValue &&
             ratingCountsByValue.map((count, i) => (
               <div
@@ -105,9 +109,11 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               </div>
             ))}
         </div>
-        <div className="w-50 mx-4 d-flex flex-column justify-content-between">
-          <FormControl className={'w-100'} variant="outlined">
-            <InputLabel id="ratedReviewLabel">{t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}</InputLabel>
+        <div className="col-12 col-lg-6 d-flex flex-column justify-content-between">
+          <FormControl className={'w-100 mt-3 mt-lg-0'} variant="outlined">
+            <InputLabel shrink id="ratedReviewLabel" className={classes.shrinkLabel}>
+              {t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
+            </InputLabel>
             <Select
               labelId="ratedReviewLabel"
               value={filter.productOrServiceID}
@@ -120,6 +126,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
                 });
               }}
               fullWidth
+              displayEmpty
               label={t('REVIEW_DETAILS.REVIEW_PRODUCT_SERVICE')}
             >
               <MenuItem value="">
@@ -132,15 +139,18 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl className={'w-100'} variant="outlined">
-            <InputLabel id="demo-simple-select-label">{t('REVIEW_DETAILS.ARRIVAL_DATE')}</InputLabel>
+          <FormControl className={'w-100 my-3 my-lg-0'} variant="outlined">
+            <InputLabel shrink id="arrival-date-select" className={classes.shrinkLabel}>
+              {t('REVIEW_DETAILS.ARRIVAL_DATE')}
+            </InputLabel>
             <Select
-              labelId="demo-simple-select-label"
+              labelId="arrival-date-select"
               value={filter.date}
               onChange={(event) => {
                 filterChanged({ ...filter, date: event.target.value as string, pageNumber: 1 });
               }}
               fullWidth
+              displayEmpty
               label={t('REVIEW_DETAILS.ARRIVAL_DATE')}
             >
               <MenuItem value="">
@@ -165,9 +175,10 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
             variant="outlined"
             fullWidth
             onChange={(event) => changeNameFilter(event.target.value)}
+            className="mb-3 mb-lg-0"
           />
         </div>
-        <div>
+        <div className="col-12 col-lg-3">
           <FormControl>
             <FormLabel>{t('REVIEW_DETAILS.REVIEW_TYPE')}</FormLabel>
             <RadioGroup
@@ -204,7 +215,14 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <div className={`${classes.separator}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}></div>
 
         {ratings &&
-          ratings.map((rating, i) => <ReviewItem key={i} rating={rating} productsAndServices={productsAndServices} />)}
+          ratings.map((rating, i) => (
+            <ReviewItem
+              key={i}
+              rating={rating}
+              productsAndServices={productsAndServices}
+              url={`${config.publicProfileUrl}${router.asPath}`}
+            />
+          ))}
 
         <div className={`${classes.pager}${ratingCount > 20 ? '' : ` ${classes.hidden}`}`}>
           <div className={classes.pageNumber}>

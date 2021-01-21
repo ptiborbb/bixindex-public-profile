@@ -52,7 +52,8 @@
       "CANNOT_DELETE_YOURSELF": "Nem törölheted saját magad",
       "USER_ALREADY_EXISTS": "A felhasználó már létezik",
       "UNKOWN_ERROR": "Ismeretlen hiba történt",
-      "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy."
+      "GOOGLE_ERROR": "Hiba történt a Google azonosítás során. Kérlek ellenőrizd, nincsenek-e blokkolva a sütik a böngésződben, vagy jelentkezz be máshogy.",
+      "UNAUTHORIZED": "Hibás email cím vagy jelszó."
     },
     "OK": "Rendben"
   },
@@ -452,7 +453,10 @@
     "BIX_PROFILE": "BIX Profil",
     "MAIN_TITLE": "Nálunk számít a véleményed! Keress rá bármelyik hazai cégre, és oszd meg a tapasztalataid!",
     "SUB_TITLE": "Értékelj legalább 5 különböző céget minden héten január 10-ig, és ",
-    "WIN": "nyerj"
+    "WIN": "nyerj",
+    "FEATURED": {
+      "OPEN_ALL": "Összes találat"
+    }
   },
   "TOAST": {
     "ERROR": {
@@ -578,6 +582,7 @@
     "CHEMICAL": "Vegyipar",
     "TOURISM": "Vendéglátás, Idegenforgalom",
     "BUSINESS_SERVICES": "Üzleti szolgáltatás",
+    "BUSINESS_SERVICE": "Üzleti szolgáltatás",
     "UNKNOWN": "Ismeretlen"
   },
   "SUBCATEGORIES": {
@@ -781,7 +786,10 @@
     "WEBSITE": "Weboldal",
     "RELATED_PROFILES": "Kapcsolódó profilok",
     "PRODUCTS_SERVICES": "Termékek és szolgáltatások",
-    "CONTACT": "Kapcsolattartó"
+    "CONTACT": "Kapcsolattartó",
+    "TRUST_INDEX": "Bizalmi index",
+    "COMPANY_DETAILS": "Cégadatok",
+    "REVIEW_COUNT_SUM": "ÖSSZESEN {{count}} DB ÉRTÉKELÉS"
   },
   "NPS_TEXT": {
     "NEGATIVE": "Ellenző",

@@ -16,6 +16,7 @@
 
     .header {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       padding: 20px;
       border-bottom: 1px solid $grey;
@@ -41,19 +42,9 @@
 
           h3 {
             margin: 0 10px 0 0;
-          }
-
-          .starHolder {
-            width: 100px;
-            min-width: 100px;
-
-            .ratingStar {
-              color: lightgray;
-            }
-
-            .ratingStarActive {
-              color: #bf9855;
-            }
+            font-size: 1.6em;
+            line-height: 1.4em;
+            font-weight: 300;
           }
         }
 
@@ -62,9 +53,29 @@
           font-weight: 400;
         }
       }
+      .starHolder {
+        width: 100px;
+        min-width: 100px;
+
+        .ratingStar {
+          color: lightgray;
+        }
+
+        .ratingStarActive {
+          color: #bf9855;
+        }
+      }
 
       .indexes {
         text-align: right;
+        display: flex;
+        flex-direction: column;
+        @media screen and( max-width: 960px) {
+          width: 100%;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
 
         .indexTitle {
           text-transform: uppercase;
@@ -93,6 +104,9 @@
     .columns {
       display: flex;
       padding: 10px 0;
+      @media screen and( max-width: 960px) {
+        flex-direction: column;
+      }
 
       p {
         margin-top: 0;
@@ -148,6 +162,12 @@
     box-sizing: content-box;
     display: flex;
     flex-direction: column;
+    @media screen and( max-width: 960px) {
+      padding: unset;
+      max-width: unset;
+      width: 100%;
+      align-items: center;
+    }
 
     & > div {
       height: 50%;

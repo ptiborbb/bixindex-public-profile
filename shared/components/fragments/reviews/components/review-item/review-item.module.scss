@@ -13,12 +13,14 @@
 
     .reviewer {
       margin-left: 1rem;
+      max-width: 60%;
 
       .name {
         font-weight: bold;
         font-size: 20px;
         line-height: 24px;
         color: $dark;
+        width: 200px;
       }
       .role {
         font-size: 12px;
@@ -83,9 +85,19 @@
             margin-right: 0.5rem;
             display: none;
 
+            .socialButton {
+              display: flex;
+              align-items: center;
+              &:focus {
+                outline: unset;
+              }
+              .socialImage {
+                margin: 0.2rem 0.5rem;
+              }
+            }
+
             .shareFb {
               margin-right: 0.5rem;
-              padding: 0.2rem 0.5rem;
               cursor: pointer;
             }
             .shareSeparator {
@@ -95,7 +107,6 @@
             }
             .shareIn {
               margin-left: 0.5rem;
-              padding: 0.2rem 0.5rem;
               cursor: pointer;
             }
           }

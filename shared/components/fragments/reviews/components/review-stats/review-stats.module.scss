@@ -14,12 +14,12 @@
     background: #f15c5c;
     border-radius: 3px;
     color: white;
-    display: flex;
     align-items: center;
+    justify-content: center;
+    display: flex;
     padding: 0.5rem;
     border: 0;
     flex-shrink: 0;
-    margin-left: 3rem;
     .reviewIcon {
       margin-left: 0.5rem;
     }
