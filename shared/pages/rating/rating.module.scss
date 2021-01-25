@@ -15,6 +15,9 @@
   & .flexRight {
     display: flex;
     justify-content: flex-end;
+    @media screen and(max-width: 801px) {
+      justify-content: center;
+    }
   }
 }
 .perfectReviewWarning {
