@@ -243,12 +243,12 @@ export const Landing: FunctionComponent = () => {
                   {t('LANDING.HEROS.HERO_1.A.A_4')}
                 </div>
               </div>
-              <div className={classes.mt40}>
+              <div className={`${classes.mt40} ${classes.buttonsContainer}`}>
                 <Link href="/cegkereso">
                   <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_1')}</Button>
                 </Link>
                 <Link href="/cegkereso">
-                  <Button>{t('LANDING.HEROS.HERO_1.CTA.CTA_2')}</Button>
+                  <Button className="mt-3 mt-lg-0 ml-lg-3">{t('LANDING.HEROS.HERO_1.CTA.CTA_2')}</Button>
                 </Link>
               </div>
             </Grid>
@@ -287,12 +287,12 @@ export const Landing: FunctionComponent = () => {
                   {t('LANDING.HEROS.HERO_2.A.A_4')}
                 </div>
               </div>
-              <div className={classes.mt40}>
+              <div className={`${classes.mt40} ${classes.buttonsContainer}`}>
                 <Link href="/cegkereso">
                   <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_1')}</Button>
                 </Link>
                 <Link href="/cegkereso">
-                  <Button>{t('LANDING.HEROS.HERO_2.CTA.CTA_2')}</Button>
+                  <Button className="mt-3 mt-lg-0 ml-lg-3">{t('LANDING.HEROS.HERO_2.CTA.CTA_2')}</Button>
                 </Link>
               </div>
             </Grid>
@@ -325,12 +325,12 @@ export const Landing: FunctionComponent = () => {
                   {t('LANDING.HEROS.HERO_3.A.A_4')}
                 </div>
               </div>
-              <div className={classes.mt40}>
+              <div className={`${classes.mt40} ${classes.buttonsContainer}`}>
                 <Link href="/cegkereso">
                   <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_1')}</Button>
                 </Link>
                 <Link href="/cegkereso">
-                  <Button>{t('LANDING.HEROS.HERO_3.CTA.CTA_2')}</Button>
+                  <Button className="mt-3 mt-lg-0 ml-lg-3">{t('LANDING.HEROS.HERO_3.CTA.CTA_2')}</Button>
                 </Link>
               </div>
             </Grid>
@@ -369,12 +369,12 @@ export const Landing: FunctionComponent = () => {
                   {t('LANDING.HEROS.HERO_4.A.A_4')}
                 </div>
               </div>
-              <div className={classes.mt40}>
+              <div className={`${classes.mt40} ${classes.buttonsContainer}`}>
                 <Link href="/cegkereso">
                   <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_1')}</Button>
                 </Link>
                 <Link href="/cegkereso">
-                  <Button>{t('LANDING.HEROS.HERO_4.CTA.CTA_2')}</Button>
+                  <Button className="mt-3 mt-lg-0 ml-lg-3">{t('LANDING.HEROS.HERO_4.CTA.CTA_2')}</Button>
                 </Link>
               </div>
             </Grid>
