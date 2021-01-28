@@ -51,7 +51,7 @@ export const BixDialog: FC<IDialogProps> = ({
       <DialogContent>
         <DialogContentText id="dialog-description">{text}</DialogContentText>
       </DialogContent>
-      <DialogActions className="pb-3 px-3">
+      <DialogActions className="pb-3 px-3 justify-content-center justify-content-lg-end">
         {variant === DialogType.CONFIRM && (
           <Button onClick={onClose} color="primary" autoFocus>
             {closeButtonLabel || t('DIALOG.BUTTON_CANCEL')}
