@@ -82,14 +82,17 @@ export const Landing: FunctionComponent = () => {
                   content="Legjobb Ügyfélélmény Díj 2020 - BIX - Cégek, akikkel nyugodtan dolgozhatsz"
                 />
                 <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
-                <Link href="/cegkereso">
-                  <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
-                </Link>
-                <Link href="https://legjobbugyfelelmeny.hu">
-                  <Button variant="text" color="default" className={classes.learnMoreBtn}>
-                    {t('LANDING.HEAD_BOX.CTA_2')}
-                  </Button>
-                </Link>
+                <div className="d-flex flex-wrap justify-content-center justify-content-lg-start">
+                  <Link href="/cegkereso">
+                    <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
+                  </Link>
+                  <Link href="https://legjobbugyfelelmeny.hu">
+                    <Button variant="text" color="default" className={classes.learnMoreBtn}>
+                      {t('LANDING.HEAD_BOX.CTA_2')}
+                    </Button>
+                  </Link>
+                </div>
+
                 <div className={classes.headerBlockLogos}>
                   <a
                     href="https://index.hu/gazdasag/2018/11/23/felmilliard_forint_tiz_startupnak/"

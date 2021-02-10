@@ -25,13 +25,6 @@ export const ProfileListSearchbar: FC<ProfileListSearchbarProps> = ({ searchText
           <Typography variant="h3" align="center" className={classes.mainTitle}>
             {t('COMPANY_SEARCH.MAIN_TITLE')}
           </Typography>
-          <Typography variant="h3" align="center" className={classes.subTitle}>
-            {t('COMPANY_SEARCH.SUB_TITLE')}
-            <a style={{ textDecoration: 'underline' }} href={`${bestUserExperience}/nevezd-a-kedvenc-ceged/`}>
-              {t('COMPANY_SEARCH.WIN')}
-            </a>
-            !
-          </Typography>
         </Grid>
       </Grid>
       <Formik
