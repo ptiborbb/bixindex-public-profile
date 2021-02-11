@@ -18,6 +18,7 @@ import React, { useEffect, useMemo, useReducer } from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import CookieConsent from 'react-cookie-consent';
 import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
 import { useConfig } from '../shared/config.context';
@@ -34,6 +35,11 @@ import '../styles/globals.scss';
 const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element => {
   const config = useConfig();
   const router = useRouter();
+  useEffect(() => {
+    if (window && config.nodeEnv === EDevelopmentEnvironments.PROD) {
+      hotjar.initialize(2230800, 6);
+    }
+  }, []);
 
   if (config.sentry.dsn) {
     Sentry.init({
