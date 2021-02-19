@@ -14,13 +14,17 @@ const withNextI18NextRewrites = ({ localeSubpaths = {}, ...nextConfig } = {}) =>
   });
 }
 
+const backendURL = process.env.VERCEL_GIT_COMMIT_REF === 'subscription'
+  && process.env.NEXT_PUBLIC_BACKEND_URL_SUBSCRIPTION
+  || process.env.NEXT_PUBLIC_BACKEND_URL;
+
 module.exports = withNextI18NextRewrites({
   localeSubpaths: {},
   ...withImages({
     rewrites: async () => [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/:path*`,
+        destination: `${backendURL}/:path*`,
       },
     ],
   }),
