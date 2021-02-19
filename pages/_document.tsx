@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
                 src="https://www.datadoghq-browser-agent.com/datadog-logs.js"
               ></script>
               <script key="DD_LOGS_INIT">
-                window.DD_LOGS && DD_LOGS.init(
+                window.DD_LOGS {'&&'} DD_LOGS.init(
                 {JSON.stringify({
                   service: process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG,
                   version: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
