@@ -21,6 +21,7 @@ import ReactGA from 'react-ga';
 import { hotjar } from 'react-hotjar';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
+import '../shared/axios-request-id';
 import { useConfig } from '../shared/config.context';
 import { setLoggerUserID } from '../shared/datadog';
 import { DialogServiceProvider } from '../shared/dialog.context';
