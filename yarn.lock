@@ -1040,6 +1040,21 @@
     eslint-config-prettier "^6.1.0"
     eslint-plugin-prettier "^3.1.0"
 
+"@datadog/browser-core@2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-2.5.3.tgz#8bb04c7eeb4ce8594636a0c35b1e536cbc2ed66e"
+  integrity sha512-gg1xLQWgConfxwjcb/GVoWERQv4KzXiMVOUDYNRQIgm7l/F2e+KjpqZniOnA9U66ZmYNYBSydzADvgXrXWUe8A==
+  dependencies:
+    tslib "^1.10.0"
+
+"@datadog/browser-logs@2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-2.5.3.tgz#ca15b035225d49494db7e26125f3dc0d5e0eb28f"
+  integrity sha512-iSDGzUiU2zHHoldWbk40vxxoBANP9JTufsnMpg7CZvrSNyIZ/lV0ElGjLaoICcNPaF3yacPxVo24tan4jXHL/Q==
+  dependencies:
+    "@datadog/browser-core" "2.5.3"
+    tslib "^1.10.0"
+
 "@date-io/core@1.x", "@date-io/core@^1.3.13":
   version "1.3.13"
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.3.13.tgz#90c71da493f20204b7a972929cc5c482d078b3fa"
