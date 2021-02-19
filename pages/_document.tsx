@@ -12,6 +12,24 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
           />
+          {process.env.DATADOG_LOGS_CONFIG && (
+            <>
+              <script
+                key="DD_LOGS"
+                type="text/javascript"
+                src="https://www.datadoghq-browser-agent.com/datadog-logs.js"
+              ></script>
+              <script key="DD_LOGS_INIT">
+                window.DD_LOGS && DD_LOGS.init(
+                {JSON.stringify({
+                  service: process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG,
+                  version: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+                  ...JSON.parse(process.env.DATADOG_LOGS_CONFIG),
+                })}
+                )
+              </script>
+            </>
+          )}
         </Head>
         <body>
           <Main />
@@ -21,6 +39,10 @@ export default class MyDocument extends Document {
     );
   }
 }
+const a = {
+  clientToken: 'pubaa881e39450699427eda861f7d98fa68',
+  site: 'datadoghq.eu',
+};
 
 MyDocument.getInitialProps = async (ctx) => {
   const sheets = new ServerStyleSheets();
