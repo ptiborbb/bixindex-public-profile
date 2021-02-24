@@ -39,6 +39,7 @@ import { mockForm } from '../../data/mockForm';
 import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
 import { EReviewValues } from '../../enums/review-values';
+import { EAuthTypes } from '../../services/auth.service';
 import { useTranslate } from '../../translate.context';
 import classes from './rating.module.scss';
 
@@ -129,15 +130,16 @@ export const Rating: FC = () => {
 
   const loginResponseFacebook = useCallback(
     async (response: { accessToken: string } & Record<string, unknown>) => {
-      await authService.facebook(response.accessToken);
+      await authService.login(EAuthTypes.FACEBOOK, { accessToken: response.accessToken });
     },
     [authService],
   );
 
   const responseGoogle = useCallback(
-    async (response: GoogleLoginResponse, _isRegister: boolean) => {
-      await authService.google(response.tokenId);
-    },
+    async (response: GoogleLoginResponse, isRegister: boolean) =>
+      isRegister
+        ? await authService.register(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
+        : await authService.login(EAuthTypes.GOOGLE, { accessToken: response.accessToken }),
     [authService],
   );
 
@@ -162,12 +164,12 @@ export const Rating: FC = () => {
           if (values.auth.loginOrRegister === ELoginOrRegister.LOGIN) {
             await authService.login(values.auth.email, values.auth.password);
           } else {
-            await authService.register(
-              `${values.auth.firstname} ${values.auth.lastname}`,
-              values.auth.email,
-              values.auth.password,
-              `+${values.auth.phone}`,
-            );
+            await authService.register(EAuthTypes.LOCAL, {
+              name: `${values.auth.firstname} ${values.auth.lastname}`,
+              email: values.auth.email,
+              password: values.auth.password,
+              phone: values.auth.phone ? `+${values.auth.phone}` : undefined,
+            });
           }
         }
         if (nps) {

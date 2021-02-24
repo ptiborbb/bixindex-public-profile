@@ -18,6 +18,7 @@ import { useApp } from '../../app.context';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useConfig } from '../../config.context';
+import { EAuthTypes } from '../../services/auth.service';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
 
@@ -56,7 +57,7 @@ export const Auth: FunctionComponent = () => {
     (email: string, password: string) => {
       setLoginError({ isError: false, message: '' });
       return authService
-        .login(email, password)
+        .login(EAuthTypes.LOCAL, { email, password })
         .then(() => {
           return companyFormID
             ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
@@ -73,7 +74,7 @@ export const Auth: FunctionComponent = () => {
   const register = useCallback(
     (name: string, email: string, password: string) => {
       return authService
-        .register(name, email, password)
+        .register(EAuthTypes.LOCAL, { name, email, password })
         .then(() => {
           setRegisterError({ isError: false, message: '' });
           return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
@@ -92,32 +93,42 @@ export const Auth: FunctionComponent = () => {
 
   const responseFacebook = useCallback(
     (response: { accessToken: string } & Record<string, unknown>, isRegister: boolean) => {
+      const handleFacebookError = (): void => {
+        enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' });
+      };
+      if (isRegister) {
+        return authService
+          .register(EAuthTypes.FACEBOOK, { accessToken: response.accessToken })
+          .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push(`/`)))
+          .catch(handleFacebookError);
+      }
       return authService
-        .facebook(response.accessToken)
+        .login(EAuthTypes.FACEBOOK, { accessToken: response.accessToken })
         .then(() =>
-          companyFormID
-            ? isRegister
-              ? router.push(`/rating/${companyFormID}`)
-              : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
-            : router.push('/'),
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(`/`),
         )
-        .catch(() => enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' }));
+        .catch(handleFacebookError);
     },
     [authService],
   );
 
   const responseGoogle = useCallback(
     (response: GoogleLoginResponse, isRegister: boolean) => {
+      const handleGoogleError = (): void => {
+        enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' });
+      };
+      if (isRegister) {
+        return authService
+          .register(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
+          .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push(`/`)))
+          .catch(handleGoogleError);
+      }
       return authService
-        .google(response.tokenId)
+        .login(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
         .then(() =>
-          companyFormID
-            ? isRegister
-              ? router.push(`/rating/${companyFormID}`)
-              : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
-            : router.push('/'),
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(`/`),
         )
-        .catch(() => enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' }));
+        .catch(handleGoogleError);
     },
     [authService],
   );
