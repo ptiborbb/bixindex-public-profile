@@ -83,7 +83,7 @@ export const Landing: FunctionComponent = () => {
                 />
                 <meta property="og:description" content="Tudd meg kinek és miért érték a BIX!" />
                 <div className="d-flex flex-wrap justify-content-center justify-content-lg-start">
-                  <Link href="/cegkereso">
+                  <Link href="/auth">
                     <Button>{t('LANDING.HEAD_BOX.CTA_1')}</Button>
                   </Link>
                   <Link href="https://legjobbugyfelelmeny.hu">
