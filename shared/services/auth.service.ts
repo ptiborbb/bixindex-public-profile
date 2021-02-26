@@ -37,7 +37,9 @@ export interface IAuthService {
 export const authServiceFactory = (bixClient: IBixindexClient, dispatch: Dispatch<any>): IAuthService => {
   return {
     login: ((type: EAuthTypes, _payload: { email: string; password: string } | { accessToken: string }) => {
-      const handleLoginError = (_: unknown): void => null;
+      const handleLoginError = (error: unknown): void => {
+        throw error;
+      };
       if (type === EAuthTypes.LOCAL) {
         const payload = _payload as { email: string; password: string };
         return bixClient.auth
