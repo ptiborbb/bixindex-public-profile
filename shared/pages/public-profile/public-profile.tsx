@@ -69,7 +69,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                 activate={async (segment) => {
                   await router.push(
                     `/bix-profil/[companyAlias]?by=${by}`,
-                    `/bix-profil/${alias}?by=${by}#segment=${segment}`,
+                    `/bix-profil/${alias}?by=${by}&segment=${segment}`,
                   );
                 }}
               />
