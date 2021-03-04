@@ -44,7 +44,7 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
   }, []);
 
   useEffect(() => {
-    setLoggerUserID(pageProps?.user?.id);
+    setLoggerUserID(pageProps?.user?.id ? pageProps.user.id : undefined);
   }, [pageProps?.user?.id]);
 
   if (config.sentry.dsn) {
