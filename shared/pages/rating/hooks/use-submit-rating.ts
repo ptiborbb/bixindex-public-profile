@@ -57,8 +57,8 @@ export const useSubmitRating: () => CurriedFunction3<
       if (error?.response?.status === EHttpStatus.UNAUTHORIZED) {
         enqueueSnackbar(t(`COMMON.ERROR.UNAUTHORIZED`), { variant: 'error' });
       } else {
-        const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
-        enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
+        const errorDetail = error?.response?.data?.details?.entityName;
+        enqueueSnackbar(t(errorDetail ? `COMMON.ERROR.${errorDetail}` : 'COMMON.UNKNOWN_ERROR'), { variant: 'error' });
       }
       setSubmitting(false);
     }
