@@ -23,8 +23,8 @@ import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
 import '../shared/axios-request-id';
 import { useConfig } from '../shared/config.context';
-import { setLoggerUserID } from '../shared/datadog';
 import { DialogServiceProvider } from '../shared/dialog.context';
+import { useLogger } from '../shared/logging';
 import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 import { ratingServiceFactory } from '../shared/services/rating.service';
@@ -43,8 +43,11 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
     }
   }, []);
 
+  const logger = useLogger();
   useEffect(() => {
-    setLoggerUserID(pageProps?.user?.id ? pageProps.user.id : undefined);
+    logger.setGlobalProperties({
+      userID: pageProps?.user?.id,
+    }) as void;
   }, [pageProps?.user?.id]);
 
   if (config.sentry.dsn) {
