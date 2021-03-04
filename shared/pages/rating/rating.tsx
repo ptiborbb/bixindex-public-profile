@@ -176,7 +176,7 @@ export const Rating: FC = () => {
     });
   };
 
-  const handleSubmitReview = useSubmitRating();
+  const handleSubmitReview = useSubmitRating()(notifyUserUponRatingSubmission);
 
   const companyForm: Record<string, unknown> & { questions: ICompanyFormQuestion[] } = form || mockForm();
 
@@ -366,7 +366,7 @@ export const Rating: FC = () => {
             <Formik
               initialValues={formInitialValues}
               onSubmit={async (values, { setSubmitting }) => {
-                await handleSubmitReview(values, setSubmitting, notifyUserUponRatingSubmission);
+                await handleSubmitReview(values, setSubmitting);
               }}
               validationSchema={validationSchema}
               enableReinitialize

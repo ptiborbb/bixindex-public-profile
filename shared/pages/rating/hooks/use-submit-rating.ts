@@ -1,4 +1,6 @@
 import { EHttpStatus, IUser } from '@codingsans/bixindex-common';
+import { CurriedFunction3 } from 'lodash';
+import { curry } from 'lodash/fp';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { useApp } from '../../../app.context';
@@ -11,11 +13,18 @@ import { useTranslate } from '../../../translate.context';
 import { IRatingFormValues } from '../interfaces/rating-form-values.interface';
 import { useFormDetails } from './use-form-details';
 
-export const useSubmitRating: () => (
+type HandlerFunction = (
+  notifyUser: () => Promise<void>,
   values: IRatingFormValues,
   setSubmitting: (isSubmitting: boolean) => void,
-  notifyUser: () => Promise<void>,
-) => Promise<void> = () => {
+) => Promise<void>;
+
+export const useSubmitRating: () => CurriedFunction3<
+  Parameters<HandlerFunction>[0],
+  Parameters<HandlerFunction>[1],
+  Parameters<HandlerFunction>[2],
+  ReturnType<HandlerFunction>
+> = () => {
   const { companyFormID, productOrServiceID, partnerID, isNps, by, companyAlias } = useFormDetails();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslate();
@@ -28,7 +37,7 @@ export const useSubmitRating: () => (
     },
   } = useApp();
   const router = useRouter();
-  return async (values, setSubmitting, notifyUser) => {
+  const handler: HandlerFunction = async (notifyUser, values, setSubmitting) => {
     try {
       await authenticateUserBeforeSubmitting({ values, user, authService });
       await submitRatingOrNps({
@@ -42,7 +51,7 @@ export const useSubmitRating: () => (
         values,
       });
       await notifyUser();
-      await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${companyAlias}?by=${by}`);
+      await navigateAway(router, by, companyAlias);
     } catch (error) {
       console.error(error);
       if (error?.response?.status === EHttpStatus.UNAUTHORIZED) {
@@ -54,6 +63,7 @@ export const useSubmitRating: () => (
       setSubmitting(false);
     }
   };
+  return curry(handler);
 };
 
 const authenticateUserBeforeSubmitting: (input: {
@@ -125,4 +135,8 @@ const submitRatingOrNps: (input: {
     };
     await ratingService.submitReview(parsedRating);
   }
+};
+
+const navigateAway = async (router, by: string, companyAlias: string) => {
+  await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${companyAlias}?by=${by}`);
 };
