@@ -1,4 +1,3 @@
-import { EHttpStatus } from '@codingsans/bixindex-common';
 import {
   Avatar,
   Button,
@@ -17,8 +16,6 @@ import {
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { RadioGroup, Select, TextField } from 'formik-material-ui';
-import { get } from 'lodash';
-import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
@@ -40,6 +37,10 @@ import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
 import { EReviewValues } from '../../enums/review-values';
 import { useTranslate } from '../../translate.context';
+import { useFormDetails } from './hooks/use-form-details';
+import { useSubmitRating } from './hooks/use-submit-rating';
+import { ICompanyFormQuestion, ICompanyFormQuestionMapped } from './interfaces/questions.interface';
+import { IRatingFormValues } from './interfaces/rating-form-values.interface';
 import classes from './rating.module.scss';
 
 export const Rating: FC = () => {
@@ -47,12 +48,8 @@ export const Rating: FC = () => {
   const { fbAppId, googleClientId, customerPortalUrl } = useConfig();
   const { t, i18n } = useTranslate();
   const { enqueueSnackbar } = useSnackbar();
-  const router = useRouter();
-  const alias = router.query.companyAlias as string;
-  const companyFormID = router.query.companyFormID as string;
-  const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
-  const productOrServiceID = router.query.productOrServiceID as string;
-  const partnerID = useMemo(() => get(router, 'query.partnerID', undefined), [router]);
+
+  const { by, companyAlias: alias, companyFormID, productOrServiceID, isNps } = useFormDetails();
 
   const {
     ratingService,
@@ -71,7 +68,6 @@ export const Rating: FC = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  const nps = useMemo(() => companyFormID === 'nps', [companyFormID]);
   const authValidation = useMemo(
     () =>
       !user
@@ -103,7 +99,7 @@ export const Rating: FC = () => {
   );
   const validationSchema = useMemo(
     () =>
-      !nps
+      !isNps
         ? Yup.object({
             satisfaction: Yup.string().required(),
             answers: Yup.array().of(
@@ -124,7 +120,7 @@ export const Rating: FC = () => {
             comment: Yup.string().required(t('COMMON.REQUIRED')),
             auth: authValidation,
           }),
-    [nps, authValidation, user],
+    [isNps, authValidation, user],
   );
 
   const loginResponseFacebook = useCallback(
@@ -146,7 +142,7 @@ export const Rating: FC = () => {
   };
 
   useEffect(() => {
-    if (!nps) {
+    if (!isNps) {
       ratingService.getFormByID(companyFormID, i18n.language);
     }
   }, [ratingService, alias, companyFormID]);
@@ -155,91 +151,36 @@ export const Rating: FC = () => {
     publicProfileService.getPublicProfileByIDOrAlias(alias, by);
   }, [publicProfileService]);
 
-  const handleSubmitReview = useCallback(
-    async (values, setSubmitting, _resetForm) => {
-      try {
-        if (!user) {
-          if (values.auth.loginOrRegister === ELoginOrRegister.LOGIN) {
-            await authService.login(values.auth.email, values.auth.password);
-          } else {
-            await authService.register(
-              `${values.auth.firstname} ${values.auth.lastname}`,
-              values.auth.email,
-              values.auth.password,
-              `+${values.auth.phone}`,
-            );
-          }
-        }
-        if (nps) {
-          const parsedRating = {
-            companyID: profilePage.profile.companyID,
-            rating: values.nps,
-            visibility: values.visibility,
-            comment: values.comment,
-            userID: user.id,
-          };
-          await ratingService.submitNps(parsedRating);
-        } else {
-          const parsedRating = {
-            satisfaction: parseFloat(values.satisfaction),
-            nps: values.nps,
-            companyFormID,
-            summary: values.comment,
-            positive: values.positive,
-            negative: values.negative,
-            ratedProductOrService: values.ratedProductOrService || productOrServiceID,
-            reference: values.reference,
-            visibility: values.visibility,
-            partnerID,
-            answers: values.answers
-              .filter((answer) => answer.value !== EReviewValues.NO_EXPERIENCE)
-              .map((answer) => ({
-                questionID: answer.id,
-                value: parseFloat(answer.value),
-              })),
-          };
-          await ratingService.submitReview(parsedRating);
-        }
-        await dialog({
-          variant: DialogType.ALERT,
-          title: <Typography className="text-white font-weight-bold">{t('RATING.WE_GOT_YOUR_REVIEW')}</Typography>,
-          text: (
-            <>
-              <Typography>{t('RATING.THANK_YOU_RATING_RECEIVED')}</Typography>
-              <Typography>{t('RATING.BIX_CHECKS_REVIEW')}</Typography>
-              <Typography>{t('RATING.UNTIL')}</Typography>
-              <ul>
-                <li>{t('RATING.WRITE_ANOTHER')}</li>
-                <li>
-                  <a href={customerPortalUrl} target="blank" rel="noreferrer">
-                    {t('RATING.VERIFY_YOUR_PROFILE')}
-                  </a>
-                </li>
-              </ul>
-              <Typography>{t('RATING.BIX_TEAM')}</Typography>
-            </>
-          ),
-          submitButtonLabel: t('COMMON.OK'),
-          headerColor: '#56AAA6',
-        });
-        await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${alias}?by=${by}`);
-      } catch (error) {
-        if (error?.response.status === EHttpStatus.UNAUTHORIZED) {
-          enqueueSnackbar(t(`COMMON.ERROR.UNAUTHORIZED`), { variant: 'error' });
-        } else {
-          const errorDetail = error?.response?.data?.details?.entityName || 'UNKNOWN_ERROR';
-          enqueueSnackbar(t(`COMMON.ERROR.${errorDetail}`), { variant: 'error' });
-        }
-        setSubmitting(false);
-      }
-    },
-    [ratingService, authService, alias, profilePage, user],
-  );
+  const notifyUserUponRatingSubmission = async (): Promise<void> => {
+    await dialog({
+      variant: DialogType.ALERT,
+      title: <Typography className="text-white font-weight-bold">{t('RATING.WE_GOT_YOUR_REVIEW')}</Typography>,
+      text: (
+        <>
+          <Typography>{t('RATING.THANK_YOU_RATING_RECEIVED')}</Typography>
+          <Typography>{t('RATING.BIX_CHECKS_REVIEW')}</Typography>
+          <Typography>{t('RATING.UNTIL')}</Typography>
+          <ul>
+            <li>{t('RATING.WRITE_ANOTHER')}</li>
+            <li>
+              <a href={customerPortalUrl} target="blank" rel="noreferrer">
+                {t('RATING.VERIFY_YOUR_PROFILE')}
+              </a>
+            </li>
+          </ul>
+          <Typography>{t('RATING.BIX_TEAM')}</Typography>
+        </>
+      ),
+      submitButtonLabel: t('COMMON.OK'),
+      headerColor: '#56AAA6',
+    });
+  };
 
-  const companyForm: Record<string, unknown> & { questions: { id: string; text: string; value: string }[] } =
-    form || mockForm();
+  const handleSubmitReview = useSubmitRating()(notifyUserUponRatingSubmission);
 
-  const initialAnswers = useMemo(
+  const companyForm: Record<string, unknown> & { questions: ICompanyFormQuestion[] } = form || mockForm();
+
+  const initialAnswers: ICompanyFormQuestionMapped[] = useMemo(
     () =>
       companyForm.questions.reduce((acc, { value, ...rest }) => {
         if (value) {
@@ -250,7 +191,7 @@ export const Rating: FC = () => {
     [companyForm.questions],
   );
 
-  const formInitialValues = useMemo(
+  const formInitialValues: IRatingFormValues = useMemo(
     () => ({
       satisfaction: '',
       nps: 8,
@@ -424,15 +365,15 @@ export const Rating: FC = () => {
             </Grid>
             <Formik
               initialValues={formInitialValues}
-              onSubmit={async (values, { setSubmitting, resetForm }) => {
-                await handleSubmitReview(values, setSubmitting, resetForm);
+              onSubmit={async (values, { setSubmitting }) => {
+                await handleSubmitReview(values, setSubmitting);
               }}
               validationSchema={validationSchema}
               enableReinitialize
             >
               {({ setFieldValue, errors, submitCount, values, isValid, submitForm, validateForm, isSubmitting }) => (
                 <Form style={{ width: '100%' }}>
-                  {!nps && (
+                  {!isNps && (
                     <>
                       <Grid item xs={12}>
                         <hr className={classes.verticalSpacing} />
@@ -488,7 +429,7 @@ export const Rating: FC = () => {
                       </Grid>
                     </Grid>
                   </Grid>
-                  {!nps && (
+                  {!isNps && (
                     <>
                       <Grid item xs={12}>
                         <hr className={classes.verticalSpacing} />
@@ -628,7 +569,7 @@ export const Rating: FC = () => {
                       inputProps={{ maxLength: 150 }}
                     />
                   </Grid>
-                  {!nps && profilePage?.productsAndServices.length > 0 && (
+                  {!isNps && profilePage?.productsAndServices.length > 0 && (
                     <>
                       <Divider className={classes.verticalSpacing} />
                       <Grid item xs={12}>
