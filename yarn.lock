@@ -1022,9 +1022,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codingsans/bixindex-common@git+https://subs:wTdC27NaJGmGiu6DhEus@gitlab.com/codingsans/bixindex/bixindex-common#subscription":
-  version "1.3.175"
-  resolved "git+https://subs:wTdC27NaJGmGiu6DhEus@gitlab.com/codingsans/bixindex/bixindex-common#f0bc7d167b94f8a422425cebd93d0816b0923a4d"
+"@codingsans/bixindex-common@1.3.180-subscription.4":
+  version "1.3.180-subscription.4"
+  resolved "https://registry.yarnpkg.com/@codingsans/bixindex-common/-/bixindex-common-1.3.180-subscription.4.tgz#a66074ae64080d151bd9ae505cca9ce3f40ef332"
+  integrity sha512-2GPHQFFreXgeh9UHEkBoQjao+AtairTFABq0Jv5WNMmrcOfMa2mVLy9jMwX2YN4SuoIjKKZii3+xXJb5PdHWSg==
   dependencies:
     "@datadog/browser-logs" "^2.5.4"
     axios "^0.19.2"
@@ -1048,10 +1049,10 @@
   dependencies:
     tslib "^1.10.0"
 
-"@datadog/browser-core@2.5.4":
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-2.5.4.tgz#68dee0fd1e8fbc7dd712e3d38e8932f22428018e"
-  integrity sha512-ZJ/WXDVXUKDG15spji8VLs4iVy5wpqZWbXSm4HUY+QgWV5yM5UUYZt7xDAkVWJkEeXRBfrWyzbdSeDSP12M6lA==
+"@datadog/browser-core@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-2.6.0.tgz#06c5a46bea3d2cebb1cd949001e9780ffc40062d"
+  integrity sha512-GBSv5tV5qOCqohIYq5Ru1e4Sl+ndXRuirSkJlsGdSvsVsYff2CP/K77c2K/D1P6KMVM9r+fJYDT9BTyTTERqjQ==
   dependencies:
     tslib "^1.10.0"
 
@@ -1064,11 +1065,11 @@
     tslib "^1.10.0"
 
 "@datadog/browser-logs@^2.5.4":
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-2.5.4.tgz#e81b0ac7e74fe3b9caed584af0e52eba92beaa08"
-  integrity sha512-2YifgBeVALhPrJuzhLkYr2hFeufsFfBjSo5Q7w074Jgyet3O6LG+0hvDbFuEmY0UZ0LyFsYoQk5GWzxR4kQCDg==
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-2.6.0.tgz#809729b6b4f4e623a3c7571fdf11533bdfecdebe"
+  integrity sha512-f0pWbUesyHScdJSZfVoDNHvILrPThD3DWx3pbhrbDwnoKaTjzhDfhp5WfDe2molS9PbNDOPuad63oWhPKIcWrw==
   dependencies:
-    "@datadog/browser-core" "2.5.4"
+    "@datadog/browser-core" "2.6.0"
     tslib "^1.10.0"
 
 "@date-io/core@1.x", "@date-io/core@^1.3.13":

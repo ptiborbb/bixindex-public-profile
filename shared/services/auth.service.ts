@@ -9,7 +9,7 @@ import {
   registerSuccess,
   resetPassword,
   resetPasswordFail,
-  resetPasswordSuccess,
+  resetPasswordSuccess
 } from '../store/actions';
 // eslint-disable-next-line @typescript-eslint/interface-name-prefix
 
@@ -24,7 +24,7 @@ export interface IAuthService {
     (type: EAuthTypes.GOOGLE | EAuthTypes.FACEBOOK, payload: { accessToken: string }): Promise<void>;
   };
   register: {
-    (type: EAuthTypes.LOCAL, payload: { name: string; email: string; password: string; phone?: string }): Promise<void>;
+    (type: EAuthTypes.LOCAL, payload: { firstName: string; lastName: string; email: string }): Promise<void>;
     (type: EAuthTypes.GOOGLE | EAuthTypes.FACEBOOK, payload: { accessToken: string }): Promise<void>;
   };
   logout: () => Promise<void>;
@@ -75,13 +75,13 @@ export const authServiceFactory = (bixClient: IBixindexClient, dispatch: Dispatc
     },
     register: ((
       type: EAuthTypes,
-      _payload: { name: string; email: string; password: string; phone?: string } | { accessToken: string },
+      _payload: { firstName: string; lastName: string; email: string } | { accessToken: string },
     ) => {
       const handleLoginError = (_: unknown): void => null;
       if (type === EAuthTypes.LOCAL) {
-        const payload = _payload as { name: string; email: string; password: string; phone?: string };
+        const payload = _payload as { firstName: string; lastName: string; email: string };
         return bixClient.auth
-          .register(payload.name, payload.email, payload.password, payload.phone)
+          .register(payload.firstName, payload.lastName, payload.email)
           .then(() => bixClient.auth.me())
           .then((user) => dispatch(registerSuccess({ user })))
           .catch(handleLoginError);
