@@ -55,9 +55,9 @@ const updateRatingsOnFilterChange = ({
         20,
         (filter.pageNumber - 1) * 20,
         filter.stars,
-        filter.productOrServiceID,
-        filter.date,
-        filter.name,
+        filter.productOrServiceID ? filter.productOrServiceID : undefined,
+        filter.date ? filter.date : undefined,
+        filter.name ? filter.name : undefined,
         filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
       );
     }

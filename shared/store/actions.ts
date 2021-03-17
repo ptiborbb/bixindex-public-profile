@@ -19,7 +19,7 @@ export enum EAuthActionTypes {
 export const login = createAction<{ email: string; password: string }>(EAuthActionTypes.LOGIN);
 export const loginSuccess = createAction<{ user: IUser }>(EAuthActionTypes.LOGIN_SUCCESS);
 export const loginFail = createAction<{ error: unknown }>(EAuthActionTypes.LOGIN_FAIL);
-export const register = createAction<{ name: string; email: string; password: string }>(EAuthActionTypes.REGISTER);
+export const register = createAction<{ firstName: string; lastName: string; email: string }>(EAuthActionTypes.REGISTER);
 export const registerSuccess = createAction<{ user: IUser }>(EAuthActionTypes.REGISTER_SUCCESS);
 export const registerFail = createAction<{ error: unknown }>(EAuthActionTypes.REGISTER_FAIL);
 export const forgotPassword = createAction(EAuthActionTypes.FORGOT_PASSWORD);

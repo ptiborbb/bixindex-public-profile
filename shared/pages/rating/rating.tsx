@@ -7,10 +7,8 @@ import {
   FormHelperText,
   Grid,
   Hidden,
-  InputAdornment,
   MenuItem,
   Radio,
-  Tooltip,
   Typography,
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
@@ -36,6 +34,7 @@ import { mockForm } from '../../data/mockForm';
 import { useDialog } from '../../dialog.context';
 import { ELoginOrRegister } from '../../enums/login-or-register';
 import { EReviewValues } from '../../enums/review-values';
+import { EAuthTypes } from '../../services/auth.service';
 import { useTranslate } from '../../translate.context';
 import { useFormDetails } from './hooks/use-form-details';
 import { useSubmitRating } from './hooks/use-submit-rating';
@@ -49,14 +48,14 @@ export const Rating: FC = () => {
   const { t, i18n } = useTranslate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { by, companyAlias: alias, companyFormID, productOrServiceID, isNps } = useFormDetails();
+  const { by, companyAlias: alias, companyFormID, productOrServiceID, isNps, partnerID } = useFormDetails();
 
   const {
     ratingService,
     publicProfileService,
     authService,
     state: {
-      rating: { form },
+      rating: { form, partner },
       publicProfile: { profilePage },
       auth: { user },
     },
@@ -65,8 +64,6 @@ export const Rating: FC = () => {
   const logout = useCallback(() => {
     authService.logout();
   }, [authService]);
-
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const authValidation = useMemo(
     () =>
@@ -81,12 +78,10 @@ export const Rating: FC = () => {
               then: Yup.string().required(t('COMMON.REQUIRED')),
             }),
             email: Yup.string().required(t('COMMON.REQUIRED')).email(),
-            phone: Yup.string().matches(phoneRegExp, t('COMMON.PHONE_VALIDATION_ERROR')),
             company: Yup.string(),
             role: Yup.string(),
-            password: Yup.string().required(t('COMMON.REQUIRED')),
-            confirmPassword: Yup.string().when('loginOrRegister', {
-              is: ELoginOrRegister.REGISTER,
+            password: Yup.string().when('loginOrRegister', {
+              is: ELoginOrRegister.LOGIN,
               then: Yup.string().required(t('COMMON.REQUIRED')),
             }),
             policy: Yup.boolean().when('loginOrRegister', {
@@ -125,21 +120,32 @@ export const Rating: FC = () => {
 
   const loginResponseFacebook = useCallback(
     async (response: { accessToken: string } & Record<string, unknown>) => {
-      await authService.facebook(response.accessToken);
+      await authService.login(EAuthTypes.FACEBOOK, { accessToken: response.accessToken });
     },
     [authService],
   );
 
   const responseGoogle = useCallback(
-    async (response: GoogleLoginResponse, _isRegister: boolean) => {
-      await authService.google(response.tokenId);
-    },
+    async (response: GoogleLoginResponse, isRegister: boolean) =>
+      isRegister
+        ? await authService.register(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
+        : await authService.login(EAuthTypes.GOOGLE, { accessToken: response.accessToken }),
     [authService],
   );
 
   const failResponseGoogle = (_): unknown => {
     return enqueueSnackbar(t('COMMON.ERROR.GOOGLE_ERROR'), { variant: 'error' });
   };
+
+  const checkPartnerRegistration = useCallback(() => {
+    if (partnerID && companyFormID) {
+      ratingService.checkPartnerRegistration(partnerID, companyFormID);
+    }
+  }, [ratingService, partnerID, companyFormID]);
+
+  useEffect(() => {
+    checkPartnerRegistration();
+  }, [checkPartnerRegistration]);
 
   useEffect(() => {
     if (!isNps) {
@@ -202,18 +208,16 @@ export const Rating: FC = () => {
       ratedProductOrService: productOrServiceID || '',
       reference: '',
       auth: {
-        loginOrRegister: ELoginOrRegister.REGISTER,
+        loginOrRegister: partner?.isRegistered ? ELoginOrRegister.LOGIN : ELoginOrRegister.REGISTER,
         firstname: '',
         lastname: '',
-        email: '',
-        phone: '',
+        email: partner?.email ?? '',
         password: '',
-        confirmPassword: '',
         policy: false,
       },
       visibility: 'VISIBLE',
     }),
-    [initialAnswers, ELoginOrRegister],
+    [initialAnswers, ELoginOrRegister, partner],
   );
 
   const satisfactionOptions = [
@@ -758,59 +762,6 @@ export const Rating: FC = () => {
                                   variant="outlined"
                                   inputProps={{
                                     autoComplete: 'email',
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} lg={6}>
-                                <Typography className={classes.summary}>{t('RATING.PHONE')}</Typography>
-                                <Field
-                                  component={TextField}
-                                  label=""
-                                  name="auth.phone"
-                                  type="tel"
-                                  fullWidth
-                                  variant="outlined"
-                                  placeholder="36301234567"
-                                  InputProps={{
-                                    autoComplete: 'tel',
-                                    startAdornment: <InputAdornment position="start">+</InputAdornment>,
-                                    endAdornment: (
-                                      <Tooltip
-                                        title="Telefonszámod soha nem lesz nyilvános. Kizárólag a BIX Hungary kft munkatársai számára elérhető, az értékelés telefonos hitelesítése céljából"
-                                        arrow
-                                        placement="top"
-                                      >
-                                        <Info style={{ color: '#595959' }} />
-                                      </Tooltip>
-                                    ),
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} lg={6}>
-                                <Typography className={classes.summary}>{t('RATING.PASSWORD')}</Typography>
-                                <Field
-                                  component={TextField}
-                                  label=""
-                                  name="auth.password"
-                                  fullWidth
-                                  type="password"
-                                  variant="outlined"
-                                  inputProps={{
-                                    autoComplete: 'new-password',
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={12} lg={6}>
-                                <Typography className={classes.summary}>{t('RATING.CONFIRM_PASSWORD')}</Typography>
-                                <Field
-                                  component={TextField}
-                                  label=""
-                                  name="auth.confirmPassword"
-                                  fullWidth
-                                  type="password"
-                                  variant="outlined"
-                                  inputProps={{
-                                    autoComplete: 'new-password',
                                   }}
                                 />
                               </Grid>

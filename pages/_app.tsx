@@ -21,8 +21,10 @@ import ReactGA from 'react-ga';
 import { hotjar } from 'react-hotjar';
 import { appWithTranslation, useTranslation } from '../i18n';
 import { AppContext } from '../shared/app.context';
+import '../shared/axios-request-id';
 import { useConfig } from '../shared/config.context';
 import { DialogServiceProvider } from '../shared/dialog.context';
+import { useLogger } from '../shared/logging';
 import { authServiceFactory } from '../shared/services/auth.service';
 import { publicProfileServiceFactory } from '../shared/services/public-profile.service';
 import { ratingServiceFactory } from '../shared/services/rating.service';
@@ -40,6 +42,13 @@ const BixIndexPublicProfile = ({ Component, pageProps }: AppProps): JSX.Element 
       hotjar.initialize(2230800, 6);
     }
   }, []);
+
+  const logger = useLogger();
+  useEffect(() => {
+    logger.setGlobalProperties({
+      userID: pageProps?.user?.id,
+    }) as void;
+  }, [pageProps?.user?.id]);
 
   if (config.sentry.dsn) {
     Sentry.init({
