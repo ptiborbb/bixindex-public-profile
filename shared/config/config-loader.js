@@ -28,9 +28,7 @@ const config = convict({
     doc: 'The customer portal app url',
     format: String,
     default: '',
-    env: process.env.VERCEL_GIT_COMMIT_REF === 'subscription'
-      && 'NEXT_PUBLIC_CUSTOMER_PORTAL_URL_SUBSCRIPTION'
-      || 'NEXT_PUBLIC_CUSTOMER_PORTAL_URL',
+    env: 'NEXT_PUBLIC_CUSTOMER_PORTAL_URL',
   },
   fbAppId: {
     doc: 'Facebook app id',
@@ -54,17 +52,13 @@ const config = convict({
     doc: 'Public profile app url',
     format: String,
     default: '',
-    env: process.env.VERCEL_GIT_COMMIT_REF === 'subscription'
-      && 'NEXT_PUBLIC_PROFILE_URL_SUBSCRIPTION'
-      || 'NEXT_PUBLIC_PROFILE_URL',
+    env: 'NEXT_PUBLIC_PROFILE_URL',
   },
   backendUrl: {
     doc: 'Backend url',
     format: String,
     default: '',
-    env: process.env.VERCEL_GIT_COMMIT_REF === 'subscription'
-      && 'NEXT_PUBLIC_BACKEND_URL_SUBSCRIPTION'
-      || 'NEXT_PUBLIC_BACKEND_URL',
+    env: 'NEXT_PUBLIC_BACKEND_URL',
   },
   analyticsId: {
     doc: 'Google analytics property ID',
