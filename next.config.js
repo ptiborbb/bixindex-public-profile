@@ -6,17 +6,15 @@ const withNextI18NextRewrites = ({ localeSubpaths = {}, ...nextConfig } = {}) =>
   return Object.assign({}, nextConfig, {
     rewrites: async () => [
       ...(nextConfig.rewrites ? await nextConfig.rewrites() : []),
-      ...nextI18NextRewrites(localeSubpaths)
+      ...nextI18NextRewrites(localeSubpaths),
     ],
     publicRuntimeConfig: Object.assign({}, nextConfig.publicRuntimeConfig, {
-      localeSubpaths
+      localeSubpaths,
     }),
   });
-}
+};
 
-const backendURL = process.env.VERCEL_GIT_COMMIT_REF === 'subscription'
-  && process.env.NEXT_PUBLIC_BACKEND_URL_SUBSCRIPTION
-  || process.env.NEXT_PUBLIC_BACKEND_URL;
+const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 module.exports = withNextI18NextRewrites({
   localeSubpaths: {},
