@@ -1,3 +1,4 @@
+import { getFullName } from '@codingsans/bixindex-common';
 import {
   Avatar,
   Button,
@@ -9,7 +10,7 @@ import {
   Hidden,
   MenuItem,
   Radio,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
@@ -615,7 +616,7 @@ export const Rating: FC = () => {
                       <div className={classes.user}>
                         <div className={classes.user}>
                           <Avatar className={classes.avatar} src={user.image} />
-                          <Typography variant="h6">{user.name}</Typography>
+                          <Typography variant="h6">{getFullName(user)}</Typography>
                         </div>
                         <Button className={classes.logButton} onClick={logout}>
                           {t('HEADER.LOGOUT')}
