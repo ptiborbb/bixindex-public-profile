@@ -1,4 +1,4 @@
-import { EHttpStatus } from '@codingsans/bixindex-common';
+import { EHttpStatus, getFullName } from '@codingsans/bixindex-common';
 import {
   Avatar,
   Button,
@@ -672,7 +672,7 @@ export const Rating: FC = () => {
                       <div className={classes.user}>
                         <div className={classes.user}>
                           <Avatar className={classes.avatar} src={user.image} />
-                          <Typography variant="h6">{user.name}</Typography>
+                          <Typography variant="h6">{getFullName(user)}</Typography>
                         </div>
                         <Button className={classes.logButton} onClick={logout}>
                           {t('HEADER.LOGOUT')}
