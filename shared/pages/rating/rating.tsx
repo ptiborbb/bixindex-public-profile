@@ -10,7 +10,7 @@ import {
   Hidden,
   MenuItem,
   Radio,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
@@ -129,8 +129,8 @@ export const Rating: FC = () => {
   const responseGoogle = useCallback(
     async (response: GoogleLoginResponse, isRegister: boolean) =>
       isRegister
-        ? await authService.register(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
-        : await authService.login(EAuthTypes.GOOGLE, { accessToken: response.accessToken }),
+        ? await authService.register(EAuthTypes.GOOGLE, { accessToken: response.tokenId })
+        : await authService.login(EAuthTypes.GOOGLE, { accessToken: response.tokenId }),
     [authService],
   );
 
