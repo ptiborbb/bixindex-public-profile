@@ -119,12 +119,12 @@ export const Auth: FunctionComponent = () => {
       };
       if (isRegister) {
         return authService
-          .register(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
+          .register(EAuthTypes.GOOGLE, { accessToken: response.tokenId })
           .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push(`/`)))
           .catch(handleGoogleError);
       }
       return authService
-        .login(EAuthTypes.GOOGLE, { accessToken: response.accessToken })
+        .login(EAuthTypes.GOOGLE, { accessToken: response.tokenId })
         .then(() =>
           companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(`/`),
         )
