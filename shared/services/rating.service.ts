@@ -1,6 +1,9 @@
 import { IBixindexClient } from '@codingsans/bixindex-common';
 import { Dispatch } from 'react';
 import {
+  checkPartnerRegistration,
+  checkPartnerRegistrationFail,
+  checkPartnerRegistrationSuccess,
   getForm,
   getFormFail,
   getFormSuccess,
@@ -9,13 +12,14 @@ import {
   submitNPSSuccess,
   submitReview,
   submitReviewFail,
-  submitReviewSuccess,
+  submitReviewSuccess
 } from '../pages/rating/store/actions';
 
 export interface IRatingService {
   getFormByID: (companyFormID: string, locale: string) => void;
   submitReview: (rating: unknown) => Promise<void>;
   submitNps: (rating: unknown) => Promise<void>;
+  checkPartnerRegistration: (partnerID: string, formID: string) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,6 +55,13 @@ export const ratingServiceFactory = (bixClient: IBixindexClient, dispatch: Dispa
           dispatch(submitNPSFail());
           throw error;
         });
+    },
+    checkPartnerRegistration: (partnerID, formID) => {
+      dispatch(checkPartnerRegistration({ partnerID, formID }));
+      bixClient.publicProfile.profile
+        .checkPartnerRegistration(partnerID, formID)
+        .then((partner) => dispatch(checkPartnerRegistrationSuccess({ partner })))
+        .catch((error) => dispatch(checkPartnerRegistrationFail({ error })));
     },
   };
 };

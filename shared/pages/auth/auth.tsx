@@ -18,6 +18,7 @@ import { useApp } from '../../app.context';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
 import { useConfig } from '../../config.context';
+import { EAuthTypes } from '../../services/auth.service';
 import { useTranslate } from '../../translate.context';
 import classes from './auth.module.scss';
 
@@ -56,7 +57,7 @@ export const Auth: FunctionComponent = () => {
     (email: string, password: string) => {
       setLoginError({ isError: false, message: '' });
       return authService
-        .login(email, password)
+        .login(EAuthTypes.LOCAL, { email, password })
         .then(() => {
           return companyFormID
             ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
@@ -71,9 +72,9 @@ export const Auth: FunctionComponent = () => {
   );
 
   const register = useCallback(
-    (name: string, email: string, password: string) => {
+    (firstName: string, lastName: string, email: string) => {
       return authService
-        .register(name, email, password)
+        .register(EAuthTypes.LOCAL, { firstName, lastName, email })
         .then(() => {
           setRegisterError({ isError: false, message: '' });
           return companyFormID ? router.push(`/rating/${companyFormID}`) : router.push('/');
@@ -92,32 +93,42 @@ export const Auth: FunctionComponent = () => {
 
   const responseFacebook = useCallback(
     (response: { accessToken: string } & Record<string, unknown>, isRegister: boolean) => {
+      const handleFacebookError = (): void => {
+        enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' });
+      };
+      if (isRegister) {
+        return authService
+          .register(EAuthTypes.FACEBOOK, { accessToken: response.accessToken })
+          .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push(`/`)))
+          .catch(handleFacebookError);
+      }
       return authService
-        .facebook(response.accessToken)
+        .login(EAuthTypes.FACEBOOK, { accessToken: response.accessToken })
         .then(() =>
-          companyFormID
-            ? isRegister
-              ? router.push(`/rating/${companyFormID}`)
-              : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
-            : router.push('/'),
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(`/`),
         )
-        .catch(() => enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' }));
+        .catch(handleFacebookError);
     },
     [authService],
   );
 
   const responseGoogle = useCallback(
     (response: GoogleLoginResponse, isRegister: boolean) => {
+      const handleGoogleError = (): void => {
+        enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' });
+      };
+      if (isRegister) {
+        return authService
+          .register(EAuthTypes.GOOGLE, { accessToken: response.tokenId })
+          .then(() => (companyFormID ? router.push(`/rating/${companyFormID}`) : router.push(`/`)))
+          .catch(handleGoogleError);
+      }
       return authService
-        .google(response.tokenId)
+        .login(EAuthTypes.GOOGLE, { accessToken: response.tokenId })
         .then(() =>
-          companyFormID
-            ? isRegister
-              ? router.push(`/rating/${companyFormID}`)
-              : router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`)
-            : router.push('/'),
+          companyFormID ? router.push(`/bix-profil/${companyAlias}/ertekeles/${companyFormID}`) : router.push(`/`),
         )
-        .catch(() => enqueueSnackbar(t(`TOAST.ERROR.INTERNAL_SERVER_ERROR`), { variant: 'error' }));
+        .catch(handleGoogleError);
     },
     [authService],
   );
@@ -136,9 +147,9 @@ export const Auth: FunctionComponent = () => {
   const [registerError, setRegisterError] = useState({ isError: false, message: '' });
 
   const registerValidationSchema = Yup.object({
+    firstName: Yup.string().required(t('AUTH.REQUIRED')),
+    lastName: Yup.string().required(t('AUTH.REQUIRED')),
     email: Yup.string().email(t('AUTH.INVALID_EMAIL')).required(t('AUTH.REQUIRED')),
-    password: Yup.string().required(t('AUTH.REQUIRED')),
-    name: Yup.string().required(t('AUTH.REQUIRED')),
   });
 
   const inputFieldStyle = useInputFieldStyle();
@@ -150,9 +161,9 @@ export const Auth: FunctionComponent = () => {
   }
 
   interface IRegisterFormValues {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    password: string;
   }
 
   return (
@@ -226,9 +237,9 @@ export const Auth: FunctionComponent = () => {
                 {showRegisterForm && (
                   <Formik
                     initialValues={{
-                      name: '',
+                      firstName: '',
+                      lastName: '',
                       email: '',
-                      password: '',
                     }}
                     validationSchema={registerValidationSchema}
                     validateOnMount={true}
@@ -236,7 +247,7 @@ export const Auth: FunctionComponent = () => {
                       values: IRegisterFormValues,
                       { setSubmitting, resetForm }: FormikHelpers<IRegisterFormValues>,
                     ) => {
-                      return register(values.name, values.email, values.password).catch(() => {
+                      return register(values.firstName, values.lastName, values.email).catch(() => {
                         setSubmitting(false);
                         resetForm();
                       });
@@ -246,16 +257,35 @@ export const Auth: FunctionComponent = () => {
                       <Form className={classes.form} noValidate>
                         <FormControl error={registerError.isError} fullWidth>
                           <Field
-                            id="name"
-                            name="name"
+                            id="firstName"
+                            name="firstName"
                             type="text"
-                            label={t('AUTH.NAME')}
+                            label={t('AUTH.FIRST_NAME')}
                             component={TextField}
                             fullWidth
                             className={classes.formInput}
                             InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
                             InputProps={{
-                              autoComplete: 'name',
+                              autoComplete: 'given-name',
+                              classes: inputFieldStyle,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <PersonIcon />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Field
+                            id="lastName"
+                            name="lastName"
+                            type="text"
+                            label={t('AUTH.LAST_NAME')}
+                            component={TextField}
+                            fullWidth
+                            className={classes.formInput}
+                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
+                            InputProps={{
+                              autoComplete: 'family-name',
                               classes: inputFieldStyle,
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -279,25 +309,6 @@ export const Auth: FunctionComponent = () => {
                               startAdornment: (
                                 <InputAdornment position="start">
                                   <MailIcon />
-                                </InputAdornment>
-                              ),
-                            }}
-                          />
-                          <Field
-                            id="password"
-                            type="password"
-                            name="password"
-                            label={t('AUTH.PASSWORD')}
-                            component={TextField}
-                            fullWidth
-                            className={classes.formInput}
-                            InputLabelProps={{ classes: inputLabelStyle, shrink: false }}
-                            InputProps={{
-                              autoComplete: 'new-password',
-                              classes: inputFieldStyle,
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <LockIcon />
                                 </InputAdornment>
                               ),
                             }}

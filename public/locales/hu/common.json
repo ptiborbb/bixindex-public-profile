@@ -92,6 +92,8 @@
   },
   "AUTH": {
     "NAME": "Név",
+    "FIRST_NAME": "Keresztnév",
+    "LAST_NAME": "Vezetéknév",
     "EMAIL": "Email cím",
     "PASSWORD": "Jelszó",
     "CONFIRM_PASSWORD": "Jelszó megerősítés",

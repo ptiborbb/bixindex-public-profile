@@ -6,7 +6,6 @@ import React from 'react';
 import logo from '../../../public/bix_logo.svg';
 import { CompanyFrame } from '../../components/company-frame/company-frame';
 import { CompanyHeader } from '../../components/company-header/company-header';
-import { CompanySearch } from '../../components/company-search/company-search';
 import { Header } from '../../components/header/header';
 import { PageNotFound } from '../../components/page-not-found/page-not-found';
 import { ProfilePage } from '../../interfaces/profile-page';
@@ -56,9 +55,6 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
             </Container>
             <Divider />
             <Container>
-              <CompanySearch />
-            </Container>
-            <Container>
               <CompanyHeader
                 companyAlias={alias}
                 companyFormID={profilePage.profile.defaultFormID}
@@ -69,7 +65,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                 activate={async (segment) => {
                   await router.push(
                     `/bix-profil/[companyAlias]?by=${by}`,
-                    `/bix-profil/${alias}?by=${by}#segment=${segment}`,
+                    `/bix-profil/${alias}?by=${by}&segment=${segment}`,
                   );
                 }}
               />
