@@ -120,9 +120,10 @@ export const Rating: FC = () => {
   );
 
   const loginResponseFacebook = useCallback(
-    async (response: { accessToken: string } & Record<string, unknown>) => {
-      await authService.login(EAuthTypes.FACEBOOK, { accessToken: response.accessToken });
-    },
+    async (response: { accessToken: string } & Record<string, unknown>, isRegister: boolean) =>
+      isRegister
+        ? await authService.register(EAuthTypes.FACEBOOK, { accessToken: response.accessToken })
+        : await authService.login(EAuthTypes.FACEBOOK, { accessToken: response.accessToken }),
     [authService],
   );
 
@@ -664,7 +665,10 @@ export const Rating: FC = () => {
                               autoLoad={false}
                               fields="name,email,picture"
                               callback={async (response) => {
-                                await loginResponseFacebook(response);
+                                await loginResponseFacebook(
+                                  response,
+                                  values.auth.loginOrRegister === ELoginOrRegister.REGISTER,
+                                );
                                 await validateForm();
                               }}
                               render={(renderProps) => (
