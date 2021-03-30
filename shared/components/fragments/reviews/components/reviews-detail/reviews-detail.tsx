@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
-import { debounce, sum } from 'lodash';
+import { debounce } from 'lodash';
 import { useRouter } from 'next/router';
 import React, { FC, useCallback, useState } from 'react';
 import { useConfig } from '../../../../../config.context';
@@ -74,7 +74,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <div className={classes.reviewsDetailContent}>
           <ReviewStats
             npsRates={stats.npsRates}
-            index={{ score: stats.index.score, ratingCount: sum(ratingCountsByValue), ratings: ratingCountsByValue }}
+            index={{ score: stats.index.score, ratingCount: stats.index.ratingCount, ratings: ratingCountsByValue }}
             companyAlias={companyAlias}
             companyFormID={companyFormID}
             lastRating={lastRating}
