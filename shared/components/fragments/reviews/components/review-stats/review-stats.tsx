@@ -1,4 +1,4 @@
-import { IRating } from '@codingsans/bixindex-common';
+import { IRatingItem } from '@codingsans/bixindex-common';
 import { Edit } from '@material-ui/icons';
 import format from 'date-fns/format';
 import Link from 'next/link';
@@ -22,28 +22,13 @@ export interface ReviewStatsProps {
     ratingCount: number;
     ratings: number[];
   };
-  indexDetails?: {
-    label: string;
-    index: {
-      score: number;
-      ratingCount: number;
-      ratings: Ratings;
-    };
-  }[];
   npsRates: [number, number, number, number, number, number, number, number, number, number, number];
   companyAlias: string;
   companyFormID: string;
-  lastRating: IRating;
+  lastRating: IRatingItem;
 }
 
-export const ReviewStats: FC<ReviewStatsProps> = ({
-  index,
-  indexDetails,
-  npsRates,
-  companyAlias,
-  companyFormID,
-  lastRating,
-}) => {
+export const ReviewStats: FC<ReviewStatsProps> = ({ index, npsRates, companyAlias, companyFormID, lastRating }) => {
   const router = useRouter();
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const { t } = useTranslate();
@@ -70,13 +55,10 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
         </div>
         <div className="d-flex justify-content-end pr-5 flex-wrap mb-3 mb-lg-0">
           <span>{t('REVIEW_STATS.LAST_REVIEW_DATE')}: </span>
-          <span>{lastRating ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}</span>
+          <span>{lastRating?.date ? format(new Date(lastRating?.date), 'yyyy.MM.dd. HH:mm') : '-'}</span>
         </div>
       </div>
       <NpsStat npsRates={npsRates} />
-      {/* {indexDetails.map((indexDetail, i) => (
-        <ReviewStat key={i} label={indexDetail.label} index={indexDetail.index} radius={80} />
-      ))} */}
     </div>
   );
 };

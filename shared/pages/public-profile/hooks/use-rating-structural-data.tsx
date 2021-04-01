@@ -12,21 +12,21 @@ export const useRatingStructuralData = (profilePage: ProfilePage | null): ReactN
         name: profilePage.profile.name,
         image: profilePage.profile.logo || 'https://via.placeholder.com/100',
         telephone: profilePage.profile.contacts[0].phone,
-        ...(profilePage.ratings.count
+        ...(profilePage.ratingCount
           ? {
               aggregateRating: {
                 '@type': 'AggregateRating',
-                ratingCount: profilePage.ratings.count,
-                reviewCount: profilePage.ratings.count,
+                ratingCount: profilePage.ratingCount,
+                reviewCount: profilePage.ratingCount,
                 ratingValue: profilePage.stats.index.score,
                 worstRating: 0,
                 bestRating: 10,
               },
               review: {
                 '@type': 'Review',
-                author: { '@type': 'Person', name: profilePage.ratings.items[0].name },
-                datePublished: profilePage.ratings.items[0].date,
-                reviewBody: profilePage.ratings.items[0].summary,
+                author: { '@type': 'Person', name: profilePage.lastRating.name },
+                datePublished: profilePage.lastRating.date,
+                reviewBody: profilePage.lastRating.summary,
                 publisher: { '@type': 'Organization', name: 'Bixindex', sameAs: 'https://bixindex.hu/' },
               },
             }

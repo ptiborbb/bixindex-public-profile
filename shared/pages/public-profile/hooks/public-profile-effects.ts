@@ -23,6 +23,7 @@ export const usePublicProfileEffects = ({
 }: PublicProfileEffectsInput): void => {
   syncSSRProfileWithState({ companyIdentity, publicProfileService, ssrProfilePage });
   updateRatingsOnFilterChange({ companyIdentity, filter, publicProfileService });
+  getRatingsInitially({ companyIdentity, filter, publicProfileService });
 };
 
 const syncSSRProfileWithState = ({
@@ -62,4 +63,27 @@ const updateRatingsOnFilterChange = ({
       );
     }
   }, [publicProfileService, filter]);
+};
+
+const getRatingsInitially = ({
+  companyIdentity: { alias, by },
+  filter,
+  publicProfileService,
+}: Pick<PublicProfileEffectsInput, 'filter' | 'publicProfileService' | 'companyIdentity'>): void => {
+  useEffect(() => {
+    publicProfileService.getRatingsByProfile(
+      alias,
+      by,
+      20,
+      (filter.pageNumber - 1) * 20,
+      filter.stars,
+      filter.productOrServiceID ? filter.productOrServiceID : undefined,
+      filter.date ? filter.date : undefined,
+      filter.name ? filter.name : undefined,
+      filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
+    );
+    return () => {
+      publicProfileService.resetRatings();
+    };
+  }, []);
 };
