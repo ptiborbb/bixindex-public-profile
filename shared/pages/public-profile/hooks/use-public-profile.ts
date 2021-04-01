@@ -1,3 +1,4 @@
+import { IProfileRatings } from '@codingsans/bixindex-common';
 import { useApp } from '../../../app.context';
 import { ProfilePage } from '../../../interfaces/profile-page';
 import { CompanyIdentity, useCompanyIdentity } from '../../../utils/use-company-identity';
@@ -15,10 +16,16 @@ interface UsePublicProfileReturn {
     filter: FilterOptions;
     setFilter: (val: FilterOptions) => void;
   };
+  ratings: IProfileRatings | null;
 }
 
 export const usePublicProfile = (ssrProfilePage: ProfilePage | null): UsePublicProfileReturn => {
-  const { publicProfileService } = useApp();
+  const {
+    publicProfileService,
+    state: {
+      publicProfile: { ratings },
+    },
+  } = useApp();
   const companyIdentity = useCompanyIdentity();
   const { activeSegment } = useContentSegment(ContentSegmentTypes.REVIEWS);
   const { loading, profilePage } = useProfilePage(ssrProfilePage);
@@ -34,5 +41,6 @@ export const usePublicProfile = (ssrProfilePage: ProfilePage | null): UsePublicP
     },
     loading,
     profilePage,
+    ratings,
   };
 };

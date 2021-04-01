@@ -31,6 +31,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
     filter,
     loading,
     profilePage,
+    ratings,
   } = usePublicProfile(ssrProfilePage);
 
   const ratingStructuralData = useRatingStructuralData(profilePage);
@@ -42,7 +43,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
         <title>{`${profilePage?.profile?.name}: Vélemények, értékelések, céginformációk`}</title>
         <meta
           name="description"
-          content={`Ezen az oldalon ${profilePage?.ratings?.count} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`}
+          content={`Ezen az oldalon ${profilePage?.ratingCount} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`}
         />
         {ratingStructuralData}
         {ogMetaElements}
@@ -86,6 +87,7 @@ export const PublicProfile: NextPage<PublicProfileProps> = ({ profilePage: ssrPr
                     alias={alias}
                     filter={filter}
                     profilePage={profilePage}
+                    ratings={ratings}
                   />
                 )}
               </CompanyFrame>

@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { ProfilePage } from '../../../interfaces/profile-page';
 import {
   getPublicProfile,
   getPublicProfileFail,
@@ -26,10 +25,7 @@ export const publicProfileReducer = createReducer(initialPublicProfileState, (bu
       state.ratingsLoading = true;
     })
     .addCase(getRatingsForProfileSuccess, (state, action) => {
-      state.profilePage = {
-        ...(state.profilePage as ProfilePage),
-        ratings: action.payload.ratings,
-      };
+      state.ratings = action.payload.ratings;
       state.ratingsLoading = false;
     })
     .addCase(getRatingsForProfileFail, (state) => {
