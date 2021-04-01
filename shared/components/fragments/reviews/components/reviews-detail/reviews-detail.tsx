@@ -1,4 +1,4 @@
-import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRatingItem, IService } from '@codingsans/bixindex-common';
 import {
   Button,
   FormControl,
@@ -35,7 +35,7 @@ interface ReviewsDetailProps {
   ratingCountsByValue: number[];
   companyAlias: string;
   companyFormID: string;
-  lastRating: IRating;
+  lastRating: IRatingItem;
 }
 
 export const ReviewsDetail: FC<ReviewsDetailProps> = ({
@@ -45,7 +45,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   stats,
   ratings,
   ratingCount,
-  ratingCountsByValue,
+  ratingCountsByValue = Array.from({ length: 5 }, () => 0),
   companyAlias,
   companyFormID,
   lastRating,

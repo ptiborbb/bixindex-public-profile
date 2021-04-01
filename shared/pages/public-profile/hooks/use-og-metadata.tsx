@@ -30,7 +30,7 @@ const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
             ['og:title', `${profilePage?.profile?.name}: Vélemények, értékelések, céginformációk`],
             [
               'og:description',
-              `Ezen az oldalon ${profilePage?.ratings?.count} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`,
+              `Ezen az oldalon ${profilePage?.ratingCount} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`,
             ],
             ['og:image', ogProfileBg],
           ],

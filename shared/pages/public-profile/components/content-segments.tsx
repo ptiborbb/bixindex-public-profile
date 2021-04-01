@@ -1,3 +1,4 @@
+import { IProfileRatings } from '@codingsans/bixindex-common';
 import { isEqual, omit } from 'lodash';
 import React, { FC } from 'react';
 import { Awards } from '../../../components/fragments/awards/awards';
@@ -11,6 +12,7 @@ import { FilterOptions } from '../hooks/use-filter';
 interface ContentSegmentProps {
   activeSegment: ContentSegmentTypes;
   profilePage: ProfilePage;
+  ratings: IProfileRatings;
   alias: string; // not actually alias, either id or alias
   filter: {
     filter: FilterOptions;
@@ -21,6 +23,7 @@ interface ContentSegmentProps {
 const ContentSegmentBase: FC<ContentSegmentProps> = ({
   activeSegment,
   profilePage,
+  ratings,
   alias,
   filter: { filter, setFilter },
 }) => {
@@ -30,7 +33,7 @@ const ContentSegmentBase: FC<ContentSegmentProps> = ({
         <Reviews
           companyAlias={alias}
           companyFormID={profilePage.profile?.defaultFormID}
-          ratings={profilePage.ratings}
+          ratings={ratings}
           stats={profilePage.stats}
           npsRates={profilePage.npsRates}
           filter={filter}
@@ -55,7 +58,7 @@ const ContentSegmentBase: FC<ContentSegmentProps> = ({
         <Reviews
           companyAlias={alias}
           companyFormID={profilePage.profile?.defaultFormID}
-          ratings={profilePage.ratings}
+          ratings={ratings}
           stats={profilePage.stats}
           npsRates={profilePage.npsRates}
           filter={filter}
