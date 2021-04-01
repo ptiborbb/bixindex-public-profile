@@ -1,4 +1,4 @@
-import { IRating } from '@codingsans/bixindex-common';
+import { IRatingItem } from '@codingsans/bixindex-common';
 import { Edit } from '@material-ui/icons';
 import format from 'date-fns/format';
 import Link from 'next/link';
@@ -33,7 +33,7 @@ export interface ReviewStatsProps {
   npsRates: [number, number, number, number, number, number, number, number, number, number, number];
   companyAlias: string;
   companyFormID: string;
-  lastRating: IRating;
+  lastRating: IRatingItem;
 }
 
 export const ReviewStats: FC<ReviewStatsProps> = ({
@@ -70,7 +70,7 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
         </div>
         <div className="d-flex justify-content-end pr-5 flex-wrap mb-3 mb-lg-0">
           <span>{t('REVIEW_STATS.LAST_REVIEW_DATE')}: </span>
-          <span>{lastRating ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}</span>
+          <span>{lastRating ? format(new Date(lastRating?.date), 'yyyy.MM.dd. HH:mm') : '-'}</span>
         </div>
       </div>
       <NpsStat npsRates={npsRates} />

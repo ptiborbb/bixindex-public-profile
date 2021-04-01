@@ -1,4 +1,4 @@
-import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
+import { IProduct, IProfileRatings, IRatingItem, IService } from '@codingsans/bixindex-common';
 import { FC } from 'react';
 import { ReviewFilter } from '../../../interfaces/review-filter';
 import { ReviewsDetail } from './components/reviews-detail/reviews-detail';
@@ -8,17 +8,13 @@ import classes from './reviews.module.scss';
 interface ReviewsProps {
   companyAlias: string;
   companyFormID: string;
-  ratings: {
-    items: IRatingItem[];
-    count: number;
-    countsByValue: number[];
-  };
+  ratings: IProfileRatings;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stats: any;
   npsRates: number[];
   filter: ReviewFilter;
   filterChanged: (filters: ReviewFilter) => void;
-  lastRating: IRating;
+  lastRating: IRatingItem;
   productsAndServices: (IProduct | IService)[];
 }
 // TODO missing typings
