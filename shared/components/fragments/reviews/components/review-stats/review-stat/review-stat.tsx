@@ -56,7 +56,7 @@ export const ReviewStat: FC<ReviewStatProps> = ({ label, index, radius = 80 }) =
           label={t('REVIEW_STAT.OUTSTANDING')}
         />
         <ReviewRate
-          ratingCount={index.ratingCount}
+          ratingCount={index?.ratingCount ?? 0}
           rating={index?.ratings?.[3] ?? 0}
           emoji={<SentimentSatisfiedIcon />}
           label={t('REVIEW_STAT.GOOD')}

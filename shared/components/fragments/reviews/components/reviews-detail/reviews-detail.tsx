@@ -45,7 +45,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   stats,
   ratings,
   ratingCount,
-  ratingCountsByValue,
+  ratingCountsByValue = Array.from({ length: 5 }, () => 0),
   companyAlias,
   companyFormID,
   lastRating,
