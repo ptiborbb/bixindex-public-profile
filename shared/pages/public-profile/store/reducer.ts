@@ -6,6 +6,7 @@ import {
   getRatingsForProfile,
   getRatingsForProfileFail,
   getRatingsForProfileSuccess,
+  resetRatings,
 } from './actions';
 import { initialPublicProfileState } from './state';
 export const publicProfileReducer = createReducer(initialPublicProfileState, (builder) => {
@@ -30,6 +31,9 @@ export const publicProfileReducer = createReducer(initialPublicProfileState, (bu
     })
     .addCase(getRatingsForProfileFail, (state) => {
       state.ratingsLoading = false;
+    })
+    .addCase(resetRatings, (state) => {
+      state.ratings = initialPublicProfileState.ratings;
     })
     .addDefaultCase((state) => state);
 });

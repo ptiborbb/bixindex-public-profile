@@ -82,5 +82,8 @@ const getRatingsInitially = ({
       filter.name ? filter.name : undefined,
       filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
     );
+    return () => {
+      publicProfileService.resetRatings();
+    };
   }, []);
 };
