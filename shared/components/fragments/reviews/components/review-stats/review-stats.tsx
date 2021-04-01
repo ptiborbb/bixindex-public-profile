@@ -22,28 +22,13 @@ export interface ReviewStatsProps {
     ratingCount: number;
     ratings: number[];
   };
-  indexDetails?: {
-    label: string;
-    index: {
-      score: number;
-      ratingCount: number;
-      ratings: Ratings;
-    };
-  }[];
   npsRates: [number, number, number, number, number, number, number, number, number, number, number];
   companyAlias: string;
   companyFormID: string;
   lastRating: IRatingItem;
 }
 
-export const ReviewStats: FC<ReviewStatsProps> = ({
-  index,
-  indexDetails,
-  npsRates,
-  companyAlias,
-  companyFormID,
-  lastRating,
-}) => {
+export const ReviewStats: FC<ReviewStatsProps> = ({ index, npsRates, companyAlias, companyFormID, lastRating }) => {
   const router = useRouter();
   const by = (router.query.by as 'ID' | 'ALIAS') || 'ALIAS';
   const { t } = useTranslate();
@@ -74,9 +59,6 @@ export const ReviewStats: FC<ReviewStatsProps> = ({
         </div>
       </div>
       <NpsStat npsRates={npsRates} />
-      {/* {indexDetails.map((indexDetail, i) => (
-        <ReviewStat key={i} label={indexDetail.label} index={indexDetail.index} radius={80} />
-      ))} */}
     </div>
   );
 };
