@@ -29,8 +29,8 @@ export const useContentSegment = (fallbackSegment: ContentSegmentTypes): UseCont
 };
 
 const getSegmentFromPath = (): ContentSegmentTypes | null => {
-  const localPath = useRouter().asPath.split('#')[1];
-  const segment = qs.parse(localPath)?.segment as string | undefined;
+  const asPath = useRouter().asPath;
+  const segment = qs.parse(asPath)?.['segment'] as string | undefined;
   return segment && checkSegment(segment) ? (segment as ContentSegmentTypes) : null;
 };
 

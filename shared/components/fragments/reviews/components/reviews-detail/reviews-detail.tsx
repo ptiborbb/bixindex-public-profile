@@ -1,4 +1,4 @@
-import { IProduct, IRating, IRatingItem, IService } from '@codingsans/bixindex-common';
+import { IProduct, IRatingItem, IService } from '@codingsans/bixindex-common';
 import {
   Button,
   FormControl,
@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, ExpandLess, ExpandMore, Tune } from '@material-ui/icons';
 import { startOfToday, subMonths } from 'date-fns';
-import { debounce, sum } from 'lodash';
+import { debounce } from 'lodash';
 import { useRouter } from 'next/router';
 import React, { FC, useCallback, useState } from 'react';
 import { useConfig } from '../../../../../config.context';
@@ -35,7 +35,7 @@ interface ReviewsDetailProps {
   ratingCountsByValue: number[];
   companyAlias: string;
   companyFormID: string;
-  lastRating: IRating;
+  lastRating: IRatingItem;
 }
 
 export const ReviewsDetail: FC<ReviewsDetailProps> = ({
@@ -45,7 +45,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
   stats,
   ratings,
   ratingCount,
-  ratingCountsByValue,
+  ratingCountsByValue = Array.from({ length: 5 }, () => 0),
   companyAlias,
   companyFormID,
   lastRating,
@@ -74,7 +74,7 @@ export const ReviewsDetail: FC<ReviewsDetailProps> = ({
         <div className={classes.reviewsDetailContent}>
           <ReviewStats
             npsRates={stats.npsRates}
-            index={{ score: stats.index.score, ratingCount: sum(ratingCountsByValue), ratings: ratingCountsByValue }}
+            index={{ score: stats.index.score, ratingCount: stats.index.ratingCount, ratings: ratingCountsByValue }}
             companyAlias={companyAlias}
             companyFormID={companyFormID}
             lastRating={lastRating}

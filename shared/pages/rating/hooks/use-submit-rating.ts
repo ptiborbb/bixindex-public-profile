@@ -7,7 +7,7 @@ import { useApp } from '../../../app.context';
 import { ELoginOrRegister } from '../../../enums/login-or-register';
 import { EReviewValues } from '../../../enums/review-values';
 import { ProfilePage } from '../../../interfaces/profile-page';
-import { IAuthService } from '../../../services/auth.service';
+import { EAuthTypes, IAuthService } from '../../../services/auth.service';
 import { IRatingService } from '../../../services/rating.service';
 import { useTranslate } from '../../../translate.context';
 import { IRatingFormValues } from '../interfaces/rating-form-values.interface';
@@ -75,14 +75,13 @@ const authenticateUserBeforeSubmitting: (input: {
     return;
   }
   if (values.auth.loginOrRegister === ELoginOrRegister.LOGIN) {
-    await authService.login(values.auth.email, values.auth.password);
+    await authService.login(EAuthTypes.LOCAL, { email: values.auth.email, password: values.auth.password });
   } else {
-    await authService.register(
-      `${values.auth.firstname} ${values.auth.lastname}`,
-      values.auth.email,
-      values.auth.password,
-      `+${values.auth.phone}`,
-    );
+    await authService.register(EAuthTypes.LOCAL, {
+      firstName: values.auth.firstname,
+      lastName: values.auth.lastname,
+      email: values.auth.email,
+    });
   }
 };
 
@@ -137,6 +136,6 @@ const submitRatingOrNps: (input: {
   }
 };
 
-const navigateAway = async (router, by: string, companyAlias: string) => {
+const navigateAway = async (router, by: string, companyAlias: string): Promise<void> => {
   await router.push(`/bix-profil/[companyAlias]?by=${by}`, `/bix-profil/${companyAlias}?by=${by}`);
 };

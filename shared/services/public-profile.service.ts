@@ -19,6 +19,7 @@ import {
   getRatingsForProfile,
   getRatingsForProfileFail,
   getRatingsForProfileSuccess,
+  resetRatings,
 } from '../pages/public-profile/store/actions';
 import { retryOnAxiosTimeout } from '../utils/retry-on-axios-timeout';
 
@@ -40,6 +41,7 @@ export interface IPublicProfileService {
   searchProfilesByCategory(page: number, rowsPerPage: number, category: string): void;
   setPublicProfiles(profiles: IProfileSummary[], count: number, searchText: string): void;
   resetProfiles(): void;
+  resetRatings(): void;
   getFeaturedCategories(): void;
 }
 
@@ -133,6 +135,9 @@ export const publicProfileServiceFactory = (
         .catch((_) => {
           dispatch(getFeaturedCategoriesFail());
         });
+    },
+    resetRatings: () => {
+      dispatch(resetRatings());
     },
   };
 };

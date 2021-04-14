@@ -23,6 +23,7 @@ export const usePublicProfileEffects = ({
 }: PublicProfileEffectsInput): void => {
   syncSSRProfileWithState({ companyIdentity, publicProfileService, ssrProfilePage });
   updateRatingsOnFilterChange({ companyIdentity, filter, publicProfileService });
+  getRatingsInitially({ companyIdentity, filter, publicProfileService });
 };
 
 const syncSSRProfileWithState = ({
@@ -55,11 +56,34 @@ const updateRatingsOnFilterChange = ({
         20,
         (filter.pageNumber - 1) * 20,
         filter.stars,
-        filter.productOrServiceID,
-        filter.date,
-        filter.name,
+        filter.productOrServiceID ? filter.productOrServiceID : undefined,
+        filter.date ? filter.date : undefined,
+        filter.name ? filter.name : undefined,
         filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
       );
     }
   }, [publicProfileService, filter]);
+};
+
+const getRatingsInitially = ({
+  companyIdentity: { alias, by },
+  filter,
+  publicProfileService,
+}: Pick<PublicProfileEffectsInput, 'filter' | 'publicProfileService' | 'companyIdentity'>): void => {
+  useEffect(() => {
+    publicProfileService.getRatingsByProfile(
+      alias,
+      by,
+      20,
+      (filter.pageNumber - 1) * 20,
+      filter.stars,
+      filter.productOrServiceID ? filter.productOrServiceID : undefined,
+      filter.date ? filter.date : undefined,
+      filter.name ? filter.name : undefined,
+      filter.isNPS === EReviewFilterType.NPS ? true : filter.isNPS === EReviewFilterType.BIX ? false : undefined,
+    );
+    return () => {
+      publicProfileService.resetRatings();
+    };
+  }, []);
 };
