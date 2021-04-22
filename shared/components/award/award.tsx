@@ -24,7 +24,10 @@ export const Award: FC<AwardProps> = ({ image, date, title, description, link })
         {link && (
           <div className={classes.link}>
             <a href={convertLinkToAbsolute(link)}>
-              <Link className={classes.icon} fontSize="small" /> {link}
+              <Link className={classes.icon} fontSize="small" />
+              <div>
+                <span>{link}</span>
+              </div>
             </a>
           </div>
         )}
