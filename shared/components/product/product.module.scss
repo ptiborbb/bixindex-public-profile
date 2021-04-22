@@ -70,8 +70,9 @@
     margin-top: 0.5rem;
     cursor: pointer;
     .attachment {
-      width: 240px !important;
-      height: 130px !important;
+      max-width: 20rem !important;
+      height: unset !important;
+      width: unset !important;
     }
   }
 }
