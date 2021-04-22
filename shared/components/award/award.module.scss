@@ -60,10 +60,17 @@
 
     & > a {
       display: flex;
-      align-items: center;
-
       & > .icon {
-        margin-right: 0.5rem;
+        width: 20px;
+        height: 20px;
+        display: inline-block !important;
+        margin-right: 8px;
+      }
+      & * {
+        max-width: calc(100% - 28px);
+      }
+      & span {
+        overflow-wrap: break-word;
       }
     }
   }
