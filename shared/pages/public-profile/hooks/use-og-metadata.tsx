@@ -4,7 +4,7 @@ import ogProfileBg from '../../../../public/images/bix_profil_og.png';
 import { useConfig } from '../../../config.context';
 import { ProfilePage } from '../../../interfaces/profile-page';
 
-export type OgMetaProperties = 'og:url' | 'og:type' | 'og:title' | 'og:image' | 'og:description';
+export type OgMetaProperties = 'og:url' | 'og:type' | 'og:title' | 'og:image:secure_url' | 'og:description';
 
 export type IOgMetaData = [OgMetaProperties, string];
 
@@ -22,7 +22,7 @@ const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
               'og:description',
               `Készíts értékelést a ${profilePage.profile.name}-vel való együttműködésről, és segítsd, hogy megnyerje a Legjobb Ügyfélélmény díjat! `,
             ],
-            ['og:image', ogProfileBg],
+            ['og:image:secure_url', ogProfileBg],
           ]
         : [
             ['og:url', publicProfileUrl ? `${publicProfileUrl}${asPath}` : ''],
@@ -32,7 +32,7 @@ const useOgMetaData = (profilePage: ProfilePage | null): IOgMetaData[] => {
               'og:description',
               `Ezen az oldalon ${profilePage?.ratingCount} db értékelést olvashatsz a ${profilePage?.profile?.name}-ről! Érdekel mit mondanak a partnerei? Olvass bele az értékelésekbe!`,
             ],
-            ['og:image', ogProfileBg],
+            ['og:image:secure_url', ogProfileBg],
           ],
     [profilePage, route],
   );
