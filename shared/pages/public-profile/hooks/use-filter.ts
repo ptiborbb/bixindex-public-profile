@@ -29,5 +29,5 @@ const defaultFilterOptions: FilterOptions = {
   stars: undefined,
   date: '',
   pageNumber: 1,
-  isNPS: EReviewFilterType.ALL,
+  isNPS: EReviewFilterType.BIX,
 };

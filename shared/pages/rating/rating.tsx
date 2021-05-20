@@ -10,7 +10,7 @@ import {
   Hidden,
   MenuItem,
   Radio,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import { Announcement, Info, LiveHelp, ThumbDown, ThumbUp, WarningRounded } from '@material-ui/icons';
 import { Field, FieldArray, Form, Formik } from 'formik';
@@ -104,8 +104,7 @@ export const Rating: FC = () => {
                 value: Yup.string().required(t('COMMON.REQUIRED')),
               }),
             ),
-            positive: Yup.string().required(t('COMMON.REQUIRED')),
-            negative: Yup.string().required(t('COMMON.REQUIRED')),
+
             comment: Yup.string()
               .required(t('COMMON.REQUIRED'))
               .test('len', t('COMMON.FORM_VALIDATION.MAX_LENGTH', { number: 150 }), (val) => val?.length <= 150),
