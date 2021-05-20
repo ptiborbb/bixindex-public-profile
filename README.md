@@ -21,3 +21,4 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - add line below localhost: `127.0.0.1 bix.local`
 - run `yarn dev`
 - open browser on `bix.local:3001`
+
