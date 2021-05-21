@@ -31,24 +31,26 @@ build:
     - yarn build
 
 deploy:dev:
+  stage: deploy
   extends:
     - .deploy
     - .dev_vars
 
 deploy:staging:
+  stage: deploy
   extends:
     - .deploy
     - .staging_vars
+
 deploy:prod:
+  stage: deploy
   extends:
     - .deploy
     - .prod_vars
 
 .deploy:
   rules:
-    - if: CI_COMMIT_BRANCH = $BRANCH_TARGET
-      when: always
-    - when: never
+    - if: $CI_COMMIT_BRANCH == $BRANCH_TARGET
   cache:
     key:
       files:
