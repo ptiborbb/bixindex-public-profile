@@ -60,7 +60,7 @@ deploy:prod:
     policy: pull
   script:
     - mkdir .vercel
-    - echo $DOT_VERCEL} > .vercel/project.json
+    - echo $DOT_VERCEL > .vercel/project.json
     - cp vercel.json .vercel/vercel.ci.json
     - DEPLOYMENT_URL=$(yarn -s vercel --scope "${VERCEL_SCOPE}" --token "${VERCEL_TOKEN}" --local-config .vercel/vercel.ci.json)
     - yarn -s vercel --scope "${VERCEL_SCOPE}" --token "${VERCEL_TOKEN} alias "${DEPLOYMENT_URL}" "${VERCEL_ALIAS}"
