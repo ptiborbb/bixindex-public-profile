@@ -1,8 +1,9 @@
+image: node:12.18.3
 stages:
   - build
+  - deploy
 
 build:
-  image: node:12.18.3
   variables:
     NEXT_PUBLIC_BACKEND_URL: https://bixindex-backend-local.herokuapp.com/
   cache:
@@ -28,3 +29,59 @@ build:
   stage: build
   script:
     - yarn build
+
+deploy:dev:
+  stage: deploy
+  extends:
+    - .deploy
+    - .dev_vars
+
+deploy:staging:
+  stage: deploy
+  extends:
+    - .deploy
+    - .staging_vars
+
+deploy:prod:
+  stage: deploy
+  extends:
+    - .deploy
+    - .prod_vars
+
+.deploy:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $BRANCH_TARGET
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules/
+    policy: pull
+  script:
+    - mkdir .vercel
+    - echo $DOT_VERCEL > .vercel/project.json
+    - cp vercel.json .vercel/vercel.ci.json
+    - DEPLOYMENT_URL=$(yarn -s vercel --scope "${VERCEL_SCOPE}" --token "${VERCEL_TOKEN}" --local-config .vercel/vercel.ci.json)
+    - yarn -s vercel --scope "${VERCEL_SCOPE}" --token "${VERCEL_TOKEN}" alias "${DEPLOYMENT_URL}" "${VERCEL_ALIAS}"
+
+.dev_vars:
+  variables:
+    VERCEL_SCOPE: $DEV_VERCEL_SCOPE
+    VERCEL_ALIAS: $DEV_VERCEL_ALIAS
+    DOT_VERCEL: $DEV_VERCEL_PROJECT_JSON
+    BRANCH_TARGET: develop
+
+.staging_vars:
+  variables:
+    VERCEL_SCOPE: $STAGING_VERCEL_SCOPE
+    VERCEL_ALIAS: $STAGING_VERCEL_ALIAS
+    DOT_VERCEL: $STAGING_VERCEL_PROJECT_JSON
+    BRANCH_TARGET: staging
+
+.prod_vars:
+  variables:
+    VERCEL_SCOPE: $PROD_VERCEL_SCOPE
+    VERCEL_ALIAS: $PROD_VERCEL_ALIAS
+    DOT_VERCEL: $PROD_VERCEL_PROJECT_JSON
+    BRANCH_TARGET: master
