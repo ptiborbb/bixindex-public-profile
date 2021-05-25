@@ -55,7 +55,9 @@ export const ReviewStats: FC<ReviewStatsProps> = ({ index, npsRates, companyAlia
         </div>
         <div className="d-flex justify-content-end pr-5 flex-wrap mb-3 mb-lg-0">
           <span>{t('REVIEW_STATS.LAST_REVIEW_DATE')}: </span>
-          <span>{lastRating?.date ? format(new Date(lastRating?.date), 'yyyy.MM.dd. HH:mm') : '-'}</span>
+          <span>
+            {lastRating?.dateOfCreation ? format(new Date(lastRating?.dateOfCreation), 'yyyy.MM.dd. HH:mm') : '-'}
+          </span>
         </div>
       </div>
       <NpsStat npsRates={npsRates} />
